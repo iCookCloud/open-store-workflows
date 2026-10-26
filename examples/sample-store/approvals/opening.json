@@ -1,0 +1,28 @@
+[
+  {
+    "step": "opening/planMarketing",
+    "subject": "launch",
+    "subjectHash": "bb161eef158da5a3074b0a1e3d92a91095b8fa4d397c66da1207095b09fe9831",
+    "decision": "approved",
+    "by": "example:reviewer",
+    "at": "2026-01-01T00:00:00Z",
+    "note": "Synthetic reviewer confirmed the displayed evidence"
+  },
+  {
+    "step": "opening/signRelease",
+    "subject": "store:example-opening-store",
+    "subjectHash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+    "decision": "go",
+    "by": "example:reviewer",
+    "at": "2026-01-01T00:00:00Z",
+    "note": "Synthetic reviewer confirmed the displayed evidence"
+  },
+  {
+    "step": "opening/handoff",
+    "subjectHash": "e90016fa969ddc995551c4346ad59afcae3355c939f5a1b2de97099544854231",
+    "decision": "operating",
+    "by": "example:reviewer",
+    "at": "2026-01-01T00:00:00Z",
+    "note": "Synthetic reviewer confirmed the displayed evidence"
+  }
+]

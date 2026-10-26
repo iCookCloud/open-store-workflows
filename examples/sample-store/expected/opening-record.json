@@ -1,0 +1,427 @@
+{
+  "kind": "OpeningRecord",
+  "artifactVersion": "0.1.0",
+  "id": "opening-b29cf2c9658ffd28990cb1fb99857dfc",
+  "hash": "b29cf2c9658ffd28990cb1fb99857dfcc6c1cabe9a197d337ce3f6888958121b",
+  "producedBy": {
+    "step": "opening/assembleRecord",
+    "pkg": "@osw/opening",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-opening-store",
+  "inputs": [
+    {
+      "kind": "StoreSpec",
+      "id": "store-spec-15bd9350bb0ad5bfb32bbb9d652963d4",
+      "hash": "15bd9350bb0ad5bfb32bbb9d652963d42ffca18a6fd80fde432b675d6e7d106b"
+    },
+    {
+      "kind": "Bom",
+      "id": "example-opening-bom",
+      "hash": "14de931a3d1712f8216a4f4d55415956cb7e7f3106c0e96721481e7cdbc3129c"
+    }
+  ],
+  "sources": [
+    {
+      "slot": "role",
+      "id": "example-cook",
+      "versionHash": "cd141a2754c0b2acb0531e7bd283f7c8c1558f856f8d8a78f6ebc3f2c4802d3b"
+    },
+    {
+      "slot": "menu",
+      "id": "example-menu-1",
+      "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53"
+    },
+    {
+      "slot": "course",
+      "id": "example-course",
+      "versionHash": "a4e167f76c5a276bfc70664df93d1a5b67039d362d2488f14dc5718c0b6a1308"
+    },
+    {
+      "slot": "template",
+      "id": "example-cert-plan",
+      "versionHash": "3f783309e2fc28bbb9533c18760bd42b91e1f7b357dde6f7d6ab6b97f02871ba"
+    },
+    {
+      "slot": "cert",
+      "id": "example-safety",
+      "versionHash": "4cbb6e3224a6e1a0a70531f47aba6385faf6e2c98d96c629e92227e652218000"
+    },
+    {
+      "slot": "params",
+      "id": "training.minPassScore",
+      "versionHash": "8fb61ff04cb1e44adb1a724f98fbda0ec1e5b7f0df9f03d51c81068f0eefd199"
+    },
+    {
+      "slot": "track-affinity",
+      "id": "example-affinity",
+      "versionHash": "e3660fd9949cee24289395342209b46bc1972f4c8453acf2398ba7b94e393b83"
+    },
+    {
+      "slot": "exam",
+      "id": "example-exam",
+      "versionHash": "9dca118480bab3d9662e1332cfe52306d846cdedbd5e306ca7dd67062580b1be"
+    },
+    {
+      "slot": "params",
+      "id": "training.verify.minAttempts",
+      "versionHash": "dae6c1018d3717d6d7f65c2a1140d308b5b0d30ef44094f2a290b78226475e73"
+    },
+    {
+      "slot": "params",
+      "id": "training.verify.firstPassRateLow",
+      "versionHash": "0351bb55263cd8c7bc147e19f89f488806c129ec5955e5488bb7935209379f7f"
+    },
+    {
+      "slot": "params",
+      "id": "training.verify.firstPassRateHigh",
+      "versionHash": "5162d948df205baf6076772cc92fb50aa05a25a45cdc6bfe4cf959ede079cffe"
+    },
+    {
+      "slot": "course",
+      "id": "example-course",
+      "versionHash": "a4e167f76c5a276bfc70664df93d1a5b67039d362d2488f14dc5718c0b6a1308",
+      "path": "/units/0"
+    },
+    {
+      "slot": "template",
+      "id": "example-opening-checklist",
+      "versionHash": "fa63e9afc07da82d46f8679e38a7d5af47258d6055a89f546ce48565258499db"
+    },
+    {
+      "slot": "template",
+      "id": "example-marketing-plan",
+      "versionHash": "0a810ea39827e44a977401ab82b9d32b1f1828026194154581dd0e2e2015dcdf"
+    },
+    {
+      "slot": "template",
+      "id": "example-asset-plan",
+      "versionHash": "42ecef2b42bd6a9bfe326acdd7cc4e09ddf8680a3de242c66842b3b31d7a8cfe"
+    },
+    {
+      "slot": "party",
+      "id": "example-creator",
+      "versionHash": "9d01fd063cc44b05e75fb0f69b0b26eeebb60ed04cc0666310a37fc79eedc992"
+    },
+    {
+      "slot": "content-playbook",
+      "id": "example-playbook",
+      "versionHash": "c6621bdae84bdd27429e77d1ffe82eb8219cf69435a1433373263cdaf9036ec0"
+    },
+    {
+      "slot": "content-case",
+      "id": "example-content",
+      "versionHash": "412cd5749aab23058df8fc6adbdc24f88341ae5d01e5574b535fea1e86d4f97d"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.budget.revenueRate",
+      "versionHash": "afe14ff0b1ee13c6ab54b6ab742d1c0fdba22dbae7373dc9b85d218ff44903d1"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.budget.reserveRate",
+      "versionHash": "f4c0a257251a7d91a0059c91c626b2eff8263f3fb63941612a08e238f926ac73"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.activeWithinDays",
+      "versionHash": "2133668fa9a6a859be3535a709d0b0a0116f7053d5ef9e1d222c60119e9eef62"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.maxPostGapDays",
+      "versionHash": "8b6ea0d9000da6783718fe8165a03260f040d3b99a7ca0dc986436aefa4871e0"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.staleDays",
+      "versionHash": "89ddeb74e4489e9d6c3299e5e011013b487b90ed2d57d2e9b135715c100b65d4"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.budget.split.social",
+      "versionHash": "417c2bcb9bd3592ec18b5407cdeedb7ea0bf89afe8d0492b6dd803b46e637d65"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.ads.stageWeight.before",
+      "versionHash": "7e065f069d765cc54068f2c1afab7067dffb3d5f30325c923acbf6aad4793287"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.minEngagement.micro",
+      "versionHash": "2e8e48737e6ebc578a6faac8eb7a013092fb1e19bcbb0477123ba4d5adcf7433"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.mixMin.local",
+      "versionHash": "4182d3d3f616ce181fddd28b296f153765b844bcb2178110548b1438b970fceb"
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.mixMax.local",
+      "versionHash": "caea6fff804e4936b658628f1217948355d59fa5198f11b87906cfb0e8728c89"
+    },
+    {
+      "slot": "calc-template",
+      "id": "example-noodle-template",
+      "versionHash": "f49565e37d1ec319b5276331c1e16566b29be814119e74671c6fb0fd372d098a"
+    },
+    {
+      "slot": "site-profile",
+      "id": "example-noodle-site-profile",
+      "versionHash": "39ec649fc3510eb8b3dac21b33518be01ceafa2e47004d4276a8ec7d5369369f"
+    },
+    {
+      "slot": "menu",
+      "id": "example-menu-2",
+      "versionHash": "5469ac89eb7101be9fea5a15b4f46e67e2d5a14453b58c676b00c68f378350e6"
+    },
+    {
+      "slot": "store",
+      "id": "example-store-1",
+      "versionHash": "c1e1b5fa33dfaa84c279c5cae3163501cf62549d4930039314861b295781dba4"
+    },
+    {
+      "slot": "store",
+      "id": "example-store-2",
+      "versionHash": "31864d697032e580b2cf097ee91f741016380fe624819897fc1c5f02dd24b3ad"
+    },
+    {
+      "slot": "store",
+      "id": "example-store-3",
+      "versionHash": "9f7705ca6c16c5e5ae3b50d1b3d1fc1135929a9278faf959690415b231ee2e84"
+    },
+    {
+      "slot": "params",
+      "id": "concept-budgetband",
+      "versionHash": "e45350e514385e0ef8f6069ac04aa8cc242ee4e6446145eecad50b856e9c0194"
+    },
+    {
+      "slot": "params",
+      "id": "concept-calibrationminsample",
+      "versionHash": "ae93833d39f096a34baa2c3f0bfe84cdb2febc20cd27a9517ed83d285beab908"
+    },
+    {
+      "slot": "params",
+      "id": "verify-calctemplatetolerance",
+      "versionHash": "63154eddeb5d088fa9ceb8d08387c383eefe13e6376107dd8e7f00ed9296a4a8"
+    },
+    {
+      "slot": "params",
+      "id": "concept-areatolerance",
+      "versionHash": "1f7e8d6ff3b32994a282b6177488912074f018111ce4aca29c99dc8a8c9840e0"
+    },
+    {
+      "slot": "params",
+      "id": "concept-minmarginrate",
+      "versionHash": "533346f3a3426abe84f1ca1809af5756de7ca72d1b03d13241aba9aa0082da25"
+    },
+    {
+      "slot": "term",
+      "id": "example-induction",
+      "versionHash": "99a020e1023a9c0454ccb26679df1f260006b19058d99663a292abad8f3e44c3"
+    },
+    {
+      "slot": "store",
+      "id": "example-opening-store",
+      "versionHash": "65e9cdabd60123095437c352362e0c0288d2055b6f9fb48b2288648991e0bce1"
+    }
+  ],
+  "createdAt": "2026-01-01T00:00:00Z",
+  "body": {
+    "menuRef": {
+      "slot": "menu",
+      "id": "example-menu-1",
+      "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53"
+    },
+    "bomRef": {
+      "kind": "Bom",
+      "id": "example-opening-bom",
+      "hash": "14de931a3d1712f8216a4f4d55415956cb7e7f3106c0e96721481e7cdbc3129c"
+    },
+    "decidedAt": "2026-01-01T00:00:00Z",
+    "track": "example-noodle",
+    "jurisdiction": "XE",
+    "timezone": "UTC",
+    "openingDate": "2026-01-01",
+    "status": "live",
+    "staffing": [
+      {
+        "positionKey": "example-cook",
+        "planned": 2,
+        "staffed": 2
+      }
+    ],
+    "certMatrix": {
+      "plan": {
+        "slot": "template",
+        "id": "example-cert-plan",
+        "versionHash": "3f783309e2fc28bbb9533c18760bd42b91e1f7b357dde6f7d6ab6b97f02871ba"
+      },
+      "seats": [
+        {
+          "seatId": "example-seat-a",
+          "positionKey": "example-cook",
+          "status": "active"
+        },
+        {
+          "seatId": "example-seat-b",
+          "positionKey": "example-cook",
+          "status": "active"
+        }
+      ],
+      "cells": [
+        {
+          "seatId": "example-seat-a",
+          "certKey": "example-safety",
+          "critical": true,
+          "locked": true,
+          "state": "passed",
+          "passedAt": "2026-01-01",
+          "recertDue": "2027-01-01",
+          "examiner": "example:reviewer",
+          "attempts": 2
+        },
+        {
+          "seatId": "example-seat-a",
+          "certKey": "course:example-course:example-boil",
+          "critical": true,
+          "locked": false,
+          "state": "passed",
+          "passedAt": "2026-01-01",
+          "sop": {
+            "slot": "course",
+            "id": "example-course",
+            "versionHash": "a4e167f76c5a276bfc70664df93d1a5b67039d362d2488f14dc5718c0b6a1308",
+            "path": "/units/0"
+          },
+          "examiner": "example:reviewer",
+          "attempts": 1
+        },
+        {
+          "seatId": "example-seat-b",
+          "certKey": "example-safety",
+          "critical": true,
+          "locked": true,
+          "state": "passed",
+          "passedAt": "2026-01-01",
+          "recertDue": "2027-01-01",
+          "examiner": "example:reviewer",
+          "attempts": 2
+        },
+        {
+          "seatId": "example-seat-b",
+          "certKey": "course:example-course:example-boil",
+          "critical": true,
+          "locked": false,
+          "state": "passed",
+          "passedAt": "2026-01-01",
+          "sop": {
+            "slot": "course",
+            "id": "example-course",
+            "versionHash": "a4e167f76c5a276bfc70664df93d1a5b67039d362d2488f14dc5718c0b6a1308",
+            "path": "/units/0"
+          },
+          "examiner": "example:reviewer",
+          "attempts": 1
+        }
+      ],
+      "summary": {
+        "planTotal": 2,
+        "staffed": 2,
+        "gaps": [],
+        "certRequired": 4,
+        "certPassed": 4,
+        "criticalRequired": 4,
+        "criticalPassed": 4,
+        "criticalPending": 0,
+        "expiring": 0,
+        "hollow": false,
+        "ready": true
+      }
+    },
+    "checklist": {
+      "template": {
+        "slot": "template",
+        "id": "example-opening-checklist",
+        "versionHash": "fa63e9afc07da82d46f8679e38a7d5af47258d6055a89f546ce48565258499db"
+      },
+      "firstDay": -1,
+      "lastDay": 30,
+      "items": [
+        {
+          "key": "example-permit",
+          "title": "Example permit evidence",
+          "phase": "before",
+          "dayOffset": -1,
+          "dueDate": "2025-12-31",
+          "gate": true,
+          "waivable": false,
+          "status": "done",
+          "note": "Synthetic permit evidence reviewed"
+        },
+        {
+          "key": "example-review",
+          "title": "Example first-month review",
+          "phase": "after",
+          "dayOffset": 30,
+          "dueDate": "2026-01-31",
+          "gate": false,
+          "waivable": false,
+          "status": "todo",
+          "note": ""
+        }
+      ]
+    },
+    "issues": [],
+    "release": {
+      "current": {
+        "state": "ready",
+        "blockers": []
+      },
+      "signed": {
+        "snapshot": [],
+        "snapshotHash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "decision": "go",
+        "at": "2026-01-01T00:00:00Z",
+        "by": "example:reviewer"
+      }
+    },
+    "marketing": {
+      "template": {
+        "slot": "template",
+        "id": "example-marketing-plan",
+        "versionHash": "0a810ea39827e44a977401ab82b9d32b1f1828026194154581dd0e2e2015dcdf"
+      },
+      "items": [
+        {
+          "key": "example-launch",
+          "channel": "social",
+          "title": "Example launch announcement",
+          "dayOffset": -1,
+          "dueDate": "2025-12-31",
+          "deliverable": "Example post",
+          "core": true,
+          "status": "todo"
+        }
+      ],
+      "ledger": [],
+      "assetGap": {
+        "required": 2,
+        "ready": 1,
+        "missing": 1,
+        "blockedChannels": [
+          "social"
+        ]
+      }
+    },
+    "reviews": [],
+    "handoff": {
+      "storeStatus": "operating",
+      "openedAt": "2026-01-01"
+    }
+  },
+  "example": true
+}

@@ -1,0 +1,48 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "course",
+      "id": "example-course",
+      "data": {
+        "key": "example-course",
+        "rights": "synthetic-public",
+        "version": "0.1.0",
+        "sourceDocs": [],
+        "units": [
+          {
+            "id": "example-boil",
+            "title": "Example boiling method",
+            "station": "example-hot",
+            "positions": [
+              "example-cook"
+            ],
+            "critical": true,
+            "controls": [
+              "example-observe"
+            ],
+            "covers": [
+              "example-dish"
+            ]
+          }
+        ]
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "a4e167f76c5a276bfc70664df93d1a5b67039d362d2488f14dc5718c0b6a1308",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

@@ -6,7 +6,7 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-This first implementation includes the shared core and the **store-concept** workflow. It produces a versioned `StoreSpec` from a concept brief, calculation templates, menus, site requirements and operating-store actuals. The other six workflow implementations and production-system integration are separate work.
+This implementation includes the shared core, **store-concept** and **opening** workflows. Store-concept produces a versioned `StoreSpec`; opening uses it to derive staffing and certification requirements, grade assessments, expand opening checklists, gate human release, plan marketing, review results and produce an `OpeningRecord` for operating-store handoff. The other five workflows and production-system integration are separate work.
 
 ## Packages
 
@@ -14,6 +14,7 @@ This first implementation includes the shared core and the **store-concept** wor
 | --- | --- |
 | `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
 | `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
+| `@osw/opening` | Staffing, SOP coverage, assessments, checklists, release signatures, marketing, reviews and operating-store handoff |
 | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 
 The portable core and workflow have no Node builtin dependency. File access and command-line execution live in `@osw/core/node`; the HTTP client lives in `@osw/core/http`. Workflow packages import only `@osw/core`.
@@ -62,6 +63,28 @@ OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
 ```
 
 The MCP server discovers installed `@osw/*` workflow packages. Its query tool limits pages to 50 records. Writeback tools are registered only when the server is started with `--allow-record`. HTTP credentials are read from `OSW_TOKEN`, never from committed inputs. FileSource writebacks use the system `flock` command for cross-process locking; reading files does not require it. If `flock` is unavailable, writes fail explicitly instead of proceeding without a lock.
+
+## Opening a store
+
+The synthetic opening example consumes the generated StoreSpec and a separately constructed example Bom reference. It exercises actual written and practical grading for two seats, including course-unit practical checks. Run it after building:
+
+```sh
+pnpm osw opening run \
+  --assets examples/sample-store/assets \
+  --in examples/sample-store/inputs/opening.json \
+  --approvals examples/sample-store/approvals/opening.json \
+  --now 2026-01-01T00:00:00Z \
+  --actor example:reviewer \
+  --out-dir .osw/opening
+```
+
+Omit `--approvals` to receive the blocking `opening/signRelease` need. Release approvals use `subject: "store:<storeId>"` and the returned hash of the sorted blockers. `go` requires no blockers; `go_with_conditions` requires only waivable blockers, a note and a dated condition for each one. Applicable gate items cannot be manually skipped. A changed blocker set invalidates a pre-opening signature. Once live, the original signature remains frozen in the previous `OpeningRecord`, while new issues remain visible in `release.current`.
+
+The workflow input accepts explicit `transitions` (for example `["ready", "live"]`), previous records, assessment history, checklist updates and review observations. Supplying `handoff: true` requires an `operating` approval with a note. The result emits an `openedAt` fill intention and preserves an existing first opening date; changing store status belongs to the private adapter. Without a BuildPlan or DeliveryPlan, related checks require manual confirmation. An ETA alone never completes receipt.
+
+Opening adds `role`, `cert`, `course`, `exam`, `track-affinity`, `content-case` and `content-playbook` slots. Four JSON template kinds carry certification, checklist, marketing and content-asset requirements. Business thresholds, budget shares and FX rates come from `params`; qualifier segments use letters and digits. Borrowed course recommendations do not automatically become required certifications: adopted courses must explicitly cover the store's track. Students receive only a projected paper; grading results contain scores and per-question marks, never answer keys. MCP asset queries also honor schema `writeOnly` fields.
+
+Marketing approval and checkpoint review signatures are nonblocking. Marketing output includes budgets, creator selection, evidence gaps and content calendars; only approved categories receive budgets. Reviews calculate ticket and prime-cost figures and produce source-specific verification intentions. The opening example deliberately leaves a content gap and detects an overly easy exam rather than manufacturing all-green results. `pnpm examples` checks both workflows and their committed golden artifacts.
 
 ## Semantics that matter
 

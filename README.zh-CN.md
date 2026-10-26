@@ -4,7 +4,7 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-本批实现 **共享 core 与第 1 项「定店型」**：从开店意图出发，匹配测算模板与菜单，计算投资、营收、保本、回本和场地要求，经审批后生成 `StoreSpec`。其余六项流程的业务实现与现有站点对接另行开展。
+已实现 **共享 core、第 1 项「定店型」与第 6 项「开门营业」**。定店型生成 `StoreSpec`；开门营业据此完成岗位编制、SOP 覆盖、培训考核、开业清单、人工放行、营销复盘及转在营交接，产出 `OpeningRecord`。其余五项流程及现有站点对接另行开展。
 
 ## 使用
 
@@ -36,9 +36,31 @@ OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
 
 MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动时添加 `--allow-record` 才提供写回工具。
 
+## 第六项：开门营业
+
+```sh
+pnpm osw opening run \
+  --assets examples/sample-store/assets \
+  --in examples/sample-store/inputs/opening.json \
+  --approvals examples/sample-store/approvals/opening.json \
+  --now 2026-01-01T00:00:00Z \
+  --actor example:reviewer \
+  --out-dir .osw/opening
+```
+
+示例消费第一项生成的 `StoreSpec`，以及单独构造的合成 `Bom` 引用；对两个座位实际执行笔试、实操和课程单元考核。省略 `--approvals` 会返回 `opening/signRelease` 审批待办，退出码为 `2`。
+
+放行审批的 `subject` 为 `store:<storeId>`，`subjectHash` 绑定排序后的阻断集合。`go` 要求无阻断；`go_with_conditions` 只接受可豁免项，每项均需条件、截止日期及签署说明。适用的必过项不能手工跳过，P0、锁定证未过、无人在册和编制缺口不可豁免。开业前阻断变化必须重签；进入 `live` 后沿用上一版 `OpeningRecord` 的原始签署，新问题仍在 `release.current` 展示。
+
+输入中的 `transitions` 明确指定状态流转，例如 `["ready", "live"]`；还可提供上一版记录、考次历史、清单更新及复盘数据。设置 `handoff: true` 后，需附说明的 `operating` 审批。流程只产生 `openedAt` 补空意图，并保留已存在的首次开业日期；门店状态由私有适配层根据 `handoff` 更新。缺少施工或到店产物时对应项人工确认，预计到货日期不能自动算作签收。
+
+新增七个槽位：`role`、`cert`、`course`、`exam`、`track-affinity`、`content-case`、`content-playbook`，以及认证、清单、营销、素材需求四种 JSON 模板。业务阈值、预算比例及汇率均取自 `params`；参数 qualifier 段使用英文字母和数字。借用课程只作推荐，采用后须由资产数据明确覆盖本店赛道才会列为必考。
+
+学生卷、判分输出和 MCP 通用查询均保护答案、解析和评分指南。营销及复盘签署不阻止开业审批；营销只对批准的类别计预算，输出达人筛选、凭证缺口及内容日历。复盘按课程单元、清单项和上游测算来源产生验证记录。示例刻意保留素材缺口，并检出缺少区分度的考卷；`pnpm examples` 同时核对两条流程及黄金产物。
+
 ## 设计约束
 
-- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；`@osw/store-concept` 只依赖它。
+- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；`@osw/store-concept` 与 `@osw/opening` 只依赖它。
 - Memory、File、HTTP 三种资产源使用同一份接口。FileSource 支持 JSON、NDJSON 和 CSV。
 - 缺业务参数或同级候选不唯一时明确返回 `needs`，不猜默认价格和汇率。
 - 金额按币种最小单位逐行舍入，用户覆盖值已经是目标币种，不重复换算。

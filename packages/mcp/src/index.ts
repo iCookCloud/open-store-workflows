@@ -68,6 +68,25 @@ export function stripPrivateOutput(
   return safe;
 }
 
+/** 遵循槽位 JSON Schema 的 writeOnly 标记；通用查询也不能旁路考卷答案保护。 */
+export function publicAssetData(value: unknown, schema: unknown): unknown {
+  if (!schema || typeof schema !== 'object') return value;
+  const shape = schema as {
+    writeOnly?: boolean;
+    properties?: Record<string, unknown>;
+    items?: unknown;
+  };
+  if (shape.writeOnly) return undefined;
+  if (Array.isArray(value)) return value.map((item) => publicAssetData(item, shape.items));
+  if (!value || typeof value !== 'object') return value;
+  const output: Record<string, unknown> = {};
+  for (const [key, child] of Object.entries(value)) {
+    const projected = publicAssetData(child, shape.properties?.[key]);
+    if (projected !== undefined) output[key] = projected;
+  }
+  return output;
+}
+
 function toolResult(value: Record<string, unknown>) {
   return {
     content: [{ type: 'text' as const, text: JSON.stringify(value) }],
@@ -211,7 +230,14 @@ export async function createOswServer(options: ServerOptions = {}): Promise<Serv
           cursor: input.cursor,
           sort: input.sort,
         });
-        return toolResult({ items: page.items, nextCursor: page.nextCursor });
+        const schema = slotJsonSchema(slot);
+        return toolResult({
+          items: page.items.map((record) => ({
+            ...record,
+            data: publicAssetData(record.data, schema),
+          })),
+          nextCursor: page.nextCursor,
+        });
       } catch (error) {
         return toolError(error);
       }
