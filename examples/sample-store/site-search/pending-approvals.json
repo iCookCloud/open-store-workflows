@@ -1,0 +1,49 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "step": "site-search/shortlist",
+      "subject": "shortlist",
+      "subjectHash": "8fbd66bfe271869d7e77f11f4c890af6f5e34265632f9a9e787d904fd3e57eb5",
+      "decision": "accept",
+      "by": "example-human",
+      "at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "step": "site-search/chooseSite",
+      "subject": "listing:example-listing-1",
+      "subjectHash": "86b8fb6218d462b6dfebfe9590f5e1c2ac65d3a9698be7c1498534e7d2fdb4f7",
+      "decision": "choose",
+      "by": "example-human",
+      "at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "step": "site-search/matchCounsel",
+      "subject": "party:lawyer-one",
+      "subjectHash": "e4017c67a26d4c1c6ad20d80e2fbe0449ff1a8d5155693af9db0cf2ef4c7447e",
+      "decision": "engage",
+      "by": "example-human",
+      "at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "step": "site-search/draftLoi",
+      "subjectHash": "aaac9e607a6fa5583c525e345d92bc44a899950c30ae43dd51884def940460de",
+      "decision": "send",
+      "by": "example-human",
+      "at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "step": "site-search/reviewLease",
+      "subjectHash": "08ee8625a031ad174fbe933cebdc90f0bdd3a047c14021eb09921c58f6cc923d",
+      "decision": "approve",
+      "by": "example-human",
+      "at": "2026-01-10T12:00:00Z",
+      "role": "lawyer",
+      "party": {
+        "slot": "party",
+        "id": "lawyer-one",
+        "versionHash": "bd219a3250696cba96aa4b6d0dcefe23f2147f65046e5729d2a1d9e1b31aaf38"
+      }
+    }
+  ]
+}

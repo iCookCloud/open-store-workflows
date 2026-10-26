@@ -6,7 +6,9 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-Implemented workflows include **store-concept** (a versioned `StoreSpec` from the concept, menus and economics) and **fitout-bom** (reviewed quantities, material model costs, supplier selection, verification and a frozen `Bom`). They share the core, CLI and MCP interfaces. The remaining five workflows and production-system integration are separate work.
+Implemented workflows include **store-concept** (`StoreSpec`), **site-search** (screening, surveys, LOI, counsel review and signed `SiteDecision`), and **fitout-bom** (reviewed quantities, supplier offers and frozen `Bom`). They share the core, CLI and MCP interfaces. The remaining four workflows and production-system integration are separate work.
+
+See the [site-search guide](packages/site-search/README.md) for the synthetic end-to-end example and explicit local `--providers` modules. `pnpm examples:site-search` checks missing-signature-approval exit 2 and completed exit 0.
 
 ## Packages
 
@@ -14,6 +16,7 @@ Implemented workflows include **store-concept** (a versioned `StoreSpec` from th
 | --- | --- |
 | `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
 | `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
+| `@osw/site-search` | Unit-aware listing filters, independent surveys, lease drift, approvals and signing evidence |
 | `@osw/fitout-bom` | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
 | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 

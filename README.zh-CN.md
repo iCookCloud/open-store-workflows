@@ -4,7 +4,9 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-已实现 **共享 core、第 1 项「定店型」与第 3 项「装修物料单」**。定店型生成 `StoreSpec`；装修流程复核物料及数量、保留模型成本与供应商价、验证报价，并经批示生成 `Bom`。两条流程共用 CLI／MCP。其余五项及生产站点接入另行开展。
+已实现 **共享 core、第 1 项「定店型」、第 2 项「找房」与第 3 项「装修物料单」**，分别生成 `StoreSpec`、`SiteDecision` 和 `Bom`。三条流程共用 CLI／MCP；其余四项及生产站点接入另行开展。
+
+第二项包含筛选、周边扫描、实测、意向书、律师审阅与签署证据核验，详见[找房运行说明](packages/site-search/README.md)。运行 `pnpm examples:site-search` 可验证缺签约批示退出 2、审批完整退出 0。CLI 和 MCP 可用 `--providers <本地模块>` 显式加载外部服务及额度存储。
 
 ## 使用
 

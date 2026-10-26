@@ -33,6 +33,7 @@ export interface ServerOptions {
   actor?: string;
   approvals?: RunOptions['approvals'];
   providers?: RunOptions['providers'];
+  stores?: RunOptions['stores'];
   allowRecord?: boolean;
 }
 
@@ -152,6 +153,7 @@ export async function createOswServer(options: ServerOptions = {}): Promise<Serv
               actor: options.actor,
               approvals: options.approvals,
               providers: options.providers,
+              stores: options.stores,
               record: false,
             });
             return toolResult(

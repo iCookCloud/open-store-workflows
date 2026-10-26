@@ -1,0 +1,77 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "contentHash": "08ee8625a031ad174fbe933cebdc90f0bdd3a047c14021eb09921c58f6cc923d",
+      "signedAt": "2026-01-10T12:00:00Z",
+      "envelopeRef": "example-signed-envelope",
+      "signers": [
+        {
+          "slot": "party",
+          "id": "tenant",
+          "versionHash": "3d1ac841fc14f98c8f6a9b17fbae94bad38f9c40b38783c03a6c363c5241a22c"
+        },
+        {
+          "slot": "party",
+          "id": "landlord",
+          "versionHash": "03621716884cab8ff41cae14c69b3890e64526e57c5cb6db022f258c9c025a59"
+        }
+      ],
+      "signedPdf": [
+        37,
+        80,
+        68,
+        70,
+        45,
+        115,
+        121,
+        110,
+        116,
+        104,
+        101,
+        116,
+        105,
+        99,
+        45,
+        101,
+        120,
+        97,
+        109,
+        112,
+        108,
+        101
+      ],
+      "signedPdfHash": "165f590e6e5d59e2c642a87479c656e610194e3a34ad9eb97c15f547a871e7e1",
+      "auditCertificate": [
+        83,
+        121,
+        110,
+        116,
+        104,
+        101,
+        116,
+        105,
+        99,
+        32,
+        97,
+        117,
+        100,
+        105,
+        116,
+        32,
+        99,
+        101,
+        114,
+        116,
+        105,
+        102,
+        105,
+        99,
+        97,
+        116,
+        101
+      ],
+      "auditHash": "652e555944b1d268e725ba14535a3fb4e15057fd0ef2d2650113d710946bfce6"
+    }
+  ]
+}

@@ -16,9 +16,10 @@
     "boundaries": "node scripts/check-boundaries.mjs",
     "runtime": "node scripts/check-runtime.mjs",
     "scan": "node scripts/scan-private.mjs",
-    "examples": "node scripts/example-check.mjs",
+    "examples": "node scripts/example-check.mjs && pnpm examples:site-search",
     "check": "pnpm build && pnpm lint && pnpm typecheck && pnpm test && pnpm boundaries && pnpm runtime && pnpm examples && pnpm scan",
-    "osw": "node packages/core/dist/node/cli.js"
+    "osw": "node packages/core/dist/node/cli.js",
+    "examples:site-search": "tsx packages/site-search/tests/example-check.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -31,6 +32,7 @@
     "@osw/core": "workspace:*",
     "@osw/store-concept": "workspace:*",
     "@osw/mcp": "workspace:*",
+    "@osw/site-search": "workspace:*",
     "@osw/fitout-bom": "workspace:*"
   }
 }
