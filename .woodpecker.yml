@@ -1,0 +1,21 @@
+steps:
+  - name: verify
+    image: node:22
+    environment:
+      OSW_PRIVATE_DENYLIST_CONTENT:
+        from_secret: osw_private_denylist
+    commands:
+      - corepack enable
+      - pnpm install --frozen-lockfile
+      - pnpm build
+      - pnpm lint
+      - pnpm typecheck
+      - pnpm test
+      - pnpm boundaries
+      - pnpm runtime
+      - pnpm examples
+      - test -n "$OSW_PRIVATE_DENYLIST_CONTENT"
+      - export OSW_PRIVATE_DENYLIST="$(mktemp)"
+      - printf '%s\n' "$OSW_PRIVATE_DENYLIST_CONTENT" > "$OSW_PRIVATE_DENYLIST"
+      - pnpm scan
+      - node scripts/scan-private.mjs --history

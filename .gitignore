@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+.osw/
+*.tsbuildinfo
+.env
+.env.*

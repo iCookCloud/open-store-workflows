@@ -1,0 +1,499 @@
+import { execFile } from 'node:child_process';
+import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
+import {
+  MemorySource,
+  type StepDef,
+  type WorkflowModule,
+  paramsSlot,
+  versionHash,
+  z,
+} from '@osw/core';
+import { discoverWorkflows, executeStep, runCli } from '@osw/core/node';
+import { describe, expect, it, vi } from 'vitest';
+import { createOswServer, stripPrivateOutput } from '../src/index.js';
+
+const now = '2030-01-01T00:00:00Z';
+const emptyHash = '0'.repeat(64);
+
+async function tempDirectory() {
+  const base = join(process.cwd(), '.osw');
+  await mkdir(base, { recursive: true });
+  return mkdtemp(join(base, 'interfaces-'));
+}
+
+const inputSchema = z.object({
+  value: z.number(),
+  jurisdiction: z.string().optional(),
+});
+const outputSchema = z.object({
+  doubled: z.number(),
+  answers: z.object({ secret: z.string(), label: z.string() }),
+});
+
+const testStep: StepDef<typeof inputSchema, typeof outputSchema> = {
+  id: 'store-concept/echo',
+  input: inputSchema,
+  output: outputSchema,
+  reads: [],
+  params: [],
+  outputPrivate: ['/answers/secret'],
+  async run(input) {
+    return input.value < 0
+      ? {
+          output: null,
+          needs: [
+            { kind: 'input', path: 'value', reason: 'Use a non-negative value', blocking: true },
+          ],
+          verifications: [],
+        }
+      : {
+          output: {
+            doubled: input.value * 2,
+            answers: { secret: 'hidden-answer', label: 'public' },
+          },
+          needs: [],
+          verifications: [],
+        };
+  },
+};
+
+const workflow: WorkflowModule = {
+  key: 'store-concept',
+  version: '0.1.0',
+  slots: [],
+  steps: [testStep],
+  async run(input, ctx) {
+    const result = await testStep.run(inputSchema.parse(input), ctx);
+    return { steps: { echo: result }, artifact: result.output, needs: result.needs };
+  },
+};
+
+async function connect(options: Parameters<typeof createOswServer>[0] = {}) {
+  const server = await createOswServer({
+    workflows: [workflow],
+    source: new MemorySource(),
+    now,
+    ...options,
+  });
+  const client = new Client({ name: 'osw-test', version: '0.1.0' });
+  const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
+  await server.connect(serverTransport);
+  await client.connect(clientTransport);
+  return { client, server };
+}
+
+describe('CLI and MCP use the same read-only runner', () => {
+  it('returns the same input need for missing required fields without hiding internal errors', async () => {
+    const directory = await tempDirectory();
+    await writeFile(join(directory, 'missing.json'), '{}');
+    const output: string[] = [];
+    expect(
+      await runCli(['store-concept', 'echo', '--in', 'missing.json'], {
+        cwd: directory,
+        workflows: [workflow],
+        source: new MemorySource(),
+        stdout: (text) => output.push(text),
+      }),
+    ).toBe(2);
+    const expected = JSON.parse(output.join(''));
+    expect(expected.needs[0]).toMatchObject({ kind: 'input', path: 'value', blocking: true });
+    const { client } = await connect();
+    try {
+      const result = await client.callTool({ name: 'store-concept_echo', arguments: {} });
+      expect(result.isError).not.toBe(true);
+      expect(result.structuredContent).toEqual(expected);
+    } finally {
+      await client.close();
+    }
+    const broken: StepDef = {
+      ...testStep,
+      run: async () => {
+        throw new Error('Internal failure');
+      },
+    };
+    await expect(
+      executeStep(broken, { value: 1 }, { source: new MemorySource(), now }),
+    ).rejects.toThrow('Internal failure');
+    const unavailable = new MemorySource();
+    vi.spyOn(unavailable, 'query').mockRejectedValue(new Error('Source unavailable'));
+    await expect(
+      executeStep(
+        {
+          ...testStep,
+          params: [{ key: 'example.factor', required: true, description: 'Example parameter' }],
+        },
+        { value: 1 },
+        { source: unavailable, now },
+      ),
+    ).rejects.toThrow('Source unavailable');
+  });
+
+  it('publishes StepDef input schema and returns the same sanitized result as CLI', async () => {
+    const directory = await tempDirectory();
+    await writeFile(join(directory, 'input.json'), JSON.stringify({ value: 7 }));
+    const stdout: string[] = [];
+    expect(
+      await runCli(['store-concept', 'echo', '--in', 'input.json', '--now', now], {
+        cwd: directory,
+        workflows: [workflow],
+        source: new MemorySource(),
+        stdout: (text) => stdout.push(text),
+      }),
+    ).toBe(0);
+    const cliResult = JSON.parse(stdout.join(''));
+    const { client } = await connect();
+    try {
+      const { tools } = await client.listTools();
+      const tool = tools.find((entry) => entry.name === 'store-concept_echo');
+      expect(tool?.inputSchema.properties).toHaveProperty('value');
+      expect(tools.some((entry) => entry.name === 'osw_record_verifications')).toBe(false);
+      const result = await client.callTool({ name: 'store-concept_echo', arguments: { value: 7 } });
+      expect(result.structuredContent).toEqual(
+        stripPrivateOutput(cliResult, testStep.outputPrivate),
+      );
+      expect(JSON.stringify(result)).not.toContain('hidden-answer');
+      expect(cliResult.output.answers.secret).toBe('hidden-answer');
+    } finally {
+      await client.close();
+    }
+  });
+
+  it('lists read-only slots, enforces limit <=50, and never records a step automatically', async () => {
+    const source = new MemorySource();
+    const record = vi.spyOn(source, 'recordVerification');
+    const { client } = await connect({ source, allowRecord: true });
+    try {
+      const response = await client.callTool({ name: 'osw_slots', arguments: {} });
+      expect((response.structuredContent?.slots as unknown[]).length).toBe(9);
+      const invalid = await client.callTool({
+        name: 'osw_query',
+        arguments: { slot: 'term', limit: 51 },
+      });
+      expect(invalid.isError).toBe(true);
+      await client.callTool({ name: 'store-concept_echo', arguments: { value: 2 } });
+      expect(record).not.toHaveBeenCalled();
+      const names = (await client.listTools()).tools.map((tool) => tool.name);
+      expect(names).toContain('osw_record_verifications');
+      expect(names).toContain('osw_apply_fills');
+    } finally {
+      await client.close();
+    }
+  });
+
+  it('returns CLI exit 2 and writes blocking needs for missing or malformed business input', async () => {
+    const directory = await tempDirectory();
+    await writeFile(join(directory, 'input.json'), JSON.stringify({ value: -1 }));
+    const options = {
+      cwd: directory,
+      workflows: [workflow],
+      source: new MemorySource(),
+      stdout: () => {},
+      stderr: () => {},
+    };
+    expect(
+      await runCli(
+        ['store-concept', 'run', '--in', 'input.json', '--now', now, '--out-dir', 'outputs'],
+        options,
+      ),
+    ).toBe(2);
+    expect(
+      JSON.parse(await readFile(join(directory, 'outputs', 'result.json'), 'utf8')).needs[0].kind,
+    ).toBe('input');
+    expect(
+      JSON.parse(await readFile(join(directory, 'outputs', 'echo.json'), 'utf8')).output,
+    ).toBeNull();
+    await writeFile(join(directory, 'bad.json'), JSON.stringify({ value: 'wrong' }));
+    expect(await runCli(['store-concept', 'echo', '--in', 'bad.json'], options)).toBe(2);
+    await writeFile(join(directory, 'broken.json'), '{');
+    expect(await runCli(['store-concept', 'echo', '--in', 'broken.json'], options)).toBe(1);
+  });
+
+  it('overwrites previous artifact and skipped step files when a reused output directory becomes blocked', async () => {
+    const directory = await tempDirectory();
+    const secondStep: StepDef = { ...testStep, id: 'store-concept/afterEcho' };
+    const twoStepWorkflow: WorkflowModule = {
+      ...workflow,
+      steps: [testStep, secondStep],
+      async run(input, ctx) {
+        const first = await testStep.run(inputSchema.parse(input), ctx);
+        if (first.output === null)
+          return { steps: { echo: first }, artifact: null, needs: first.needs };
+        const second = await secondStep.run(input, ctx);
+        return {
+          steps: { echo: first, afterEcho: second },
+          artifact: second.output,
+          needs: second.needs,
+        };
+      },
+    };
+    const options = {
+      cwd: directory,
+      workflows: [twoStepWorkflow],
+      source: new MemorySource(),
+      stdout: () => {},
+    };
+    const args = [
+      'store-concept',
+      'run',
+      '--in',
+      'input.json',
+      '--now',
+      now,
+      '--out-dir',
+      'outputs',
+    ];
+    await writeFile(join(directory, 'input.json'), JSON.stringify({ value: 1 }));
+    expect(await runCli(args, options)).toBe(0);
+    expect(
+      JSON.parse(await readFile(join(directory, 'outputs', 'artifact.json'), 'utf8')),
+    ).not.toBeNull();
+    expect(
+      JSON.parse(await readFile(join(directory, 'outputs', 'afterEcho.json'), 'utf8')),
+    ).not.toBeNull();
+    await writeFile(join(directory, 'input.json'), JSON.stringify({ value: -1 }));
+    expect(await runCli(args, options)).toBe(2);
+    expect(
+      JSON.parse(await readFile(join(directory, 'outputs', 'artifact.json'), 'utf8')),
+    ).toBeNull();
+    expect(
+      JSON.parse(await readFile(join(directory, 'outputs', 'afterEcho.json'), 'utf8')),
+    ).toBeNull();
+    expect(
+      JSON.parse(await readFile(join(directory, 'outputs', 'result.json'), 'utf8')).artifact,
+    ).toBeNull();
+  });
+
+  it('returns 3 on partial recording and leaves default execution read-only', async () => {
+    const source = new MemorySource();
+    const record = vi
+      .spyOn(source, 'recordVerification')
+      .mockResolvedValue([{ status: 'source_changed' }]);
+    const step: StepDef = {
+      ...testStep,
+      async run() {
+        return {
+          output: { doubled: 2, answers: { secret: 'hidden-answer', label: 'public' } },
+          needs: [],
+          verifications: [
+            {
+              asset: { slot: 'term', id: 'example-term', versionHash: emptyHash },
+              purpose: 'store-concept/echo',
+              verdict: 'fails',
+              reason: 'Synthetic mismatch',
+              at: now,
+              by: 'example',
+            },
+          ],
+        };
+      },
+    };
+    expect((await executeStep(step, { value: 1 }, { source, now })).exitCode).toBe(0);
+    expect(record).not.toHaveBeenCalled();
+    const result = await executeStep(step, { value: 1 }, { source, now, record: true });
+    expect(result.exitCode).toBe(3);
+    expect(result.records?.[0].result.status).toBe('source_changed');
+  });
+
+  it('records only via the explicit enabled MCP write tool', async () => {
+    const record = vi.fn().mockResolvedValue([{ status: 'recorded' }]);
+    const source = new MemorySource();
+    source.recordVerification = record;
+    const { client } = await connect({ source, allowRecord: true });
+    try {
+      const result = await client.callTool({
+        name: 'osw_record_verifications',
+        arguments: {
+          items: [
+            {
+              asset: { slot: 'term', id: 'example-term', versionHash: emptyHash },
+              purpose: 'store-concept/echo',
+              verdict: 'holds',
+              reason: 'Example checked',
+              at: now,
+              by: 'example',
+            },
+          ],
+        },
+      });
+      expect(record).toHaveBeenCalledTimes(1);
+      expect(result.structuredContent).toEqual({ results: [{ status: 'recorded' }] });
+    } finally {
+      await client.close();
+    }
+  });
+
+  it('prefetches scoped parameters and preserves ambiguity instead of inventing a value', async () => {
+    const data = { key: 'example.factor', value: 10, appliesTo: { jurisdictions: ['XE'] } };
+    const hash = await versionHash(data);
+    const source = new MemorySource(
+      ['a', 'b'].map((id) => ({
+        slot: 'params',
+        id,
+        slotVersion: '0.1.0',
+        versionHash: hash,
+        coverage: { tier: 'general', tracks: [], jurisdictions: [], workflows: [] },
+        updatedAt: now,
+        data,
+      })),
+      [paramsSlot],
+    );
+    const step: StepDef = {
+      ...testStep,
+      params: [{ key: 'example.factor', required: true, description: 'Example factor' }],
+      async run(_input, ctx) {
+        const need = ctx.params.need?.('example.factor');
+        return { output: null, needs: [need!], verifications: [] };
+      },
+    };
+    const result = await executeStep(step, { value: 1, jurisdiction: 'XE' }, { source, now });
+    expect(result.exitCode).toBe(2);
+    expect(result.result.needs[0]).toMatchObject({ kind: 'param', reason: 'ambiguous' });
+  });
+
+  it('exports workflow slots as JSON Schema and validates envelope major versions', async () => {
+    const directory = await tempDirectory();
+    const output: string[] = [];
+    const options = {
+      cwd: directory,
+      workflows: [workflow],
+      stdout: (text: string) => output.push(text),
+      stderr: () => {},
+    };
+    expect(await runCli(['slots', '--json-schema', 'schemas'], options)).toBe(0);
+    expect(
+      JSON.parse(await readFile(join(directory, 'schemas', 'term.schema.json'), 'utf8')).properties
+        .key,
+    ).toBeDefined();
+    const data = { key: 'sample', kind: 'equipment', labels: { en: 'Sample' } };
+    const record = {
+      slot: 'term',
+      id: 'sample',
+      slotVersion: '9.0.0',
+      versionHash: await versionHash(data),
+      updatedAt: now,
+      coverage: { tier: 'general' },
+      data,
+    };
+    await writeFile(join(directory, 'invalid.json'), JSON.stringify(record));
+    expect(await runCli(['validate', 'term', 'invalid.json'], options)).toBe(1);
+    await writeFile(
+      join(directory, 'menu.json'),
+      JSON.stringify({
+        title: { en: 'Example menu' },
+        cuisine: 'example',
+        tracks: [],
+        items: [{ id: 'sample', name: { en: 'Example item' } }],
+      }),
+    );
+    expect(await runCli(['validate', 'menu', 'menu.json'], options)).toBe(0);
+  });
+
+  it('discovers only marked installed @osw packages through their exported ESM entry', async () => {
+    const directory = await tempDirectory();
+    const scope = join(directory, 'node_modules', '@osw');
+    const packageDirectory = join(scope, 'example');
+    await mkdir(packageDirectory, { recursive: true });
+    await writeFile(
+      join(packageDirectory, 'package.json'),
+      JSON.stringify({
+        name: '@osw/example',
+        type: 'module',
+        osw: { workflow: true },
+        exports: { '.': { import: './index.js' } },
+      }),
+    );
+    await writeFile(
+      join(packageDirectory, 'index.js'),
+      `export const workflow = {
+      key: 'opening', version: '0.1.0', slots: [], steps: [],
+      async run() { return {steps: {}, artifact: {example: true}, needs: []}; }
+    };`,
+    );
+    expect((await discoverWorkflows({ moduleDirs: [scope] })).map((entry) => entry.key)).toEqual([
+      'opening',
+    ]);
+  });
+
+  it('serves installed workflow steps over real stdio with the same blocked result as the CLI process', async () => {
+    const directory = await tempDirectory();
+    const input = {
+      storeId: null,
+      storeType: 'example-absent',
+      jurisdiction: 'XE',
+      timezone: 'Etc/UTC',
+      currency: 'USD',
+    };
+    const inputFile = join(directory, 'input.json');
+    const outFile = join(directory, 'result.json');
+    await writeFile(inputFile, JSON.stringify(input));
+    const cliFile = fileURLToPath(new URL('../../core/dist/node/cli.js', import.meta.url));
+    const stdioFile = fileURLToPath(new URL('../dist/stdio.js', import.meta.url));
+    let cliCode = 0;
+    try {
+      await promisify(execFile)(process.execPath, [
+        cliFile,
+        'store-concept',
+        'resolveConcept',
+        '--assets',
+        directory,
+        '--in',
+        inputFile,
+        '--out',
+        outFile,
+        '--now',
+        now,
+      ]);
+    } catch (error) {
+      cliCode = (error as { code: number }).code;
+    }
+    expect(cliCode).toBe(2);
+    const cliResult = JSON.parse(await readFile(outFile, 'utf8'));
+    const transport = new StdioClientTransport({
+      command: process.execPath,
+      args: [stdioFile, '--assets', directory, '--now', now],
+      stderr: 'pipe',
+    });
+    const client = new Client({ name: 'osw-stdio-test', version: '0.1.0' });
+    await client.connect(transport);
+    try {
+      const tools = (await client.listTools()).tools;
+      expect(tools.filter((tool) => tool.name.startsWith('store-concept_'))).toHaveLength(6);
+      const result = await client.callTool({
+        name: 'store-concept_resolveConcept',
+        arguments: input,
+      });
+      expect(result.structuredContent).toEqual(cliResult);
+      expect(cliResult.needs[0]).toMatchObject({ kind: 'asset', slot: 'calc-template' });
+      const { timezone: _timezone, ...missingTimezone } = input;
+      const missing = await client.callTool({
+        name: 'store-concept_resolveConcept',
+        arguments: missingTimezone,
+      });
+      expect(missing.isError).not.toBe(true);
+      expect(missing.structuredContent?.needs).toEqual([
+        expect.objectContaining({ kind: 'input', path: 'timezone', blocking: true }),
+      ]);
+    } finally {
+      await client.close();
+    }
+  });
+});
+
+describe('private JSON pointers', () => {
+  it('handles escaped keys and array elements without mutating the workflow result', () => {
+    const result = {
+      output: { 'a/b': { '~answer': 'private' }, list: [{ secret: 'private', visible: 1 }] },
+      needs: [],
+      verifications: [],
+    };
+    const stripped = stripPrivateOutput(result, ['/a~1b/~0answer', '/list/0/secret']);
+    expect(stripped.output).toEqual({ 'a/b': {}, list: [{ visible: 1 }] });
+    expect(result.output.list[0].secret).toBe('private');
+  });
+});

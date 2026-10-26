@@ -1,0 +1,86 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "term",
+      "id": "example-noodle",
+      "slotVersion": "0.1.0",
+      "versionHash": "362034d1330c8fa3e4165a9ee09eeb1b0a61032013709f3dff79efed53433968",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "example-noodle",
+        "kind": "ingredient",
+        "labels": {
+          "en": "example-noodle"
+        }
+      }
+    },
+    {
+      "slot": "term",
+      "id": "example-induction",
+      "slotVersion": "0.1.0",
+      "versionHash": "99a020e1023a9c0454ccb26679df1f260006b19058d99663a292abad8f3e44c3",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "example-induction",
+        "kind": "equipment",
+        "labels": {
+          "en": "example-induction"
+        }
+      }
+    },
+    {
+      "slot": "term",
+      "id": "example-boil",
+      "slotVersion": "0.1.0",
+      "versionHash": "202fa0dc7b551f4c9a38f604d54fdd5871d4a68f652de49d8b621963a1c67c27",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "example-boil",
+        "kind": "sop",
+        "labels": {
+          "en": "example-boil"
+        }
+      }
+    }
+  ]
+}
