@@ -70,7 +70,11 @@ export async function prepareContext(
 ): Promise<StepCtx> {
   const now = IsoDateTime.parse(options.now ?? new Date().toISOString());
   const keys = [...new Set(steps.flatMap((step) => step.params.map((param) => param.key)))];
-  const records = await loadParameterRecords(options.source, [...keys, 'fx'], true);
+  const records = await loadParameterRecords(
+    options.source,
+    keys.length ? [...keys, 'fx'] : [],
+    true,
+  );
 
   return {
     assets: options.source,
