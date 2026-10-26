@@ -1,0 +1,29 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "party",
+      "id": "example-supplier",
+      "slotVersion": "0.1.0",
+      "versionHash": "cb6c6943f2b6fb8ddb947aad758ecd9783b46700d904591436f8dcdecf6283f7",
+      "fieldsetHashes": {},
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Supplier"
+        },
+        "roles": [
+          "supplier"
+        ],
+        "status": "active"
+      }
+    }
+  ]
+}

@@ -1,0 +1,365 @@
+{
+  "$example": "synthetic",
+  "artifact": {
+    "kind": "SiteDecision",
+    "artifactVersion": "0.1.0",
+    "id": "example-store",
+    "hash": "c1e25e06b4f205ffbde6b89105db6d2b2959d6eb8822f87452ae47672feb2fc4",
+    "producedBy": {
+      "step": "site-search/signLease",
+      "pkg": "@osw/site-search",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": null,
+    "inputs": [
+      {
+        "kind": "StoreSpec",
+        "id": "example-store",
+        "hash": "81ab39b7167d3972e88678ba2865bacc2100631b4ca656164182ddcc357226cf"
+      }
+    ],
+    "sources": [
+      {
+        "slot": "listing",
+        "id": "example-listing-1",
+        "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-2",
+        "versionHash": "779aab5fb7e14ad1c5549920cb71627d739a14750966bf9b13304a70a20566fd"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-3",
+        "versionHash": "62485a52d9abaa592fc754d41da3668e97f72b46e822c42c47116a1ac9f7163d"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-4",
+        "versionHash": "952cc00e7d709916e5cfafefb82947b5db6d11129f871554ad8a73f1812317c8"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-5",
+        "versionHash": "b0d9fcf4af2f811dd4fb5093832501920f5a53305bef92ad9ab188951a515a97"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-6",
+        "versionHash": "764f7b4923b7e21f633f7e5ce702c3ab65810a687d92d0f560edb45184bfc2bb"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-7",
+        "versionHash": "2b6bde874d064ffadb311bdd5ea132cbfc365426b19948712664aabcf60b6283"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-8",
+        "versionHash": "94ca1b3babfdd93738a7328ea4900aea54e81def8ee8b44d5099c88c92d54e38"
+      },
+      {
+        "slot": "listing",
+        "id": "example-listing-1",
+        "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f"
+      },
+      {
+        "slot": "trade-area",
+        "id": "example-population",
+        "versionHash": "91aea7b247fb2805760e6f2df73ce9e31e72da53852879cc3dcdf26e235b09f5"
+      },
+      {
+        "slot": "template",
+        "id": "example-dd",
+        "versionHash": "69f1db09d329df885ce3347f36b071b99a958d3f749a31ff4ae1909e9fa4d197"
+      },
+      {
+        "slot": "template",
+        "id": "example-loi",
+        "versionHash": "ebafba6235fd174b930e7d83cc06eabd1db5a20ddc89cf6d61bc965b08d5fbf3"
+      },
+      {
+        "slot": "party",
+        "id": "lawyer-one",
+        "versionHash": "bd219a3250696cba96aa4b6d0dcefe23f2147f65046e5729d2a1d9e1b31aaf38"
+      },
+      {
+        "slot": "template",
+        "id": "example-lease",
+        "versionHash": "4b605a517fa9b38376c00ee34efaf23374809b6fcf7408e46d18634c13be4242"
+      }
+    ],
+    "createdAt": "2026-01-10T12:00:00Z",
+    "example": true,
+    "body": {
+      "stage": "signed",
+      "listing": {
+        "slot": "listing",
+        "id": "example-listing-1",
+        "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f"
+      },
+      "address": {
+        "line1": "100 Example Road",
+        "locality": "Example City",
+        "jurisdiction": "XE"
+      },
+      "geo": {
+        "lat": 0,
+        "lng": 0
+      },
+      "jurisdiction": "XE",
+      "unit": "example-unit",
+      "floorLevel": 0,
+      "conditions": [
+        {
+          "key": "area",
+          "measure": {
+            "value": 100,
+            "unit": "m2",
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "observed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/survey"
+            ]
+          },
+          "verdict": "holds"
+        },
+        {
+          "key": "frontage",
+          "measure": {
+            "value": 20,
+            "unit": "ft",
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "observed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/survey"
+            ]
+          },
+          "verdict": "holds"
+        },
+        {
+          "key": "clearHeight",
+          "measure": {
+            "value": 12,
+            "unit": "ft",
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "observed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/survey"
+            ]
+          },
+          "required": {
+            "key": "clearHeight",
+            "op": "gte",
+            "value": 10,
+            "unit": "ft",
+            "hard": true
+          },
+          "claimed": {
+            "value": 14,
+            "unit": "ft",
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "claimed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/claims"
+            ]
+          },
+          "verdict": "holds"
+        },
+        {
+          "key": "powerCapacity",
+          "measure": {
+            "value": 100,
+            "unit": "kW",
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "observed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/survey"
+            ]
+          },
+          "verdict": "holds"
+        },
+        {
+          "key": "gasService",
+          "measure": {
+            "value": true,
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "observed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/survey"
+            ]
+          },
+          "verdict": "holds"
+        },
+        {
+          "key": "exhaustPath",
+          "measure": {
+            "value": "existing",
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "observed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/survey"
+            ]
+          },
+          "verdict": "holds"
+        },
+        {
+          "key": "foodUse",
+          "measure": {
+            "value": true,
+            "at": "2026-01-09T12:00:00Z",
+            "by": "example-surveyor",
+            "basis": "observed",
+            "expiresAt": "2026-12-31",
+            "refs": [
+              "https://example.com/survey"
+            ]
+          },
+          "verdict": "holds"
+        }
+      ],
+      "unmeasured": [],
+      "openingTarget": "2026-06-01",
+      "lease": {
+        "termMonths": 60,
+        "renewals": [],
+        "possessionDate": "2026-02-01",
+        "rentCommencementDate": "2026-05-01",
+        "rent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total",
+          "escalation": {
+            "kind": "none",
+            "value": null,
+            "everyMonths": 12
+          },
+          "freeRentMonths": 3,
+          "additional": []
+        },
+        "deposit": {
+          "amount": 2000,
+          "currency": "USD"
+        },
+        "tiAllowance": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "guarantee": {
+          "kind": "none",
+          "cap": null
+        },
+        "permittedUse": "Example food service",
+        "exclusiveUse": false,
+        "assignment": "consent",
+        "deliveryCondition": "second_gen_food",
+        "landlordWork": [],
+        "documents": [
+          {
+            "template": {
+              "slot": "template",
+              "id": "example-lease",
+              "versionHash": "4b605a517fa9b38376c00ee34efaf23374809b6fcf7408e46d18634c13be4242"
+            },
+            "kind": "lease",
+            "contentHash": "08ee8625a031ad174fbe933cebdc90f0bdd3a047c14021eb09921c58f6cc923d",
+            "signedAt": "2026-01-10T12:00:00Z",
+            "envelopeRef": "example-signed-envelope"
+          }
+        ]
+      },
+      "shortlist": [
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-1",
+            "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f"
+          },
+          "status": "chosen",
+          "reason": "Chosen example"
+        },
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-2",
+            "versionHash": "779aab5fb7e14ad1c5549920cb71627d739a14750966bf9b13304a70a20566fd"
+          },
+          "status": "rejected",
+          "reason": "Less suitable example"
+        },
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-3",
+            "versionHash": "62485a52d9abaa592fc754d41da3668e97f72b46e822c42c47116a1ac9f7163d"
+          },
+          "status": "rejected",
+          "reason": "Less suitable example"
+        },
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-4",
+            "versionHash": "952cc00e7d709916e5cfafefb82947b5db6d11129f871554ad8a73f1812317c8"
+          },
+          "status": "rejected",
+          "reason": "Less suitable example"
+        },
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-5",
+            "versionHash": "b0d9fcf4af2f811dd4fb5093832501920f5a53305bef92ad9ab188951a515a97"
+          },
+          "status": "rejected",
+          "reason": "Less suitable example"
+        },
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-6",
+            "versionHash": "764f7b4923b7e21f633f7e5ce702c3ab65810a687d92d0f560edb45184bfc2bb"
+          },
+          "status": "rejected",
+          "reason": "Less suitable example"
+        },
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-7",
+            "versionHash": "2b6bde874d064ffadb311bdd5ea132cbfc365426b19948712664aabcf60b6283"
+          },
+          "status": "rejected",
+          "reason": "Less suitable example"
+        },
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing-8",
+            "versionHash": "94ca1b3babfdd93738a7328ea4900aea54e81def8ee8b44d5099c88c92d54e38"
+          },
+          "status": "rejected",
+          "reason": "Less suitable example"
+        }
+      ]
+    }
+  }
+}

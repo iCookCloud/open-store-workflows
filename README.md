@@ -6,7 +6,9 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-This implementation includes the shared core, **store-concept** and **opening** workflows. Store-concept produces a versioned `StoreSpec`; opening uses it to derive staffing and certification requirements, grade assessments, expand opening checklists, gate human release, plan marketing, review results and produce an `OpeningRecord` for operating-store handoff. The other five workflows and production-system integration are separate work.
+Implemented workflows include **store-concept** (`StoreSpec`), **site-search** (screening, surveys, LOI, counsel review and signed `SiteDecision`), **fitout-bom** (reviewed quantities, supplier offers and frozen `Bom`), and **opening** (training, release gates, marketing and operating-store `OpeningRecord`). They share the core, CLI and MCP interfaces. The remaining three workflows and production-system integration are separate work.
+
+See the [site-search guide](packages/site-search/README.md) for the synthetic end-to-end example and explicit local `--providers` modules. `pnpm examples:site-search` checks missing-signature-approval exit 2 and completed exit 0.
 
 ## Packages
 
@@ -14,6 +16,8 @@ This implementation includes the shared core, **store-concept** and **opening** 
 | --- | --- |
 | `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
 | `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
+| `@osw/site-search` | Unit-aware listing filters, independent surveys, lease drift, approvals and signing evidence |
+| `@osw/fitout-bom` | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
 | `@osw/opening` | Staffing, SOP coverage, assessments, checklists, release signatures, marketing, reviews and operating-store handoff |
 | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 
@@ -124,3 +128,7 @@ The pre-push hook scans the blobs reachable from outgoing commits; the full-hist
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+## Fitout workflow
+
+`@osw/fitout-bom` implements case/image review, site and menu quantities, material costing, supplier selection, offer verification, BOM freezing and optional customer quotes. See [the fitout package guide](packages/fitout-bom/README.md). The fully synthetic `examples/fitout-store` fixture is checked by `pnpm examples`.
