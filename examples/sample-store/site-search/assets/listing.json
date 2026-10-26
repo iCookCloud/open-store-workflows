@@ -1,0 +1,671 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "listing",
+      "id": "site",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-one",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 12,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/listings/one"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "5c7687d930215bda22404539d60c50802f9a4c31d5df456d81ac064092434852",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-1",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-1",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 14,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-2",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-2",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 14,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "779aab5fb7e14ad1c5549920cb71627d739a14750966bf9b13304a70a20566fd",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-3",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-3",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 12,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "62485a52d9abaa592fc754d41da3668e97f72b46e822c42c47116a1ac9f7163d",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-4",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-4",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 12,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "952cc00e7d709916e5cfafefb82947b5db6d11129f871554ad8a73f1812317c8",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-5",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-5",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 12,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "b0d9fcf4af2f811dd4fb5093832501920f5a53305bef92ad9ab188951a515a97",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-6",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-6",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 12,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "764f7b4923b7e21f633f7e5ce702c3ab65810a687d92d0f560edb45184bfc2bb",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-7",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-7",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 12,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "2b6bde874d064ffadb311bdd5ea132cbfc365426b19948712664aabcf60b6283",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing-8",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-8",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 12,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "94ca1b3babfdd93738a7328ea4900aea54e81def8ee8b44d5099c88c92d54e38",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    }
+  ]
+}

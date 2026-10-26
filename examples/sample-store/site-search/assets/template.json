@@ -1,0 +1,120 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "template",
+      "id": "example-loi",
+      "data": {
+        "kind": "loi",
+        "lang": "en",
+        "title": {
+          "en": "Synthetic example only"
+        },
+        "format": "markdown",
+        "jurisdiction": "XE",
+        "body": "Example only. Free rent: {{months}} months. Use: {{use}}.",
+        "placeholders": [
+          {
+            "token": "{{months}}",
+            "key": "rent.freeRentMonths",
+            "required": true
+          },
+          {
+            "token": "{{use}}",
+            "key": "permittedUse",
+            "required": true
+          }
+        ],
+        "termKeys": [
+          "rent.freeRentMonths",
+          "permittedUse"
+        ],
+        "requiresCounselReview": true
+      },
+      "versionHash": "ebafba6235fd174b930e7d83cc06eabd1db5a20ddc89cf6d61bc965b08d5fbf3",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-dd",
+      "data": {
+        "kind": "site-dd-checklist",
+        "lang": "en",
+        "title": {
+          "en": "Example checklist"
+        },
+        "format": "json",
+        "jurisdiction": "XE",
+        "content": {
+          "checks": [
+            {
+              "key": "zoning"
+            },
+            {
+              "key": "violations"
+            }
+          ]
+        }
+      },
+      "versionHash": "69f1db09d329df885ce3347f36b071b99a958d3f749a31ff4ae1909e9fa4d197",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-lease",
+      "data": {
+        "kind": "lease",
+        "lang": "en",
+        "title": {
+          "en": "Synthetic example only"
+        },
+        "format": "markdown",
+        "jurisdiction": "XE",
+        "body": "Example only. Free rent: {{months}} months. Use: {{use}}.",
+        "placeholders": [
+          {
+            "token": "{{months}}",
+            "key": "rent.freeRentMonths",
+            "required": true
+          },
+          {
+            "token": "{{use}}",
+            "key": "permittedUse",
+            "required": true
+          }
+        ],
+        "termKeys": [
+          "rent.freeRentMonths",
+          "permittedUse"
+        ],
+        "requiresCounselReview": true
+      },
+      "versionHash": "4b605a517fa9b38376c00ee34efaf23374809b6fcf7408e46d18634c13be4242",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    }
+  ]
+}

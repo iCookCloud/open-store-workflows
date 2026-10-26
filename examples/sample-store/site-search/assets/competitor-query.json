@@ -1,0 +1,27 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "competitor-query",
+      "id": "example-query",
+      "data": {
+        "queries": [
+          "example noodles"
+        ],
+        "lang": "en"
+      },
+      "versionHash": "e5122ba16b1d2d596f3a29d66056f0a07aa2461473b66ffc7598ad54d351a862",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    }
+  ]
+}

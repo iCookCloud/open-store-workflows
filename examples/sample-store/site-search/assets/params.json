@@ -1,0 +1,257 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "params",
+      "id": "example-site.searchRadiusKm",
+      "data": {
+        "key": "site.searchRadiusKm",
+        "value": 10
+      },
+      "versionHash": "ecf3cf8e1091a3fe0b18da90685e3c2e94b9a37015b704970986fc5925dfc812",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.screenLimit",
+      "data": {
+        "key": "site.screenLimit",
+        "value": 200
+      },
+      "versionHash": "c9cc7a131d2b86c3a693f885d18a002ce33cc0d084d56b9f42a5398094044dc3",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.shortlistMax",
+      "data": {
+        "key": "site.shortlistMax",
+        "value": 10
+      },
+      "versionHash": "bb9a3d0240f11a751fb3f708602f8c455652f983e8b9849ca9618b2e717b9aeb",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.maxOccupancyRatio",
+      "data": {
+        "key": "site.maxOccupancyRatio",
+        "value": 0.2
+      },
+      "versionHash": "d44ccf2a3c46e940d56b3e1a92bfb00209d4cdebfb910d1a28bcf3f3adde8b7a",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.minResidents",
+      "data": {
+        "key": "site.minResidents",
+        "value": 10000
+      },
+      "versionHash": "bce025a422e3b4b8cc6851cf6d93f687c1e5956c4d2cd2e815e04043d0844db5",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.evidenceMaxAgeDays",
+      "data": {
+        "key": "site.evidenceMaxAgeDays",
+        "value": 30
+      },
+      "versionHash": "ebaffa111b8fd2dfbdba46606a835b9804f323a713dc414b25665d9773f344c5",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.claimTolerance",
+      "data": {
+        "key": "site.claimTolerance",
+        "value": 0.5
+      },
+      "versionHash": "43f1438578b9552716440a2fde3ebef2bee122b49d2af0b985293b4dfc30b9e5",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.competitorRadiusKm",
+      "data": {
+        "key": "site.competitorRadiusKm",
+        "value": 2
+      },
+      "versionHash": "dae04c8a8ce5a2325df3c125105aeef8735e0978adc7ef0c61e04e65f0c05c90",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-site.maxScansPerDecision",
+      "data": {
+        "key": "site.maxScansPerDecision",
+        "value": 10
+      },
+      "versionHash": "2b097bccf7b82cdcc6b648a212d139212cd6574912b74503ddb0211be768f6a4",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-places.dailyCap",
+      "data": {
+        "key": "places.dailyCap",
+        "value": 100
+      },
+      "versionHash": "3fbc0ac1864038ffa7c9f07827456a0056170bf4b54a5aedfe7add2ad9f513a2",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-places.reuseDays",
+      "data": {
+        "key": "places.reuseDays",
+        "value": 1
+      },
+      "versionHash": "3e61c99c598ec24c7503149c87e69407717dd8d7e7bfe5374eeedf3ec5800e4a",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-listingFeed.reuseHours",
+      "data": {
+        "key": "listingFeed.reuseHours",
+        "value": 1
+      },
+      "versionHash": "f0084a97123c1f37453c3479e5d5c3f7a3e6632c2255da019250c7ca88850726",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-listingFeed.maxItemsPerRun",
+      "data": {
+        "key": "listingFeed.maxItemsPerRun",
+        "value": 20
+      },
+      "versionHash": "98aeb09c4e91abbbbf9d5820f3e41cf3721cd8aaad526c54116627b6f01b51a1",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "example-listingFeed.maxChargePerRun",
+      "data": {
+        "key": "listingFeed.maxChargePerRun",
+        "value": 0
+      },
+      "versionHash": "75c3daf933e810b49e88611f4fff2f60a98db83c25636bb17ec774dac5de3477",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    }
+  ]
+}
