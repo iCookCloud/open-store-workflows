@@ -1,0 +1,263 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "product",
+      "id": "example-cooker",
+      "slotVersion": "0.1.0",
+      "versionHash": "660675c2379936cdda5d41c7e63b89d85223f0752f1a8237dcd2dbbb7fbed0d7",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "双头煮面炉"
+        },
+        "kind": "catalog",
+        "category": "equipment",
+        "goodsClass": "nonfood",
+        "status": "active",
+        "spec": "2 pcs/carton",
+        "netWeightKg": 10,
+        "unitVolumeM3": 0.1,
+        "carton": {
+          "units": 2,
+          "grossWeightKg": 30,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example synthetic material",
+        "storage": "ambient"
+      },
+      "fieldsetHashes": {
+        "identity": "ecfe740e10e27417c39415f6fc8f9b8aed98815b7f88fa65528776f4cac9cdfa",
+        "logistics": "e8a14ec8852ee212ac57ef6dc7b5bd5443e9d4be92d0c52614bf6af12642b859",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    },
+    {
+      "slot": "product",
+      "id": "example-table",
+      "slotVersion": "0.1.0",
+      "versionHash": "2e61215d0547e9ee6eda3739b230801c558f3cae99e79fa8164d681d2e4f27c1",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "茶几"
+        },
+        "kind": "catalog",
+        "category": "furniture",
+        "goodsClass": "nonfood",
+        "status": "active",
+        "spec": "2 pcs/carton",
+        "netWeightKg": 10,
+        "unitVolumeM3": 0.1,
+        "carton": {
+          "units": 2,
+          "grossWeightKg": 30,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example synthetic material",
+        "storage": "ambient"
+      },
+      "fieldsetHashes": {
+        "identity": "ab0ce1a415ded683f556349b5a49795149ebd21efb2d7ec2aa309f1d73f16df6",
+        "logistics": "e8a14ec8852ee212ac57ef6dc7b5bd5443e9d4be92d0c52614bf6af12642b859",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    },
+    {
+      "slot": "product",
+      "id": "example-food",
+      "slotVersion": "0.1.0",
+      "versionHash": "a690aeeb549a64b695f20f420c8064d4fb8c9ce02a1fa792514845379910762e",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example noodles"
+        },
+        "kind": "catalog",
+        "category": "food",
+        "goodsClass": "food",
+        "status": "active",
+        "spec": "2 pcs/carton",
+        "netWeightKg": 10,
+        "unitVolumeM3": 0.1,
+        "carton": {
+          "units": 2,
+          "grossWeightKg": 30,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example synthetic material",
+        "storage": "chilled"
+      },
+      "fieldsetHashes": {
+        "identity": "606e9ff202ffee41d018a03cc8c06fdf2a0103ff15a9268cd1e2164e034e011d",
+        "logistics": "0db37e0afa30e6830f34b50c87e1432a0f111cc47e0a3f2146c9db38ef04e08a",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    },
+    {
+      "slot": "product",
+      "id": "example-urgent",
+      "slotVersion": "0.1.0",
+      "versionHash": "36d5edee1d5ad922c1fa20508a708589f2fd68950a9b961de97ffe9e30d7f193",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example urgent equipment"
+        },
+        "kind": "catalog",
+        "category": "equipment",
+        "goodsClass": "nonfood",
+        "status": "active",
+        "spec": "2 pcs/carton",
+        "netWeightKg": 10,
+        "unitVolumeM3": 0.1,
+        "carton": {
+          "units": 2,
+          "grossWeightKg": 30,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example synthetic material",
+        "storage": "ambient"
+      },
+      "fieldsetHashes": {
+        "identity": "b663633e9773676e79ac3325f27d34d0e7277d216fadfbee4be8608d260abaa7",
+        "logistics": "e8a14ec8852ee212ac57ef6dc7b5bd5443e9d4be92d0c52614bf6af12642b859",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    },
+    {
+      "slot": "product",
+      "id": "example-local",
+      "slotVersion": "0.1.0",
+      "versionHash": "540acdd4a8431b37aef56eb909b671114e24c7e75260b36d9ec0265e517d3b0c",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example local supplies"
+        },
+        "kind": "catalog",
+        "category": "supplies",
+        "goodsClass": "nonfood",
+        "status": "active",
+        "spec": "2 pcs/carton",
+        "netWeightKg": 10,
+        "unitVolumeM3": 0.1,
+        "carton": {
+          "units": 2,
+          "grossWeightKg": 30,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example synthetic material",
+        "storage": "ambient"
+      },
+      "fieldsetHashes": {
+        "identity": "658adba7e7a9e4c3a9cc29aea1348a97e53a9bde47123f93181557f853aa22ac",
+        "logistics": "e8a14ec8852ee212ac57ef6dc7b5bd5443e9d4be92d0c52614bf6af12642b859",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    },
+    {
+      "slot": "product",
+      "id": "example-denied",
+      "slotVersion": "0.1.0",
+      "versionHash": "34fa67d7220d5aaa4d73ec8e3558eb10f358948a05d10ee3f2157f9e9ac6a0ba",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example denied product"
+        },
+        "kind": "catalog",
+        "category": "food",
+        "goodsClass": "food",
+        "status": "active",
+        "spec": "2 pcs/carton",
+        "netWeightKg": 10,
+        "unitVolumeM3": 0.1,
+        "carton": {
+          "units": 2,
+          "grossWeightKg": 30,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example synthetic material",
+        "storage": "chilled"
+      },
+      "fieldsetHashes": {
+        "identity": "692147a0f536eca74913c72c79470cbb1ddec5c70403840764349e80ce26a46a",
+        "logistics": "0db37e0afa30e6830f34b50c87e1432a0f111cc47e0a3f2146c9db38ef04e08a",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    }
+  ]
+}

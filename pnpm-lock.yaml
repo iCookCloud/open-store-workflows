@@ -20,6 +20,9 @@ importers:
       '@osw/fitout-bom':
         specifier: workspace:*
         version: link:packages/fitout-bom
+      '@osw/landed-delivery':
+        specifier: workspace:*
+        version: link:packages/landed-delivery
       '@osw/mcp':
         specifier: workspace:*
         version: link:packages/mcp
@@ -55,6 +58,12 @@ importers:
         version: 4.6.7
 
   packages/fitout-bom:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/landed-delivery:
     dependencies:
       '@osw/core':
         specifier: workspace:*

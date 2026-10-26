@@ -17,8 +17,10 @@ import {
   z,
 } from '@osw/core';
 import { discoverWorkflows, executeStep, runCli } from '@osw/core/node';
+import { workflow as deliveryWorkflow } from '@osw/landed-delivery';
 import { CertSlot, ExamSlot, workflow as openingWorkflow } from '@osw/opening';
 import { describe, expect, it, vi } from 'vitest';
+import { deliveryFixture } from '../../../scripts/gen-delivery-example.mjs';
 import { createOswServer, stripPrivateOutput } from '../src/index.js';
 
 const now = '2030-01-01T00:00:00Z';
@@ -92,6 +94,52 @@ async function connect(options: Parameters<typeof createOswServer>[0] = {}) {
 }
 
 describe('CLI and MCP use the same read-only runner', () => {
+  it('discovers all landed-delivery steps and returns identical compliance needs through CLI and MCP', async () => {
+    const fixture = await deliveryFixture();
+    const directory = await tempDirectory();
+    await writeFile(join(directory, 'delivery.json'), JSON.stringify(fixture.input));
+    const output: string[] = [];
+    const record = vi.spyOn(fixture.source, 'recordVerification');
+    expect(
+      await runCli(
+        [
+          'landed-delivery',
+          'screenCompliance',
+          '--in',
+          'delivery.json',
+          '--now',
+          fixture.ctx.now,
+          '--actor',
+          fixture.ctx.actor,
+        ],
+        {
+          cwd: directory,
+          workflows: [deliveryWorkflow],
+          source: fixture.source,
+          stdout: (text) => output.push(text),
+        },
+      ),
+    ).toBe(2);
+    const { client } = await connect({
+      workflows: [deliveryWorkflow],
+      source: fixture.source,
+      now: fixture.ctx.now,
+      actor: fixture.ctx.actor,
+    });
+    try {
+      const names = (await client.listTools()).tools.map((tool) => tool.name);
+      for (const step of deliveryWorkflow.steps) expect(names).toContain(step.id.replace('/', '_'));
+      const result = await client.callTool({
+        name: 'landed-delivery_screenCompliance',
+        arguments: fixture.input,
+      });
+      expect(result.isError).not.toBe(true);
+      expect(result.structuredContent).toEqual(JSON.parse(output.join('')));
+      expect(record).not.toHaveBeenCalled();
+    } finally {
+      await client.close();
+    }
+  });
   it('returns the same input need for missing required fields without hiding internal errors', async () => {
     const directory = await tempDirectory();
     await writeFile(join(directory, 'missing.json'), '{}');

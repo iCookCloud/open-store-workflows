@@ -4,6 +4,7 @@ import { cp, mkdtemp, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkDeliveryExample } from './delivery-example-check.mjs';
 import { EXAMPLE_ACTOR, EXAMPLE_NOW, exampleDirectory, generateExamples } from './gen-examples.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -149,6 +150,7 @@ console.log(
   'Fitout example passed: blocked approval, reproducible Bom, and three recorded offer verdicts',
 );
 
+await checkDeliveryExample();
 const openingBase = [
   cli,
   'opening',

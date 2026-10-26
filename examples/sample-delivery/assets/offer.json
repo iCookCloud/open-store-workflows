@@ -1,0 +1,251 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "offer",
+      "id": "example-cooker-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "1e2b14f2b0baf8ab83d4c19be46292ebbbdf095f1178aac0dde63419a2ed5c6b",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-cooker",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 100
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "shipFrom": "XF",
+        "delivery": "buyer_arranges",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "fieldsetHashes": {
+        "price": "63eb34e860b72d8bbb52829e65f3443d6908ff64696113d2b93b95b28faf2ab8",
+        "terms": "c36929a177be9e0dfacc6c012e479c9114a1f67ffd79fcfbfe87faf92a10c3f1"
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-table-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "13bf24dd763007f7d8e8c904b75a3c423577451472ea043442f7c7a15675ef7b",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-table",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 100
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "shipFrom": "XF",
+        "delivery": "buyer_arranges",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "fieldsetHashes": {
+        "price": "63eb34e860b72d8bbb52829e65f3443d6908ff64696113d2b93b95b28faf2ab8",
+        "terms": "c36929a177be9e0dfacc6c012e479c9114a1f67ffd79fcfbfe87faf92a10c3f1"
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-food-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "8b4c8e0cbfbc7a925a536c04678cede64d091a42c1c6b74eb178735046f75f3d",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-food",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 100
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "shipFrom": "XF",
+        "delivery": "buyer_arranges",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "fieldsetHashes": {
+        "price": "63eb34e860b72d8bbb52829e65f3443d6908ff64696113d2b93b95b28faf2ab8",
+        "terms": "c36929a177be9e0dfacc6c012e479c9114a1f67ffd79fcfbfe87faf92a10c3f1"
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-urgent-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "dd7312e228a57fc05dbb4f8f6ff29169cc56f03455320ba4103cbab8821a0948",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-urgent",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 100
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "shipFrom": "XF",
+        "delivery": "buyer_arranges",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "fieldsetHashes": {
+        "price": "63eb34e860b72d8bbb52829e65f3443d6908ff64696113d2b93b95b28faf2ab8",
+        "terms": "c36929a177be9e0dfacc6c012e479c9114a1f67ffd79fcfbfe87faf92a10c3f1"
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-local-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "899b08395079bb68df5399ad2ae614d3ad1564c0a483ea6fed7dc2592dee8083",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-local-seller",
+        "productId": "example-local",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 100
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "shipFrom": "XE",
+        "delivery": "seller_delivers",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "fieldsetHashes": {
+        "price": "63eb34e860b72d8bbb52829e65f3443d6908ff64696113d2b93b95b28faf2ab8",
+        "terms": "4b55c96b42e23c80463507e5dfd1fa5dec485057c099d34385f490e8dd5d331b"
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-denied-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "ec6afaa8d52bf778e5295e4c58bc55a158725ceed5ea352e9b4b56779c81c48c",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-denied",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 100
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "shipFrom": "XF",
+        "delivery": "buyer_arranges",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "fieldsetHashes": {
+        "price": "63eb34e860b72d8bbb52829e65f3443d6908ff64696113d2b93b95b28faf2ab8",
+        "terms": "c36929a177be9e0dfacc6c012e479c9114a1f67ffd79fcfbfe87faf92a10c3f1"
+      }
+    }
+  ]
+}
