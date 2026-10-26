@@ -34,6 +34,7 @@
     "@osw/mcp": "workspace:*",
     "@osw/site-search": "workspace:*",
     "@osw/fitout-bom": "workspace:*",
-    "@osw/landed-delivery": "workspace:*"
+    "@osw/landed-delivery": "workspace:*",
+    "@osw/opening": "workspace:*"
   }
 }

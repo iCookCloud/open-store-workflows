@@ -1,0 +1,15 @@
+import { contentCaseSlot } from '../slots/content-case.js';
+import { contentPlaybookSlot } from '../slots/content-playbook.js';
+import { planMarketing } from './plan-marketing.js';
+export * from './models.js';
+export * from './plan-marketing.js';
+export * from './creator-select.js';
+export * from './ledger.js';
+export * from './asset-gap.js';
+export * from './content-calendar.js';
+export * from '../templates/marketing-plan.js';
+export * from '../templates/asset-plan.js';
+export * from '../slots/content-case.js';
+export * from '../slots/content-playbook.js';
+export const marketingSteps = [planMarketing] as const;
+export const marketingSlots = [contentCaseSlot, contentPlaybookSlot] as const;

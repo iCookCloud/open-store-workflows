@@ -4,7 +4,7 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-已实现 **共享 core、第 1 项「定店型」、第 2 项「找房」、第 3 项「装修物料单」与第 4 项「到店」**，分别生成 `StoreSpec`、`SiteDecision`、`Bom` 和 `DeliveryPlan`。四条流程共用 CLI／MCP；其余三项及生产站点接入另行开展。
+已实现 **共享 core、第 1 项「定店型」、第 2 项「找房」、第 3 项「装修物料单」、第 4 项「到店」与第 6 项「开门营业」**，分别生成 `StoreSpec`、`SiteDecision`、`Bom`、`DeliveryPlan` 和 `OpeningRecord`。五条流程共用 CLI／MCP；其余两项及生产站点接入另行开展。
 
 第二项包含筛选、周边扫描、实测、意向书、律师审阅与签署证据核验，详见[找房运行说明](packages/site-search/README.md)。运行 `pnpm examples:site-search` 可验证缺签约批示退出 2、审批完整退出 0。CLI 和 MCP 可用 `--providers <本地模块>` 显式加载外部服务及额度存储。
 
@@ -38,9 +38,31 @@ OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
 
 MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动时添加 `--allow-record` 才提供写回工具。
 
+## 第六项：开门营业
+
+```sh
+pnpm osw opening run \
+  --assets examples/sample-store/assets \
+  --in examples/sample-store/inputs/opening.json \
+  --approvals examples/sample-store/approvals/opening.json \
+  --now 2026-01-01T00:00:00Z \
+  --actor example:reviewer \
+  --out-dir .osw/opening
+```
+
+示例消费第一项生成的 `StoreSpec`，以及单独构造的合成 `Bom` 引用；对两个座位实际执行笔试、实操和课程单元考核。省略 `--approvals` 会返回 `opening/signRelease` 审批待办，退出码为 `2`。
+
+放行审批的 `subject` 为 `store:<storeId>`，`subjectHash` 绑定排序后的阻断集合。`go` 要求无阻断；`go_with_conditions` 只接受可豁免项，每项均需条件、截止日期及签署说明。适用的必过项不能手工跳过，P0、锁定证未过、无人在册和编制缺口不可豁免。开业前阻断变化必须重签；进入 `live` 后沿用上一版 `OpeningRecord` 的原始签署，新问题仍在 `release.current` 展示。
+
+输入中的 `transitions` 明确指定状态流转，例如 `["ready", "live"]`；还可提供上一版记录、考次历史、清单更新及复盘数据。设置 `handoff: true` 后，需附说明的 `operating` 审批。流程只产生 `openedAt` 补空意图，并保留已存在的首次开业日期；门店状态由私有适配层根据 `handoff` 更新。缺少施工或到店产物时对应项人工确认，预计到货日期不能自动算作签收。
+
+新增七个槽位：`role`、`cert`、`course`、`exam`、`track-affinity`、`content-case`、`content-playbook`，以及认证、清单、营销、素材需求四种 JSON 模板。业务阈值、预算比例及汇率均取自 `params`；参数 qualifier 段使用英文字母和数字。借用课程只作推荐，采用后须由资产数据明确覆盖本店赛道才会列为必考。
+
+学生卷、判分输出和 MCP 通用查询均保护答案、解析和评分指南。营销及复盘签署不阻止开业审批；营销只对批准的类别计预算，输出达人筛选、凭证缺口及内容日历。复盘按课程单元、清单项和上游测算来源产生验证记录。示例刻意保留素材缺口，并检出缺少区分度的考卷；`pnpm examples` 核对五条流程及黄金产物。
+
 ## 设计约束
 
-- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；四个 workflow 包均只依赖它。
+- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；所有 workflow 包只依赖它。
 - Memory、File、HTTP 三种资产源使用同一份接口。FileSource 支持 JSON、NDJSON 和 CSV。
 - 缺业务参数或同级候选不唯一时明确返回 `needs`，不猜默认价格和汇率。
 - 金额按币种最小单位逐行舍入，用户覆盖值已经是目标币种，不重复换算。
@@ -72,7 +94,7 @@ pnpm osw landed-delivery run \
 - 承运方报送达不等于门店实收；缺任一必需批次日期时，汇总日期仍为未知。混合预计与实收日期时，汇总采用较弱的证据类型。暂挂、短收、破损都使 `allReceived=false`。恢复既有计划时只传新增运输事件，签收记录不能静默覆盖。
 - 回填只认人工/签收实测；同字段多人值冲突记 `pending`，已有值不一致记 `fails`，不覆盖源数据。产品槽位升级到 `0.2.0`，允许逐项提供箱规，已核装箱数和毛重可先于尺寸入库。core 每次回填都检查源版本及 schema；同批先前回填导致版本改变时，后续意图必须重新读取并核实。host 应先保存计划，再执行补空意图。
 
-示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `node scripts/gen-delivery-example.mjs` 更新该示例；`pnpm examples` 检查四个 workflow。
+示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `node scripts/gen-delivery-example.mjs` 更新该示例；`pnpm examples` 检查五个 workflow。
 
 ## 验收与示例
 

@@ -151,3 +151,62 @@ console.log(
 );
 
 await checkDeliveryExample();
+const openingBase = [
+  cli,
+  'opening',
+  'run',
+  '--assets',
+  resolve(generated, 'assets'),
+  '--in',
+  resolve(generated, 'inputs/opening.json'),
+  '--now',
+  EXAMPLE_NOW,
+  '--actor',
+  EXAMPLE_ACTOR,
+];
+const openingBlocked = spawnSync(process.execPath, openingBase, { cwd: root, encoding: 'utf8' });
+assert.equal(
+  openingBlocked.status,
+  2,
+  `Opening without approvals must block: ${openingBlocked.stderr}`,
+);
+assert(
+  JSON.parse(openingBlocked.stdout).needs.some(
+    (need) => need.kind === 'approval' && need.step === 'opening/signRelease',
+  ),
+);
+const openingDone = spawnSync(
+  process.execPath,
+  [
+    ...openingBase,
+    '--approvals',
+    resolve(generated, 'approvals/opening.json'),
+    '--record',
+    '--out-dir',
+    resolve(scratch, 'opening'),
+  ],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(
+  openingDone.status,
+  0,
+  `Opening approved run failed: ${openingDone.stderr}\n${openingDone.stdout}`,
+);
+const openingArtifact = JSON.parse(
+  await readFile(resolve(scratch, 'opening/artifact.json'), 'utf8'),
+);
+assert.deepEqual(
+  openingArtifact,
+  JSON.parse(await readFile(resolve(exampleDirectory, 'expected/opening-record.json'), 'utf8')),
+);
+assert.equal(openingArtifact.body.certMatrix.summary.certRequired, 4);
+assert.equal(openingArtifact.body.certMatrix.summary.criticalPassed, 4);
+assert.equal(openingArtifact.body.release.current.state, 'ready');
+assert.deepEqual(openingArtifact.body.handoff, {
+  storeStatus: 'operating',
+  openedAt: '2026-01-01',
+});
+assert.equal(openingArtifact.body.marketing.assetGap.missing, 1);
+console.log(
+  'Opening example passed: real assessments, approval gates, operating handoff and golden artifact',
+);
