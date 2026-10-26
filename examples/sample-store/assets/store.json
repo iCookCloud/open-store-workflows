@@ -222,6 +222,103 @@
           }
         ]
       }
+    },
+    {
+      "slot": "store",
+      "id": "example-opening-store",
+      "data": {
+        "name": {
+          "en": "Example Noodle Bar"
+        },
+        "status": "preparing",
+        "track": "example-noodle",
+        "jurisdiction": "XE",
+        "timezone": "UTC"
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "65e9cdabd60123095437c352362e0c0288d2055b6f9fb48b2288648991e0bce1",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "store",
+      "id": "example-supply-store-1",
+      "slotVersion": "0.1.0",
+      "versionHash": "8ad15d1a7422b2bdc00530462037d382e1cfa5b0b9090658849659fa9153c7b7",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Noodle Bar"
+        },
+        "status": "operating",
+        "origin": "opened",
+        "track": "replenishment-noodle",
+        "jurisdiction": "XE-A-AA",
+        "timezone": "UTC",
+        "openedAt": "2026-01-01",
+        "supplyCategories": [
+          "outdated-example-category"
+        ]
+      }
+    },
+    {
+      "slot": "store",
+      "id": "example-supply-store-2",
+      "slotVersion": "0.1.0",
+      "versionHash": "6a33f39e5237a7af7a367f957ad9b7a0fbf230b2ac82b56c0238d25461cf0d21",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Intake Noodle Bar"
+        },
+        "status": "operating",
+        "origin": "intake",
+        "track": "replenishment-noodle",
+        "jurisdiction": "XE-A-BB",
+        "timezone": "UTC",
+        "openedAt": "2026-01-01",
+        "supplyCategories": [
+          "ingredients"
+        ]
+      }
     }
   ]
 }

@@ -1,0 +1,534 @@
+{
+  "storeSpec": {
+    "kind": "StoreSpec",
+    "artifactVersion": "0.1.0",
+    "id": "store-spec-15bd9350bb0ad5bfb32bbb9d652963d4",
+    "hash": "15bd9350bb0ad5bfb32bbb9d652963d42ffca18a6fd80fde432b675d6e7d106b",
+    "producedBy": {
+      "step": "store-concept/assembleSpec",
+      "pkg": "@osw/store-concept",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-opening-store",
+    "inputs": [],
+    "sources": [
+      {
+        "slot": "calc-template",
+        "id": "example-noodle-template",
+        "versionHash": "f49565e37d1ec319b5276331c1e16566b29be814119e74671c6fb0fd372d098a"
+      },
+      {
+        "slot": "site-profile",
+        "id": "example-noodle-site-profile",
+        "versionHash": "39ec649fc3510eb8b3dac21b33518be01ceafa2e47004d4276a8ec7d5369369f"
+      },
+      {
+        "slot": "menu",
+        "id": "example-menu-1",
+        "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53"
+      },
+      {
+        "slot": "menu",
+        "id": "example-menu-2",
+        "versionHash": "5469ac89eb7101be9fea5a15b4f46e67e2d5a14453b58c676b00c68f378350e6"
+      },
+      {
+        "slot": "store",
+        "id": "example-store-1",
+        "versionHash": "c1e1b5fa33dfaa84c279c5cae3163501cf62549d4930039314861b295781dba4"
+      },
+      {
+        "slot": "store",
+        "id": "example-store-2",
+        "versionHash": "31864d697032e580b2cf097ee91f741016380fe624819897fc1c5f02dd24b3ad"
+      },
+      {
+        "slot": "store",
+        "id": "example-store-3",
+        "versionHash": "9f7705ca6c16c5e5ae3b50d1b3d1fc1135929a9278faf959690415b231ee2e84"
+      },
+      {
+        "slot": "params",
+        "id": "concept-budgetband",
+        "versionHash": "e45350e514385e0ef8f6069ac04aa8cc242ee4e6446145eecad50b856e9c0194"
+      },
+      {
+        "slot": "params",
+        "id": "concept-calibrationminsample",
+        "versionHash": "ae93833d39f096a34baa2c3f0bfe84cdb2febc20cd27a9517ed83d285beab908"
+      },
+      {
+        "slot": "params",
+        "id": "verify-calctemplatetolerance",
+        "versionHash": "63154eddeb5d088fa9ceb8d08387c383eefe13e6376107dd8e7f00ed9296a4a8"
+      },
+      {
+        "slot": "params",
+        "id": "concept-areatolerance",
+        "versionHash": "1f7e8d6ff3b32994a282b6177488912074f018111ce4aca29c99dc8a8c9840e0"
+      },
+      {
+        "slot": "params",
+        "id": "concept-minmarginrate",
+        "versionHash": "533346f3a3426abe84f1ca1809af5756de7ca72d1b03d13241aba9aa0082da25"
+      },
+      {
+        "slot": "term",
+        "id": "example-induction",
+        "versionHash": "99a020e1023a9c0454ccb26679df1f260006b19058d99663a292abad8f3e44c3"
+      }
+    ],
+    "createdAt": "2026-01-01T00:00:00Z",
+    "example": true,
+    "body": {
+      "concept": {
+        "storeType": "example-noodle",
+        "track": "example-noodle",
+        "cuisine": "example-noodle",
+        "nonFood": false,
+        "revenueModel": "covers"
+      },
+      "jurisdiction": "XE",
+      "timezone": "UTC",
+      "menu": {
+        "status": "approved",
+        "refs": [
+          {
+            "ref": {
+              "slot": "menu",
+              "id": "example-menu-1",
+              "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53"
+            },
+            "status": "approved"
+          },
+          {
+            "ref": {
+              "slot": "menu",
+              "id": "example-menu-2",
+              "versionHash": "5469ac89eb7101be9fea5a15b4f46e67e2d5a14453b58c676b00c68f378350e6"
+            },
+            "status": "candidate"
+          }
+        ],
+        "approved": [
+          {
+            "slot": "menu",
+            "id": "example-menu-1",
+            "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53"
+          }
+        ]
+      },
+      "area": {
+        "targetM2": 100,
+        "minM2": 80,
+        "maxM2": 120
+      },
+      "capacity": {
+        "seats": 50,
+        "turnover": 2,
+        "opDays": 20
+      },
+      "staffing": [
+        {
+          "positionKey": "example-cook",
+          "headcount": 2
+        }
+      ],
+      "economics": {
+        "template": {
+          "slot": "calc-template",
+          "id": "example-noodle-template",
+          "versionHash": "f49565e37d1ec319b5276331c1e16566b29be814119e74671c6fb0fd372d098a"
+        },
+        "spend": {
+          "amount": 20,
+          "currency": "USD"
+        },
+        "taxRate": 0.1,
+        "investment": [
+          {
+            "amount": {
+              "amount": 10000,
+              "currency": "USD"
+            },
+            "algorithm": "area_scale",
+            "overridden": false,
+            "key": "equipment",
+            "owner": "fitout-bom",
+            "range": {
+              "low": {
+                "amount": 12000,
+                "currency": "USD"
+              },
+              "high": {
+                "amount": 14000,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "amount": {
+              "amount": 4000,
+              "currency": "USD"
+            },
+            "algorithm": "fixed",
+            "overridden": false,
+            "key": "furnishing",
+            "owner": "fitout-bom",
+            "range": {
+              "low": {
+                "amount": 3000,
+                "currency": "USD"
+              },
+              "high": {
+                "amount": 6000,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "amount": {
+              "amount": 20000,
+              "currency": "USD"
+            },
+            "algorithm": "area_scale",
+            "overridden": false,
+            "key": "construction",
+            "owner": "build-out",
+            "range": {
+              "low": {
+                "amount": 18000,
+                "currency": "USD"
+              },
+              "high": {
+                "amount": 28000,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "amount": {
+              "amount": 3400,
+              "currency": "USD"
+            },
+            "algorithm": "subtotal_percent",
+            "overridden": false,
+            "key": "working_capital",
+            "owner": "opening",
+            "range": {
+              "low": {
+                "amount": 3000,
+                "currency": "USD"
+              },
+              "high": {
+                "amount": 5000,
+                "currency": "USD"
+              }
+            }
+          }
+        ],
+        "monthly": [
+          {
+            "amount": {
+              "amount": 2000,
+              "currency": "USD"
+            },
+            "algorithm": "fixed",
+            "overridden": false,
+            "key": "rent"
+          },
+          {
+            "amount": {
+              "amount": 4000,
+              "currency": "USD"
+            },
+            "algorithm": "fixed",
+            "overridden": false,
+            "key": "labor"
+          },
+          {
+            "amount": {
+              "amount": 1000,
+              "currency": "USD"
+            },
+            "algorithm": "fixed",
+            "overridden": false,
+            "key": "utilities"
+          },
+          {
+            "amount": {
+              "amount": 12000,
+              "currency": "USD"
+            },
+            "algorithm": "revenue_percent",
+            "overridden": false,
+            "key": "food_cost"
+          }
+        ],
+        "totals": {
+          "investment": {
+            "amount": 37400,
+            "currency": "USD"
+          },
+          "monthlyRevenue": {
+            "amount": 40000,
+            "currency": "USD"
+          },
+          "tax": {
+            "amount": 4000,
+            "currency": "USD"
+          },
+          "monthlyCost": {
+            "amount": 23000,
+            "currency": "USD"
+          },
+          "monthlyProfit": {
+            "amount": 17000,
+            "currency": "USD"
+          }
+        },
+        "breakeven": {
+          "status": "ok",
+          "revenue": {
+            "amount": 11666.67,
+            "currency": "USD"
+          },
+          "spend": {
+            "amount": 5.83,
+            "currency": "USD"
+          },
+          "dailyUnits": 29.166674999999998
+        },
+        "paybackMonths": 2.2,
+        "budgetRange": {
+          "low": {
+            "amount": 45000,
+            "currency": "USD"
+          },
+          "high": {
+            "amount": 53000,
+            "currency": "USD"
+          },
+          "basis": "actuals",
+          "sampleSize": 2
+        },
+        "rentCeiling": {
+          "amount": 15000,
+          "currency": "USD"
+        }
+      },
+      "siteRequirements": [
+        {
+          "key": "area",
+          "op": "gte",
+          "value": 80,
+          "unit": "m2",
+          "hard": true,
+          "basis": "estimate",
+          "reason": "Minimum area from requested target and tolerance"
+        },
+        {
+          "key": "area",
+          "op": "lte",
+          "value": 120,
+          "unit": "m2",
+          "hard": true,
+          "basis": "estimate",
+          "reason": "Maximum area from requested target and tolerance"
+        },
+        {
+          "key": "powerCapacity",
+          "op": "gte",
+          "value": 30,
+          "unit": "kW",
+          "hard": true,
+          "basis": "store-type",
+          "reason": "Synthetic equipment allowance",
+          "source": {
+            "slot": "site-profile",
+            "id": "example-noodle-site-profile",
+            "versionHash": "39ec649fc3510eb8b3dac21b33518be01ceafa2e47004d4276a8ec7d5369369f"
+          }
+        },
+        {
+          "key": "serviceVoltage",
+          "op": "gte",
+          "value": 220,
+          "unit": "V",
+          "hard": true,
+          "basis": "menu",
+          "reason": "Synthetic induction requirement",
+          "source": {
+            "slot": "site-profile",
+            "id": "example-noodle-site-profile",
+            "versionHash": "39ec649fc3510eb8b3dac21b33518be01ceafa2e47004d4276a8ec7d5369369f"
+          }
+        }
+      ],
+      "downstream": {
+        "coldchain": false,
+        "ingredients": [
+          {
+            "key": "example-noodle"
+          }
+        ],
+        "equipment": [
+          {
+            "key": "example-induction"
+          }
+        ],
+        "sop": [
+          {
+            "key": "example-boil"
+          }
+        ]
+      }
+    }
+  },
+  "bomRef": {
+    "kind": "Bom",
+    "id": "example-opening-bom",
+    "hash": "14de931a3d1712f8216a4f4d55415956cb7e7f3106c0e96721481e7cdbc3129c"
+  },
+  "openingDate": "2026-01-01",
+  "languages": [
+    "en"
+  ],
+  "seats": [
+    {
+      "seatId": "example-seat-a",
+      "positionKey": "example-cook",
+      "status": "active"
+    },
+    {
+      "seatId": "example-seat-b",
+      "positionKey": "example-cook",
+      "status": "active"
+    }
+  ],
+  "assessments": [
+    {
+      "seatId": "example-seat-a",
+      "certKey": "example-safety",
+      "examRef": {
+        "slot": "exam",
+        "id": "example-exam",
+        "versionHash": "9dca118480bab3d9662e1332cfe52306d846cdedbd5e306ca7dd67062580b1be"
+      },
+      "submission": {
+        "id": "example-seat-a-written",
+        "kind": "written",
+        "by": "example:reviewer",
+        "answers": {
+          "1": "example"
+        }
+      }
+    },
+    {
+      "seatId": "example-seat-a",
+      "certKey": "example-safety",
+      "submission": {
+        "id": "example-seat-a-practical",
+        "kind": "practical",
+        "by": "example:reviewer",
+        "examiner": "example:reviewer",
+        "checks": {
+          "example-clean": "pass"
+        }
+      }
+    },
+    {
+      "seatId": "example-seat-a",
+      "certKey": "course:example-course:example-boil",
+      "submission": {
+        "id": "example-seat-a-course",
+        "kind": "practical",
+        "by": "example:reviewer",
+        "examiner": "example:reviewer",
+        "checks": {
+          "example-observe": "pass"
+        }
+      }
+    },
+    {
+      "seatId": "example-seat-b",
+      "certKey": "example-safety",
+      "examRef": {
+        "slot": "exam",
+        "id": "example-exam",
+        "versionHash": "9dca118480bab3d9662e1332cfe52306d846cdedbd5e306ca7dd67062580b1be"
+      },
+      "submission": {
+        "id": "example-seat-b-written",
+        "kind": "written",
+        "by": "example:reviewer",
+        "answers": {
+          "1": "example"
+        }
+      }
+    },
+    {
+      "seatId": "example-seat-b",
+      "certKey": "example-safety",
+      "submission": {
+        "id": "example-seat-b-practical",
+        "kind": "practical",
+        "by": "example:reviewer",
+        "examiner": "example:reviewer",
+        "checks": {
+          "example-clean": "pass"
+        }
+      }
+    },
+    {
+      "seatId": "example-seat-b",
+      "certKey": "course:example-course:example-boil",
+      "submission": {
+        "id": "example-seat-b-course",
+        "kind": "practical",
+        "by": "example:reviewer",
+        "examiner": "example:reviewer",
+        "checks": {
+          "example-observe": "pass"
+        }
+      }
+    }
+  ],
+  "checklistUpdates": [
+    {
+      "key": "example-permit",
+      "status": "done",
+      "note": "Synthetic permit evidence reviewed"
+    }
+  ],
+  "transitions": [
+    "ready",
+    "live"
+  ],
+  "handoff": true,
+  "marketing": {
+    "assetProgress": [
+      {
+        "key": "example-photo",
+        "ready": 1
+      }
+    ],
+    "creatorFacts": [
+      {
+        "partyId": "example-creator",
+        "locality": {
+          "local": true,
+          "by": "example:reviewer"
+        },
+        "recentPostDates": [
+          "2025-12-30",
+          "2025-12-31"
+        ],
+        "audienceLanguages": [
+          "en"
+        ],
+        "mixRole": "local"
+      }
+    ]
+  }
+}

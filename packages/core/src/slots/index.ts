@@ -54,6 +54,8 @@ export const Product = z.object({
       wMm: z.number().positive(),
       hMm: z.number().positive(),
     })
+    // 箱规逐项实测与补空；未知尺寸不能阻止已核实的装箱数、毛重入库。
+    .partial()
     .optional(),
   hsCode: z
     .string()
@@ -84,6 +86,7 @@ export const Product = z.object({
 export type Product = z.infer<typeof Product>;
 export const ProductSlot = defineSlot({
   name: 'product',
+  slotVersion: '0.2.0',
   schema: Product,
   fieldsets: {
     identity: [

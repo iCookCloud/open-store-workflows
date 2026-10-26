@@ -1,0 +1,85 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "install-rate",
+      "id": "example-carpentry-rate",
+      "slotVersion": "0.1.0",
+      "versionHash": "2eedf1f2d8ca7d9d4ab828ef795137c6c14c3d0c5615f0b030ef197a90e33be5",
+      "fieldsetHashes": {
+        "price": "2eedf1f2d8ca7d9d4ab828ef795137c6c14c3d0c5615f0b030ef197a90e33be5",
+        "terms": "2eedf1f2d8ca7d9d4ab828ef795137c6c14c3d0c5615f0b030ef197a90e33be5"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "match": {
+          "category": [
+            "example-casework"
+          ],
+          "unit": [
+            "pcs"
+          ]
+        },
+        "priority": 10,
+        "hoursPerUnit": 2,
+        "unit": "pcs",
+        "basis": "Invented installation allowance",
+        "trade": "carpentry",
+        "source": "estimate"
+      }
+    },
+    {
+      "slot": "install-rate",
+      "id": "example-electrical-rate",
+      "slotVersion": "0.1.0",
+      "versionHash": "9ed3f805028633eae2b03bc4c156738ca5be11b5b14ea763fbeefa21e144e89c",
+      "fieldsetHashes": {
+        "price": "9ed3f805028633eae2b03bc4c156738ca5be11b5b14ea763fbeefa21e144e89c",
+        "terms": "9ed3f805028633eae2b03bc4c156738ca5be11b5b14ea763fbeefa21e144e89c"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "match": {
+          "category": [
+            "example-appliance"
+          ],
+          "unit": [
+            "pcs"
+          ]
+        },
+        "priority": 10,
+        "hoursPerUnit": 4,
+        "unit": "pcs",
+        "basis": "Invented installation allowance",
+        "trade": "electrical",
+        "source": "estimate"
+      }
+    }
+  ]
+}

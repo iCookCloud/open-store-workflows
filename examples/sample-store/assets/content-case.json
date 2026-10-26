@@ -1,0 +1,34 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "content-case",
+      "id": "example-content",
+      "data": {
+        "goal": "intro",
+        "durationSec": 20,
+        "metrics": {
+          "plays": 100,
+          "likes": 10
+        },
+        "url": "https://example.com/example-video"
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "412cd5749aab23058df8fc6adbdc24f88341ae5d01e5574b535fea1e86d4f97d",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

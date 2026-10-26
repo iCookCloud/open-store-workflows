@@ -1,0 +1,391 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "template",
+      "id": "example-cert-plan",
+      "data": {
+        "kind": "cert-plan",
+        "lang": "en",
+        "title": {
+          "en": "example-cert-plan"
+        },
+        "format": "json",
+        "content": {
+          "standard": "example-food",
+          "groups": [
+            "example-required"
+          ],
+          "excludeKeys": [],
+          "checks": {
+            "example-safety": [
+              "example-clean"
+            ]
+          }
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "3f783309e2fc28bbb9533c18760bd42b91e1f7b357dde6f7d6ab6b97f02871ba",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-opening-checklist",
+      "data": {
+        "kind": "opening-checklist",
+        "lang": "en",
+        "title": {
+          "en": "example-opening-checklist"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-permit",
+              "title": "Example permit evidence",
+              "phase": "before",
+              "dayOffset": -1,
+              "gate": true,
+              "waivable": false,
+              "jurisdiction": "XE"
+            },
+            {
+              "key": "example-review",
+              "title": "Example first-month review",
+              "phase": "after",
+              "dayOffset": 30,
+              "gate": false,
+              "waivable": false,
+              "reviewCheckpoint": "month"
+            }
+          ],
+          "complaintAreas": [
+            "example-food"
+          ]
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "fa63e9afc07da82d46f8679e38a7d5af47258d6055a89f546ce48565258499db",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-marketing-plan",
+      "data": {
+        "kind": "marketing-plan",
+        "lang": "en",
+        "title": {
+          "en": "example-marketing-plan"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-launch",
+              "channel": "social",
+              "title": "Example launch announcement",
+              "dayOffset": -1,
+              "deliverable": "Example post",
+              "core": true,
+              "category": "launch",
+              "stage": "before"
+            }
+          ],
+          "creatorSelection": {
+            "tiers": [
+              "micro"
+            ],
+            "formats": [
+              "short"
+            ],
+            "audienceLanguages": [
+              "en"
+            ],
+            "mixRoles": [
+              "local"
+            ]
+          },
+          "disclosureRules": [
+            {
+              "jurisdiction": "XE",
+              "required": true
+            }
+          ]
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "0a810ea39827e44a977401ab82b9d32b1f1828026194154581dd0e2e2015dcdf",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-asset-plan",
+      "data": {
+        "kind": "asset-plan",
+        "lang": "en",
+        "title": {
+          "en": "example-asset-plan"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-photo",
+              "required": 2,
+              "channels": [
+                "social"
+              ]
+            }
+          ]
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "42ecef2b42bd6a9bfe326acdd7cc4e09ddf8680a3de242c66842b3b31d7a8cfe",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-lead",
+      "slotVersion": "0.1.0",
+      "versionHash": "30f260c8e2605b5589887b0c88e57d1d16049e38b1629b79c3eba65ebea0b256",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "newsletter-block",
+        "lang": "en",
+        "title": {
+          "en": "Example Supply Introduction"
+        },
+        "format": "markdown",
+        "body": "Hello {{STORE}}, explore recurring ingredients for your menu."
+      }
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-service",
+      "slotVersion": "0.1.0",
+      "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "newsletter-block",
+        "lang": "en",
+        "title": {
+          "en": "Example Supply Service"
+        },
+        "format": "markdown",
+        "body": "Choose quantities in your store page: {{STORE_URL}}"
+      }
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-footer",
+      "slotVersion": "0.1.0",
+      "versionHash": "09374cf67830f06682a9f57a0f3b78cafb32b4b7997b28e285f4c381608a4972",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "newsletter-block",
+        "lang": "en",
+        "title": {
+          "en": "Example Supply Footer"
+        },
+        "format": "markdown",
+        "body": "Unsubscribe: {{UNSUB}}"
+      }
+    },
+    {
+      "slot": "template",
+      "id": "example-build-phases",
+      "slotVersion": "0.1.0",
+      "versionHash": "257bcaae83f03a2e3145e8249c7d3d99621a8cb3fb74a2c89e876ea23aac6d1e",
+      "fieldsetHashes": {
+        "price": "257bcaae83f03a2e3145e8249c7d3d99621a8cb3fb74a2c89e876ea23aac6d1e",
+        "terms": "257bcaae83f03a2e3145e8249c7d3d99621a8cb3fb74a2c89e876ea23aac6d1e"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "buildout-phases",
+        "lang": "en",
+        "title": {
+          "en": "Example build phases"
+        },
+        "format": "json",
+        "content": {
+          "phases": [
+            {
+              "key": "casework",
+              "title": "Example casework",
+              "dependsOn": [],
+              "trades": [
+                "carpentry"
+              ]
+            },
+            {
+              "key": "equipment",
+              "title": "Example equipment",
+              "dependsOn": [],
+              "trades": [
+                "electrical"
+              ]
+            },
+            {
+              "key": "inspection",
+              "title": "Example inspection",
+              "dependsOn": [
+                "casework",
+                "equipment"
+              ],
+              "checkpoint": "example-signoff"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "slot": "template",
+      "id": "example-build-acceptance",
+      "slotVersion": "0.1.0",
+      "versionHash": "f209679a4c13949802b53fe2356d34f10f08a21c2da00ca1b559937d47df7700",
+      "fieldsetHashes": {
+        "price": "f209679a4c13949802b53fe2356d34f10f08a21c2da00ca1b559937d47df7700",
+        "terms": "f209679a4c13949802b53fe2356d34f10f08a21c2da00ca1b559937d47df7700"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "buildout-acceptance",
+        "lang": "en",
+        "title": {
+          "en": "Example acceptance"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-check",
+              "title": "Example completion evidence",
+              "ownerRole": "owner",
+              "dependsOn": [],
+              "evidence": "Evidence reference",
+              "gate": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

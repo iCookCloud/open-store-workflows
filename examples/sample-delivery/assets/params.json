@@ -1,0 +1,105 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "params",
+      "id": "example-customs.declarationCurrency",
+      "slotVersion": "0.1.0",
+      "versionHash": "a658891e5c5f39e69208ac52882e2ae952e941f871d5271d96a2223a6551352f",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "customs.declarationCurrency",
+        "value": "USD"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-delivery.tolerance.weightPct",
+      "slotVersion": "0.1.0",
+      "versionHash": "85ef61257d5c65b9c2277df20555b1c12cb7a9f04bc2a2625c706c61f54bb21a",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "delivery.tolerance.weightPct",
+        "value": 0.1
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-delivery.tolerance.volumePct",
+      "slotVersion": "0.1.0",
+      "versionHash": "766f2e867a31a8a98e02fa2e42a20d1d4c84f7b5cc07e1b76202dc464a4718b6",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "delivery.tolerance.volumePct",
+        "value": 0.1
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-freight.tolerance.rateCardPct",
+      "slotVersion": "0.1.0",
+      "versionHash": "fbf38446d92a8681bc97e5de72557aff5bec7284ff4b01d390d8c22dd2692213",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "freight.tolerance.rateCardPct",
+        "value": 0.1
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-freight.tolerance.transitDays",
+      "slotVersion": "0.1.0",
+      "versionHash": "a45620c6a07c022b96e8d8bce807865169608ae1faab41b58e66810dc02c73e4",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "freight.tolerance.transitDays",
+        "value": 1
+      }
+    }
+  ]
+}

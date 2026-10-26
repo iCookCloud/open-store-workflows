@@ -1,0 +1,557 @@
+{
+  "kind": "BuildPlan",
+  "artifactVersion": "0.1.0",
+  "id": "build-plan-4448f75b259bb6e6dd2f6928e5955469",
+  "hash": "4448f75b259bb6e6dd2f6928e5955469e1f9b828db09fd81e2f92ba886be770a",
+  "producedBy": {
+    "step": "build-out/accept",
+    "pkg": "@osw/build-out",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-noodle-store",
+  "inputs": [
+    {
+      "kind": "SiteDecision",
+      "id": "example-sitedecision",
+      "hash": "b40ef873010cb0cba8834d221b392507f4e2ac30bbf17975be32c4439b8473d7"
+    },
+    {
+      "kind": "Bom",
+      "id": "example-bom",
+      "hash": "7710a5035d0f21199d9007cad421e809bdb8ad8195656895def9112e160e1c2e"
+    },
+    {
+      "kind": "DeliveryPlan",
+      "id": "example-deliveryplan",
+      "hash": "32bc4bcbdaa838860b247df41ac87843148a4df83ac6ac9503b1fba6c556666e"
+    }
+  ],
+  "sources": [
+    {
+      "slot": "bom-case",
+      "id": "example-bom-case",
+      "versionHash": "dc1fd60936e8b12abb463f30a0680b2ad1a7b90d77c7b2c3de67d26822ccca8a"
+    },
+    {
+      "slot": "listing",
+      "id": "example-listing",
+      "versionHash": "1139ff7fc6bfde530309e1d5eb53653857e3c6b54b72591e8ab047045f772b98"
+    },
+    {
+      "slot": "party",
+      "id": "example-delivery-party",
+      "versionHash": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98"
+    },
+    {
+      "slot": "build-fee",
+      "id": "example-build-fixed",
+      "versionHash": "71611f6804b4f63f70f1593550f42641211cc7ff7881d8ca2c5e4237c2bb2822"
+    },
+    {
+      "slot": "build-fee",
+      "id": "example-build-percentage",
+      "versionHash": "5859ab3bfbd0554d6de09ed4e685a313c352c8f77e17fb946eb261ba77b9e744"
+    },
+    {
+      "slot": "build-fee",
+      "id": "example-build-volume",
+      "versionHash": "8a29b77935e358ded6a74ca32b903553facdea75ee1ab6e3f85cc3acafc4c284"
+    },
+    {
+      "slot": "install-rate",
+      "id": "example-carpentry-rate",
+      "versionHash": "2eedf1f2d8ca7d9d4ab828ef795137c6c14c3d0c5615f0b030ef197a90e33be5"
+    },
+    {
+      "slot": "install-rate",
+      "id": "example-electrical-rate",
+      "versionHash": "9ed3f805028633eae2b03bc4c156738ca5be11b5b14ea763fbeefa21e144e89c"
+    },
+    {
+      "slot": "params",
+      "id": "example-build-labor-hourlyRate",
+      "versionHash": "cb13e59a7da230d56bc7171e6ad4b14874271151dfe0899627a255c2fff527cc"
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-minBids",
+      "versionHash": "2a4319c476606e87b0d41e6d9223195c1eadaa10b823eb66e7d5c2dd3dc99ec6"
+    },
+    {
+      "slot": "params",
+      "id": "example-build-verify-installHours-tolerancePct",
+      "versionHash": "45f2365dc0ce81f615a5839925b97e1d7cb99077bc502e870cea7be7e80e75ff"
+    },
+    {
+      "slot": "offer",
+      "id": "example-builder-a-bid",
+      "versionHash": "a8708d4ca59618470371b692e95e29fcdd2fdbdbc11934ce66f3817f6da736d1"
+    },
+    {
+      "slot": "party",
+      "id": "example-builder-a",
+      "versionHash": "c90415956aa19bae718f21c104cf162dcfdffd673f3efe4626f2fef41c45280f"
+    },
+    {
+      "slot": "offer",
+      "id": "example-builder-b-bid",
+      "versionHash": "6a39258f933dfa997def0ab824c45b05c5dd1b3f405d4e5b253aac6a95add5bc"
+    },
+    {
+      "slot": "party",
+      "id": "example-builder-b",
+      "versionHash": "7a523ff5cdbdad1d5e4551dfab62555d50d67561ebc17370b9220d91c8a2dd25"
+    },
+    {
+      "slot": "template",
+      "id": "example-build-phases",
+      "versionHash": "257bcaae83f03a2e3145e8249c7d3d99621a8cb3fb74a2c89e876ea23aac6d1e"
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-crewSize",
+      "versionHash": "dff60a9f442bbbdc51b2fdf0a883ae5c114b77563e726040068029089e34aa27"
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-hoursPerDay",
+      "versionHash": "e9950b4b3913669cfa4fee3e21455c0261b0683b5df6cee0526aca993945ccab"
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-workdays",
+      "versionHash": "e5c19ab0793ccec26014b8a03c7c70653b8ab6b4c563ce1554952bbb26e033e4"
+    },
+    {
+      "slot": "template",
+      "id": "example-build-acceptance",
+      "versionHash": "f209679a4c13949802b53fe2356d34f10f08a21c2da00ca1b559937d47df7700"
+    },
+    {
+      "slot": "params",
+      "id": "example-build-verify-siteMeasure-tolerancePct",
+      "versionHash": "42a3da48031c0723e794d6c0c1eedb9c04dd9ac8a9ed7c5c5ceadcc890610f62"
+    }
+  ],
+  "createdAt": "2026-01-30T00:00:00Z",
+  "example": true,
+  "body": {
+    "drawings": [
+      "https://example.com/drawing"
+    ],
+    "landlordScope": [
+      {
+        "item": "Example landlord panel",
+        "lineIds": [
+          "example-landlord-panel"
+        ],
+        "conditions": []
+      }
+    ],
+    "quote": {
+      "currency": "USD",
+      "lines": [
+        {
+          "id": "example-counter",
+          "lineKind": "furniture",
+          "qty": 20,
+          "unit": "pcs",
+          "source": "bom",
+          "bomLineId": "example-counter",
+          "bomQty": 10,
+          "name": "Example counter",
+          "category": "example-casework",
+          "trade": "carpentry",
+          "basePrice": {
+            "amount": 100,
+            "currency": "USD"
+          },
+          "install": {
+            "hoursPerUnit": 2,
+            "basis": "Invented installation allowance",
+            "rateRef": {
+              "slot": "install-rate",
+              "id": "example-carpentry-rate",
+              "versionHash": "2eedf1f2d8ca7d9d4ab828ef795137c6c14c3d0c5615f0b030ef197a90e33be5"
+            },
+            "overridden": false
+          },
+          "volumePerUnit": 0.1,
+          "partsCheck": "holds",
+          "unitPrice": {
+            "amount": 140,
+            "currency": "USD"
+          },
+          "laborPerUnit": {
+            "amount": 40,
+            "currency": "USD"
+          },
+          "lineTotal": {
+            "amount": 2800,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "example-appliance",
+          "lineKind": "equipment",
+          "qty": 2,
+          "unit": "pcs",
+          "source": "bom",
+          "bomLineId": "example-appliance",
+          "bomQty": 2,
+          "name": "Example appliance",
+          "category": "example-appliance",
+          "trade": "electrical",
+          "basePrice": {
+            "amount": 200,
+            "currency": "USD"
+          },
+          "install": {
+            "hoursPerUnit": 4,
+            "basis": "Invented installation allowance",
+            "rateRef": {
+              "slot": "install-rate",
+              "id": "example-electrical-rate",
+              "versionHash": "9ed3f805028633eae2b03bc4c156738ca5be11b5b14ea763fbeefa21e144e89c"
+            },
+            "overridden": false
+          },
+          "volumePerUnit": 0.5,
+          "partsCheck": "holds",
+          "unitPrice": {
+            "amount": 280,
+            "currency": "USD"
+          },
+          "laborPerUnit": {
+            "amount": 80,
+            "currency": "USD"
+          },
+          "lineTotal": {
+            "amount": 560,
+            "currency": "USD"
+          }
+        }
+      ],
+      "fees": [
+        {
+          "id": "example-build-fixed",
+          "name": "Example setup",
+          "basis": "fixed",
+          "rate": {
+            "amount": 50,
+            "currency": "USD"
+          },
+          "freight": false,
+          "ruleRef": {
+            "slot": "build-fee",
+            "id": "example-build-fixed",
+            "versionHash": "71611f6804b4f63f70f1593550f42641211cc7ff7881d8ca2c5e4237c2bb2822"
+          },
+          "fromDelivery": false,
+          "amount": {
+            "amount": 50,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "example-build-percentage",
+          "name": "Example handling",
+          "basis": "pctOfGoods",
+          "pct": 10,
+          "freight": false,
+          "ruleRef": {
+            "slot": "build-fee",
+            "id": "example-build-percentage",
+            "versionHash": "5859ab3bfbd0554d6de09ed4e685a313c352c8f77e17fb946eb261ba77b9e744"
+          },
+          "fromDelivery": false,
+          "amount": {
+            "amount": 240,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "example-build-volume",
+          "name": "Example storage",
+          "basis": "perVolume",
+          "rate": {
+            "amount": 30,
+            "currency": "USD"
+          },
+          "freight": false,
+          "ruleRef": {
+            "slot": "build-fee",
+            "id": "example-build-volume",
+            "versionHash": "8a29b77935e358ded6a74ca32b903553facdea75ee1ab6e3f85cc3acafc4c284"
+          },
+          "fromDelivery": false,
+          "amount": {
+            "amount": 90,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "delivery:example-shipment",
+          "name": "Delivery freight",
+          "basis": "fixed",
+          "rate": {
+            "amount": 80,
+            "currency": "USD"
+          },
+          "freight": true,
+          "fromDelivery": true,
+          "amount": {
+            "amount": 80,
+            "currency": "USD"
+          }
+        }
+      ],
+      "laborRate": {
+        "amount": 20,
+        "currency": "USD"
+      },
+      "fxUsed": {},
+      "options": {
+        "selfInstall": false,
+        "selfFreight": false
+      },
+      "totals": {
+        "goods": {
+          "amount": 2400,
+          "currency": "USD"
+        },
+        "labor": {
+          "amount": 960,
+          "currency": "USD"
+        },
+        "fees": {
+          "amount": 460,
+          "currency": "USD"
+        },
+        "total": {
+          "amount": 3820,
+          "currency": "USD"
+        },
+        "laborHours": 48
+      },
+      "status": "accepted",
+      "quoteHash": "dbb0ea23ef0502d1f558d77ac071ba38910712533edcbbe852a00c0806ca1873",
+      "acceptedAt": "2026-01-30T00:00:00Z"
+    },
+    "bids": [
+      {
+        "partyId": "example-builder-a",
+        "offerRefs": [
+          {
+            "slot": "offer",
+            "id": "example-builder-a-bid",
+            "versionHash": "a8708d4ca59618470371b692e95e29fcdd2fdbdbc11934ce66f3817f6da736d1"
+          }
+        ],
+        "total": {
+          "amount": 2000,
+          "currency": "USD"
+        },
+        "missingLineIds": [],
+        "hours": 30
+      },
+      {
+        "partyId": "example-builder-b",
+        "offerRefs": [
+          {
+            "slot": "offer",
+            "id": "example-builder-b-bid",
+            "versionHash": "6a39258f933dfa997def0ab824c45b05c5dd1b3f405d4e5b253aac6a95add5bc"
+          }
+        ],
+        "total": {
+          "amount": 2200,
+          "currency": "USD"
+        },
+        "missingLineIds": [],
+        "hours": 30
+      }
+    ],
+    "schedule": {
+      "start": "2026-01-05",
+      "finish": "2026-01-08",
+      "tasks": [
+        {
+          "id": "casework:carpentry",
+          "name": "Example casework",
+          "phase": "casework",
+          "trade": "carpentry",
+          "lineIds": [
+            "example-counter"
+          ],
+          "dependsOn": [],
+          "workHours": 40,
+          "durationDays": 2,
+          "earliestStart": "2026-01-05",
+          "start": "2026-01-05",
+          "end": "2026-01-06",
+          "slackDays": 1,
+          "critical": false,
+          "actual": {
+            "start": "2026-01-05",
+            "end": "2026-01-06",
+            "hours": 50,
+            "by": "example:builder"
+          }
+        },
+        {
+          "id": "equipment:electrical",
+          "name": "Example equipment",
+          "phase": "equipment",
+          "trade": "electrical",
+          "lineIds": [
+            "example-appliance"
+          ],
+          "dependsOn": [],
+          "workHours": 8,
+          "durationDays": 1,
+          "earliestStart": "2026-01-07",
+          "start": "2026-01-07",
+          "end": "2026-01-07",
+          "slackDays": 0,
+          "critical": true,
+          "actual": {
+            "start": "2026-01-07",
+            "end": "2026-01-07",
+            "hours": 8,
+            "by": "example:builder"
+          }
+        },
+        {
+          "id": "inspection",
+          "name": "Example inspection",
+          "phase": "inspection",
+          "lineIds": [],
+          "dependsOn": [
+            "casework:carpentry",
+            "equipment:electrical"
+          ],
+          "checkpoint": "example-signoff",
+          "workHours": 0,
+          "durationDays": 0,
+          "earliestStart": "2026-01-08",
+          "start": "2026-01-08",
+          "end": "2026-01-08",
+          "slackDays": 0,
+          "critical": true,
+          "actual": {
+            "start": "2026-01-08",
+            "end": "2026-01-08",
+            "hours": 0,
+            "by": "example:reviewer"
+          }
+        }
+      ],
+      "criticalPath": [
+        "equipment:electrical",
+        "inspection"
+      ],
+      "blocked": []
+    },
+    "changes": [
+      {
+        "id": "example-extra-counter",
+        "reason": "Synthetic increase in confirmed quantity",
+        "lineDeltas": [
+          {
+            "lineId": "example-counter",
+            "qtyDelta": 10
+          }
+        ],
+        "priceDelta": {
+          "amount": 1530,
+          "currency": "USD"
+        },
+        "scheduleDeltaDays": 0,
+        "status": "effective"
+      }
+    ],
+    "acceptance": {
+      "status": "accepted",
+      "acceptedAt": "2026-01-30T00:00:00Z",
+      "checklist": [
+        {
+          "key": "example-check",
+          "title": "Example completion evidence",
+          "ownerRole": "owner",
+          "dependsOn": [],
+          "evidence": "Evidence reference",
+          "gate": true,
+          "done": true,
+          "evidenceRefs": [
+            "https://example.com/completion"
+          ]
+        }
+      ],
+      "lineChecks": [
+        {
+          "lineId": "example-counter",
+          "expectedQty": 20,
+          "deliveredQty": 20,
+          "damagedQty": 0,
+          "installedQty": 20,
+          "verdict": "holds"
+        },
+        {
+          "lineId": "example-appliance",
+          "expectedQty": 2,
+          "deliveredQty": 2,
+          "damagedQty": 0,
+          "installedQty": 2,
+          "verdict": "holds"
+        }
+      ],
+      "siteChecks": [
+        {
+          "key": "area",
+          "inScope": false,
+          "required": {
+            "key": "area",
+            "op": "gte",
+            "value": 80,
+            "unit": "m2",
+            "hard": true
+          },
+          "measure": {
+            "value": 100,
+            "unit": "m2",
+            "basis": "observed"
+          },
+          "asBuilt": {
+            "value": 100,
+            "unit": "m2",
+            "basis": "observed"
+          },
+          "verdict": "holds"
+        }
+      ],
+      "punch": [],
+      "landlordChecks": [
+        {
+          "item": "Example landlord panel",
+          "delivered": true,
+          "verdict": "holds",
+          "evidenceRefs": [
+            "https://example.com/landlord"
+          ]
+        }
+      ],
+      "possession": {
+        "promised": "as_is",
+        "observed": "as_is",
+        "verdict": "holds"
+      },
+      "handover": [
+        {
+          "kind": "as-built",
+          "ref": "https://example.com/as-built"
+        }
+      ]
+    }
+  }
+}

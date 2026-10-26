@@ -1,0 +1,35 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "store",
+      "id": "example-delivery-store",
+      "slotVersion": "0.1.0",
+      "versionHash": "1dd086e5c71b36dadd7f15e34354d63ce7442d9a5c134a249814f3334a59a477",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Delivery Store"
+        },
+        "status": "preparing",
+        "track": "example-noodle",
+        "jurisdiction": "XE",
+        "timezone": "UTC",
+        "address": {
+          "line1": "Example Street",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        }
+      }
+    }
+  ]
+}

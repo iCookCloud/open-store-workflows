@@ -1,0 +1,61 @@
+[
+  {
+    "step": "build-out/takeoff",
+    "subjectHash": "8540db589f4578bcbe4e141c6b2eb67bfb80d7e0e53720f2888b6c418913c2f9",
+    "at": "2026-01-30T00:00:00Z",
+    "role": "operator",
+    "decision": "confirm",
+    "by": "example:operator",
+    "note": "Explicit approval for invented example only"
+  },
+  {
+    "step": "build-out/priceQuote",
+    "subjectHash": "490b36e1d2544c87b68fb9eba2da05d14a0d4cc424954765758837172990369f",
+    "at": "2026-01-30T00:00:00Z",
+    "role": "client",
+    "decision": "accept",
+    "by": "example:client",
+    "note": "Explicit approval for invented example only"
+  },
+  {
+    "step": "build-out/levelBids",
+    "subjectHash": "78a6ce7ecf30bb6b723dab7911177a08dd009b4461abec10a4be602e822a0a40",
+    "at": "2026-01-30T00:00:00Z",
+    "role": "operator",
+    "decision": "proceed",
+    "by": "example:operator",
+    "note": "Explicit approval for invented example only"
+  },
+  {
+    "step": "build-out/track",
+    "subjectHash": "56a84ce98f2de31c54e680f39ebe0055f6fc9cf8e3e31947a47ea4246656d0c3",
+    "subject": "change:example-extra-counter",
+    "at": "2026-01-30T00:00:00Z",
+    "role": "owner",
+    "decision": "approve",
+    "by": "example:owner"
+  },
+  {
+    "step": "build-out/track",
+    "subjectHash": "56a84ce98f2de31c54e680f39ebe0055f6fc9cf8e3e31947a47ea4246656d0c3",
+    "subject": "change:example-extra-counter",
+    "at": "2026-01-30T00:00:00Z",
+    "role": "contractor",
+    "decision": "approve",
+    "by": "example:builder",
+    "party": {
+      "slot": "party",
+      "id": "example-builder-a",
+      "versionHash": "c90415956aa19bae718f21c104cf162dcfdffd673f3efe4626f2fef41c45280f"
+    }
+  },
+  {
+    "step": "build-out/accept",
+    "subjectHash": "4daf959e8842ea67042b80e1e0a7d675a01aa7e4c7d34c2e8f6db225cf2e93f5",
+    "at": "2026-01-30T00:00:00Z",
+    "role": "owner",
+    "decision": "accept",
+    "by": "example:owner",
+    "note": "Explicit approval for invented example only"
+  }
+]

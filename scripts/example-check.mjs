@@ -4,7 +4,9 @@ import { cp, mkdtemp, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkDeliveryExample } from './delivery-example-check.mjs';
 import { EXAMPLE_ACTOR, EXAMPLE_NOW, exampleDirectory, generateExamples } from './gen-examples.mjs';
+import { REPLENISHMENT_ACTOR, REPLENISHMENT_NOW } from './gen-replenishment-examples.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const scratch = await mkdtemp(resolve(tmpdir(), 'osw-example-'));
@@ -91,6 +93,58 @@ assert(
   verifications.some((verification) => verification.verdict === 'fails'),
   'The sample must detect at least one actual discrepancy',
 );
+for (const name of ['replenishment', 'replenishment-reorder']) {
+  const base = [
+    cli,
+    'replenishment',
+    'run',
+    '--assets',
+    resolve(generated, 'assets'),
+    '--in',
+    resolve(generated, `inputs/${name}.json`),
+    '--now',
+    REPLENISHMENT_NOW,
+    '--actor',
+    REPLENISHMENT_ACTOR,
+  ];
+  const blocked = spawnSync(
+    process.execPath,
+    [...base, '--out-dir', resolve(scratch, `${name}-blocked`)],
+    { cwd: root, encoding: 'utf8' },
+  );
+  assert.equal(blocked.status, 2, `Replenishment must require approval: ${blocked.stderr}`);
+  const completed = spawnSync(
+    process.execPath,
+    [
+      ...base,
+      '--approvals',
+      resolve(generated, `approvals/${name}.json`),
+      '--out-dir',
+      resolve(scratch, name),
+      '--record',
+    ],
+    { cwd: root, encoding: 'utf8' },
+  );
+  assert.equal(completed.status, 0, `Replenishment CLI failed: ${completed.stderr}`);
+  const artifact = JSON.parse(await readFile(resolve(scratch, name, 'artifact.json'), 'utf8'));
+  assert.deepEqual(
+    artifact,
+    JSON.parse(await readFile(resolve(exampleDirectory, `expected/${name}.json`), 'utf8')),
+  );
+  assert(
+    !JSON.stringify(artifact).includes('@example.com'),
+    'SupplyProgram must not expose email addresses',
+  );
+  assert.equal(artifact.body.segmentation.total, 5);
+  assert.equal(artifact.body.segmentation.unclassified.count, 3);
+  if (name === 'replenishment-reorder') {
+    const transition = JSON.parse(
+      await readFile(resolve(scratch, name, 'advanceReorders.json'), 'utf8'),
+    );
+    assert.equal(transition.output.orders[0].order.lines[0].unitPrice.amount, 20);
+    assert.equal(transition.output.orders[0].order.state, 'submitted');
+  }
+}
 console.log(
   `Example passed: reproducible fixtures, blocking approval, approved CLI and failed verification (${scratch})`,
 );
@@ -147,4 +201,125 @@ const fitoutChecks = (await readFile(resolve(fitoutAssets, '_verifications.ndjso
 assert.deepEqual(fitoutChecks.map((v) => v.verdict).sort(), ['fails', 'holds', 'pending']);
 console.log(
   'Fitout example passed: blocked approval, reproducible Bom, and three recorded offer verdicts',
+);
+
+await checkDeliveryExample();
+const openingBase = [
+  cli,
+  'opening',
+  'run',
+  '--assets',
+  resolve(generated, 'assets'),
+  '--in',
+  resolve(generated, 'inputs/opening.json'),
+  '--now',
+  EXAMPLE_NOW,
+  '--actor',
+  EXAMPLE_ACTOR,
+];
+const openingBlocked = spawnSync(process.execPath, openingBase, { cwd: root, encoding: 'utf8' });
+assert.equal(
+  openingBlocked.status,
+  2,
+  `Opening without approvals must block: ${openingBlocked.stderr}`,
+);
+assert(
+  JSON.parse(openingBlocked.stdout).needs.some(
+    (need) => need.kind === 'approval' && need.step === 'opening/signRelease',
+  ),
+);
+const openingDone = spawnSync(
+  process.execPath,
+  [
+    ...openingBase,
+    '--approvals',
+    resolve(generated, 'approvals/opening.json'),
+    '--record',
+    '--out-dir',
+    resolve(scratch, 'opening'),
+  ],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(
+  openingDone.status,
+  0,
+  `Opening approved run failed: ${openingDone.stderr}\n${openingDone.stdout}`,
+);
+const openingArtifact = JSON.parse(
+  await readFile(resolve(scratch, 'opening/artifact.json'), 'utf8'),
+);
+assert.deepEqual(
+  openingArtifact,
+  JSON.parse(await readFile(resolve(exampleDirectory, 'expected/opening-record.json'), 'utf8')),
+);
+assert.equal(openingArtifact.body.certMatrix.summary.certRequired, 4);
+assert.equal(openingArtifact.body.certMatrix.summary.criticalPassed, 4);
+assert.equal(openingArtifact.body.release.current.state, 'ready');
+assert.deepEqual(openingArtifact.body.handoff, {
+  storeStatus: 'operating',
+  openedAt: '2026-01-01',
+});
+assert.equal(openingArtifact.body.marketing.assetGap.missing, 1);
+console.log(
+  'Opening example passed: real assessments, approval gates, operating handoff and golden artifact',
+);
+
+const buildBase = [
+  cli,
+  'build-out',
+  'run',
+  '--assets',
+  resolve(generated, 'assets'),
+  '--in',
+  resolve(generated, 'inputs/build-out.json'),
+  '--now',
+  '2026-01-30T00:00:00Z',
+  '--actor',
+  EXAMPLE_ACTOR,
+];
+const buildBlocked = spawnSync(
+  process.execPath,
+  [...buildBase, '--out-dir', resolve(scratch, 'build-blocked')],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(
+  buildBlocked.status,
+  2,
+  `Build workflow must require approvals: ${buildBlocked.stderr}`,
+);
+const buildCompleted = spawnSync(
+  process.execPath,
+  [
+    ...buildBase,
+    '--approvals',
+    resolve(generated, 'approvals/build-out.json'),
+    '--out-dir',
+    resolve(scratch, 'build-approved'),
+  ],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(
+  buildCompleted.status,
+  0,
+  `Build workflow failed: ${buildCompleted.stderr}\n${buildCompleted.stdout}`,
+);
+const buildArtifact = JSON.parse(
+  await readFile(resolve(scratch, 'build-approved/artifact.json'), 'utf8'),
+);
+assert.deepEqual(
+  buildArtifact,
+  JSON.parse(await readFile(resolve(exampleDirectory, 'expected/build-plan.json'), 'utf8')),
+);
+// 独立手算：20×140 + 2×280 + 240 + 50 + 90 + 80 = 3820。
+assert.equal(buildArtifact.body.quote.totals.total.amount, 3820);
+assert.equal(buildArtifact.body.schedule.finish, '2026-01-08');
+assert.equal(buildArtifact.body.acceptance.status, 'accepted');
+assert.equal(buildArtifact.body.changes[0].status, 'effective');
+const tracked = JSON.parse(await readFile(resolve(scratch, 'build-approved/track.json'), 'utf8'));
+assert(
+  tracked.verifications.some((v) => v.dimension === 'hoursPerUnit' && v.verdict === 'fails'),
+  'Build example must expose the deliberately higher actual installation hours',
+);
+console.log(
+  'Build example passed: reproducible artifact, approvals, signed change, CPM and installation verification',
 );

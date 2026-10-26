@@ -1,0 +1,46 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "recipe",
+      "id": "example-supply-recipe",
+      "slotVersion": "0.1.0",
+      "versionHash": "e91a5b529088b0ae41122126a089bbb40cf8f08b508bc098236a40fb257c7b3d",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Noodle Bowl"
+        },
+        "yield": {
+          "value": 1,
+          "unit": "pcs"
+        },
+        "ingredients": [
+          {
+            "productId": "example-supply-noodle",
+            "qty": 1,
+            "unit": "kg"
+          },
+          {
+            "productId": "example-supply-broth",
+            "qty": 1,
+            "unit": "kg"
+          }
+        ]
+      }
+    }
+  ]
+}

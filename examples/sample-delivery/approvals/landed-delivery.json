@@ -1,0 +1,146 @@
+[
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-cooker@XE",
+    "subjectHash": "96dfe33e12858ee6c1a099d4e28a929cf86aa8ac7b85213605420bc355a28ca8",
+    "decision": "enter",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-table@XE",
+    "subjectHash": "6d9644414a7922d9fa77b1d4f3225b6b0f6afcf674daa9922594b30224ab8983",
+    "decision": "enter",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-food@XE",
+    "subjectHash": "e1d981942b1998891e579b4e15a997cda6f55eb38fe201d8b8612860d63facb7",
+    "decision": "enter",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-urgent@XE",
+    "subjectHash": "8959d4b5be2486b71f441636006772ea915a92b37f1022855a9c7a96d612dbd3",
+    "decision": "enter",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-local@XE",
+    "subjectHash": "64e498c453e2275aa35e60fa1fdd51d1674484af43c0178778c67bc381497c51",
+    "decision": "enter",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-denied@XE",
+    "subjectHash": "4df77de8631dab8893b2deb4e1fe5ac1d185f57b07952e79fd568fd597b8cd78",
+    "decision": "deny",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/assignCarrier",
+    "subject": "shipment:shipment-9a0821dbcc60b322-1",
+    "subjectHash": "75443e0f44d16dbf6724111ec20c38f15f2c3e336e60f9fbad0c182d6b400d48",
+    "decision": "forwarder:example-forwarder",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/assignCarrier",
+    "subject": "shipment:shipment-c6fed32b4cc67145-1",
+    "subjectHash": "08631d0a5334adaee44da4c677aef346634ee947cd64e08082a36f7e40db5681",
+    "decision": "forwarder:example-forwarder",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/assignCarrier",
+    "subject": "shipment:shipment-d8819705c85d8bea-1",
+    "subjectHash": "42aaf6c44af3c59a52d7b7da6c5a00214f1e306233caf2b61392daa3ea18f542",
+    "decision": "own",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/assignCarrier",
+    "subject": "shipment:shipment-30bfd425ac15ffcf-1",
+    "subjectHash": "8292bde35f3f32d677950a0e616a65a268e305a0b0585144649ae31cc2850ce6",
+    "decision": "seller",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/confirmPacking",
+    "subject": "shipment:shipment-9a0821dbcc60b322-1",
+    "subjectHash": "5fc465fe6f9c08225a5d95864633c333d3c7a5e88f86e4b6ee18d48114915653",
+    "decision": "confirm",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/confirmPacking",
+    "subject": "shipment:shipment-c6fed32b4cc67145-1",
+    "subjectHash": "671e6046e197f328cf7bb78b29699463219d3f0fe01ed85741993068de258079",
+    "decision": "confirm",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/confirmPacking",
+    "subject": "shipment:shipment-d8819705c85d8bea-1",
+    "subjectHash": "a4240953e878ec99b9705a6e3a63b251112d9fec732af533a88df8e2fafefdfd",
+    "decision": "confirm",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/confirmPacking",
+    "subject": "shipment:shipment-30bfd425ac15ffcf-1",
+    "subjectHash": "8b63ef0e3107457dbc01b38dec1a52bc1dbc7fda9931eda74daec6fb9ba64b4c",
+    "decision": "confirm",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/collectQuotes",
+    "subject": "quote:shipment-9a0821dbcc60b322-1-quote",
+    "subjectHash": "d29832957103709ce831e2ac84cdea54215a47dfecf1473bdd73685c28b46d79",
+    "decision": "choose",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/collectQuotes",
+    "subject": "quote:shipment-c6fed32b4cc67145-1-quote",
+    "subjectHash": "04e1d5293ac0de5b8fc98a94aa5d3463d2fcc00667b9712b7624189e1d082556",
+    "decision": "choose",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-01-20T12:00:00Z"
+  }
+]

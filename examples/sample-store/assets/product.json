@@ -1,0 +1,77 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "product",
+      "id": "example-supply-noodle",
+      "slotVersion": "0.1.0",
+      "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3",
+      "fieldsetHashes": {
+        "identity": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3",
+        "logistics": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ],
+        "frequency": "recurring"
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Noodles"
+        },
+        "kind": "catalog",
+        "category": "ingredients",
+        "goodsClass": "food",
+        "status": "active",
+        "spec": "Example 1 kg bag"
+      }
+    },
+    {
+      "slot": "product",
+      "id": "example-supply-broth",
+      "slotVersion": "0.1.0",
+      "versionHash": "c526dd8b94a2b90f050ccbe2be769aaeea002adcdf647e120696b17fe532d792",
+      "fieldsetHashes": {
+        "identity": "c526dd8b94a2b90f050ccbe2be769aaeea002adcdf647e120696b17fe532d792",
+        "logistics": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ],
+        "frequency": "recurring"
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Broth"
+        },
+        "kind": "catalog",
+        "category": "ingredients",
+        "goodsClass": "food",
+        "status": "active",
+        "spec": "Example 1 kg bag"
+      }
+    }
+  ]
+}

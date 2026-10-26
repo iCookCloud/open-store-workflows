@@ -1,0 +1,90 @@
+{
+  "kind": "Bom",
+  "artifactVersion": "0.1.0",
+  "id": "example-opening-bom",
+  "hash": "14de931a3d1712f8216a4f4d55415956cb7e7f3106c0e96721481e7cdbc3129c",
+  "producedBy": {
+    "step": "fitout-bom/assembleBom",
+    "pkg": "@osw/fitout-bom",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-opening-store",
+  "inputs": [],
+  "sources": [],
+  "createdAt": "2026-01-01T00:00:00Z",
+  "example": true,
+  "body": {
+    "currency": "USD",
+    "lines": [
+      {
+        "id": "example-stock",
+        "lineKind": "food",
+        "qty": 20,
+        "unit": "pack",
+        "category": "example-noodle",
+        "name": "Example opening noodles",
+        "zone": "example-kitchen",
+        "spec": "Synthetic pack",
+        "qtyRule": {
+          "kind": "manual"
+        },
+        "qtyBasis": {
+          "status": "manual",
+          "note": "Invented fixture"
+        },
+        "dimsBasis": {
+          "status": "manual",
+          "note": "Not dimensioned"
+        },
+        "budgetKey": "working_capital",
+        "evidence": [],
+        "derivedFrom": {
+          "kind": "manual",
+          "ref": "example:fixture"
+        },
+        "pricingMode": "whole",
+        "components": [],
+        "wholeEstimate": {
+          "unit": {
+            "amount": 10,
+            "currency": "USD"
+          },
+          "basis": "estimate"
+        },
+        "modelCostPerUnit": null,
+        "parts": [],
+        "modelWarnings": [],
+        "sourcing": null,
+        "costBasis": "model",
+        "unitPrice": {
+          "amount": 10,
+          "currency": "USD",
+          "basis": "estimate"
+        }
+      }
+    ],
+    "totals": {
+      "model": {
+        "amount": 200,
+        "currency": "USD"
+      },
+      "chosen": {
+        "amount": 200,
+        "currency": "USD"
+      },
+      "byBudgetKey": {
+        "working_capital": {
+          "model": {
+            "amount": 200,
+            "currency": "USD"
+          },
+          "chosen": {
+            "amount": 200,
+            "currency": "USD"
+          },
+          "sourcedShare": 0
+        }
+      }
+    }
+  }
+}

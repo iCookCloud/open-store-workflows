@@ -1,0 +1,27 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "compliance-category",
+      "id": "example-category",
+      "slotVersion": "0.1.0",
+      "versionHash": "ceaa72676fa6b0a8453be0bccda39dd643296b73c0bd8cd106780bbdd4f907ef",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "parentId": null,
+        "market": "XE",
+        "name": "Example synthetic category",
+        "goneAt": null
+      }
+    }
+  ]
+}
