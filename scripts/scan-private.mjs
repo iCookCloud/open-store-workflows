@@ -18,6 +18,7 @@ const allowedDomains = new Set([
   'www.apache.org',
   'spdx.org',
   'github.com',
+  'api.resend.com',
   'www.w3.org',
   'json-schema.org',
   'zod.dev',
