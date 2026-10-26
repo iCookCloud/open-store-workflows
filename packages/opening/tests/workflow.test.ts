@@ -87,3 +87,36 @@ describe('opening workflow integration', () => {
     expect(artifact.body.handoff).toEqual(previous.body.handoff);
   });
 });
+
+it('requires fresh certification when its catalog source changes before opening', async () => {
+  const { CertSlot } = await import('../src/training/index.js');
+  const { input, options } = await fixture();
+  const first = await executeWorkflow(
+    workflow,
+    { ...input, transitions: ['ready'], handoff: false },
+    options,
+  );
+  expect(first.exitCode).toBe(0);
+  const cert = await options.source.get(CertSlot, 'example-safety');
+  if (!cert) throw new Error('Missing synthetic certification');
+  const data = { ...cert.data, title: { en: 'Updated example standard' } };
+  options.source.add({ ...cert, data, versionHash: await versionHash(data) });
+  const rerun = await executeWorkflow(
+    workflow,
+    {
+      ...input,
+      previous: first.result.artifact,
+      assessments: [],
+      transitions: ['live'],
+      handoff: false,
+    },
+    options,
+  );
+  expect(rerun.exitCode).toBe(2);
+  expect(rerun.result.steps['opening/evaluateRelease'].output).toMatchObject({
+    state: 'blocked',
+    blockers: expect.arrayContaining([
+      expect.objectContaining({ kind: 'criticalCert', waivable: false }),
+    ]),
+  });
+});
