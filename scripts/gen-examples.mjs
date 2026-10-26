@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MemorySource, createParamReader, versionHash } from '@osw/core';
 import { workflow } from '@osw/store-concept';
+import { openingAssets, saveOpeningExample } from './opening-examples.mjs';
 
 export const EXAMPLE_NOW = '2026-01-01T00:00:00Z';
 export const EXAMPLE_ACTOR = 'example:reviewer';
@@ -106,6 +107,7 @@ export async function exampleAssets() {
     cuisine: 'example-noodle',
     tracks: ['example-noodle'],
     origin: 'delivered',
+    items: [{ id: 'example-dish', name: { en: 'Example Noodles' }, station: 'example-hot' }],
     pageCount: 2,
     derives: {
       ingredients: [{ key: 'example-noodle' }],
@@ -181,7 +183,7 @@ export async function exampleAssets() {
 }
 
 export const exampleInput = {
-  storeId: null,
+  storeId: 'example-opening-store',
   storeType: 'example-noodle',
   cuisine: 'example-noodle',
   jurisdiction: 'XE',
@@ -192,7 +194,7 @@ export const exampleInput = {
 };
 
 export async function generateExamples(directory = exampleDirectory) {
-  const records = await exampleAssets();
+  const records = [...(await exampleAssets()), ...(await openingAssets())];
   const slots = [...new Set(records.map((record) => record.slot))];
   const save = async (path, data) => {
     await mkdir(resolve(directory, path, '..'), { recursive: true });
@@ -244,6 +246,7 @@ export async function generateExamples(directory = exampleDirectory) {
     throw new Error(`Example did not complete: ${JSON.stringify(approved.needs)}`);
   await save('approvals/store-concept.json', approvals);
   await save('expected/store-spec.json', approved.artifact);
+  await saveOpeningExample(directory, records, approved.artifact);
   console.log(
     `Synthetic sample generated (${records.length} assets); artifact ${approved.artifact.hash}`,
   );

@@ -1,0 +1,53 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "party",
+      "id": "example-creator",
+      "data": {
+        "name": {
+          "en": "Example Creator"
+        },
+        "roles": [
+          "creator"
+        ],
+        "status": "active",
+        "jurisdictions": [
+          "XE"
+        ],
+        "languages": [
+          "en"
+        ],
+        "profiles": {
+          "creator": {
+            "platform": "example-platform",
+            "tier": "micro",
+            "audience": 100,
+            "formats": [
+              "short"
+            ],
+            "engagementPct": 10,
+            "lastPostOn": "2025-12-31",
+            "verifiedOn": "2025-12-31"
+          }
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "9d01fd063cc44b05e75fb0f69b0b26eeebb60ed04cc0666310a37fc79eedc992",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

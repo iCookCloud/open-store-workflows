@@ -1,0 +1,46 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "cert",
+      "id": "example-safety",
+      "data": {
+        "key": "example-safety",
+        "standard": "example-food",
+        "title": {
+          "en": "Example Safety"
+        },
+        "group": "example-required",
+        "positions": [
+          "example-cook"
+        ],
+        "critical": true,
+        "locked": true,
+        "requires": [
+          "written",
+          "practical"
+        ],
+        "defaultChecks": [
+          "example-clean"
+        ],
+        "recertMonths": 12
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "4cbb6e3224a6e1a0a70531f47aba6385faf6e2c98d96c629e92227e652218000",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

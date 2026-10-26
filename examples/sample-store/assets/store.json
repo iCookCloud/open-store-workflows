@@ -222,6 +222,35 @@
           }
         ]
       }
+    },
+    {
+      "slot": "store",
+      "id": "example-opening-store",
+      "data": {
+        "name": {
+          "en": "Example Noodle Bar"
+        },
+        "status": "preparing",
+        "track": "example-noodle",
+        "jurisdiction": "XE",
+        "timezone": "UTC"
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "65e9cdabd60123095437c352362e0c0288d2055b6f9fb48b2288648991e0bce1",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
     }
   ]
 }

@@ -2,14 +2,14 @@
   {
     "step": "store-concept/shortlistMenus",
     "subject": "menu:example-menu-1",
-    "subjectHash": "58c606f6f5f13cb0b46f0af2301f20df3b18d526c93e0f2ecab368acb8aae941",
+    "subjectHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53",
     "decision": "approve",
     "by": "example:reviewer",
     "at": "2026-01-01T00:00:00Z"
   },
   {
     "step": "store-concept/assembleSpec",
-    "subjectHash": "7f45dc2e80329a81e126a7038efd8c9f0a65cfb36eeb4025f9ca36485999e4f8",
+    "subjectHash": "15bd9350bb0ad5bfb32bbb9d652963d42ffca18a6fd80fde432b675d6e7d106b",
     "decision": "release",
     "by": "example:reviewer",
     "at": "2026-01-01T00:00:00Z"

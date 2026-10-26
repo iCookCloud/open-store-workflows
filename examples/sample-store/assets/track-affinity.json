@@ -1,0 +1,31 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "track-affinity",
+      "id": "example-affinity",
+      "data": {
+        "track": "example-noodle",
+        "borrowFrom": [
+          "example-neighbor"
+        ]
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "e3660fd9949cee24289395342209b46bc1972f4c8453acf2398ba7b94e393b83",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

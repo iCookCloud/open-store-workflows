@@ -33,6 +33,7 @@
     "@osw/store-concept": "workspace:*",
     "@osw/mcp": "workspace:*",
     "@osw/site-search": "workspace:*",
-    "@osw/fitout-bom": "workspace:*"
+    "@osw/fitout-bom": "workspace:*",
+    "@osw/opening": "workspace:*"
   }
 }
