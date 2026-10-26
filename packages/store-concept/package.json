@@ -20,5 +20,14 @@
   },
   "osw": {
     "workflow": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iCookCloud/open-store-workflows.git",
+    "directory": "packages/store-concept"
+  },
+  "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/store-concept",
+  "bugs": {
+    "url": "https://github.com/iCookCloud/open-store-workflows/issues"
   }
 }

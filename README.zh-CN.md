@@ -1,12 +1,26 @@
 # Open Store Workflows
 
-把开店流程中的规则、计算和验证封装成可复用的包，由使用者接入自己的资产、价格、合作方和审批记录。
+七条开店 workflow 在一个仓库开发，组织为七个独立 npm 包与共享 `@osw/core`。规则、计算和验证由代码提供，资产、价格、合作方和审批记录由使用者接入。
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
 已实现 **共享 core、第 1 项「定店型」、第 2 项「找房」、第 3 项「装修物料单」、第 4 项「到店」、第 5 项「施工」、第 6 项「开门营业」与第 7 项「开业后供货」**，分别生成 `StoreSpec`、`SiteDecision`、`Bom`、`DeliveryPlan`、`BuildPlan`、`OpeningRecord` 和 `SupplyProgram`。七条流程共用 CLI／MCP；生产站点接入另行开展。
 
-第二项包含筛选、周边扫描、实测、意向书、律师审阅与签署证据核验，详见[找房运行说明](packages/site-search/README.md)。运行 `pnpm examples:site-search` 可验证缺签约批示退出 2、审批完整退出 0。CLI 和 MCP 可用 `--providers <本地模块>` 显式加载外部服务及额度存储。
+npm 发布仍须单独批准；目前从源码工作区安装、构建和运行。
+
+## 包与产出
+
+| 顺序 | 独立包 | 产出 |
+| --- | --- | --- |
+| 01 | [@osw/store-concept](packages/store-concept/README.md) | `StoreSpec` |
+| 02 | [@osw/site-search](packages/site-search/README.md) | `SiteDecision` |
+| 03 | [@osw/fitout-bom](packages/fitout-bom/README.md) | `Bom` |
+| 04 | [@osw/landed-delivery](packages/landed-delivery/README.md) | `DeliveryPlan` |
+| 05 | [@osw/build-out](packages/build-out/README.md) | `BuildPlan` |
+| 06 | [@osw/opening](packages/opening/README.md) | `OpeningRecord` |
+| 07 | [@osw/replenishment](packages/replenishment/README.md) | `SupplyProgram` |
+
+共享契约见 [@osw/core](packages/core/README.md)，CLI／MCP 使用相同步骤。
 
 ## 使用
 
@@ -18,6 +32,24 @@ git clone https://github.com/iCookCloud/open-store-workflows.git
 cd open-store-workflows
 pnpm install --frozen-lockfile
 pnpm build
+```
+
+## CLI／MCP
+
+默认只读资产；只有显式传入 `--record` 才写验证记录和补空意图。执行错误退出 `1`，已有产出但部分写回失败退出 `3`。HTTP 令牌通过环境变量 `OSW_TOKEN` 提供。FileSource 写回使用系统 `flock` 命令协调跨进程并发，读取文件无需它；缺少该命令时写回明确失败，不会降级为无锁覆盖。
+
+```sh
+pnpm osw slots --json-schema .osw/schemas
+OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
+```
+
+MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动时添加 `--allow-record` 才提供写回工具。
+
+## 01 · 定店型
+
+`@osw/store-concept` 完成菜单匹配、投资和保本测算、实账校准、场地要求及放行。详见[定店型包说明](packages/store-concept/README.md)。无可信默认值的模板明确阻断；模板外的合法覆盖科目也计入预算。
+
+```sh
 pnpm osw store-concept run \
   --assets examples/sample-store/assets \
   --in examples/sample-store/inputs/store-concept.json \
@@ -29,20 +61,15 @@ pnpm osw store-concept run \
 
 删除命令中的 `--approvals` 参数即可观察审批阻断：流程返回待办 `needs`，退出码为 `2`。审批通过后退出码为 `0`，输出目录中包含各步骤结果、`result.json` 和 `artifact.json`。本轮被阻断时 `artifact.json` 写为 `null`，未执行步骤的文件也写为 `null`；复用目录不会把上次成功产物误当成本轮结果。审批绑定所见内容的哈希，内容修改后需要重新批准。
 
-默认只读资产；只有显式传入 `--record` 才写验证记录和补空意图。执行错误退出 `1`，已有产出但部分写回失败退出 `3`。HTTP 令牌通过环境变量 `OSW_TOKEN` 提供。FileSource 写回使用系统 `flock` 命令协调跨进程并发，读取文件无需它；缺少该命令时写回明确失败，不会降级为无锁覆盖。
+## 02 · 找房
 
-```sh
-pnpm osw slots --json-schema .osw/schemas
-OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
-```
+第二项包含筛选、周边扫描、实测、意向书、律师审阅与签署证据核验，详见[找房运行说明](packages/site-search/README.md)。运行 `pnpm examples:site-search` 可验证缺签约批示退出 2、审批完整退出 0。CLI 和 MCP 可用 `--providers <本地模块>` 显式加载外部服务及额度存储。
 
-MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动时添加 `--allow-record` 才提供写回工具。
-
-## 第三条：装修物料单
+## 03 · 装修物料单
 
 `@osw/fitout-bom` 已实现案例／识图人审、铺位与菜单用量、用料计价、供应商选择、报价验证、物料单定稿及对外报价。操作方法见 [装修包说明](packages/fitout-bom/README.md)。`examples/fitout-store` 是从零合成的第三条独立示例，纳入 `pnpm examples` 验收。生产资产中心接入尚需在私有项目实施。
 
-## 第 4 项：到店
+## 04 · 到店
 
 ```sh
 pnpm osw landed-delivery run \
@@ -64,11 +91,11 @@ pnpm osw landed-delivery run \
 - host 负责认证 `edits[].role`。货代/自带物流只能补允许的空格；品名、规格、货值由操作员修改。定稿后修改须说明原因并留 `amendments`。分享给承运方时用 `viewFor`，隐藏其他报价和内部备注。MCP 面向已授权操作员，不承担分享链接鉴权。
 - 货代、定稿、选报价由 `operator` 批准，`client` 接受报价只留痕。无报价时返回带询价待办的计划；已有报价须明确选择，过期报价不可选。运价基数支持 `shipment` / `m3` / `kg` / `carton`；三个 `*Pct` 容差是小数比例，时效容差是天数。
 - 承运方报送达不等于门店实收；缺任一必需批次日期时，汇总日期仍为未知。混合预计与实收日期时，汇总采用较弱的证据类型。暂挂、短收、破损都使 `allReceived=false`。恢复既有计划时只传新增运输事件，签收记录不能静默覆盖。
-- 回填只认人工/签收实测；同字段多人值冲突记 `pending`，已有值不一致记 `fails`，不覆盖源数据。产品槽位升级到 `0.2.0`，允许逐项提供箱规，已核装箱数和毛重可先于尺寸入库。core 每次回填都检查源版本及 schema；同批先前回填导致版本改变时，后续意图必须重新读取并核实。host 应先保存计划，再执行补空意图。
+- 回填只认人工/签收实测；同字段多人值冲突记 `pending`，已有值不一致记 `fails`，不覆盖源数据。产品槽位升级到 `0.2.0`，允许逐项提供箱规，已核装箱数和毛重可先于尺寸入库。core 按批次起始版本检查各条意图，同批可补多个空字段；跨批旧版本仍需重新读取。每格仍受 schema 与只补空约束，日志重放冲突会显式报错。host 应先保存计划，再执行补空意图。
 
 示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `node scripts/gen-delivery-example.mjs` 更新该示例；`pnpm examples` 检查七个 workflow。
 
-## 第五项：施工
+## 05 · 施工
 
 ```sh
 pnpm osw build-out run \
@@ -90,7 +117,7 @@ pnpm osw build-out run \
 
 七个步骤为 `takeoff`、`estimateHours`、`priceQuote`、`levelBids`、`schedule`、`track`、`accept`，CLI／MCP 自动发现。步骤只返回验证意图，写回仍由 runner 显式执行。
 
-## 第六项：开门营业
+## 06 · 开门营业
 
 ```sh
 pnpm osw opening run \
@@ -112,7 +139,7 @@ pnpm osw opening run \
 
 学生卷、判分输出和 MCP 通用查询均保护答案、解析和评分指南。营销及复盘签署不阻止开业审批；营销只对批准的类别计预算，输出达人筛选、凭证缺口及内容日历。复盘按课程单元、清单项和上游测算来源产生验证记录。示例刻意保留素材缺口，并检出缺少区分度的考卷；`pnpm examples` 核对七条流程及黄金产物。
 
-## 开业后供货
+## 07 · 开业后供货
 
 `@osw/replenishment` 提供 13 个步骤、6 个资产槽位，由 CLI/MCP 自动发现。它接收已放行的 `OpeningRecord` 与首批 `Bom`，检查正文哈希和所属门店，完成分群、供应商匹配、邮件矩阵与发送决策、复购单和上游验证。合成示例中的 Example Noodle Bar 已在营一个月；外部收录店没有 BOM 时，占比保持 `basis: none`、`byLines: null`。
 
@@ -146,6 +173,7 @@ pnpm osw replenishment run \
 - 验证排除模板来源门店的同源自证，也不把用户覆盖值记成模板错误。
 - 步骤只读资产。人工批示、版本变化和只补空规则在实际运行时校验。
 - 核心模块和 workflow 可打包到非 Node 环境，文件与命令行适配集中在 `@osw/core/node`。
+- 参数族通过点分段的 `keyPrefix` 下推查询，能取回 qualifier；维度门槛缺单位返回待办；补空日志冲突明确报错。具体协议见 [core 说明](packages/core/README.md)。
 
 ## 验收与示例
 
@@ -170,5 +198,7 @@ git config core.hooksPath .githooks
 ```
 
 未配置黑名单时扫描失败。`pre-push` 检查待推提交；GitHub Actions 为推送和 PR 运行构建、测试与示例。主分支隐私检查使用 `OSW_PRIVATE_DENYLIST_CONTENT` 仓库 secret 扫描完整历史，私有词表不会提供给 PR 作业。可选的 Woodpecker 使用 `osw_private_denylist` secret。发布包还可以用 `--tarball` 检查。GitHub 源码公开与 npm 发布、生产接入分别管理。
+
+## 许可证
 
 许可证：[Apache-2.0](LICENSE)。

@@ -1,6 +1,6 @@
 # Open Store Workflows
 
-Reusable, data-driven workflows for planning and operating a store. Business rules live in code; asset records, prices, partners and approvals come from the operator's own sources.
+Seven data-driven workflows for planning and operating a store, maintained in one repository as seven independent workflow packages plus `@osw/core`. Business rules live in code; asset records, prices, partners and approvals come from the operator's own sources.
 
 [简体中文](README.zh-CN.md)
 
@@ -8,21 +8,21 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 Implemented workflows include **store-concept** (`StoreSpec`), **site-search** (`SiteDecision`), **fitout-bom** (`Bom`), **landed-delivery** (`DeliveryPlan`), **build-out** (`BuildPlan`), **opening** (`OpeningRecord`), and **replenishment** (`SupplyProgram`). They share the core, CLI and MCP interfaces. All seven workflows are implemented; production-system integration remains separate work.
 
-See the [site-search guide](packages/site-search/README.md) for the synthetic end-to-end example and explicit local `--providers` modules. `pnpm examples:site-search` checks missing-signature-approval exit 2 and completed exit 0.
+npm publication remains a separate approval step; the current installation path is the source workspace.
 
 ## Packages
 
-| Package | Responsibility |
-| --- | --- |
-| `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
-| `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
-| `@osw/site-search` | Unit-aware listing filters, independent surveys, lease drift, approvals and signing evidence |
-| `@osw/fitout-bom` | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
-| `@osw/landed-delivery` | Compliance review, packing, carrier capabilities, freight quotations, shipment tracking and measured receipts |
-| `@osw/build-out` | Construction quantities, installation rates, quotes, bids, arrival-constrained schedules, signed changes and completion acceptance |
-| `@osw/opening` | Staffing, SOP coverage, assessments, checklists, release signatures, marketing, reviews and operating-store handoff |
-| `@osw/replenishment` | Operating-store segments, supplier matching, newsletter decisions, reorders and upstream verification |
-| `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
+| No. | Package | Responsibility |
+| --- | --- | --- |
+| 00 | [`@osw/core`](packages/core/README.md) | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
+| 01 | [`@osw/store-concept`](packages/store-concept/README.md) | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
+| 02 | [`@osw/site-search`](packages/site-search/README.md) | Unit-aware listing filters, independent surveys, lease drift, approvals and signing evidence |
+| 03 | [`@osw/fitout-bom`](packages/fitout-bom/README.md) | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
+| 04 | [`@osw/landed-delivery`](packages/landed-delivery/README.md) | Compliance review, packing, carrier capabilities, freight quotations, shipment tracking and measured receipts |
+| 05 | [`@osw/build-out`](packages/build-out/README.md) | Construction quantities, installation rates, quotes, bids, arrival-constrained schedules, signed changes and completion acceptance |
+| 06 | [`@osw/opening`](packages/opening/README.md) | Staffing, SOP coverage, assessments, checklists, release signatures, marketing, reviews and operating-store handoff |
+| 07 | [`@osw/replenishment`](packages/replenishment/README.md) | Operating-store segments, supplier matching, newsletter decisions, reorders and upstream verification |
+| Tool | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 
 The portable core and workflow have no Node builtin dependency. File access and command-line execution live in `@osw/core/node`; the HTTP client lives in `@osw/core/http`. Workflow packages import only `@osw/core`.
 
@@ -38,6 +38,23 @@ pnpm install --frozen-lockfile
 pnpm build
 pnpm test
 ```
+
+## CLI and MCP
+
+The output directory contains each step result, `result.json`, and `artifact.json`. A blocked run writes `null` to `artifact.json`; a step not reached in the current run has a `null` step file. Reusing an output directory therefore cannot expose a prior successful artifact as the current result. Commands do not write back to asset sources unless `--record` is passed. Exit code `1` indicates an execution error; `3` means the workflow produced output but one or more requested writebacks did not succeed.
+
+```sh
+pnpm osw slots --json-schema .osw/schemas
+OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
+```
+
+The MCP server discovers installed `@osw/*` workflow packages. Its query tool limits pages to 50 records. Writeback tools are registered only when the server is started with `--allow-record`. HTTP credentials are read from `OSW_TOKEN`, never from committed inputs. FileSource writebacks use the system `flock` command for cross-process locking; reading files does not require it. If `flock` is unavailable, writes fail explicitly instead of proceeding without a lock.
+
+## 01 · Store concept
+
+`@osw/store-concept` selects templates and menus, estimates economics, calibrates independent actuals and derives site requirements before release. [Package guide](packages/store-concept/README.md).
+
+A template without trusted defaults produces needs instead of financial output. Overrides for additional valid budget categories are included in totals.
 
 Run the synthetic example without approvals to inspect its blocking needs (exit code `2`):
 
@@ -62,20 +79,15 @@ pnpm osw store-concept run \
   --out-dir .osw/approved
 ```
 
-The output directory contains each step result, `result.json`, and `artifact.json`. A blocked run writes `null` to `artifact.json`; a step not reached in the current run has a `null` step file. Reusing an output directory therefore cannot expose a prior successful artifact as the current result. Commands do not write back to asset sources unless `--record` is passed. Exit code `1` indicates an execution error; `3` means the workflow produced output but one or more requested writebacks did not succeed.
+## 02 · Site search
 
-```sh
-pnpm osw slots --json-schema .osw/schemas
-OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
-```
+See the [site-search guide](packages/site-search/README.md) for the synthetic end-to-end example and explicit local `--providers` modules. `pnpm examples:site-search` checks missing-signature-approval exit 2 and completed exit 0.
 
-The MCP server discovers installed `@osw/*` workflow packages. Its query tool limits pages to 50 records. Writeback tools are registered only when the server is started with `--allow-record`. HTTP credentials are read from `OSW_TOKEN`, never from committed inputs. FileSource writebacks use the system `flock` command for cross-process locking; reading files does not require it. If `flock` is unavailable, writes fail explicitly instead of proceeding without a lock.
-
-## Fitout workflow
+## 03 · Fitout and BOM
 
 `@osw/fitout-bom` implements case/image review, site and menu quantities, material costing, supplier selection, offer verification, BOM freezing and optional customer quotes. See [the fitout package guide](packages/fitout-bom/README.md). The fully synthetic `examples/fitout-store` fixture is checked by `pnpm examples`.
 
-## Landed delivery
+## 04 · Landed delivery
 
 ```sh
 pnpm osw landed-delivery run \
@@ -97,9 +109,9 @@ The host authenticates edit roles before invoking `applyPartyEdits`. Carrier edi
 
 Rates use `shipment`, `m3`, `kg` or `carton` bases. `delivery.tolerance.weightPct`, `delivery.tolerance.volumePct` and `freight.tolerance.rateCardPct` are fractional ratios; `freight.tolerance.transitDays` is an absolute day allowance. Tolerances become required when the corresponding measurement exists. Missing packing cells request follow-up without blocking confirmation; contradictions block. Missing quotes return a usable plan with a request action, while supplied quotes require an explicit current choice. Delivery is distinct from signed receipt. A milestone with any unknown required date stays unknown, and mixed evidence uses the weakest basis. Held goods, shortages or damage keep `allReceived` false.
 
-Only manual or signed observations produce fill intentions. Conflicting observations produce `pending`; existing differing values produce `fails` without overwriting. The product slot is version `0.2.0`: carton fields may be supplied individually, so verified units or weight can be filled before dimensions are known. Core writeback checks source versions and schema on each fill; later fills based on a now-changed version require a fresh read and review. Hosts persist plan results before applying fill intentions. The sample spans two shipping countries, food/nonfood, air freight, own logistics, seller delivery and one denied product, and deliberately produces rate, weight and transit failures. Regenerate it with `node scripts/gen-delivery-example.mjs`; `pnpm examples` checks all seven workflows against committed golden artifacts.
+Only manual or signed observations produce fill intentions. Conflicting observations produce `pending`; existing differing values produce `fails` without overwriting. The product slot is version `0.2.0`: carton fields may be supplied individually, so verified units or weight can be filled before dimensions are known. Core writeback checks every fill against its batch-start source version and current target emptiness; multiple fields can be filled in one batch, while a later batch needs a current version. File journal conflicts are surfaced explicitly. Hosts persist plan results before applying fill intentions. The sample spans two shipping countries, food/nonfood, air freight, own logistics, seller delivery and one denied product, and deliberately produces rate, weight and transit failures. Regenerate it with `node scripts/gen-delivery-example.mjs`; `pnpm examples` checks all seven workflows against committed golden artifacts.
 
-## Construction workflow
+## 05 · Construction
 
 ```sh
 pnpm osw build-out run \
@@ -122,7 +134,7 @@ pnpm osw build-out run \
 
 The seven step exports are `takeoff`, `estimateHours`, `priceQuote`, `levelBids`, `schedule`, `track`, and `accept`; CLI and MCP discover them from the installed package. Steps only return verification intentions. They never persist changes themselves.
 
-## Opening a store
+## 06 · Opening
 
 The synthetic opening example consumes the generated StoreSpec and a separately constructed example Bom reference. It exercises actual written and practical grading for two seats, including course-unit practical checks. Run it after building:
 
@@ -144,7 +156,7 @@ Opening adds `role`, `cert`, `course`, `exam`, `track-affinity`, `content-case` 
 
 Marketing approval and checkpoint review signatures are nonblocking. Marketing output includes budgets, creator selection, evidence gaps and content calendars; only approved categories receive budgets. Reviews calculate ticket and prime-cost figures and produce source-specific verification intentions. The opening example deliberately leaves a content gap and detects an overly easy exam rather than manufacturing all-green results. `pnpm examples` checks all seven workflows and their committed golden artifacts.
 
-## Replenishment
+## 07 · Replenishment
 
 The synthetic store has been operating for a month. Its opening handoff and first-stock BOM seed the recurring list; historical reorders provide cadence and ingredient evidence. The external intake store has no BOM denominator and reports `basis: none`, `byLines: null`.
 
@@ -179,6 +191,7 @@ All business thresholds come from `params`, including send windows, quotas, brea
 - Monetary amounts are rounded by currency at line level. Overrides are already in the requested output currency.
 - Calibration excludes a template's own source stores and does not verify a user override against the template.
 - The source protocol uses bounded filtering and cursor pagination. Unknown fields and unsupported operations are rejected.
+- Parameter families use dot-boundary `keyPrefix` filtering; dimensional thresholds require explicit units; fill batches preserve their shared observation version. See the [core contracts](packages/core/README.md).
 
 ## Verification and synthetic data
 

@@ -12,8 +12,8 @@
   "inputs": [
     {
       "kind": "StoreSpec",
-      "id": "store-spec-15bd9350bb0ad5bfb32bbb9d652963d4",
-      "hash": "15bd9350bb0ad5bfb32bbb9d652963d42ffca18a6fd80fde432b675d6e7d106b"
+      "id": "store-spec-3ed12fe6e548d325397602426f925024",
+      "hash": "3ed12fe6e548d325397602426f925024cf1c32aa2da79a997366896c8b5a0a96"
     },
     {
       "kind": "Bom",

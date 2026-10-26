@@ -21,5 +21,14 @@
   },
   "bin": {
     "osw-mcp": "./dist/stdio.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iCookCloud/open-store-workflows.git",
+    "directory": "packages/mcp"
+  },
+  "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/mcp",
+  "bugs": {
+    "url": "https://github.com/iCookCloud/open-store-workflows/issues"
   }
 }

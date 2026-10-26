@@ -5,8 +5,14 @@
   "license": "Apache-2.0",
   "files": ["dist", "rules"],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./runner": { "types": "./dist/runner/index.d.ts", "import": "./dist/runner/index.js" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./runner": {
+      "types": "./dist/runner/index.d.ts",
+      "import": "./dist/runner/index.js"
+    },
     "./provider-resend": {
       "types": "./dist/provider-resend/index.d.ts",
       "import": "./dist/provider-resend/index.js"
@@ -17,6 +23,19 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run tests"
   },
-  "dependencies": { "@osw/core": "workspace:*" },
-  "osw": { "workflow": true }
+  "dependencies": {
+    "@osw/core": "workspace:*"
+  },
+  "osw": {
+    "workflow": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iCookCloud/open-store-workflows.git",
+    "directory": "packages/replenishment"
+  },
+  "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/replenishment",
+  "bugs": {
+    "url": "https://github.com/iCookCloud/open-store-workflows/issues"
+  }
 }
