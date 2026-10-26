@@ -322,8 +322,9 @@ export const Param = z.object({
 export type Param = z.infer<typeof Param>;
 export const ParamsSlot = defineSlot({
   name: 'params',
+  slotVersion: '0.2.0',
   schema: Param,
-  filterable: { key: eqin },
+  filterable: { key: ['eq', 'in', 'keyPrefix'] },
   sortable: ['key', 'validFrom'],
   validate: (v) => {
     if (v.validFrom && v.validTo && v.validFrom > v.validTo)

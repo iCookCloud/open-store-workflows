@@ -14,6 +14,8 @@ export const ConformanceSlot = defineSlot({
     geo: z.object({ lat: z.number(), lng: z.number() }).optional(),
     lanes: z.array(z.object({ from: z.string(), to: z.string() })).optional(),
     note: z.string().nullable().optional(),
+    reviewNote: z.string().optional(),
+    paramKey: z.string().optional(),
   }),
   filterable: {
     label: ['eq', 'in', 'contains', 'exists'],
@@ -22,6 +24,7 @@ export const ConformanceSlot = defineSlot({
     jurisdiction: ['prefix', 'eq'],
     geo: ['within'],
     note: ['exists'],
+    paramKey: ['keyPrefix'],
     'lanes[].from': ['eq'],
     'lanes[].to': ['eq'],
   },
@@ -31,6 +34,7 @@ export async function conformanceRecords(): Promise<AnyAssetRecord[]> {
   const data = [
     {
       label: 'Alpha One',
+      paramKey: 'labor.rate',
       score: 10,
       tags: ['a', 'b'],
       jurisdiction: 'XE-AA',
@@ -43,6 +47,7 @@ export async function conformanceRecords(): Promise<AnyAssetRecord[]> {
     },
     {
       label: 'Beta Two',
+      paramKey: 'labor.rate.special',
       score: 20,
       tags: ['b'],
       jurisdiction: 'XE-AAX',
@@ -50,7 +55,7 @@ export async function conformanceRecords(): Promise<AnyAssetRecord[]> {
       note: 'set',
     },
     { label: 'Gamma Three', score: null, tags: [], jurisdiction: 'XF', geo: { lat: 20, lng: 20 } },
-    { label: 'Delta Four' },
+    { label: 'Delta Four', paramKey: 'labor.rateExtra' },
   ];
   return Promise.all(
     data.map(async (data, i) => ({
@@ -103,6 +108,11 @@ export async function runConformance(
     ['exists includes nonempty only', { field: 'tags', op: 'exists', value: true }, ['1', '2']],
     ['exists false missing and null', { field: 'score', op: 'exists', value: false }, ['3', '4']],
     ['prefix segment boundary', { field: 'jurisdiction', op: 'prefix', value: 'XE-AA' }, ['1']],
+    [
+      'parameter namespace boundary',
+      { field: 'paramKey', op: 'keyPrefix', value: 'labor.rate' },
+      ['1', '2'],
+    ],
     ['within', { field: 'geo', op: 'within', value: { lat: 0, lng: 0, radiusKm: 2 } }, ['1', '2']],
     [
       'array traversal coarse AND',
@@ -219,12 +229,16 @@ export async function runConformance(
       f,
       { ...f, asset: { slot: r2.slot, id: r2.id, versionHash: r2.versionHash } },
       { ...f, value: 'overwrite' },
+      { ...f, field: 'reviewNote', value: 'Second verified field' },
     ]);
-    if (results.map((r) => r.status).join() !== 'recorded,not_empty,source_changed')
+    if (results.map((r) => r.status).join() !== 'recorded,not_empty,not_empty,recorded')
       throw new Error('Fill guards failed');
     const filled = await source.get(ConformanceSlot, '1');
     if (filled?.data.note !== 'verified' || filled.versionHash === r.versionHash)
       throw new Error('Fill not persisted/versioned');
+    if (filled.data.reviewNote !== 'Second verified field') throw new Error('Second fill lost');
+    const stale = await source.applyFills([{ ...f, value: 'Stale later call' }]);
+    if (stale[0].status !== 'source_changed') throw new Error('Cross-call version guard lost');
   });
   await check('redacted filter and grouping are forbidden', async () => {
     const records = await conformanceRecords();

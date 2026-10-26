@@ -147,6 +147,19 @@ export function meets(
       value: null,
       needs: [{ kind: 'input', path: req.key, reason: 'Condition unmeasured', blocking: req.hard }],
     };
+  if (req.op !== 'present' && CONDITION_UNITS[req.key].length > 0 && !req.unit) {
+    return {
+      value: null,
+      needs: [
+        {
+          kind: 'input',
+          path: `${req.key}.unit`,
+          reason: 'Dimensional threshold requires an explicit unit',
+          blocking: req.hard,
+        },
+      ],
+    };
+  }
   let v = reading.measure.value;
   if (req.unit) {
     if (typeof v !== 'number' || !reading.measure.unit)

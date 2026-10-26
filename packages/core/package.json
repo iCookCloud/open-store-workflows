@@ -32,5 +32,14 @@
   },
   "bin": {
     "osw": "./dist/node/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iCookCloud/open-store-workflows.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/core",
+  "bugs": {
+    "url": "https://github.com/iCookCloud/open-store-workflows/issues"
   }
 }

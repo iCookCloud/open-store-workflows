@@ -9,7 +9,7 @@
   },
   {
     "step": "store-concept/assembleSpec",
-    "subjectHash": "15bd9350bb0ad5bfb32bbb9d652963d42ffca18a6fd80fde432b675d6e7d106b",
+    "subjectHash": "3ed12fe6e548d325397602426f925024cf1c32aa2da79a997366896c8b5a0a96",
     "decision": "release",
     "by": "example:reviewer",
     "at": "2026-01-01T00:00:00Z"

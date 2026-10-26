@@ -1,5 +1,5 @@
 import { type Need, type StepCtx, createParamReader } from '@osw/core';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { run } from '../src/run.js';
 import { StoreSpec } from '../src/steps/assemble-spec.js';
 import { resolveConcept } from '../src/steps/resolve-concept.js';
@@ -434,6 +434,321 @@ describe('store concept workflow', () => {
       id: parameter.id,
       versionHash: parameter.versionHash,
     });
+  });
+  it('review F1: subtotal actuals preserve the source-store ratio against its normalized investment subtotal', async () => {
+    const { ctx, source } = await fixture({ stores: 2 });
+    for (const [id, equipment, reserve] of [
+      ['example-store-0', 2000, 300],
+      ['example-store-1', 3000, 400],
+    ] as const) {
+      source.add(
+        await record('store', id, {
+          name: { en: id },
+          status: 'operating',
+          track: 'example-noodle',
+          storeType: 'example-noodle',
+          jurisdiction: 'XE',
+          timezone: 'UTC',
+          areaM2: 100,
+          actuals: [
+            {
+              key: 'equipment',
+              amount: { amount: equipment, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+            {
+              key: 'furnishing',
+              amount: { amount: 1000, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+            {
+              key: 'working_capital',
+              amount: { amount: reserve, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+          ],
+        }),
+      );
+    }
+    const output = await run({ ...brief, areaM2: 200 }, ctx);
+    const calibration = output.steps['store-concept/calibrate']!;
+    const reserves = calibration.verifications.filter(
+      (verification) => verification.dimension === 'investment.working_capital',
+    );
+    expect(reserves.map((verification) => verification.measured!.actual)).toEqual([500, 700]);
+    expect(reserves.map((verification) => verification.verdict)).toEqual(['holds', 'fails']);
+    expect((calibration.output as any).budgetRange).toEqual({
+      low: { amount: 5500, currency: 'USD' },
+      high: { amount: 7700, currency: 'USD' },
+      basis: 'actuals',
+      sampleSize: 2,
+    });
+  });
+  it('review F2: country-level concepts calibrate same-country descendant jurisdictions but exclude siblings', async () => {
+    const { ctx, source, records } = await fixture({ stores: 2 });
+    for (const store of records.filter((record) => record.slot === 'store')) {
+      source.add(await record('store', store.id, { ...store.data, jurisdiction: 'XE-AA-BB' }));
+    }
+    source.add(
+      await record('store', 'other-country', {
+        ...records.find((record) => record.slot === 'store')!.data,
+        jurisdiction: 'XF-AA',
+      }),
+    );
+    const output = await run(brief, ctx);
+    const calibration = output.steps['store-concept/calibrate']!;
+    expect((calibration.output as any).budgetRange.basis).toBe('actuals');
+    expect((calibration.output as any).budgetRange.sampleSize).toBe(2);
+    expect(calibration.verifications).toHaveLength(6);
+    expect(
+      calibration.verifications.some((verification) =>
+        verification.reason.includes('other-country'),
+      ),
+    ).toBe(false);
+  });
+  it('review F1: incomplete or zero source subtotals stay pending rather than producing a false normalized amount', async () => {
+    for (const incomplete of [true, false]) {
+      const { ctx, source } = await fixture({ stores: 1 });
+      source.add(
+        await record('store', 'example-store-0', {
+          name: { en: 'Example incomplete subtotal' },
+          status: 'operating',
+          track: 'example-noodle',
+          storeType: 'example-noodle',
+          jurisdiction: 'XE',
+          timezone: 'UTC',
+          areaM2: 100,
+          actuals: [
+            {
+              key: 'equipment',
+              amount: { amount: incomplete ? 2000 : 0, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+            ...(!incomplete
+              ? [
+                  {
+                    key: 'furnishing',
+                    amount: { amount: 0, currency: 'USD' },
+                    basis: 'paid',
+                    at: now,
+                  },
+                ]
+              : []),
+            {
+              key: 'working_capital',
+              amount: { amount: 300, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+          ],
+        }),
+      );
+      const output = await run({ ...brief, areaM2: 200 }, ctx);
+      const calibration = output.steps['store-concept/calibrate']!;
+      const reserve = calibration.verifications.find(
+        (verification) => verification.dimension === 'investment.working_capital',
+      )!;
+      expect(reserve.verdict).toBe('pending');
+      expect(reserve.measured).toBeUndefined();
+      expect((calibration.output as any).budgetRange.sampleSize).toBe(0);
+    }
+  });
+  it('review F2: ancestor and descendant markets are comparable but string-prefix siblings are not', async () => {
+    const { ctx, source, records } = await fixture({ stores: 2 });
+    const original = records.find((record) => record.slot === 'store')!;
+    source.add(
+      await record('store', 'example-store-0', { ...original.data, jurisdiction: 'XE-AA-BB' }),
+    );
+    source.add(await record('store', 'example-store-1', { ...original.data, jurisdiction: 'XE' }));
+    source.add(
+      await record('store', 'sibling-market', { ...original.data, jurisdiction: 'XE-AAA' }),
+    );
+    const output = await run({ ...brief, jurisdiction: 'XE-AA' }, ctx);
+    const calibration = output.steps['store-concept/calibrate']!;
+    expect((calibration.output as any).budgetRange.sampleSize).toBe(2);
+    expect(calibration.verifications).toHaveLength(6);
+    expect(
+      calibration.verifications.some((verification) =>
+        verification.reason.includes('sibling-market'),
+      ),
+    ).toBe(false);
+  });
+  it('review F3: no-default templates block on trusted inputs without forcing monthly proportions into fixed overrides', async () => {
+    const { ctx } = await fixture({ template: { ...template(), hasDefaults: false } });
+    const output = await run(
+      {
+        ...brief,
+        overrides: {
+          equipment: { amount: 100, currency: 'USD' },
+          furnishing: { amount: 100, currency: 'USD' },
+          working_capital: { amount: 0, currency: 'USD' },
+        },
+      },
+      ctx,
+    );
+    expect(output.steps['store-concept/estimate']!.output).toBeNull();
+    expect(output.needs).toContainEqual(
+      expect.objectContaining({ kind: 'asset', slot: 'calc-template', blocking: true }),
+    );
+    expect(
+      output.needs.some(
+        (need) =>
+          need.kind === 'input' &&
+          ['overrides.rent', 'overrides.labor', 'overrides.food_cost'].includes(need.path),
+      ),
+    ).toBe(false);
+    expect(output.steps['store-concept/calibrate']).toBeUndefined();
+  });
+  it('review F4: added investment overrides participate in budget-cap validation without crashing calibration', async () => {
+    const { ctx } = await fixture({ stores: 2 });
+    const output = await run(
+      {
+        ...brief,
+        budgetCap: { amount: 5000, currency: 'USD' },
+        overrides: { consulting: { amount: 5000, currency: 'USD' } },
+      },
+      ctx,
+    );
+    expect(output.needs).toContainEqual(
+      expect.objectContaining({ kind: 'action', action: 'rescopeConcept', blocking: true }),
+    );
+    expect(output.artifact).toBeNull();
+  });
+  it.each(['overridden', 'same-source'] as const)(
+    'review FX planning: ignores %s foreign actuals when no independent subtotal needs them',
+    async (skip) => {
+      const t = template();
+      t.params = t.params.filter((param) => param.key !== 'working_capital');
+      if (skip === 'same-source')
+        t.params.find((param) => param.key === 'equipment')!.provenance.storeIds = [
+          'example-store-0',
+        ];
+      const { ctx, source, records } = await fixture({ template: t, stores: 1 });
+      const original = records.find((record) => record.slot === 'store')!;
+      source.add(
+        await record('store', original.id, {
+          ...original.data,
+          actuals: [
+            { key: 'equipment', amount: { amount: 2000, currency: 'EUR' }, basis: 'paid', at: now },
+            {
+              key: 'furnishing',
+              amount: { amount: 1000, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+          ],
+        }),
+      );
+      const query = vi.spyOn(source, 'query');
+      const output = await run(
+        {
+          ...brief,
+          ...(skip === 'overridden'
+            ? { overrides: { equipment: { amount: 90, currency: 'USD' } } }
+            : {}),
+        },
+        ctx,
+      );
+      const calibration = output.steps['store-concept/calibrate']!;
+      expect(calibration.output).not.toBeNull();
+      expect(
+        calibration.needs.some((need) => need.kind === 'param' && need.key === 'fx.EUR.USD'),
+      ).toBe(false);
+      expect(calibration.verifications).toEqual([
+        expect.objectContaining({ dimension: 'investment.furnishing', verdict: 'holds' }),
+      ]);
+      expect(
+        query.mock.calls.some(([, filter]) => JSON.stringify(filter).includes('fx.EUR.USD')),
+      ).toBe(false);
+    },
+  );
+  it.each(['overridden', 'same-source'] as const)(
+    'review FX planning: a %s subtotal does not make skipped base actuals necessary',
+    async (skip) => {
+      const t = template();
+      if (skip === 'same-source')
+        t.params.find((param) => param.key === 'working_capital')!.provenance.storeIds = [
+          'example-store-0',
+        ];
+      const { ctx, source, records } = await fixture({ template: t, stores: 1 });
+      const original = records.find((record) => record.slot === 'store')!;
+      source.add(
+        await record('store', original.id, {
+          ...original.data,
+          actuals: [
+            { key: 'equipment', amount: { amount: 2000, currency: 'EUR' }, basis: 'paid', at: now },
+            {
+              key: 'furnishing',
+              amount: { amount: 1000, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+            {
+              key: 'working_capital',
+              amount: { amount: 300, currency: 'USD' },
+              basis: 'paid',
+              at: now,
+            },
+          ],
+        }),
+      );
+      const output = await run(
+        {
+          ...brief,
+          overrides: {
+            equipment: { amount: 90, currency: 'USD' },
+            ...(skip === 'overridden' ? { working_capital: { amount: 50, currency: 'USD' } } : {}),
+          },
+        },
+        ctx,
+      );
+      const calibration = output.steps['store-concept/calibrate']!;
+      expect(calibration.output).not.toBeNull();
+      expect(
+        calibration.needs.some((need) => need.kind === 'param' && need.key === 'fx.EUR.USD'),
+      ).toBe(false);
+      expect(calibration.verifications).toEqual([
+        expect.objectContaining({ dimension: 'investment.furnishing', verdict: 'holds' }),
+      ]);
+    },
+  );
+  it('review FX planning: an independent subtotal still requires FX for its overridden source base', async () => {
+    const { ctx, source, records } = await fixture({ stores: 1 });
+    const original = records.find((record) => record.slot === 'store')!;
+    source.add(
+      await record('store', original.id, {
+        ...original.data,
+        actuals: original.data.actuals.map((actual: any) =>
+          actual.key === 'equipment'
+            ? { ...actual, amount: { amount: 2000, currency: 'EUR' } }
+            : actual,
+        ),
+      }),
+    );
+    const output = await run(
+      { ...brief, overrides: { equipment: { amount: 90, currency: 'USD' } } },
+      ctx,
+    );
+    expect(output.steps['store-concept/calibrate']!.output).toBeNull();
+    expect(output.needs).toContainEqual(
+      expect.objectContaining({ kind: 'param', key: 'fx.EUR.USD', blocking: true }),
+    );
+  });
+  it('review FX planning: zero target overrides remain in the source subtotal denominator', async () => {
+    const { ctx } = await fixture({ stores: 1 });
+    const output = await run(
+      { ...brief, overrides: { equipment: { amount: 0, currency: 'USD' } } },
+      ctx,
+    );
+    const reserve = output.steps['store-concept/calibrate']!.verifications.find(
+      (verification) => verification.dimension === 'investment.working_capital',
+    )!;
+    expect(reserve.verdict).toBe('holds');
+    expect(reserve.measured).toMatchObject({ expected: 100, actual: 100 });
   });
   it('unknown equipment trigger terms create fails verification and matched triggers become requirements', async () => {
     const { ctx, source } = await fixture();

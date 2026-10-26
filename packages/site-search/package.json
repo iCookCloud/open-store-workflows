@@ -5,14 +5,33 @@
   "license": "Apache-2.0",
   "files": ["dist", "README.md"],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./providers": { "types": "./dist/providers/index.d.ts", "import": "./dist/providers/index.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./providers": {
+      "types": "./dist/providers/index.d.ts",
+      "import": "./dist/providers/index.js"
+    }
   },
-  "osw": { "workflow": true },
+  "osw": {
+    "workflow": true
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run tests"
   },
-  "dependencies": { "@osw/core": "workspace:*" }
+  "dependencies": {
+    "@osw/core": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iCookCloud/open-store-workflows.git",
+    "directory": "packages/site-search"
+  },
+  "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/site-search",
+  "bugs": {
+    "url": "https://github.com/iCookCloud/open-store-workflows/issues"
+  }
 }

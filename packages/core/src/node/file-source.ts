@@ -3,6 +3,8 @@ import { appendFile, mkdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { z } from '../base.js';
 import { OswSourceError } from '../errors.js';
+import { pathValues } from '../filter.js';
+import { canonicalJson } from '../hash.js';
 import { AssetRecord } from '../slot.js';
 import type { AnyAssetRecord, SlotDef } from '../slot.js';
 import { SHARED_SLOTS } from '../slots/index.js';
@@ -158,10 +160,27 @@ export class FileSource extends MemorySource {
     const replay = new MemorySource([...records.values()], this.definitions);
     if (fillJournal)
       for (const event of parseJournal(fillJournal)) {
-        const fill = Fill.parse(event.fill);
+        const batch = (event.fills ?? [event.fill]).map((raw: unknown) => Fill.parse(raw));
         // 只重放被版本守卫接受的单字段补空，禁止用旧整条快照覆盖其它字段集的新内容。
-        await replay.applyFills([fill]);
-        fills.push(fill);
+        const outcomes = await replay.applyFills(batch);
+        for (const [index, outcome] of outcomes.entries()) {
+          const fill = batch[index];
+          if (outcome.status !== 'recorded' && outcome.status !== 'duplicate') {
+            const current = replay
+              .snapshot()
+              .find((r) => r.slot === fill.asset.slot && r.id === fill.asset.id);
+            const target = fill.field.replace(/^\//, '').replaceAll('/', '.');
+            const present = current ? pathValues(current.data, target)[0] : undefined;
+            // 资产文件已经包含同一核实值时，日志只是已折叠的历史；其它失败必须显式交给调用者处理。
+            if (canonicalJson(present) !== canonicalJson(fill.value)) {
+              throw new OswSourceError(
+                'journal_conflict',
+                `Fill journal conflict: ${fill.asset.slot}/${fill.asset.id}/${fill.field} (${outcome.status})`,
+              );
+            }
+          }
+          fills.push(fill);
+        }
       }
     this.records = replay.snapshot();
     this.verifications.splice(0, this.verifications.length, ...verifications);
@@ -201,11 +220,11 @@ export class FileSource extends MemorySource {
     return this.writeLocked(async () => {
       const shadow = new MemorySource(this.snapshot(), this.definitions);
       const results = await shadow.applyFills(fs);
-      const events = fs.flatMap((fill, i) => (results[i].status === 'recorded' ? [{ fill }] : []));
-      if (events.length)
+      const accepted = fs.filter((_, index) => results[index].status === 'recorded');
+      if (accepted.length)
         await appendFile(
           join(this.directory, '_fills.ndjson'),
-          `${events.map((v) => JSON.stringify(v)).join('\n')}\n`,
+          `${JSON.stringify({ fills: accepted })}\n`,
         );
       this.records = shadow.snapshot();
       this.fills.push(...shadow.fills);
