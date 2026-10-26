@@ -1,0 +1,82 @@
+[
+  {
+    "asset": {
+      "slot": "offer",
+      "id": "example-holds",
+      "versionHash": "43feb3fa9d0e9dd008058f7c7b5bae0bca57b896f0e29e0c9cf139dbe2525d8a"
+    },
+    "verdict": "holds",
+    "dimension": "unitPrice",
+    "reason": "Supplier/model ratio 1; accepted interval [0.8, 1.2]",
+    "measured": {
+      "field": "tiers.unitPrice",
+      "expected": 100,
+      "actual": 100,
+      "unit": "USD",
+      "delta": 0
+    },
+    "purpose": "fitout-bom/verifyOffers",
+    "at": "2026-01-01T12:00:00Z",
+    "by": "osw:fitout-bom/test@0.1.0"
+  },
+  {
+    "asset": {
+      "slot": "offer",
+      "id": "example-pending",
+      "versionHash": "dd737fe5ae385049a25471914b9a4559e23bed3996809bb46e9d2035ec330a76"
+    },
+    "verdict": "pending",
+    "dimension": "unitPrice",
+    "reason": "Offer includes freight, installation or tax outside the model cost basis",
+    "measured": {
+      "field": "tiers.unitPrice",
+      "expected": 110,
+      "actual": 100,
+      "unit": "USD",
+      "delta": -10
+    },
+    "purpose": "fitout-bom/verifyOffers",
+    "at": "2026-01-01T12:00:00Z",
+    "by": "osw:fitout-bom/test@0.1.0"
+  },
+  {
+    "asset": {
+      "slot": "offer",
+      "id": "example-fails",
+      "versionHash": "3bba04c7b7d8e93576eee8dd1031a1840293b5eb7e5f46e76622b555e440e1a9"
+    },
+    "verdict": "fails",
+    "dimension": "unitPrice",
+    "reason": "Supplier/model ratio 2; accepted interval [0.8, 1.2]",
+    "measured": {
+      "field": "tiers.unitPrice",
+      "expected": 200,
+      "actual": 100,
+      "unit": "USD",
+      "delta": -100
+    },
+    "purpose": "fitout-bom/verifyOffers",
+    "at": "2026-01-01T12:00:00Z",
+    "by": "osw:fitout-bom/test@0.1.0"
+  },
+  {
+    "asset": {
+      "slot": "template",
+      "id": "example-budget",
+      "versionHash": "cbd39f034be3956bc45affde4bf042543c36fd2e84a6d26335087f088311659e"
+    },
+    "purpose": "fitout-bom/freezeBom",
+    "dimension": "budget.furnishing",
+    "verdict": "holds",
+    "reason": "Chosen amount compared with investment interval",
+    "measured": {
+      "field": "investment.furnishing",
+      "expected": 300,
+      "actual": 200,
+      "unit": "USD",
+      "delta": -100
+    },
+    "by": "osw:fitout-bom/test@0.1.0",
+    "at": "2026-01-01T12:00:00Z"
+  }
+]

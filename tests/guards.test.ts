@@ -21,7 +21,18 @@ describe('repository gates', () => {
     const denylist = resolve(scratch, 'denylist.txt');
     writeFileSync(denylist, 'ExampleBlockedTerm\n');
     const git = (args: string[], input: string) =>
-      execFileSync('git', args, { cwd: root, input, encoding: 'utf8' }).trim();
+      execFileSync('git', args, {
+        cwd: root,
+        input,
+        encoding: 'utf8',
+        env: {
+          ...process.env,
+          GIT_AUTHOR_NAME: 'Example test author',
+          GIT_AUTHOR_EMAIL: 'author@example.com',
+          GIT_COMMITTER_NAME: 'Example test author',
+          GIT_COMMITTER_EMAIL: 'author@example.com',
+        },
+      }).trim();
     // 只生成无引用的合成 Git 对象，避免改动真实分支与共享暂存区。
     const blob = git(['hash-object', '-w', '--stdin'], 'Ｅｘａｍｐｌｅ Ｂｌｏｃｋｅｄ Ｔｅｒｍ\n');
     const tree = git(['mktree'], `100644 blob ${blob}\tfixture.txt\n`);

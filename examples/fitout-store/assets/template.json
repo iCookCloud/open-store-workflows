@@ -1,0 +1,31 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "template",
+      "id": "example-budget",
+      "slotVersion": "0.1.0",
+      "versionHash": "cbd39f034be3956bc45affde4bf042543c36fd2e84a6d26335087f088311659e",
+      "fieldsetHashes": {},
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "economics",
+        "lang": "en",
+        "title": {
+          "en": "Example Budget"
+        },
+        "format": "json",
+        "content": {
+          "example": true
+        }
+      }
+    }
+  ]
+}

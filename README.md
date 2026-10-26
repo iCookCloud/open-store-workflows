@@ -4,7 +4,11 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [简体中文](README.zh-CN.md)
 
-This first implementation includes the shared core and the **store-concept** workflow. It produces a versioned `StoreSpec` from a concept brief, calculation templates, menus, site requirements and operating-store actuals. The other six workflow implementations and production-system integration are separate work.
+[Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
+
+Implemented workflows include **store-concept** (`StoreSpec`), **site-search** (screening, surveys, LOI, counsel review and signed `SiteDecision`), and **fitout-bom** (reviewed quantities, supplier offers and frozen `Bom`). They share the core, CLI and MCP interfaces. The remaining four workflows and production-system integration are separate work.
+
+See the [site-search guide](packages/site-search/README.md) for the synthetic end-to-end example and explicit local `--providers` modules. `pnpm examples:site-search` checks missing-signature-approval exit 2 and completed exit 0.
 
 ## Packages
 
@@ -12,6 +16,8 @@ This first implementation includes the shared core and the **store-concept** wor
 | --- | --- |
 | `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
 | `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
+| `@osw/site-search` | Unit-aware listing filters, independent surveys, lease drift, approvals and signing evidence |
+| `@osw/fitout-bom` | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
 | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 
 The portable core and workflow have no Node builtin dependency. File access and command-line execution live in `@osw/core/node`; the HTTP client lives in `@osw/core/http`. Workflow packages import only `@osw/core`.
@@ -22,6 +28,8 @@ Use Node.js 22 or later and the pnpm version declared in `package.json`.
 
 ```sh
 corepack enable
+git clone https://github.com/iCookCloud/open-store-workflows.git
+cd open-store-workflows
 pnpm install --frozen-lockfile
 pnpm build
 pnpm test
@@ -92,8 +100,12 @@ node scripts/scan-private.mjs --tarball /secure/package.tgz
 git config core.hooksPath .githooks
 ```
 
-The pre-push hook scans the blobs reachable from outgoing commits; the full-history mode scans all local refs. The Woodpecker pipeline requires an `osw_private_denylist` secret. Without a configured denylist, scanning fails closed. Package publication, public mirroring and production integration are not performed automatically.
+The pre-push hook scans the blobs reachable from outgoing commits; the full-history mode scans all local refs. GitHub Actions runs build, tests and examples for pushes and pull requests. The main-branch privacy job requires the `OSW_PRIVATE_DENYLIST_CONTENT` repository secret and scans the complete history. Private denylist values are never passed to pull-request jobs. The optional Woodpecker pipeline uses an `osw_private_denylist` secret. Without a configured denylist, scanning fails closed. npm publication and production integration remain separate from publishing this source repository.
 
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+## Fitout workflow
+
+`@osw/fitout-bom` implements case/image review, site and menu quantities, material costing, supplier selection, offer verification, BOM freezing and optional customer quotes. See [the fitout package guide](packages/fitout-bom/README.md). The fully synthetic `examples/fitout-store` fixture is checked by `pnpm examples`.
