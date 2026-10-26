@@ -6,7 +6,7 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-This first implementation includes the shared core and the **store-concept** workflow. It produces a versioned `StoreSpec` from a concept brief, calculation templates, menus, site requirements and operating-store actuals. The other six workflow implementations and production-system integration are separate work.
+Implemented workflows include **store-concept** (a versioned `StoreSpec` from the concept, menus and economics) and **fitout-bom** (reviewed quantities, material model costs, supplier selection, verification and a frozen `Bom`). They share the core, CLI and MCP interfaces. The remaining five workflows and production-system integration are separate work.
 
 ## Packages
 
@@ -14,6 +14,7 @@ This first implementation includes the shared core and the **store-concept** wor
 | --- | --- |
 | `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
 | `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
+| `@osw/fitout-bom` | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
 | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 
 The portable core and workflow have no Node builtin dependency. File access and command-line execution live in `@osw/core/node`; the HTTP client lives in `@osw/core/http`. Workflow packages import only `@osw/core`.

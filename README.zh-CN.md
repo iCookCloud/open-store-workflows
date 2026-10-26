@@ -4,7 +4,7 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-本批实现 **共享 core 与第 1 项「定店型」**：从开店意图出发，匹配测算模板与菜单，计算投资、营收、保本、回本和场地要求，经审批后生成 `StoreSpec`。其余六项流程的业务实现与现有站点对接另行开展。
+已实现 **共享 core、第 1 项「定店型」与第 3 项「装修物料单」**。定店型生成 `StoreSpec`；装修流程复核物料及数量、保留模型成本与供应商价、验证报价，并经批示生成 `Bom`。两条流程共用 CLI／MCP。其余五项及生产站点接入另行开展。
 
 ## 使用
 
