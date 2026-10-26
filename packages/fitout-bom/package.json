@@ -1,0 +1,17 @@
+{
+  "name": "@osw/fitout-bom",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "files": ["dist", "prompts", "README.md"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./providers/openai-compatible": {
+      "types": "./dist/providers/openai-compatible.d.ts",
+      "default": "./dist/providers/openai-compatible.js"
+    }
+  },
+  "osw": { "workflow": true },
+  "scripts": { "build": "tsc -p tsconfig.json", "typecheck": "tsc -p tsconfig.json --noEmit" },
+  "dependencies": { "@osw/core": "workspace:*" }
+}

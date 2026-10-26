@@ -4,7 +4,7 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-本批实现 **共享 core 与第 1 项「定店型」**：从开店意图出发，匹配测算模板与菜单，计算投资、营收、保本、回本和场地要求，经审批后生成 `StoreSpec`。其余六项流程的业务实现与现有站点对接另行开展。
+已实现 **共享 core、第 1 项「定店型」与第 3 项「装修物料单」**。定店型生成 `StoreSpec`；装修流程复核物料及数量、保留模型成本与供应商价、验证报价，并经批示生成 `Bom`。两条流程共用 CLI／MCP。其余五项及生产站点接入另行开展。
 
 ## 使用
 
@@ -71,3 +71,7 @@ git config core.hooksPath .githooks
 未配置黑名单时扫描失败。`pre-push` 检查待推提交；GitHub Actions 为推送和 PR 运行构建、测试与示例。主分支隐私检查使用 `OSW_PRIVATE_DENYLIST_CONTENT` 仓库 secret 扫描完整历史，私有词表不会提供给 PR 作业。可选的 Woodpecker 使用 `osw_private_denylist` secret。发布包还可以用 `--tarball` 检查。GitHub 源码公开与 npm 发布、生产接入分别管理。
 
 许可证：[Apache-2.0](LICENSE)。
+
+## 第三条：装修物料单
+
+`@osw/fitout-bom` 已实现案例／识图人审、铺位与菜单用量、用料计价、供应商选择、报价验证、物料单定稿及对外报价。操作方法见 [装修包说明](packages/fitout-bom/README.md)。`examples/fitout-store` 是从零合成的第三条独立示例，纳入 `pnpm examples` 验收。生产资产中心接入尚需在私有项目实施。

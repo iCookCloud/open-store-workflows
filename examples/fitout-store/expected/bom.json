@@ -1,0 +1,218 @@
+{
+  "kind": "Bom",
+  "artifactVersion": "0.1.0",
+  "id": "bom-c7dfe67b9ad676aa4818944b9d93601e99104180c1a53763d6872652b83648bb",
+  "hash": "c7dfe67b9ad676aa4818944b9d93601e99104180c1a53763d6872652b83648bb",
+  "producedBy": {
+    "step": "fitout-bom/freezeBom",
+    "pkg": "@osw/fitout-bom",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-store",
+  "inputs": [
+    {
+      "kind": "StoreSpec",
+      "id": "example-StoreSpec",
+      "hash": "0b107f868d6cd10249439f4e38a7ebb33ba4fe603f1106418bf27710573c7989"
+    },
+    {
+      "kind": "SiteDecision",
+      "id": "example-SiteDecision",
+      "hash": "cc637e2170a3b1d2a98bf225687e7ef6cc6cd60362589c36e8a55968cfc5acf4"
+    }
+  ],
+  "sources": [
+    {
+      "slot": "bom-case",
+      "id": "example-case",
+      "versionHash": "30b2421f023cbdea104fb104f7de07abb85862960b0546a56387bb8f24363755"
+    },
+    {
+      "slot": "design",
+      "id": "example-design",
+      "versionHash": "8f5ea8a9c46ccdcb3f538dd51db4f4c29d63063ffe2cf3c226bc359ec2fd732a"
+    },
+    {
+      "slot": "params",
+      "id": "site.powerDiversity",
+      "versionHash": "857027a0c1a235e0f544bae85fa95a03cb6de3db51891c5c02187af0c7ab6d92"
+    },
+    {
+      "slot": "product",
+      "id": "example-product",
+      "versionHash": "9355df7947a1018712be4f256d74f576a3bed6a5a7a0dd00c9f2c9524cb03ea0"
+    },
+    {
+      "slot": "material-rate",
+      "id": "example-material",
+      "versionHash": "ee4418582b72e3a99ec111ff8812c6542084962976f4151459f788ff505b650e"
+    },
+    {
+      "slot": "offer",
+      "id": "example-fails",
+      "versionHash": "3bba04c7b7d8e93576eee8dd1031a1840293b5eb7e5f46e76622b555e440e1a9"
+    },
+    {
+      "slot": "offer",
+      "id": "example-holds",
+      "versionHash": "43feb3fa9d0e9dd008058f7c7b5bae0bca57b896f0e29e0c9cf139dbe2525d8a"
+    },
+    {
+      "slot": "offer",
+      "id": "example-pending",
+      "versionHash": "dd737fe5ae385049a25471914b9a4559e23bed3996809bb46e9d2035ec330a76"
+    },
+    {
+      "slot": "party",
+      "id": "example-supplier",
+      "versionHash": "cb6c6943f2b6fb8ddb947aad758ecd9783b46700d904591436f8dcdecf6283f7"
+    },
+    {
+      "slot": "params",
+      "id": "bom.offerBand.high",
+      "versionHash": "5ddeaa1627b7243a5884b880d1bac2815199e89717d15ed4790d733752328b3c"
+    },
+    {
+      "slot": "params",
+      "id": "bom.offerBand.low",
+      "versionHash": "ca6e2e22fe1b572b3c3348b54386febbf0ad742f392dd103b847501c0eca6650"
+    },
+    {
+      "slot": "params",
+      "id": "bom.rateCheckMinOffers",
+      "versionHash": "27c2159e49d3903c271623c964b4915edec9452ec3e88c53b793166a3a43feea"
+    },
+    {
+      "slot": "params",
+      "id": "bom.specTolerance",
+      "versionHash": "e80e35a5976b1198fc573004968e17612303ecc69f229721b4a971fb639a686f"
+    }
+  ],
+  "createdAt": "2026-01-01T12:00:00Z",
+  "example": true,
+  "body": {
+    "currency": "USD",
+    "lines": [
+      {
+        "id": "line-05b0066278839aa86a9e",
+        "lineKind": "furniture",
+        "productRef": {
+          "slot": "product",
+          "id": "example-product",
+          "versionHash": "9355df7947a1018712be4f256d74f576a3bed6a5a7a0dd00c9f2c9524cb03ea0"
+        },
+        "offerRef": {
+          "slot": "offer",
+          "id": "example-holds",
+          "versionHash": "43feb3fa9d0e9dd008058f7c7b5bae0bca57b896f0e29e0c9cf139dbe2525d8a"
+        },
+        "qty": 2,
+        "unit": "pcs",
+        "category": "furniture.table",
+        "name": "Example Table",
+        "zone": "Dining",
+        "spec": "Synthetic table",
+        "qtyRule": {
+          "kind": "manual"
+        },
+        "qtyBasis": {
+          "status": "manual",
+          "note": "Synthetic fixture"
+        },
+        "dimsBasis": {
+          "status": "manual",
+          "note": "Synthetic fixture"
+        },
+        "budgetKey": "furnishing",
+        "evidence": [],
+        "derivedFrom": {
+          "kind": "case",
+          "ref": "example-case#sample-line"
+        },
+        "pricingMode": "custom",
+        "components": [
+          {
+            "key": "top",
+            "name": "Example panel",
+            "kind": "material",
+            "basis": "fixed",
+            "qtyPerUnit": 1,
+            "unit": "m2",
+            "rateRef": {
+              "slot": "material-rate",
+              "id": "example-material",
+              "versionHash": "ee4418582b72e3a99ec111ff8812c6542084962976f4151459f788ff505b650e"
+            }
+          }
+        ],
+        "modelCostPerUnit": {
+          "amount": 100,
+          "currency": "USD"
+        },
+        "parts": [
+          {
+            "key": "top",
+            "name": "Example panel",
+            "kind": "material",
+            "qty": 1,
+            "unit": "m2",
+            "rate": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "total": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "note": "Referenced material rate"
+          }
+        ],
+        "modelWarnings": [],
+        "sourcing": {
+          "partyId": "example-supplier",
+          "offerPrice": {
+            "amount": 100,
+            "currency": "USD"
+          },
+          "tierMinQty": 0,
+          "includes": [],
+          "quotedAt": "2026-01-01",
+          "validUntil": "2026-12-31",
+          "leadTimeDays": {
+            "min": 2,
+            "max": 5
+          }
+        },
+        "costBasis": "offer",
+        "unitPrice": {
+          "amount": 100,
+          "currency": "USD",
+          "basis": "quote"
+        }
+      }
+    ],
+    "totals": {
+      "model": {
+        "amount": 200,
+        "currency": "USD"
+      },
+      "chosen": {
+        "amount": 200,
+        "currency": "USD"
+      },
+      "byBudgetKey": {
+        "furnishing": {
+          "model": {
+            "amount": 200,
+            "currency": "USD"
+          },
+          "chosen": {
+            "amount": 200,
+            "currency": "USD"
+          },
+          "sourcedShare": 1
+        }
+      }
+    }
+  }
+}

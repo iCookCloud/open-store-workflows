@@ -1,0 +1,18 @@
+[
+  {
+    "step": "fitout-bom/sourceLines",
+    "subject": "line:line-05b0066278839aa86a9e",
+    "subjectHash": "56d39c25cf79dd9af69dea036a307e258b788f21cf00059a061247bf8a2e5e71",
+    "decision": "example-holds",
+    "by": "example-reviewer",
+    "at": "2026-01-01T12:00:00Z"
+  },
+  {
+    "step": "fitout-bom/freezeBom",
+    "subject": "bom",
+    "subjectHash": "c7dfe67b9ad676aa4818944b9d93601e99104180c1a53763d6872652b83648bb",
+    "decision": "approve",
+    "by": "example-reviewer",
+    "at": "2026-01-01T12:00:00Z"
+  }
+]

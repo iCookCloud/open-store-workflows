@@ -1,0 +1,199 @@
+{
+  "seed": {
+    "caseId": "example-case",
+    "storeId": "example-store"
+  },
+  "store": {
+    "kind": "StoreSpec",
+    "artifactVersion": "0.1.0",
+    "id": "example-StoreSpec",
+    "hash": "0b107f868d6cd10249439f4e38a7ebb33ba4fe603f1106418bf27710573c7989",
+    "producedBy": {
+      "step": "store-concept/freezeSpec",
+      "pkg": "@osw/example",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-store",
+    "inputs": [],
+    "sources": [],
+    "createdAt": "2026-01-01T12:00:00Z",
+    "example": true,
+    "body": {
+      "concept": {
+        "storeType": "example-retail",
+        "track": "example",
+        "nonFood": true,
+        "revenueModel": "orders"
+      },
+      "jurisdiction": "XE",
+      "timezone": "UTC",
+      "menu": {
+        "status": "not-applicable",
+        "refs": [],
+        "approved": []
+      },
+      "area": {
+        "targetM2": 100,
+        "minM2": 50,
+        "maxM2": 200
+      },
+      "capacity": {
+        "seats": 10,
+        "opDays": 20
+      },
+      "staffing": [],
+      "economics": {
+        "template": {
+          "slot": "template",
+          "id": "example-budget",
+          "versionHash": "cbd39f034be3956bc45affde4bf042543c36fd2e84a6d26335087f088311659e"
+        },
+        "spend": {
+          "amount": 10,
+          "currency": "USD"
+        },
+        "taxRate": 0,
+        "investment": [
+          {
+            "amount": {
+              "amount": 300,
+              "currency": "USD"
+            },
+            "algorithm": "fixed",
+            "overridden": false,
+            "key": "furnishing",
+            "owner": "fitout-bom",
+            "range": {
+              "low": {
+                "amount": 100,
+                "currency": "USD"
+              },
+              "high": {
+                "amount": 300,
+                "currency": "USD"
+              }
+            }
+          }
+        ],
+        "monthly": [],
+        "totals": {
+          "investment": {
+            "amount": 300,
+            "currency": "USD"
+          },
+          "monthlyRevenue": {
+            "amount": 1000,
+            "currency": "USD"
+          },
+          "tax": {
+            "amount": 0,
+            "currency": "USD"
+          },
+          "monthlyCost": {
+            "amount": 500,
+            "currency": "USD"
+          },
+          "monthlyProfit": {
+            "amount": 500,
+            "currency": "USD"
+          }
+        },
+        "breakeven": {
+          "status": "not-applicable"
+        },
+        "paybackMonths": 1,
+        "budgetRange": {
+          "low": {
+            "amount": 100,
+            "currency": "USD"
+          },
+          "high": {
+            "amount": 1000,
+            "currency": "USD"
+          },
+          "basis": "band",
+          "sampleSize": 0
+        },
+        "rentCeiling": {
+          "amount": 100,
+          "currency": "USD"
+        }
+      },
+      "siteRequirements": [],
+      "downstream": {
+        "coldchain": false,
+        "ingredients": [],
+        "equipment": [],
+        "sop": []
+      }
+    }
+  },
+  "site": {
+    "kind": "SiteDecision",
+    "artifactVersion": "0.1.0",
+    "id": "example-SiteDecision",
+    "hash": "cc637e2170a3b1d2a98bf225687e7ef6cc6cd60362589c36e8a55968cfc5acf4",
+    "producedBy": {
+      "step": "site-search/freezeSite",
+      "pkg": "@osw/example",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-store",
+    "inputs": [],
+    "sources": [],
+    "createdAt": "2026-01-01T12:00:00Z",
+    "example": true,
+    "body": {
+      "stage": "chosen",
+      "listing": {
+        "slot": "listing",
+        "id": "example-listing",
+        "versionHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "address": {
+        "line1": "Example Road",
+        "locality": "Example City",
+        "jurisdiction": "XE"
+      },
+      "geo": {
+        "lat": 0,
+        "lng": 0
+      },
+      "jurisdiction": "XE",
+      "unit": "Example unit",
+      "floorLevel": 1,
+      "conditions": [
+        {
+          "key": "area",
+          "measure": {
+            "value": 100,
+            "unit": "m2"
+          },
+          "verdict": "holds"
+        },
+        {
+          "key": "clearHeight",
+          "measure": {
+            "value": 3,
+            "unit": "m"
+          },
+          "verdict": "holds"
+        }
+      ],
+      "unmeasured": [],
+      "openingTarget": "2026-02-01",
+      "lease": null,
+      "shortlist": [
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing",
+            "versionHash": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "status": "chosen",
+          "reason": "Synthetic selection"
+        }
+      ]
+    }
+  }
+}
