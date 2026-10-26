@@ -1,0 +1,104 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "build-fee",
+      "id": "example-build-percentage",
+      "slotVersion": "0.1.0",
+      "versionHash": "5859ab3bfbd0554d6de09ed4e685a313c352c8f77e17fb946eb261ba77b9e744",
+      "fieldsetHashes": {
+        "price": "5859ab3bfbd0554d6de09ed4e685a313c352c8f77e17fb946eb261ba77b9e744",
+        "terms": "5859ab3bfbd0554d6de09ed4e685a313c352c8f77e17fb946eb261ba77b9e744"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": "Example handling",
+        "basis": "pctOfGoods",
+        "pct": 10,
+        "autoAdd": true,
+        "freight": false
+      }
+    },
+    {
+      "slot": "build-fee",
+      "id": "example-build-fixed",
+      "slotVersion": "0.1.0",
+      "versionHash": "71611f6804b4f63f70f1593550f42641211cc7ff7881d8ca2c5e4237c2bb2822",
+      "fieldsetHashes": {
+        "price": "71611f6804b4f63f70f1593550f42641211cc7ff7881d8ca2c5e4237c2bb2822",
+        "terms": "71611f6804b4f63f70f1593550f42641211cc7ff7881d8ca2c5e4237c2bb2822"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": "Example setup",
+        "basis": "fixed",
+        "rate": {
+          "amount": 50,
+          "currency": "USD"
+        },
+        "autoAdd": true,
+        "freight": false
+      }
+    },
+    {
+      "slot": "build-fee",
+      "id": "example-build-volume",
+      "slotVersion": "0.1.0",
+      "versionHash": "8a29b77935e358ded6a74ca32b903553facdea75ee1ab6e3f85cc3acafc4c284",
+      "fieldsetHashes": {
+        "price": "8a29b77935e358ded6a74ca32b903553facdea75ee1ab6e3f85cc3acafc4c284",
+        "terms": "8a29b77935e358ded6a74ca32b903553facdea75ee1ab6e3f85cc3acafc4c284"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": "Example storage",
+        "basis": "perVolume",
+        "rate": {
+          "amount": 30,
+          "currency": "USD"
+        },
+        "autoAdd": true,
+        "freight": false
+      }
+    }
+  ]
+}

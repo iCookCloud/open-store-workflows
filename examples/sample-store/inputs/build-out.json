@@ -1,0 +1,684 @@
+{
+  "bom": {
+    "kind": "Bom",
+    "artifactVersion": "0.1.0",
+    "id": "example-bom",
+    "hash": "fa188099aa0976cf2cf9dd733de5d1a7cfabe40441a98efb55e092f6bdfc2300",
+    "producedBy": {
+      "step": "fitout-bom/run",
+      "pkg": "@osw/example",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-noodle-store",
+    "inputs": [],
+    "sources": [
+      {
+        "slot": "bom-case",
+        "id": "example-bom-case",
+        "versionHash": "dc1fd60936e8b12abb463f30a0680b2ad1a7b90d77c7b2c3de67d26822ccca8a"
+      }
+    ],
+    "createdAt": "2026-01-30T00:00:00Z",
+    "example": true,
+    "body": {
+      "currency": "USD",
+      "lines": [
+        {
+          "id": "example-counter",
+          "lineKind": "furniture",
+          "qty": 10,
+          "unit": "pcs",
+          "category": "example-casework",
+          "name": "Example counter",
+          "zone": "example-room",
+          "spec": "Invented specification",
+          "qtyRule": {
+            "kind": "manual"
+          },
+          "qtyBasis": {
+            "status": "manual",
+            "note": "Synthetic"
+          },
+          "dimsBasis": {
+            "status": "manual",
+            "note": "Synthetic"
+          },
+          "budgetKey": "furnishing",
+          "evidence": [],
+          "derivedFrom": {
+            "kind": "case",
+            "ref": "example-bom-case"
+          },
+          "pricingMode": "custom",
+          "components": [],
+          "modelCostPerUnit": {
+            "amount": 100,
+            "currency": "USD"
+          },
+          "parts": [
+            {
+              "key": "example-part",
+              "name": "Example material",
+              "kind": "material",
+              "qty": 1,
+              "unit": "pcs",
+              "rate": {
+                "amount": 100,
+                "currency": "USD"
+              },
+              "total": {
+                "amount": 100,
+                "currency": "USD"
+              },
+              "note": "Invented"
+            }
+          ],
+          "modelWarnings": [],
+          "sourcing": null,
+          "costBasis": "model",
+          "unitPrice": {
+            "amount": 100,
+            "currency": "USD",
+            "basis": "model"
+          },
+          "installKind": "fixed",
+          "volumePerUnit": 0.1
+        },
+        {
+          "id": "example-appliance",
+          "lineKind": "equipment",
+          "qty": 2,
+          "unit": "pcs",
+          "category": "example-appliance",
+          "name": "Example appliance",
+          "zone": "example-room",
+          "spec": "Invented specification",
+          "qtyRule": {
+            "kind": "manual"
+          },
+          "qtyBasis": {
+            "status": "manual",
+            "note": "Synthetic"
+          },
+          "dimsBasis": {
+            "status": "manual",
+            "note": "Synthetic"
+          },
+          "budgetKey": "furnishing",
+          "evidence": [],
+          "derivedFrom": {
+            "kind": "case",
+            "ref": "example-bom-case"
+          },
+          "pricingMode": "custom",
+          "components": [],
+          "modelCostPerUnit": {
+            "amount": 200,
+            "currency": "USD"
+          },
+          "parts": [
+            {
+              "key": "example-part",
+              "name": "Example material",
+              "kind": "material",
+              "qty": 1,
+              "unit": "pcs",
+              "rate": {
+                "amount": 200,
+                "currency": "USD"
+              },
+              "total": {
+                "amount": 200,
+                "currency": "USD"
+              },
+              "note": "Invented"
+            }
+          ],
+          "modelWarnings": [],
+          "sourcing": null,
+          "costBasis": "model",
+          "unitPrice": {
+            "amount": 200,
+            "currency": "USD",
+            "basis": "model"
+          },
+          "installKind": "fixed",
+          "volumePerUnit": 0.5
+        },
+        {
+          "id": "example-landlord-panel",
+          "lineKind": "fitout",
+          "qty": 1,
+          "unit": "pcs",
+          "category": "example-casework",
+          "name": "Example landlord panel",
+          "zone": "example-room",
+          "spec": "Invented specification",
+          "qtyRule": {
+            "kind": "manual"
+          },
+          "qtyBasis": {
+            "status": "manual",
+            "note": "Synthetic"
+          },
+          "dimsBasis": {
+            "status": "manual",
+            "note": "Synthetic"
+          },
+          "budgetKey": "furnishing",
+          "evidence": [],
+          "derivedFrom": {
+            "kind": "case",
+            "ref": "example-bom-case"
+          },
+          "pricingMode": "custom",
+          "components": [],
+          "modelCostPerUnit": {
+            "amount": 100,
+            "currency": "USD"
+          },
+          "parts": [
+            {
+              "key": "example-part",
+              "name": "Example material",
+              "kind": "material",
+              "qty": 1,
+              "unit": "pcs",
+              "rate": {
+                "amount": 100,
+                "currency": "USD"
+              },
+              "total": {
+                "amount": 100,
+                "currency": "USD"
+              },
+              "note": "Invented"
+            }
+          ],
+          "modelWarnings": [],
+          "sourcing": null,
+          "costBasis": "model",
+          "unitPrice": {
+            "amount": 100,
+            "currency": "USD",
+            "basis": "model"
+          },
+          "installKind": "fixed",
+          "volumePerUnit": 0.1
+        }
+      ],
+      "totals": {
+        "model": {
+          "amount": 1500,
+          "currency": "USD"
+        },
+        "chosen": {
+          "amount": 1500,
+          "currency": "USD"
+        },
+        "byBudgetKey": {}
+      }
+    }
+  },
+  "site": {
+    "kind": "SiteDecision",
+    "artifactVersion": "0.1.0",
+    "id": "example-sitedecision",
+    "hash": "b40ef873010cb0cba8834d221b392507f4e2ac30bbf17975be32c4439b8473d7",
+    "producedBy": {
+      "step": "site-search/run",
+      "pkg": "@osw/example",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-noodle-store",
+    "inputs": [],
+    "sources": [
+      {
+        "slot": "listing",
+        "id": "example-listing",
+        "versionHash": "1139ff7fc6bfde530309e1d5eb53653857e3c6b54b72591e8ab047045f772b98"
+      }
+    ],
+    "createdAt": "2026-01-30T00:00:00Z",
+    "example": true,
+    "body": {
+      "stage": "chosen",
+      "listing": {
+        "slot": "listing",
+        "id": "example-listing",
+        "versionHash": "1139ff7fc6bfde530309e1d5eb53653857e3c6b54b72591e8ab047045f772b98"
+      },
+      "address": {
+        "line1": "Example Unit",
+        "locality": "Example Town",
+        "jurisdiction": "XE"
+      },
+      "geo": {
+        "lat": 0,
+        "lng": 0
+      },
+      "jurisdiction": "XE",
+      "unit": "Example Unit",
+      "floorLevel": 0,
+      "conditions": [
+        {
+          "key": "area",
+          "measure": {
+            "value": 100,
+            "unit": "m2",
+            "basis": "observed"
+          },
+          "required": {
+            "key": "area",
+            "op": "gte",
+            "value": 80,
+            "unit": "m2",
+            "hard": true
+          },
+          "verdict": "holds"
+        }
+      ],
+      "unmeasured": [],
+      "openingTarget": "2026-02-01",
+      "lease": {
+        "termMonths": 12,
+        "renewals": [],
+        "possessionDate": "2026-01-05",
+        "rentCommencementDate": "2026-02-01",
+        "rent": {
+          "base": {
+            "amount": 1000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total",
+          "escalation": {
+            "kind": "none",
+            "value": null,
+            "everyMonths": 12
+          },
+          "freeRentMonths": 0,
+          "additional": []
+        },
+        "deposit": null,
+        "tiAllowance": null,
+        "guarantee": {
+          "kind": "none",
+          "cap": null
+        },
+        "permittedUse": "Example food store",
+        "exclusiveUse": false,
+        "assignment": "consent",
+        "deliveryCondition": "as_is",
+        "landlordWork": [
+          "Example landlord panel"
+        ],
+        "documents": []
+      },
+      "shortlist": [
+        {
+          "listing": {
+            "slot": "listing",
+            "id": "example-listing",
+            "versionHash": "1139ff7fc6bfde530309e1d5eb53653857e3c6b54b72591e8ab047045f772b98"
+          },
+          "status": "chosen",
+          "reason": "Synthetic choice"
+        }
+      ]
+    }
+  },
+  "delivery": {
+    "kind": "DeliveryPlan",
+    "artifactVersion": "0.1.0",
+    "id": "example-deliveryplan",
+    "hash": "32bc4bcbdaa838860b247df41ac87843148a4df83ac6ac9503b1fba6c556666e",
+    "producedBy": {
+      "step": "landed-delivery/run",
+      "pkg": "@osw/example",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-noodle-store",
+    "inputs": [
+      {
+        "kind": "Bom",
+        "id": "example-bom",
+        "hash": "fa188099aa0976cf2cf9dd733de5d1a7cfabe40441a98efb55e092f6bdfc2300"
+      }
+    ],
+    "sources": [
+      {
+        "slot": "party",
+        "id": "example-delivery-party",
+        "versionHash": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98"
+      }
+    ],
+    "createdAt": "2026-01-30T00:00:00Z",
+    "example": true,
+    "body": {
+      "market": "XE",
+      "compliance": [],
+      "held": [],
+      "shipments": [
+        {
+          "id": "example-shipment",
+          "origin": "XE",
+          "goodsClass": "nonfood",
+          "mode": "ground",
+          "crossBorder": false,
+          "status": "received",
+          "node": "delivered",
+          "consignee": {},
+          "portFrom": null,
+          "portTo": null,
+          "lastMile": [],
+          "carrier": {
+            "kind": "forwarder",
+            "partyRef": {
+              "slot": "party",
+              "id": "example-delivery-party",
+              "versionHash": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98"
+            }
+          },
+          "lines": [
+            {
+              "id": "packing-example-counter",
+              "bomLineId": "example-counter",
+              "lineKind": "furniture",
+              "offerRef": {
+                "slot": "offer",
+                "id": "example-goods-example-counter",
+                "versionHash": "0000000000000000000000000000000000000000000000000000000000000000"
+              },
+              "name": "Example counter",
+              "spec": "Invented specification",
+              "qty": 20,
+              "goodsClass": "nonfood",
+              "goodsClassSrc": "manual",
+              "hsCode": {
+                "value": null,
+                "src": null
+              },
+              "materialText": {
+                "value": null,
+                "src": null
+              },
+              "netWeightKg": {
+                "value": null,
+                "src": null
+              },
+              "cartonUnits": {
+                "value": null,
+                "src": null
+              },
+              "cartons": {
+                "value": null,
+                "src": null
+              },
+              "totalNetWeightKg": {
+                "value": null,
+                "src": null
+              },
+              "totalGrossWeightKg": {
+                "value": null,
+                "src": null
+              },
+              "totalVolumeM3": {
+                "value": null,
+                "src": null
+              },
+              "declaredValue": {
+                "amount": 0,
+                "currency": "USD"
+              }
+            },
+            {
+              "id": "packing-example-appliance",
+              "bomLineId": "example-appliance",
+              "lineKind": "equipment",
+              "offerRef": {
+                "slot": "offer",
+                "id": "example-goods-example-appliance",
+                "versionHash": "0000000000000000000000000000000000000000000000000000000000000000"
+              },
+              "name": "Example appliance",
+              "spec": "Invented specification",
+              "qty": 2,
+              "goodsClass": "nonfood",
+              "goodsClassSrc": "manual",
+              "hsCode": {
+                "value": null,
+                "src": null
+              },
+              "materialText": {
+                "value": null,
+                "src": null
+              },
+              "netWeightKg": {
+                "value": null,
+                "src": null
+              },
+              "cartonUnits": {
+                "value": null,
+                "src": null
+              },
+              "cartons": {
+                "value": null,
+                "src": null
+              },
+              "totalNetWeightKg": {
+                "value": null,
+                "src": null
+              },
+              "totalGrossWeightKg": {
+                "value": null,
+                "src": null
+              },
+              "totalVolumeM3": {
+                "value": null,
+                "src": null
+              },
+              "declaredValue": {
+                "amount": 0,
+                "currency": "USD"
+              }
+            }
+          ],
+          "quotes": [],
+          "chosenQuoteId": null,
+          "freight": {
+            "amount": 80,
+            "currency": "USD"
+          },
+          "documents": [],
+          "tracking": {},
+          "holds": [],
+          "arrival": null,
+          "amendments": []
+        }
+      ],
+      "arrivals": [
+        {
+          "bomLineId": "example-counter",
+          "shipmentId": "example-shipment",
+          "qty": 20,
+          "basis": "received",
+          "eta": "2026-01-05",
+          "arrivedAt": "2026-01-05",
+          "receivedQty": 20,
+          "damagedQty": 0
+        },
+        {
+          "bomLineId": "example-appliance",
+          "shipmentId": "example-shipment",
+          "qty": 2,
+          "basis": "received",
+          "eta": "2026-01-07",
+          "arrivedAt": "2026-01-07",
+          "receivedQty": 2,
+          "damagedQty": 0
+        }
+      ],
+      "fitoutGoodsLastAt": {
+        "date": "2026-01-07",
+        "basis": "received",
+        "shipmentIds": [
+          "example-shipment"
+        ]
+      },
+      "openingStock": {
+        "status": "none",
+        "firstAt": {
+          "date": null,
+          "basis": "none",
+          "shipmentIds": []
+        },
+        "lastAt": {
+          "date": null,
+          "basis": "none",
+          "shipmentIds": []
+        }
+      },
+      "allReceived": true
+    }
+  },
+  "currency": "USD",
+  "track": "example-noodle",
+  "drawings": [
+    "https://example.com/drawing"
+  ],
+  "quantities": {},
+  "manualLines": [],
+  "installOverrides": {},
+  "landlordScope": [
+    {
+      "item": "Example landlord panel",
+      "lineIds": [
+        "example-landlord-panel"
+      ],
+      "conditions": []
+    }
+  ],
+  "changedConditions": [],
+  "options": {
+    "selfInstall": false,
+    "selfFreight": false
+  },
+  "offerIds": [
+    "example-builder-a-bid",
+    "example-builder-b-bid"
+  ],
+  "phaseTemplateId": "example-build-phases",
+  "acceptanceTemplateId": "example-build-acceptance",
+  "startNotBefore": "2026-01-05",
+  "localAvailability": {},
+  "contractor": {
+    "slot": "party",
+    "id": "example-builder-a",
+    "versionHash": "c90415956aa19bae718f21c104cf162dcfdffd673f3efe4626f2fef41c45280f"
+  },
+  "changes": [
+    {
+      "id": "example-extra-counter",
+      "reason": "Synthetic increase in confirmed quantity",
+      "lineDeltas": [
+        {
+          "lineId": "example-counter",
+          "qtyDelta": 10
+        }
+      ],
+      "priceDelta": {
+        "amount": 1530,
+        "currency": "USD"
+      },
+      "scheduleDeltaDays": 0
+    }
+  ],
+  "actuals": [
+    {
+      "taskId": "casework:carpentry",
+      "start": "2026-01-05",
+      "end": "2026-01-06",
+      "hours": 50,
+      "by": "example:builder"
+    },
+    {
+      "taskId": "equipment:electrical",
+      "start": "2026-01-07",
+      "end": "2026-01-07",
+      "hours": 8,
+      "by": "example:builder"
+    },
+    {
+      "taskId": "inspection",
+      "start": "2026-01-08",
+      "end": "2026-01-08",
+      "hours": 0,
+      "by": "example:reviewer"
+    }
+  ],
+  "checkpoints": [
+    {
+      "key": "example-signoff",
+      "passedAt": "2026-01-08",
+      "evidenceRefs": [
+        "https://example.com/signoff"
+      ]
+    }
+  ],
+  "acceptance": {
+    "checklist": [
+      {
+        "key": "example-check",
+        "done": true,
+        "evidenceRefs": [
+          "https://example.com/completion"
+        ]
+      }
+    ],
+    "installed": [
+      {
+        "lineId": "example-counter",
+        "qty": 20
+      },
+      {
+        "lineId": "example-appliance",
+        "qty": 2
+      }
+    ],
+    "observedDeliveries": [],
+    "asBuilt": [
+      {
+        "key": "area",
+        "measure": {
+          "value": 100,
+          "unit": "m2",
+          "basis": "observed"
+        }
+      }
+    ],
+    "punch": [],
+    "landlord": [
+      {
+        "item": "Example landlord panel",
+        "delivered": true,
+        "evidenceRefs": [
+          "https://example.com/landlord"
+        ]
+      }
+    ],
+    "possession": {
+      "observed": "as_is",
+      "evidenceRefs": [
+        "https://example.com/possession"
+      ]
+    },
+    "handover": [
+      {
+        "kind": "as-built",
+        "ref": "https://example.com/as-built"
+      }
+    ],
+    "actualFinish": "2026-01-08"
+  }
+}

@@ -4,7 +4,7 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-本批实现 **共享 core 与第 1 项「定店型」**：从开店意图出发，匹配测算模板与菜单，计算投资、营收、保本、回本和场地要求，经审批后生成 `StoreSpec`。其余六项流程的业务实现与现有站点对接另行开展。
+已实现 **共享 core、第 1 项「定店型」与第 5 项「施工」**：从开店意图出发，匹配测算模板与菜单，计算投资、营收、保本、回本和场地要求，经审批后生成 `StoreSpec`。施工包接收选址、BOM 和到店产物，经工程量确认、报价、比价、排期、变更双签和完工验收，生成 `BuildPlan`。其余五项流程的业务实现与现有站点对接另行开展。
 
 ## 使用
 
@@ -36,9 +36,31 @@ OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
 
 MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动时添加 `--allow-record` 才提供写回工具。
 
+## 第五项：施工
+
+```sh
+pnpm osw build-out run \
+  --assets examples/sample-store/assets \
+  --in examples/sample-store/inputs/build-out.json \
+  --approvals examples/sample-store/approvals/build-out.json \
+  --now 2026-01-30T00:00:00Z \
+  --actor example:reviewer \
+  --out-dir .osw/build-out
+```
+
+输入 `BuildOutInput` 包含完整的 `site: SiteDecision`、`bom: Bom`、`delivery: DeliveryPlan` 信封，以及报价币种、阶段模板和验收模板 ID。示例中的上游产物是从零构造的快照，尚未宣称七项全链路完成；房源和 BOM 案例的来源记录属于上游槽位，本示例目录未附这些记录，补齐其所属槽位与记录前使用 `--record` 会报告部分写回失败。
+
+- **工程量**：`landlordScope` 必须逐项映射租约中的房东施工；对应行移出本方报价。数量调整与工时覆盖按稳定行 ID 输入，工程量确认绑定内容哈希。
+- **报价**：人工、汇率、最低比价数、班组人数、每日工时、工作日和验证容差都从参数读取。单价先舍入，再乘数量；产品价也采用这两个舍入点，人工合计吸收舍入余差，确保产品与人工合计等于实际行额。运费直接引用到店产物。`projectClientQuote()` 只给客户字段白名单，不暴露原价、来源、工厂加工成本和费率。
+- **变更**：修改已接受报价时传入 `previousPlan`；直接修改会要求变更单。变更绑定当前报价版本，需不同签字人的业主、施工方双签，施工方批示还须匹配 `input.contractor`。价差与日历日工期差必须等于重算结果；单签保持 `proposed`，从原报价重跑不会重复加量。
+- **排期**：每行只映射一个阶段，跨阶段工作需拆行；按各任务所需到货日和交房日排期。本地采购显式填写 `localAvailability`。支持 ISO 星期工作日，不处理节假日和多班组资源平衡；阶段检查需有证据，才能登记依赖任务的实耗或完成验收。
+- **验收**：ETA 不算收货，逐行核对实装、数量与破损，并复测场地条件。房东未交付会生成阻塞尾项。证据不足时输出 `open`；证据完整时须业主批准当前版本。`accepted`／`conditional` 带 `acceptedAt`，未关闭的轻微尾项必须有到期日。签名还绑定完工日期、阶段检查证据和报价版本。
+
+七个步骤为 `takeoff`、`estimateHours`、`priceQuote`、`levelBids`、`schedule`、`track`、`accept`，CLI／MCP 自动发现。步骤只返回验证意图，写回仍由 runner 显式执行。
+
 ## 设计约束
 
-- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；`@osw/store-concept` 只依赖它。
+- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；`@osw/store-concept` 和 `@osw/build-out` 只依赖它。
 - Memory、File、HTTP 三种资产源使用同一份接口。FileSource 支持 JSON、NDJSON 和 CSV。
 - 缺业务参数或同级候选不唯一时明确返回 `needs`，不猜默认价格和汇率。
 - 金额按币种最小单位逐行舍入，用户覆盖值已经是目标币种，不重复换算。

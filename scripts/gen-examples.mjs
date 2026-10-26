@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MemorySource, createParamReader, versionHash } from '@osw/core';
 import { workflow } from '@osw/store-concept';
+import { generateBuildOutExamples } from './gen-build-out-examples.mjs';
 
 export const EXAMPLE_NOW = '2026-01-01T00:00:00Z';
 export const EXAMPLE_ACTOR = 'example:reviewer';
@@ -244,6 +245,7 @@ export async function generateExamples(directory = exampleDirectory) {
     throw new Error(`Example did not complete: ${JSON.stringify(approved.needs)}`);
   await save('approvals/store-concept.json', approvals);
   await save('expected/store-spec.json', approved.artifact);
+  await generateBuildOutExamples(directory);
   console.log(
     `Synthetic sample generated (${records.length} assets); artifact ${approved.artifact.hash}`,
   );

@@ -1,0 +1,110 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "template",
+      "id": "example-build-phases",
+      "slotVersion": "0.1.0",
+      "versionHash": "257bcaae83f03a2e3145e8249c7d3d99621a8cb3fb74a2c89e876ea23aac6d1e",
+      "fieldsetHashes": {
+        "price": "257bcaae83f03a2e3145e8249c7d3d99621a8cb3fb74a2c89e876ea23aac6d1e",
+        "terms": "257bcaae83f03a2e3145e8249c7d3d99621a8cb3fb74a2c89e876ea23aac6d1e"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "buildout-phases",
+        "lang": "en",
+        "title": {
+          "en": "Example build phases"
+        },
+        "format": "json",
+        "content": {
+          "phases": [
+            {
+              "key": "casework",
+              "title": "Example casework",
+              "dependsOn": [],
+              "trades": [
+                "carpentry"
+              ]
+            },
+            {
+              "key": "equipment",
+              "title": "Example equipment",
+              "dependsOn": [],
+              "trades": [
+                "electrical"
+              ]
+            },
+            {
+              "key": "inspection",
+              "title": "Example inspection",
+              "dependsOn": [
+                "casework",
+                "equipment"
+              ],
+              "checkpoint": "example-signoff"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "slot": "template",
+      "id": "example-build-acceptance",
+      "slotVersion": "0.1.0",
+      "versionHash": "f209679a4c13949802b53fe2356d34f10f08a21c2da00ca1b559937d47df7700",
+      "fieldsetHashes": {
+        "price": "f209679a4c13949802b53fe2356d34f10f08a21c2da00ca1b559937d47df7700",
+        "terms": "f209679a4c13949802b53fe2356d34f10f08a21c2da00ca1b559937d47df7700"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "buildout-acceptance",
+        "lang": "en",
+        "title": {
+          "en": "Example acceptance"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-check",
+              "title": "Example completion evidence",
+              "ownerRole": "owner",
+              "dependsOn": [],
+              "evidence": "Evidence reference",
+              "gate": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
