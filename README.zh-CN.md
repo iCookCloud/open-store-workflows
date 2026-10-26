@@ -2,6 +2,8 @@
 
 把开店流程中的规则、计算和验证封装成可复用的包，由使用者接入自己的资产、价格、合作方和审批记录。
 
+[GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
+
 本批实现 **共享 core 与第 1 项「定店型」**：从开店意图出发，匹配测算模板与菜单，计算投资、营收、保本、回本和场地要求，经审批后生成 `StoreSpec`。其余六项流程的业务实现与现有站点对接另行开展。
 
 ## 使用
@@ -10,6 +12,8 @@
 
 ```sh
 corepack enable
+git clone https://github.com/iCookCloud/open-store-workflows.git
+cd open-store-workflows
 pnpm install --frozen-lockfile
 pnpm build
 pnpm osw store-concept run \
@@ -64,7 +68,7 @@ node scripts/scan-private.mjs --history
 git config core.hooksPath .githooks
 ```
 
-未配置黑名单时扫描失败。`pre-push` 检查待推提交，Woodpecker 使用 `osw_private_denylist` secret。发布包还可以用 `--tarball` 检查。当前不自动发布 npm、不转公开、不修改生产站点。
+未配置黑名单时扫描失败。`pre-push` 检查待推提交；GitHub Actions 为推送和 PR 运行构建、测试与示例。主分支隐私检查使用 `OSW_PRIVATE_DENYLIST_CONTENT` 仓库 secret 扫描完整历史，私有词表不会提供给 PR 作业。可选的 Woodpecker 使用 `osw_private_denylist` secret。发布包还可以用 `--tarball` 检查。GitHub 源码公开与 npm 发布、生产接入分别管理。
 
 许可证：[Apache-2.0](LICENSE)。
 

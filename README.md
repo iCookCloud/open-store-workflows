@@ -4,6 +4,8 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [简体中文](README.zh-CN.md)
 
+[Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
+
 This first implementation includes the shared core and the **store-concept** workflow. It produces a versioned `StoreSpec` from a concept brief, calculation templates, menus, site requirements and operating-store actuals. The other six workflow implementations and production-system integration are separate work.
 
 ## Packages
@@ -22,6 +24,8 @@ Use Node.js 22 or later and the pnpm version declared in `package.json`.
 
 ```sh
 corepack enable
+git clone https://github.com/iCookCloud/open-store-workflows.git
+cd open-store-workflows
 pnpm install --frozen-lockfile
 pnpm build
 pnpm test
@@ -92,7 +96,7 @@ node scripts/scan-private.mjs --tarball /secure/package.tgz
 git config core.hooksPath .githooks
 ```
 
-The pre-push hook scans the blobs reachable from outgoing commits; the full-history mode scans all local refs. The Woodpecker pipeline requires an `osw_private_denylist` secret. Without a configured denylist, scanning fails closed. Package publication, public mirroring and production integration are not performed automatically.
+The pre-push hook scans the blobs reachable from outgoing commits; the full-history mode scans all local refs. GitHub Actions runs build, tests and examples for pushes and pull requests. The main-branch privacy job requires the `OSW_PRIVATE_DENYLIST_CONTENT` repository secret and scans the complete history. Private denylist values are never passed to pull-request jobs. The optional Woodpecker pipeline uses an `osw_private_denylist` secret. Without a configured denylist, scanning fails closed. npm publication and production integration remain separate from publishing this source repository.
 
 ## License
 
