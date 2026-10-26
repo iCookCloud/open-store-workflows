@@ -63,6 +63,32 @@ describe('provider limits and persisted output', () => {
     expect(JSON.stringify(out.output)).not.toContain('Transient');
     expect(out.needs).toContainEqual(expect.objectContaining({ action: 'ingestListing' }));
   });
+  it('applies listing item and charge caps across all candidates', async () => {
+    const listing = await record('listing', 'one', listingData());
+    const second = await record('listing', 'two', listingData({ geo: { lat: 0.001, lng: 0 } }));
+    const query = await record('competitor-query', 'queries', { queries: ['example'], lang: 'en' });
+    query.coverage.tracks = [spec.concept.track];
+    const search = vi.fn(async () => [listingData(), listingData()]);
+    const ctx = context([listing, second, query], {
+      params: { ...defaults, 'listingFeed.maxItemsPerRun': 1, 'listingFeed.maxChargePerRun': 10 },
+      providers: {
+        places: {
+          name: 'example',
+          persistable: ['providerPlaceId'],
+          maxCacheSeconds: 0,
+          search: async () => [],
+        },
+        listingFeed: { name: 'example', search },
+      },
+    });
+    const out = await scanSurroundings(
+      { decisionId: 'cap-test', candidates: [listing, second], track: spec.concept.track },
+      ctx,
+    );
+    expect(out.output?.candidates.flatMap((c) => c.vacancies)).toHaveLength(1);
+    expect(search).toHaveBeenCalledTimes(1);
+    expect(search.mock.calls[0]?.[0]).toMatchObject({ limit: 1, maxCharge: 5 });
+  });
   it('returns blocking provider need on quota exhaustion', async () => {
     const listing = await record('listing', 'one', listingData());
     const query = await record('competitor-query', 'queries', { queries: ['example'], lang: 'en' });

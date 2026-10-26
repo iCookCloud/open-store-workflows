@@ -4,7 +4,7 @@ import { inputNeed, withExchangeRates } from './rules/common.js';
 import { assessRent, moneyIn } from './rules/rent.js';
 import { CounselShortlist, DocDraft, LeaseReviewInput } from './steps/legal.js';
 import { Screening, ScreeningInput } from './steps/screen.js';
-import { AssessmentInput, Shortlist, assessSite } from './steps/selection.js';
+import { Assessment, AssessmentInput, Shortlist, assessSite } from './steps/selection.js';
 import { Survey, SurveyInput } from './steps/survey.js';
 import { workflowSteps } from './workflow-steps.js';
 
@@ -80,6 +80,7 @@ export async function run(raw: unknown, ctx: StepCtx) {
         const surveyed = SurveyInput.parse(inputs.surveySite);
         input.listing = surveyed.listing;
         input.survey = Survey.parse(steps.surveySite!.output);
+        input.sources = Assessment.parse(steps.assessSite!.output).sources;
         const reasons = value.data.rejectionReasons as Record<string, string> | undefined;
         input.shortlist = Shortlist.parse(steps.shortlist!.output).map((s) => ({
           ...s,

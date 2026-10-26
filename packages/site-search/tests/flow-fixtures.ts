@@ -122,7 +122,25 @@ export async function sampleFlow() {
       auditHash: await bytesHash(auditCertificate),
     },
   ];
-  const records = [...f.records, ...listings, query, area, checklist, leaseTemplate];
+  const records = [
+    ...f.records.filter((r) => r.slot !== 'listing'),
+    ...listings,
+    query,
+    area,
+    checklist,
+    leaseTemplate,
+    ...(await Promise.all(
+      ['direct', 'adjacent', 'substitute'].map((kind, i) =>
+        record('place-observation', `example-observation-${i}`, {
+          provider: 'example',
+          providerPlaceId: `example-place-${i}`,
+          kind,
+          observedAt: NOW,
+          curatedBy: 'example-researcher',
+        }),
+      ),
+    )),
+  ];
   const makeContext = (approvals: Approval[]) => {
     const ctx = context(records, {
       approvals,

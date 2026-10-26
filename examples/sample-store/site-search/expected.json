@@ -60,6 +60,21 @@
         "versionHash": "94ca1b3babfdd93738a7328ea4900aea54e81def8ee8b44d5099c88c92d54e38"
       },
       {
+        "slot": "listing",
+        "id": "example-listing-1",
+        "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f"
+      },
+      {
+        "slot": "trade-area",
+        "id": "example-population",
+        "versionHash": "91aea7b247fb2805760e6f2df73ce9e31e72da53852879cc3dcdf26e235b09f5"
+      },
+      {
+        "slot": "template",
+        "id": "example-dd",
+        "versionHash": "69f1db09d329df885ce3347f36b071b99a958d3f749a31ff4ae1909e9fa4d197"
+      },
+      {
         "slot": "template",
         "id": "example-loi",
         "versionHash": "ebafba6235fd174b930e7d83cc06eabd1db5a20ddc89cf6d61bc965b08d5fbf3"

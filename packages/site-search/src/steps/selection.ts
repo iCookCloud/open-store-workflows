@@ -74,6 +74,7 @@ export const AssessmentInput = ScreeningInput.extend({
     .optional(),
 });
 export const Assessment = z.object({
+  sources: z.array(AssetRef),
   checks: z.array(CheckSchema),
   missing: z.array(z.array(z.string())),
   firstBlocked: z.number().int().nullable(),
@@ -187,12 +188,21 @@ export async function assessSite(raw: z.infer<typeof AssessmentInput>, ctx: Step
   );
   const index = missing.findIndex((g) => g.length > 0);
   return {
-    ...result({ checks: row.checks, missing, firstBlocked: index === -1 ? null : index }, needs),
+    ...result(
+      {
+        checks: row.checks,
+        missing,
+        firstBlocked: index === -1 ? null : index,
+        sources: [...row.sources, ...(matching ? [assetRef(matching)] : [])],
+      },
+      needs,
+    ),
     verifications,
   };
 }
 export const ChooseInput = z.object({
   example: z.literal(true).optional(),
+  sources: z.array(AssetRef).optional(),
   id: z.string().min(1),
   storeId: z.string().nullable(),
   spec: z.object({ kind: z.literal('StoreSpec'), id: z.string(), hash: z.string() }),
@@ -268,7 +278,7 @@ export async function chooseSite(raw: z.infer<typeof ChooseInput>, ctx: StepCtx)
       input.id,
       input.storeId,
       [input.spec],
-      entries.map((e) => e.listing),
+      [...entries.map((e) => e.listing), ...(input.sources ?? [])],
       ctx,
       'chooseSite',
       input.example,

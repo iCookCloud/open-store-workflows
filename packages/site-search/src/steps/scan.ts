@@ -136,6 +136,8 @@ export async function scanSurroundings(raw: z.infer<typeof ScanInput>, ctx: Step
   const provider = siteProviders(ctx).places!;
   const feed = siteProviders(ctx).listingFeed!;
   const stores = ctx.stores!;
+  let remainingItems = feedLimit!;
+  const chargePerCandidate = maxCharge! / input.candidates.length;
   for (const listing of input.candidates) {
     const center = listing.data.geo;
     if (!center) {
@@ -176,15 +178,15 @@ export async function scanSurroundings(raw: z.infer<typeof ScanInput>, ctx: Step
         const ttl = Math.min(provider.maxCacheSeconds, reuseDays! * 86400);
         if (ttl > 0) await stores.cache.put(key, fresh, ttl);
       }
-      const feedKey = `listing-feed:${await versionHash({ provider: feed.name, center, radius, jurisdiction: listing.data.jurisdiction, limit: feedLimit, maxCharge })}`;
-      let vacancies = await stores.cache.get(feedKey);
+      const feedKey = `listing-feed:${await versionHash({ provider: feed.name, center, radius, jurisdiction: listing.data.jurisdiction, limit: remainingItems, maxCharge: chargePerCandidate })}`;
+      let vacancies = remainingItems > 0 ? await stores.cache.get(feedKey) : [];
       if (!vacancies) {
         vacancies = await feed.search({
           center,
           radiusKm: radius!,
           jurisdiction: listing.data.jurisdiction,
-          limit: feedLimit!,
-          maxCharge: maxCharge!,
+          limit: remainingItems,
+          maxCharge: chargePerCandidate,
         });
         if (feedHours! > 0) await stores.cache.put(feedKey, vacancies, feedHours! * 3600);
       }
@@ -192,7 +194,8 @@ export async function scanSurroundings(raw: z.infer<typeof ScanInput>, ctx: Step
         .array(Listing)
         .parse(vacancies)
         .filter((v) => v.geo && distanceKm(v.geo, center) <= radius!)
-        .slice(0, feedLimit);
+        .slice(0, remainingItems);
+      remainingItems -= drafts.length;
       for (const draft of drafts)
         needs.push({
           kind: 'action',

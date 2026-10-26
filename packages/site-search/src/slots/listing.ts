@@ -13,21 +13,23 @@ import {
   z,
 } from '@osw/core';
 
-export const AskingRent = SiteDecisionRent.pick({
-  base: true,
-  period: true,
-  basis: true,
-  areaUnit: true,
-}).superRefine((rent, ctx) => {
-  if (rent.base.amount < 0)
-    ctx.addIssue({
-      code: 'custom',
-      path: ['base', 'amount'],
-      message: 'Rent cannot be negative',
-    });
-  if (rent.basis === 'per_area' && !rent.areaUnit)
-    ctx.addIssue({ code: 'custom', path: ['areaUnit'], message: 'Area unit is required' });
-});
+export const AskingRent = z
+  .object({
+    base: SiteDecisionRent.shape.base,
+    period: SiteDecisionRent.shape.period,
+    basis: SiteDecisionRent.shape.basis,
+    areaUnit: SiteDecisionRent.shape.areaUnit,
+  })
+  .superRefine((rent, ctx) => {
+    if (rent.base.amount < 0)
+      ctx.addIssue({
+        code: 'custom',
+        path: ['base', 'amount'],
+        message: 'Rent cannot be negative',
+      });
+    if (rent.basis === 'per_area' && !rent.areaUnit)
+      ctx.addIssue({ code: 'custom', path: ['areaUnit'], message: 'Area unit is required' });
+  });
 export const ListingSource = z.object({
   kind: z.enum(['broker', 'feed', 'csv', 'manual']),
   name: z.string().min(1),

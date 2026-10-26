@@ -1,12 +1,14 @@
 import {
   AssetRecord,
   type AssetRecordOf,
+  AssetRef,
   type Filter,
   GeoPoint,
   Money,
   type Need,
   type StepCtx,
   StoreSpecBody,
+  assetRef,
   convertUnit,
   z,
 } from '@osw/core';
@@ -36,6 +38,7 @@ export const CheckSchema = z.object({
 });
 export const ScreenedListing = z.object({
   listing: AssetRecord(Listing),
+  sources: z.array(AssetRef),
   checks: z.array(CheckSchema),
   monthlyRent: Money.nullable(),
 });
@@ -173,7 +176,12 @@ export async function candidateChecks(
     verdict: population,
     reason: 'Population evidence must cover the candidate and meet the track threshold',
   });
-  return { listing, checks, monthlyRent: rent.monthlyTotal };
+  return {
+    listing,
+    checks,
+    monthlyRent: rent.monthlyTotal,
+    sources: [assetRef(listing), ...relevant.map((a) => assetRef(a))],
+  };
 }
 export async function screenListings(raw: z.infer<typeof ScreeningInput>, ctx: StepCtx) {
   const input = ScreeningInput.parse(raw);

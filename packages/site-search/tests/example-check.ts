@@ -50,6 +50,10 @@ if (write) {
     })),
   });
 }
+const savedListings = JSON.parse(
+  await readFile(join(directory, 'assets/listing.json'), 'utf8'),
+).items;
+if (savedListings.length !== 8) throw new Error('Expected exactly eight synthetic listings');
 const expected = JSON.parse(await readFile(join(directory, 'expected.json'), 'utf8'));
 if (SiteDecision.parse(f.output.artifact).hash !== SiteDecision.parse(expected.artifact).hash)
   throw new Error('Synthetic SiteDecision golden hash drifted');
