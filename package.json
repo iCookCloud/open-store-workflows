@@ -36,6 +36,7 @@
     "@osw/site-search": "workspace:*",
     "@osw/fitout-bom": "workspace:*",
     "@osw/landed-delivery": "workspace:*",
-    "@osw/opening": "workspace:*"
+    "@osw/opening": "workspace:*",
+    "@osw/build-out": "workspace:*"
   }
 }

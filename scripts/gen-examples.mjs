@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MemorySource, createParamReader, versionHash } from '@osw/core';
 import { workflow } from '@osw/store-concept';
+import { generateBuildOutExamples } from './gen-build-out-examples.mjs';
 import { generateReplenishmentExamples } from './gen-replenishment-examples.mjs';
 import { openingAssets, saveOpeningExample } from './opening-examples.mjs';
 
@@ -249,6 +250,7 @@ export async function generateExamples(directory = exampleDirectory) {
   await save('expected/store-spec.json', approved.artifact);
   await saveOpeningExample(directory, records, approved.artifact);
   await generateReplenishmentExamples(directory, records);
+  await generateBuildOutExamples(directory);
   console.log(
     `Synthetic sample generated (${records.length} assets); artifact ${approved.artifact.hash}`,
   );

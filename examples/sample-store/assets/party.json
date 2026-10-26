@@ -88,6 +88,129 @@
           }
         }
       }
+    },
+    {
+      "slot": "party",
+      "id": "example-builder-a",
+      "slotVersion": "0.1.0",
+      "versionHash": "c90415956aa19bae718f21c104cf162dcfdffd673f3efe4626f2fef41c45280f",
+      "fieldsetHashes": {
+        "price": "c90415956aa19bae718f21c104cf162dcfdffd673f3efe4626f2fef41c45280f",
+        "terms": "c90415956aa19bae718f21c104cf162dcfdffd673f3efe4626f2fef41c45280f"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Builder A"
+        },
+        "roles": [
+          "contractor"
+        ],
+        "status": "active",
+        "jurisdictions": [
+          "XE"
+        ],
+        "profiles": {
+          "contractor": {
+            "trades": [
+              "carpentry",
+              "electrical"
+            ],
+            "licenses": []
+          }
+        }
+      }
+    },
+    {
+      "slot": "party",
+      "id": "example-builder-b",
+      "slotVersion": "0.1.0",
+      "versionHash": "7a523ff5cdbdad1d5e4551dfab62555d50d67561ebc17370b9220d91c8a2dd25",
+      "fieldsetHashes": {
+        "price": "7a523ff5cdbdad1d5e4551dfab62555d50d67561ebc17370b9220d91c8a2dd25",
+        "terms": "7a523ff5cdbdad1d5e4551dfab62555d50d67561ebc17370b9220d91c8a2dd25"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Builder B"
+        },
+        "roles": [
+          "contractor"
+        ],
+        "status": "active",
+        "jurisdictions": [
+          "XE"
+        ],
+        "profiles": {
+          "contractor": {
+            "trades": [
+              "carpentry",
+              "electrical"
+            ],
+            "licenses": []
+          }
+        }
+      }
+    },
+    {
+      "slot": "party",
+      "id": "example-delivery-party",
+      "slotVersion": "0.1.0",
+      "versionHash": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98",
+      "fieldsetHashes": {
+        "price": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98",
+        "terms": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Carrier"
+        },
+        "roles": [
+          "forwarder"
+        ],
+        "status": "active"
+      }
     }
   ]
 }

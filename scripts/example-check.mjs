@@ -263,3 +263,63 @@ assert.equal(openingArtifact.body.marketing.assetGap.missing, 1);
 console.log(
   'Opening example passed: real assessments, approval gates, operating handoff and golden artifact',
 );
+
+const buildBase = [
+  cli,
+  'build-out',
+  'run',
+  '--assets',
+  resolve(generated, 'assets'),
+  '--in',
+  resolve(generated, 'inputs/build-out.json'),
+  '--now',
+  '2026-01-30T00:00:00Z',
+  '--actor',
+  EXAMPLE_ACTOR,
+];
+const buildBlocked = spawnSync(
+  process.execPath,
+  [...buildBase, '--out-dir', resolve(scratch, 'build-blocked')],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(
+  buildBlocked.status,
+  2,
+  `Build workflow must require approvals: ${buildBlocked.stderr}`,
+);
+const buildCompleted = spawnSync(
+  process.execPath,
+  [
+    ...buildBase,
+    '--approvals',
+    resolve(generated, 'approvals/build-out.json'),
+    '--out-dir',
+    resolve(scratch, 'build-approved'),
+  ],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(
+  buildCompleted.status,
+  0,
+  `Build workflow failed: ${buildCompleted.stderr}\n${buildCompleted.stdout}`,
+);
+const buildArtifact = JSON.parse(
+  await readFile(resolve(scratch, 'build-approved/artifact.json'), 'utf8'),
+);
+assert.deepEqual(
+  buildArtifact,
+  JSON.parse(await readFile(resolve(exampleDirectory, 'expected/build-plan.json'), 'utf8')),
+);
+// 独立手算：20×140 + 2×280 + 240 + 50 + 90 + 80 = 3820。
+assert.equal(buildArtifact.body.quote.totals.total.amount, 3820);
+assert.equal(buildArtifact.body.schedule.finish, '2026-01-08');
+assert.equal(buildArtifact.body.acceptance.status, 'accepted');
+assert.equal(buildArtifact.body.changes[0].status, 'effective');
+const tracked = JSON.parse(await readFile(resolve(scratch, 'build-approved/track.json'), 'utf8'));
+assert(
+  tracked.verifications.some((v) => v.dimension === 'hoursPerUnit' && v.verdict === 'fails'),
+  'Build example must expose the deliberately higher actual installation hours',
+);
+console.log(
+  'Build example passed: reproducible artifact, approvals, signed change, CPM and installation verification',
+);
