@@ -1,0 +1,10 @@
+[
+  {
+    "step": "replenishment/selectAudience",
+    "subject": "campaign:example-supply-campaign",
+    "subjectHash": "9302da0072ea68fac7dd93fecfd970eb7cd45df8fd24425a130b4f34b947d3ca",
+    "decision": "send",
+    "by": "example:operator",
+    "at": "2026-02-02T12:00:00Z"
+  }
+]

@@ -29,6 +29,9 @@ importers:
       '@osw/opening':
         specifier: workspace:*
         version: link:packages/opening
+      '@osw/replenishment':
+        specifier: workspace:*
+        version: link:packages/replenishment
       '@osw/site-search':
         specifier: workspace:*
         version: link:packages/site-search
@@ -79,6 +82,12 @@ importers:
         version: link:../core
 
   packages/opening:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/replenishment:
     dependencies:
       '@osw/core':
         specifier: workspace:*

@@ -4,7 +4,7 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-已实现 **共享 core、第 1 项「定店型」、第 2 项「找房」、第 3 项「装修物料单」、第 4 项「到店」与第 6 项「开门营业」**，分别生成 `StoreSpec`、`SiteDecision`、`Bom`、`DeliveryPlan` 和 `OpeningRecord`。五条流程共用 CLI／MCP；其余两项及生产站点接入另行开展。
+已实现 **共享 core、第 1 项「定店型」、第 2 项「找房」、第 3 项「装修物料单」、第 4 项「到店」、第 6 项「开门营业」与第 7 项「开业后供货」**，分别生成 `StoreSpec`、`SiteDecision`、`Bom`、`DeliveryPlan`、`OpeningRecord` 和 `SupplyProgram`。六条流程共用 CLI／MCP；施工流程及生产站点接入另行开展。
 
 第二项包含筛选、周边扫描、实测、意向书、律师审阅与签署证据核验，详见[找房运行说明](packages/site-search/README.md)。运行 `pnpm examples:site-search` 可验证缺签约批示退出 2、审批完整退出 0。CLI 和 MCP 可用 `--providers <本地模块>` 显式加载外部服务及额度存储。
 
@@ -58,7 +58,32 @@ pnpm osw opening run \
 
 新增七个槽位：`role`、`cert`、`course`、`exam`、`track-affinity`、`content-case`、`content-playbook`，以及认证、清单、营销、素材需求四种 JSON 模板。业务阈值、预算比例及汇率均取自 `params`；参数 qualifier 段使用英文字母和数字。借用课程只作推荐，采用后须由资产数据明确覆盖本店赛道才会列为必考。
 
-学生卷、判分输出和 MCP 通用查询均保护答案、解析和评分指南。营销及复盘签署不阻止开业审批；营销只对批准的类别计预算，输出达人筛选、凭证缺口及内容日历。复盘按课程单元、清单项和上游测算来源产生验证记录。示例刻意保留素材缺口，并检出缺少区分度的考卷；`pnpm examples` 核对五条流程及黄金产物。
+学生卷、判分输出和 MCP 通用查询均保护答案、解析和评分指南。营销及复盘签署不阻止开业审批；营销只对批准的类别计预算，输出达人筛选、凭证缺口及内容日历。复盘按课程单元、清单项和上游测算来源产生验证记录。示例刻意保留素材缺口，并检出缺少区分度的考卷；`pnpm examples` 核对六条流程及黄金产物。
+
+## 开业后供货
+
+`@osw/replenishment` 提供 13 个步骤、6 个资产槽位，由 CLI/MCP 自动发现。它接收已放行的 `OpeningRecord` 与首批 `Bom`，检查正文哈希和所属门店，完成分群、供应商匹配、邮件矩阵与发送决策、复购单和上游验证。合成示例中的 Example Noodle Bar 已在营一个月；外部收录店没有 BOM 时，占比保持 `basis: none`、`byLines: null`。
+
+```sh
+pnpm osw replenishment run \
+  --assets examples/sample-store/assets \
+  --in examples/sample-store/inputs/replenishment.json \
+  --approvals examples/sample-store/approvals/replenishment.json \
+  --now 2026-02-02T12:00:00Z \
+  --actor example:operator \
+  --out-dir .osw/supply-program
+```
+
+复购模式把输入和审批文件名换成 `replenishment-reorder.json`。不提供审批时退出 `2`。运行结果包含每步输出与 `SupplyProgram`；摘要只统计已保存的复购单，待提交的新单保留在步骤结果中。`--record` 只登记验证，邮件发送和订单保存由显式调用 `@osw/replenishment/runner` 完成。
+
+- 邮件内容、规则和正文版本绑定审批；同源 `sourceRef` 派生稳定 campaign ID，调用方应使用返回的 ID。再次运行时传 `previousCampaign`，保留暂停、完成状态和熔断基线。
+- `runCampaignSend` 重新检查受众和额度，先占位 `queued` 再逐封发送；网络结果不明时保留占位并返回核对待办，不自动重发。消息包含纯文本与 HMAC 签名的一键退订。真实 Resend 适配器由 `@osw/replenishment/provider-resend` 导出。
+- 一个 AssetSource 对应一个发信域。投诉可暂停该域全部批次；恢复需 operator 对 `resume-domain` 的 `domainStatsHash` 批准 `resume`。保存决策步骤或执行器返回的 `domainBreakerFrom`，下次传回。每域使用一个发送执行器；并发生产接入需要台账提供原子的全域额度预留。
+- 生产 `SupplyLedger` 与资产读口必须读取同一份持久台账；占位唯一约束、事件和抑制写入幂等、复购版本比较由台账保证。`ifVersionHash` 缺省只允许新建。Memory 实现用于测试与示例。
+- `handleProviderWebhook` 验证原始正文，全部事件和抑制记录写成功后才确认去重；未知服务商消息 ID 阻断并等待重试。直接使用 `parseWebhook` 时，持久化成功后才可 `ackWebhook`；持久去重接口实现 `has` 与 `claim`。未配置回调密钥时不超过试水量。
+- `persistDraftReorders`、`runReorderTransition` 负责显式保存。先用复购报价并校验单位、阶梯与 MOQ；缺汇率返回待办，沿用上次成交价需要审批。确认前协商改价要求门店重新批准，确认后锁价；收货差异会生成验证记录。
+
+发送窗口、额度、熔断、补货周期和验证阈值均来自 `params`，不猜价格和汇率。示例不发送真实邮件，不接生产数据库。
 
 ## 设计约束
 

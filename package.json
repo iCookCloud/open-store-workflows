@@ -32,6 +32,7 @@
     "@osw/core": "workspace:*",
     "@osw/store-concept": "workspace:*",
     "@osw/mcp": "workspace:*",
+    "@osw/replenishment": "workspace:*",
     "@osw/site-search": "workspace:*",
     "@osw/fitout-bom": "workspace:*",
     "@osw/landed-delivery": "workspace:*",

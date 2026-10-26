@@ -1,0 +1,11 @@
+[
+  {
+    "step": "replenishment/advanceReorder",
+    "subject": "submit:reorder-d7d9c0e1540ddeedcd7fdd22",
+    "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d",
+    "decision": "submit",
+    "role": "store",
+    "by": "example:operator",
+    "at": "2026-02-02T12:00:00Z"
+  }
+]

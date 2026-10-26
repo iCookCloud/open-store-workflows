@@ -1,0 +1,46 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "segment-ruleset",
+      "id": "example-supply-rules",
+      "slotVersion": "0.1.0",
+      "versionHash": "c30cc4c4bbf01cc371fbd4c1e5f8b6c53db99e0cad8a8351bc03c9928125da93",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "segmentRegions": [
+          "XE-A"
+        ],
+        "regionTiers": {
+          "central": [
+            "XE-A"
+          ]
+        },
+        "supplyCats": [
+          "ingredients"
+        ],
+        "trackSupply": {
+          "replenishment-noodle": [
+            "ingredients"
+          ]
+        },
+        "categoryAliases": {
+          "example noodle bar": "replenishment-noodle"
+        }
+      }
+    }
+  ]
+}
