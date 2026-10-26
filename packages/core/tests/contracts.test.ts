@@ -47,6 +47,30 @@ async function record(slot: string, id: string, data: unknown): Promise<AnyAsset
   };
 }
 describe('review: runner parameter hydration', () => {
+  it('does not require parameter access for a step with no declared parameters', async () => {
+    const source = new MemorySource();
+    let queries = 0;
+    source.query = async () => {
+      queries++;
+      throw new Error('This caller does not have parameter access');
+    };
+    const ctx = await prepareContext(
+      [
+        {
+          id: 'store-concept/review',
+          input: z.object({}),
+          output: z.object({}),
+          reads: [],
+          params: [],
+          run: async () => ({ output: {}, needs: [], verifications: [] }),
+        },
+      ],
+      {},
+      { source, now: time },
+    );
+    expect(queries).toBe(0);
+    expect(ctx.params.get('labor.rate')).toBeUndefined();
+  });
   it('loads qualified prices and dynamic FX while keeping parameter namespaces separate', async () => {
     const records = await Promise.all([
       record('params', 'base', { key: 'labor.rate', value: 1 }),

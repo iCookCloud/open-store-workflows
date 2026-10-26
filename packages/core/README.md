@@ -14,7 +14,7 @@ The root export provides schemas, canonical hashes, money and unit helpers, `Mem
 
 ## Parameter resolution
 
-The runner queries declared parameter families and the `fx` family with bounded pagination. The `keyPrefix` filter uses dot-segment boundaries: `labor.rate` matches that key and `labor.rate.special`, but not `labor.rateExtra`. This is distinct from the jurisdiction `prefix` operator, which uses hyphen-segment boundaries.
+For steps declaring parameters, the runner queries their parameter families and the `fx` family with bounded pagination. Steps with no parameter declarations do not implicitly access the parameter source; dynamic currency reads can use the explicit hydration helpers. The `keyPrefix` filter uses dot-segment boundaries: `labor.rate` matches that key and `labor.rate.special`, but not `labor.rateExtra`. This is distinct from the jurisdiction `prefix` operator, which uses hyphen-segment boundaries.
 
 Asset services must advertise and implement `params.key` operations `eq`, `in`, and `keyPrefix`. A service missing this capability must reject the query explicitly; the runner must never silently choose a generic price because it failed to retrieve a qualified one. Within the loaded records, qualifier, jurisdiction, track, validity and ambiguity resolution share the same `createParamReader` implementation. `withParameterKeys` and `withFxParams` provide targeted hydration for direct workflow callers and preserve ambiguity and source references.
 
