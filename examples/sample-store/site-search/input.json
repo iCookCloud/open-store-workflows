@@ -1,0 +1,560 @@
+{
+  "$example": "synthetic",
+  "screenListings": {
+    "spec": {
+      "concept": {
+        "storeType": "example-noodle",
+        "track": "example-noodle",
+        "nonFood": false,
+        "revenueModel": "covers"
+      },
+      "jurisdiction": "XE",
+      "timezone": "Etc/UTC",
+      "city": "Example City",
+      "menu": {
+        "status": "none",
+        "refs": [],
+        "approved": []
+      },
+      "area": {
+        "targetM2": 100,
+        "minM2": 80,
+        "maxM2": 120
+      },
+      "capacity": {
+        "seats": 20,
+        "opDays": 20
+      },
+      "staffing": [],
+      "economics": {
+        "template": {
+          "slot": "calc-template",
+          "id": "example",
+          "versionHash": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "spend": {
+          "amount": 20,
+          "currency": "USD"
+        },
+        "taxRate": 0,
+        "investment": [],
+        "monthly": [],
+        "totals": {
+          "investment": {
+            "amount": 100000,
+            "currency": "USD"
+          },
+          "monthlyRevenue": {
+            "amount": 20000,
+            "currency": "USD"
+          },
+          "tax": {
+            "amount": 0,
+            "currency": "USD"
+          },
+          "monthlyCost": {
+            "amount": 10000,
+            "currency": "USD"
+          },
+          "monthlyProfit": {
+            "amount": 10000,
+            "currency": "USD"
+          }
+        },
+        "breakeven": {
+          "status": "ok",
+          "revenue": {
+            "amount": 20000,
+            "currency": "USD"
+          },
+          "spend": null,
+          "dailyUnits": null
+        },
+        "paybackMonths": 10,
+        "budgetRange": {
+          "low": {
+            "amount": 80000,
+            "currency": "USD"
+          },
+          "high": {
+            "amount": 120000,
+            "currency": "USD"
+          },
+          "basis": "band",
+          "sampleSize": 0
+        },
+        "rentCeiling": {
+          "amount": 4000,
+          "currency": "USD"
+        }
+      },
+      "siteRequirements": [
+        {
+          "key": "clearHeight",
+          "op": "gte",
+          "value": 10,
+          "unit": "ft",
+          "hard": true,
+          "basis": "user",
+          "reason": "Synthetic test requirement"
+        }
+      ],
+      "downstream": {
+        "coldchain": false,
+        "ingredients": [],
+        "equipment": [],
+        "sop": []
+      }
+    },
+    "center": {
+      "lat": 0,
+      "lng": 0
+    }
+  },
+  "scanSurroundings": {
+    "decisionId": "example-store"
+  },
+  "shortlist": {
+    "entries": [
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-1",
+          "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f"
+        },
+        "status": "shortlisted",
+        "reason": "Chosen example"
+      },
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-2",
+          "versionHash": "779aab5fb7e14ad1c5549920cb71627d739a14750966bf9b13304a70a20566fd"
+        },
+        "status": "shortlisted",
+        "reason": "Less suitable example"
+      },
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-3",
+          "versionHash": "62485a52d9abaa592fc754d41da3668e97f72b46e822c42c47116a1ac9f7163d"
+        },
+        "status": "shortlisted",
+        "reason": "Less suitable example"
+      },
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-4",
+          "versionHash": "952cc00e7d709916e5cfafefb82947b5db6d11129f871554ad8a73f1812317c8"
+        },
+        "status": "shortlisted",
+        "reason": "Less suitable example"
+      },
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-5",
+          "versionHash": "b0d9fcf4af2f811dd4fb5093832501920f5a53305bef92ad9ab188951a515a97"
+        },
+        "status": "shortlisted",
+        "reason": "Less suitable example"
+      },
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-6",
+          "versionHash": "764f7b4923b7e21f633f7e5ce702c3ab65810a687d92d0f560edb45184bfc2bb"
+        },
+        "status": "shortlisted",
+        "reason": "Less suitable example"
+      },
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-7",
+          "versionHash": "2b6bde874d064ffadb311bdd5ea132cbfc365426b19948712664aabcf60b6283"
+        },
+        "status": "shortlisted",
+        "reason": "Less suitable example"
+      },
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing-8",
+          "versionHash": "94ca1b3babfdd93738a7328ea4900aea54e81def8ee8b44d5099c88c92d54e38"
+        },
+        "status": "shortlisted",
+        "reason": "Less suitable example"
+      }
+    ]
+  },
+  "assessSite": {
+    "listing": {
+      "slot": "listing",
+      "id": "example-listing-1",
+      "data": {
+        "source": {
+          "kind": "manual",
+          "name": "Example feed",
+          "url": "https://example.com/listings/one",
+          "sourceListingId": "example-1",
+          "brokerParty": null
+        },
+        "status": "active",
+        "address": {
+          "line1": "100 Example Road",
+          "locality": "Example City",
+          "jurisdiction": "XE"
+        },
+        "geo": {
+          "lat": 0,
+          "lng": 0
+        },
+        "jurisdiction": "XE",
+        "propertyType": "restaurant",
+        "deliveryCondition": "second_gen_food",
+        "area": {
+          "min": 100,
+          "max": 100,
+          "unit": "m2"
+        },
+        "askingRent": {
+          "base": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "period": "month",
+          "basis": "total"
+        },
+        "additionalRent": "gross",
+        "foodUse": "advertised",
+        "restrictions": [],
+        "claims": [
+          {
+            "key": "clearHeight",
+            "measure": {
+              "value": 14,
+              "unit": "ft",
+              "basis": "claimed",
+              "by": "example-surveyor",
+              "at": "2026-01-09T12:00:00Z",
+              "expiresAt": "2026-12-31",
+              "refs": [
+                "https://example.com/claims"
+              ]
+            }
+          }
+        ],
+        "media": [],
+        "checkedAt": "2026-01-10T12:00:00Z",
+        "expiresAt": "2026-12-31",
+        "refs": [
+          "https://example.com/listings/one"
+        ]
+      },
+      "versionHash": "abb1a50e935c3d9b685b04782206ef7a5ff9ef20ecd4bcfec14ca2a6a240a98f",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    "availability": {
+      "value": true,
+      "basis": "observed",
+      "by": "example-surveyor",
+      "at": "2026-01-09T12:00:00Z",
+      "expiresAt": "2026-12-31",
+      "refs": [
+        "https://example.com/survey"
+      ]
+    },
+    "dueDiligence": [
+      {
+        "key": "zoning",
+        "complete": true,
+        "evidence": [
+          "https://example.com/zoning"
+        ]
+      },
+      {
+        "key": "violations",
+        "complete": true,
+        "evidence": [
+          "https://example.com/violations"
+        ]
+      }
+    ]
+  },
+  "surveySite": {
+    "readings": [
+      {
+        "key": "area",
+        "measure": {
+          "value": 100,
+          "unit": "m2",
+          "at": "2026-01-09T12:00:00Z",
+          "by": "example-surveyor",
+          "basis": "observed",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        }
+      },
+      {
+        "key": "frontage",
+        "measure": {
+          "value": 20,
+          "unit": "ft",
+          "at": "2026-01-09T12:00:00Z",
+          "by": "example-surveyor",
+          "basis": "observed",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        }
+      },
+      {
+        "key": "clearHeight",
+        "measure": {
+          "value": 12,
+          "unit": "ft",
+          "at": "2026-01-09T12:00:00Z",
+          "by": "example-surveyor",
+          "basis": "observed",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        }
+      },
+      {
+        "key": "powerCapacity",
+        "measure": {
+          "value": 100,
+          "unit": "kW",
+          "at": "2026-01-09T12:00:00Z",
+          "by": "example-surveyor",
+          "basis": "observed",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        }
+      },
+      {
+        "key": "gasService",
+        "measure": {
+          "value": true,
+          "at": "2026-01-09T12:00:00Z",
+          "by": "example-surveyor",
+          "basis": "observed",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        }
+      },
+      {
+        "key": "exhaustPath",
+        "measure": {
+          "value": "existing",
+          "at": "2026-01-09T12:00:00Z",
+          "by": "example-surveyor",
+          "basis": "observed",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        }
+      },
+      {
+        "key": "foodUse",
+        "measure": {
+          "value": true,
+          "basis": "observed",
+          "by": "example-surveyor",
+          "at": "2026-01-09T12:00:00Z",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        }
+      }
+    ]
+  },
+  "chooseSite": {
+    "example": true,
+    "id": "example-store",
+    "storeId": null,
+    "spec": {
+      "kind": "StoreSpec",
+      "id": "example-store",
+      "hash": "81ab39b7167d3972e88678ba2865bacc2100631b4ca656164182ddcc357226cf"
+    },
+    "openingTarget": "2026-06-01",
+    "unit": "example-unit",
+    "floorLevel": 0
+  },
+  "matchCounsel": {
+    "languages": [
+      "en"
+    ],
+    "engage": "lawyer-one"
+  },
+  "draftLoi": {
+    "templateId": "example-loi",
+    "lang": "en",
+    "terms": {
+      "termMonths": 60,
+      "renewals": [],
+      "possessionDate": "2026-02-01",
+      "rentCommencementDate": "2026-05-01",
+      "rent": {
+        "base": {
+          "amount": 2000,
+          "currency": "USD"
+        },
+        "period": "month",
+        "basis": "total",
+        "escalation": {
+          "kind": "none",
+          "value": null,
+          "everyMonths": 12
+        },
+        "freeRentMonths": 3,
+        "additional": []
+      },
+      "deposit": {
+        "amount": 2000,
+        "currency": "USD"
+      },
+      "tiAllowance": {
+        "amount": 10000,
+        "currency": "USD"
+      },
+      "guarantee": {
+        "kind": "none",
+        "cap": null
+      },
+      "permittedUse": "Example food service",
+      "exclusiveUse": false,
+      "assignment": "consent",
+      "deliveryCondition": "second_gen_food",
+      "landlordWork": [],
+      "documents": []
+    },
+    "values": {}
+  },
+  "reviewLease": {
+    "documents": [
+      {
+        "template": {
+          "slot": "template",
+          "id": "example-lease",
+          "slotVersion": "0.1.0",
+          "versionHash": "4b605a517fa9b38376c00ee34efaf23374809b6fcf7408e46d18634c13be4242",
+          "coverage": {
+            "tier": "general",
+            "tracks": [],
+            "workflows": [],
+            "jurisdictions": []
+          },
+          "updatedAt": "2026-01-10T12:00:00Z",
+          "example": true,
+          "data": {
+            "kind": "lease",
+            "lang": "en",
+            "title": {
+              "en": "Synthetic example only"
+            },
+            "format": "markdown",
+            "jurisdiction": "XE",
+            "body": "Example only. Free rent: {{months}} months. Use: {{use}}.",
+            "placeholders": [
+              {
+                "token": "{{months}}",
+                "key": "rent.freeRentMonths",
+                "required": true
+              },
+              {
+                "token": "{{use}}",
+                "key": "permittedUse",
+                "required": true
+              }
+            ],
+            "termKeys": [
+              "rent.freeRentMonths",
+              "permittedUse"
+            ],
+            "requiresCounselReview": true
+          }
+        },
+        "kind": "lease",
+        "content": "SYNTHETIC EXAMPLE LEASE — not a legal document",
+        "contentHash": "08ee8625a031ad174fbe933cebdc90f0bdd3a047c14021eb09921c58f6cc923d",
+        "terms": {
+          "termMonths": 60,
+          "renewals": [],
+          "possessionDate": "2026-02-01",
+          "rentCommencementDate": "2026-05-01",
+          "rent": {
+            "base": {
+              "amount": 2000,
+              "currency": "USD"
+            },
+            "period": "month",
+            "basis": "total",
+            "escalation": {
+              "kind": "none",
+              "value": null,
+              "everyMonths": 12
+            },
+            "freeRentMonths": 3,
+            "additional": []
+          },
+          "deposit": {
+            "amount": 2000,
+            "currency": "USD"
+          },
+          "tiAllowance": {
+            "amount": 10000,
+            "currency": "USD"
+          },
+          "guarantee": {
+            "kind": "none",
+            "cap": null
+          },
+          "permittedUse": "Example food service",
+          "exclusiveUse": false,
+          "assignment": "consent",
+          "deliveryCondition": "second_gen_food",
+          "landlordWork": [],
+          "documents": []
+        }
+      }
+    ]
+  },
+  "signLease": {
+    "signers": [
+      {
+        "slot": "party",
+        "id": "tenant",
+        "versionHash": "3d1ac841fc14f98c8f6a9b17fbae94bad38f9c40b38783c03a6c363c5241a22c"
+      },
+      {
+        "slot": "party",
+        "id": "landlord",
+        "versionHash": "03621716884cab8ff41cae14c69b3890e64526e57c5cb6db022f258c9c025a59"
+      }
+    ]
+  }
+}

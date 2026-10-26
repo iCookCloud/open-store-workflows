@@ -1,0 +1,124 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "offer",
+      "id": "example-holds",
+      "slotVersion": "0.1.0",
+      "versionHash": "43feb3fa9d0e9dd008058f7c7b5bae0bca57b896f0e29e0c9cf139dbe2525d8a",
+      "fieldsetHashes": {
+        "price": "7247ed60d7ad3701cda8c28b26597ff23704593057f20f5fc151542f6c9ff4b9",
+        "terms": "02cbf1543bba8a5296a82cac3ec651aa0c88236ee5dfa35d1a2602da013eded1"
+      },
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-product",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 0,
+            "unitPrice": 100
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "includes": [],
+        "validUntil": "2026-12-31",
+        "leadTimeDays": {
+          "min": 2,
+          "max": 5
+        }
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-fails",
+      "slotVersion": "0.1.0",
+      "versionHash": "3bba04c7b7d8e93576eee8dd1031a1840293b5eb7e5f46e76622b555e440e1a9",
+      "fieldsetHashes": {
+        "price": "cc334fe485fce31dbf88d52d3e18ee044ce3108023c64771ae376360bb9a204a",
+        "terms": "02cbf1543bba8a5296a82cac3ec651aa0c88236ee5dfa35d1a2602da013eded1"
+      },
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-product",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 0,
+            "unitPrice": 200
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "includes": [],
+        "validUntil": "2026-12-31",
+        "leadTimeDays": {
+          "min": 2,
+          "max": 5
+        }
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-pending",
+      "slotVersion": "0.1.0",
+      "versionHash": "dd737fe5ae385049a25471914b9a4559e23bed3996809bb46e9d2035ec330a76",
+      "fieldsetHashes": {
+        "price": "96b78de6d04dee0c9c904986fefe141c1ddab0236f9a7c703cc670496f0b45c4",
+        "terms": "83d4203397f28904dcbcada280169b247c34ee8305c3e21d1210e267b2777945"
+      },
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supplier",
+        "productId": "example-product",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 0,
+            "unitPrice": 110
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "includes": [
+          "freight"
+        ],
+        "validUntil": "2026-12-31",
+        "leadTimeDays": {
+          "min": 2,
+          "max": 5
+        }
+      }
+    }
+  ]
+}

@@ -584,7 +584,7 @@ describe('reorder state and upstream evidence', () => {
       [
         menu,
         recipe,
-        await record('reorder', 'example-reorder', order([line()], '2026-02-01T00:00:00Z')),
+        await record('reorder', 'example-reorder', order([line()], '2026-01-20T00:00:00Z')),
       ],
       { 'verify.menu.windowDays': 30, 'verify.menu.minShare': 0.7 },
     );

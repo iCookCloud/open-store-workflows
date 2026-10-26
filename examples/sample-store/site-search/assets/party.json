@@ -1,0 +1,135 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "party",
+      "id": "lawyer-one",
+      "data": {
+        "name": {
+          "en": "Example Counsel"
+        },
+        "roles": [
+          "lawyer"
+        ],
+        "status": "active",
+        "jurisdictions": [
+          "XE"
+        ],
+        "languages": [
+          "en"
+        ],
+        "profiles": {
+          "lawyer": {
+            "matters": [
+              "lease"
+            ],
+            "stance": "tenant",
+            "caseTypes": [],
+            "chinaLanding": "none",
+            "engagement": [
+              "matter"
+            ]
+          }
+        }
+      },
+      "versionHash": "bd219a3250696cba96aa4b6d0dcefe23f2147f65046e5729d2a1d9e1b31aaf38",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "party",
+      "id": "lawyer-two",
+      "data": {
+        "name": {
+          "en": "Example Counsel"
+        },
+        "roles": [
+          "lawyer"
+        ],
+        "status": "active",
+        "jurisdictions": [
+          "XE"
+        ],
+        "languages": [
+          "en"
+        ],
+        "profiles": {
+          "lawyer": {
+            "matters": [
+              "lease"
+            ],
+            "stance": "tenant",
+            "caseTypes": [],
+            "chinaLanding": "none",
+            "engagement": [
+              "matter"
+            ]
+          }
+        }
+      },
+      "versionHash": "bd219a3250696cba96aa4b6d0dcefe23f2147f65046e5729d2a1d9e1b31aaf38",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "party",
+      "id": "tenant",
+      "data": {
+        "name": {
+          "en": "Example tenant"
+        },
+        "roles": [
+          "creator"
+        ],
+        "status": "active"
+      },
+      "versionHash": "3d1ac841fc14f98c8f6a9b17fbae94bad38f9c40b38783c03a6c363c5241a22c",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "party",
+      "id": "landlord",
+      "data": {
+        "name": {
+          "en": "Example landlord"
+        },
+        "roles": [
+          "landlord"
+        ],
+        "status": "active"
+      },
+      "versionHash": "03621716884cab8ff41cae14c69b3890e64526e57c5cb6db022f258c9c025a59",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    }
+  ]
+}

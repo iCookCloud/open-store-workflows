@@ -1,0 +1,40 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "material-rate",
+      "id": "example-material",
+      "slotVersion": "0.1.0",
+      "versionHash": "ee4418582b72e3a99ec111ff8812c6542084962976f4151459f788ff505b650e",
+      "fieldsetHashes": {},
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": "Example panel",
+        "kind": "material",
+        "group": "board",
+        "unit": "sheet",
+        "convert": 2,
+        "baseUnit": "m2",
+        "price": {
+          "amount": 200,
+          "currency": "USD"
+        },
+        "basis": "quote",
+        "source": "Synthetic example",
+        "quotedAt": "2026-01-01",
+        "sheet": {
+          "l": 2000,
+          "w": 1000,
+          "t": 20
+        }
+      }
+    }
+  ]
+}

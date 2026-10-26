@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { replenishmentExample } from '../../../scripts/gen-replenishment-examples.mjs';
 import { approvalNeed } from '../src/helpers.js';
 import { RunInput, SupplyProgram, run, steps, workflow } from '../src/run.js';
+import { verifyUpstream } from '../src/verify.js';
 
 function approvalsFor(needs: Need[], ctx: StepCtx): Approval[] {
   return needs.flatMap((need) =>
@@ -24,6 +25,26 @@ function approvalsFor(needs: Need[], ctx: StepCtx): Approval[] {
 }
 
 describe('replenishment workflow integration', () => {
+  it('does not credit orders after the menu observation window as opening-period evidence', async () => {
+    const fixture = await replenishmentExample();
+    const original = fixture.context.params;
+    const ctx = {
+      ...fixture.context,
+      params: {
+        ...original,
+        get: (key: string) =>
+          key === 'verify.menu.windowDays'
+            ? { value: 5 }
+            : key === 'verify.menu.minShare'
+              ? { value: 0.4 }
+              : original.get(key),
+      },
+    };
+    const verified = await verifyUpstream.run(fixture.reorderInput.verification, ctx);
+    expect(
+      verified.verifications.find((entry) => entry.dimension === 'menuIngredients'),
+    ).toMatchObject({ verdict: 'fails', measured: { actual: 0 } });
+  });
   it('uses the latest actual approval instant when timestamps have different UTC offsets', async () => {
     const fixture = await replenishmentExample();
     const base = {

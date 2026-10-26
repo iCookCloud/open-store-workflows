@@ -96,7 +96,12 @@ export const verifyUpstream: StepDef<typeof Input, typeof Output> = {
             else if (ingredient.termKey) incomplete = true;
           }
         }
-      const reordered = new Set(orders.flatMap((record) => record.data.lines.map(lineKey)));
+      const menuWindowEnd = Date.parse(input.openedAt) + (windowDays ?? 0) * 86400000;
+      const reordered = new Set(
+        orders
+          .filter((record) => Date.parse(orderPlacedAt(record.data)) <= menuWindowEnd)
+          .flatMap((record) => record.data.lines.map(lineKey)),
+      );
       const missing = [...expected].filter((key) => !reordered.has(key));
       const share = expected.size ? 1 - missing.length / expected.size : 0;
       const elapsed = (Date.parse(ctx.now) - Date.parse(input.openedAt)) / 86400000;

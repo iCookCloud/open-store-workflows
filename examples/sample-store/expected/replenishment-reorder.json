@@ -13,12 +13,12 @@
     {
       "kind": "OpeningRecord",
       "id": "example-supply-opening",
-      "hash": "b24d3f8bade9a8f3a6b62c1e2a66a07829bb937ce96c5ff0295b154ad985b460"
+      "hash": "bdd5ef9019e53ab27337f6f78c919f543cc75cecd337a845172512d017983847"
     },
     {
       "kind": "Bom",
       "id": "example-supply-bom",
-      "hash": "72fce2ae3df04804a629d59b508a7b0aad4e4ed42a120951d0128e8346d8e061"
+      "hash": "160133e4c977fb2389ac48345149eebca5c3ed3f36bcc06e0d3b0e93f2b7897e"
     }
   ],
   "sources": [

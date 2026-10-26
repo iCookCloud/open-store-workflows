@@ -1,0 +1,90 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "bom-case",
+      "id": "example-case",
+      "slotVersion": "0.1.0",
+      "versionHash": "30b2421f023cbdea104fb104f7de07abb85862960b0546a56387bb8f24363755",
+      "fieldsetHashes": {},
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "title": "Synthetic example fitout",
+        "designRefs": [
+          {
+            "slot": "design",
+            "id": "example-design",
+            "versionHash": "8f5ea8a9c46ccdcb3f538dd51db4f4c29d63063ffe2cf3c226bc359ec2fd732a"
+          }
+        ],
+        "lines": [
+          {
+            "id": "sample-line",
+            "lineKind": "furniture",
+            "productRef": {
+              "slot": "product",
+              "id": "example-product",
+              "versionHash": "9355df7947a1018712be4f256d74f576a3bed6a5a7a0dd00c9f2c9524cb03ea0"
+            },
+            "qty": 2,
+            "unit": "pcs",
+            "category": "furniture.table",
+            "name": "Example Table",
+            "zone": "Dining",
+            "spec": "Synthetic table",
+            "qtyRule": {
+              "kind": "manual"
+            },
+            "qtyBasis": {
+              "status": "manual",
+              "note": "Synthetic fixture"
+            },
+            "dimsBasis": {
+              "status": "manual",
+              "note": "Synthetic fixture"
+            },
+            "budgetKey": "furnishing",
+            "evidence": [],
+            "derivedFrom": {
+              "kind": "manual",
+              "ref": "example"
+            },
+            "pricingMode": "custom",
+            "components": [
+              {
+                "key": "top",
+                "name": "Example panel",
+                "kind": "material",
+                "basis": "fixed",
+                "qtyPerUnit": 1,
+                "unit": "m2",
+                "rateRef": {
+                  "slot": "material-rate",
+                  "id": "example-material",
+                  "versionHash": "ee4418582b72e3a99ec111ff8812c6542084962976f4151459f788ff505b650e"
+                }
+              }
+            ],
+            "modelCostPerUnit": null,
+            "parts": [],
+            "modelWarnings": [],
+            "sourcing": null,
+            "costBasis": "model",
+            "unitPrice": {
+              "amount": 0,
+              "currency": "USD",
+              "basis": "estimate"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

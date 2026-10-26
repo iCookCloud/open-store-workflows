@@ -6,7 +6,9 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-This implementation includes the shared core, **store-concept** (workflow 1), and **replenishment** (workflow 7). They produce versioned `StoreSpec` and `SupplyProgram` artifacts. The remaining workflow packages and production-system integration are separate work.
+Implemented workflows include **store-concept** (`StoreSpec`), **site-search** (screening, surveys, LOI, counsel review and signed `SiteDecision`), **fitout-bom** (reviewed quantities, supplier offers and frozen `Bom`), and **replenishment** (campaign and reorder decisions with `SupplyProgram`). They share the core, CLI and MCP interfaces. The remaining three workflows and production-system integration are separate work.
+
+See the [site-search guide](packages/site-search/README.md) for the synthetic end-to-end example and explicit local `--providers` modules. `pnpm examples:site-search` checks missing-signature-approval exit 2 and completed exit 0.
 
 ## Packages
 
@@ -15,6 +17,8 @@ This implementation includes the shared core, **store-concept** (workflow 1), an
 | `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
 | `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
 | `@osw/replenishment` | Operating-store segments, supplier matching, newsletter decisions, reorders and upstream verification |
+| `@osw/site-search` | Unit-aware listing filters, independent surveys, lease drift, approvals and signing evidence |
+| `@osw/fitout-bom` | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
 | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 
 The portable core and workflow have no Node builtin dependency. File access and command-line execution live in `@osw/core/node`; the HTTP client lives in `@osw/core/http`. Workflow packages import only `@osw/core`.
@@ -128,3 +132,7 @@ The pre-push hook scans the blobs reachable from outgoing commits; the full-hist
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+## Fitout workflow
+
+`@osw/fitout-bom` implements case/image review, site and menu quantities, material costing, supplier selection, offer verification, BOM freezing and optional customer quotes. See [the fitout package guide](packages/fitout-bom/README.md). The fully synthetic `examples/fitout-store` fixture is checked by `pnpm examples`.
