@@ -1,0 +1,31 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "design",
+      "id": "example-design",
+      "slotVersion": "0.1.0",
+      "versionHash": "8f5ea8a9c46ccdcb3f538dd51db4f4c29d63063ffe2cf3c226bc359ec2fd732a",
+      "fieldsetHashes": {},
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "plan",
+        "images": [
+          {
+            "url": "https://example.com/synthetic-plan.png",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "aiGenerated": true
+          }
+        ],
+        "hotspots": []
+      }
+    }
+  ]
+}

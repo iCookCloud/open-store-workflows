@@ -97,3 +97,7 @@ The pre-push hook scans the blobs reachable from outgoing commits; the full-hist
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+## Fitout workflow
+
+`@osw/fitout-bom` implements case/image review, site and menu quantities, material costing, supplier selection, offer verification, BOM freezing and optional customer quotes. See [the fitout package guide](packages/fitout-bom/README.md). The fully synthetic `examples/fitout-store` fixture is checked by `pnpm examples`.

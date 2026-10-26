@@ -67,3 +67,7 @@ git config core.hooksPath .githooks
 未配置黑名单时扫描失败。`pre-push` 检查待推提交，Woodpecker 使用 `osw_private_denylist` secret。发布包还可以用 `--tarball` 检查。当前不自动发布 npm、不转公开、不修改生产站点。
 
 许可证：[Apache-2.0](LICENSE)。
+
+## 第三条：装修物料单
+
+`@osw/fitout-bom` 已实现案例／识图人审、铺位与菜单用量、用料计价、供应商选择、报价验证、物料单定稿及对外报价。操作方法见 [装修包说明](packages/fitout-bom/README.md)。`examples/fitout-store` 是从零合成的第三条独立示例，纳入 `pnpm examples` 验收。生产资产中心接入尚需在私有项目实施。
