@@ -1,0 +1,281 @@
+{
+  "rulesetId": "example-supply-rules",
+  "opening": {
+    "kind": "OpeningRecord",
+    "artifactVersion": "0.1.0",
+    "id": "example-supply-opening",
+    "hash": "b24d3f8bade9a8f3a6b62c1e2a66a07829bb937ce96c5ff0295b154ad985b460",
+    "producedBy": {
+      "step": "opening/assembleRecord",
+      "pkg": "@osw/opening",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-supply-store-1",
+    "inputs": [],
+    "sources": [
+      {
+        "slot": "menu",
+        "id": "example-supply-menu",
+        "versionHash": "bb593ed0f7036bd46e1ea0c936c04ff2d9abde819d50c9547101126821bc88c8"
+      }
+    ],
+    "createdAt": "2026-01-01T12:00:00Z",
+    "example": true,
+    "body": {
+      "menuRef": {
+        "slot": "menu",
+        "id": "example-supply-menu",
+        "versionHash": "bb593ed0f7036bd46e1ea0c936c04ff2d9abde819d50c9547101126821bc88c8"
+      },
+      "bomRef": {
+        "kind": "Bom",
+        "id": "example-supply-bom",
+        "hash": "72fce2ae3df04804a629d59b508a7b0aad4e4ed42a120951d0128e8346d8e061"
+      },
+      "decidedAt": "2026-01-01T12:00:00Z",
+      "track": "replenishment-noodle",
+      "jurisdiction": "XE-A-AA",
+      "timezone": "UTC",
+      "openingDate": "2026-01-01",
+      "status": "completed",
+      "staffing": [],
+      "certMatrix": {
+        "plan": {
+          "slot": "template",
+          "id": "example-supply-service",
+          "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824"
+        },
+        "seats": [],
+        "cells": [],
+        "summary": {
+          "planTotal": 0,
+          "staffed": 0,
+          "gaps": [],
+          "certRequired": 0,
+          "certPassed": 0,
+          "criticalRequired": 0,
+          "criticalPassed": 0,
+          "criticalPending": 0,
+          "expiring": 0,
+          "hollow": false,
+          "ready": true
+        }
+      },
+      "checklist": {
+        "template": {
+          "slot": "template",
+          "id": "example-supply-service",
+          "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824"
+        },
+        "firstDay": 0,
+        "lastDay": 0,
+        "items": []
+      },
+      "issues": [],
+      "release": {
+        "current": {
+          "state": "ready",
+          "blockers": []
+        },
+        "signed": {
+          "snapshot": [],
+          "snapshotHash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "decision": "go",
+          "at": "2026-01-01T12:00:00Z",
+          "by": "example:operator"
+        }
+      },
+      "marketing": {
+        "template": {
+          "slot": "template",
+          "id": "example-supply-lead",
+          "versionHash": "30f260c8e2605b5589887b0c88e57d1d16049e38b1629b79c3eba65ebea0b256"
+        },
+        "items": [],
+        "ledger": [],
+        "assetGap": {
+          "required": 0,
+          "ready": 0,
+          "missing": 0,
+          "blockedChannels": []
+        }
+      },
+      "reviews": [],
+      "handoff": {
+        "storeStatus": "operating",
+        "openedAt": "2026-01-01"
+      }
+    }
+  },
+  "bom": {
+    "kind": "Bom",
+    "artifactVersion": "0.1.0",
+    "id": "example-supply-bom",
+    "hash": "72fce2ae3df04804a629d59b508a7b0aad4e4ed42a120951d0128e8346d8e061",
+    "producedBy": {
+      "step": "fitout-bom/assembleBom",
+      "pkg": "@osw/fitout-bom",
+      "pkgVersion": "0.1.0"
+    },
+    "storeId": "example-supply-store-1",
+    "inputs": [],
+    "sources": [
+      {
+        "slot": "offer",
+        "id": "example-supply-initial",
+        "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+      }
+    ],
+    "createdAt": "2026-01-01T12:00:00Z",
+    "example": true,
+    "body": {
+      "currency": "USD",
+      "lines": [
+        {
+          "id": "example-noodle-line",
+          "lineKind": "food",
+          "productRef": {
+            "slot": "product",
+            "id": "example-supply-noodle",
+            "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+          },
+          "offerRef": {
+            "slot": "offer",
+            "id": "example-supply-initial",
+            "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+          },
+          "qty": 10,
+          "unit": "kg",
+          "category": "ingredients",
+          "name": "Example Noodles",
+          "zone": "example-kitchen",
+          "spec": "Example 1 kg bag",
+          "qtyRule": {
+            "kind": "manual"
+          },
+          "qtyBasis": {
+            "status": "manual",
+            "note": "Synthetic opening stock"
+          },
+          "dimsBasis": {
+            "status": "manual",
+            "note": "Not dimensioned"
+          },
+          "budgetKey": "opening_inventory",
+          "evidence": [],
+          "derivedFrom": {
+            "kind": "manual",
+            "ref": "example"
+          },
+          "pricingMode": "whole",
+          "components": [],
+          "modelCostPerUnit": null,
+          "parts": [],
+          "modelWarnings": [],
+          "sourcing": null,
+          "costBasis": "offer",
+          "unitPrice": {
+            "amount": 30,
+            "currency": "USD",
+            "basis": "invoice"
+          },
+          "coverDays": 10
+        }
+      ],
+      "totals": {
+        "model": {
+          "amount": 0,
+          "currency": "USD"
+        },
+        "chosen": {
+          "amount": 300,
+          "currency": "USD"
+        },
+        "byBudgetKey": {}
+      }
+    }
+  },
+  "mode": "reorder",
+  "storeId": "example-supply-store-1",
+  "currency": "USD",
+  "selected": [
+    {
+      "line": {
+        "id": "example-noodle-line",
+        "lineKind": "food",
+        "qty": 10,
+        "unit": "kg",
+        "key": "example-supply-noodle",
+        "weakKey": false,
+        "name": "Example Noodles",
+        "spec": "Example 1 kg bag",
+        "productRef": {
+          "slot": "product",
+          "id": "example-supply-noodle",
+          "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+        },
+        "offerRef": {
+          "slot": "offer",
+          "id": "example-supply-initial",
+          "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+        },
+        "initialOfferRef": {
+          "slot": "offer",
+          "id": "example-supply-initial",
+          "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+        },
+        "unitPrice": {
+          "amount": 30,
+          "currency": "USD"
+        },
+        "priceSource": "last-paid",
+        "coverDays": 10
+      },
+      "supplierId": "example-supply-partner"
+    }
+  ],
+  "action": "submit",
+  "verification": {
+    "storeId": "example-supply-store-1",
+    "openedAt": "2026-01-01T12:00:00Z",
+    "menuRef": {
+      "slot": "menu",
+      "id": "example-supply-menu",
+      "versionHash": "bb593ed0f7036bd46e1ea0c936c04ff2d9abde819d50c9547101126821bc88c8"
+    },
+    "seedLines": [
+      {
+        "id": "example-noodle-line",
+        "lineKind": "food",
+        "qty": 10,
+        "unit": "kg",
+        "key": "example-supply-noodle",
+        "weakKey": false,
+        "name": "Example Noodles",
+        "spec": "Example 1 kg bag",
+        "productRef": {
+          "slot": "product",
+          "id": "example-supply-noodle",
+          "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+        },
+        "offerRef": {
+          "slot": "offer",
+          "id": "example-supply-initial",
+          "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+        },
+        "initialOfferRef": {
+          "slot": "offer",
+          "id": "example-supply-initial",
+          "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+        },
+        "unitPrice": {
+          "amount": 30,
+          "currency": "USD"
+        },
+        "priceSource": "last-paid",
+        "coverDays": 10
+      }
+    ],
+    "initialArrivedAt": "2026-01-01T12:00:00Z"
+  }
+}

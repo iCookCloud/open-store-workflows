@@ -170,6 +170,678 @@
         "validFrom": "2025-01-01",
         "validTo": "2030-12-31"
       }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.matrix.maxDims",
+      "slotVersion": "0.1.0",
+      "versionHash": "183e8864ac1a8ddf57573d11cfb3c4f30eaa5b59524cfdeadef93b6562d2dee0",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.matrix.maxDims",
+        "value": 3
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.matrix.minCell",
+      "slotVersion": "0.1.0",
+      "versionHash": "50d4bb6c436e3075f4ac6a91077859e620f537be3f3e114138cf0e00ffb0594c",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.matrix.minCell",
+        "value": 1
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.capDays",
+      "slotVersion": "0.1.0",
+      "versionHash": "292f259e99992b3344c034b9b022264b855226bbe0379229153afd5254b0621b",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.capDays",
+        "value": 10
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.runMax",
+      "slotVersion": "0.1.0",
+      "versionHash": "e9af1ae8944bd46049eea9eff47441f16326bee7c70b13228a10a903569d8198",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.runMax",
+        "value": 20
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.dayMax",
+      "slotVersion": "0.1.0",
+      "versionHash": "08e49cdba263a3215c80193c3e056f309b6ad881a7a5aa8417420051ed4c2b9a",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.dayMax",
+        "value": 100
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.trial",
+      "slotVersion": "0.1.0",
+      "versionHash": "78c881af0de21fc5b16419b3a6f920334bd9ca5b0df98450f82c09b09ced23ca",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.trial",
+        "value": 10
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.holdHours",
+      "slotVersion": "0.1.0",
+      "versionHash": "4f63cd0ca91f168243aba81a1dfed055a1bd0db81fd38c77a59a591013e8cfc8",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.holdHours",
+        "value": 10
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.tz",
+      "slotVersion": "0.1.0",
+      "versionHash": "0a8f36b7f652cd952de4c56f55d8104db7bbe9b194c5930edc75809a9480815c",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.window.tz",
+        "value": "UTC"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.days",
+      "slotVersion": "0.1.0",
+      "versionHash": "6d3bb7f61b9d2beb29be38b42ca3bb6b4e563a79c94715e90bb0016c068a2dba",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.window.days",
+        "value": "Mon,Tue,Wed,Thu,Fri"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.fromHour",
+      "slotVersion": "0.1.0",
+      "versionHash": "92afd9ea06abe34496120edfd9f535258ca436ae29a9415bbcab954b916ea98d",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.window.fromHour",
+        "value": 0
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.toHour",
+      "slotVersion": "0.1.0",
+      "versionHash": "b1586c5cdb2eba4b94a0afb9a88729d0c7632f22915de0a94e41fa7730d41a3f",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.window.toHour",
+        "value": 24
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.complaint",
+      "slotVersion": "0.1.0",
+      "versionHash": "d3f8b477e13fc67725a3f5979451b23c816c5de352e1917eecb5445db474046a",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.breaker.complaint",
+        "value": 0
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.unsub",
+      "slotVersion": "0.1.0",
+      "versionHash": "1e8054f72a8e3ebe627ca222922c1e317e434be4caec1509c710625dd892455f",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.breaker.unsub",
+        "value": 0.1
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.bounce",
+      "slotVersion": "0.1.0",
+      "versionHash": "d5167be0239cf7abb465e7d690991b0baf9af9765ec9f860ae4c20a324ad9bc3",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.breaker.bounce",
+        "value": 0.1
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.failed",
+      "slotVersion": "0.1.0",
+      "versionHash": "00928c5cd190e46df962fa933e1f52e0266c76be5650aa7681f90ca95ce0ec6c",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.breaker.failed",
+        "value": 0.2
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.minSample",
+      "slotVersion": "0.1.0",
+      "versionHash": "008bbaa3d7a9c2b3ef44eb1c0ddf37fad2e107dac68c8a4d7cbf57b86f02678a",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.breaker.minSample",
+        "value": 10
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.minAttempts",
+      "slotVersion": "0.1.0",
+      "versionHash": "96b298b8138457a0703720681b83b859ceb2713585aea50fc849d5895fa101d4",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.breaker.minAttempts",
+        "value": 10
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.attributionDays",
+      "slotVersion": "0.1.0",
+      "versionHash": "133f3bbacf027ab646812f8969bab214532125f781ae3aaff0549c47c18e7461",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.attributionDays",
+        "value": 30
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.provider.minIntervalMs",
+      "slotVersion": "0.1.0",
+      "versionHash": "a7698b1db7dc3b1488dd398e265d0274cf7095c00df8378786be4821987abc3b",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "nl.provider.minIntervalMs",
+        "value": 10
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-reorder.minIntervals",
+      "slotVersion": "0.1.0",
+      "versionHash": "45ae9849ccb552339301621404544fe985916e0421e1c4c8a1dbc6e4e1110f6d",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "reorder.minIntervals",
+        "value": 2
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-reorder.graceDays",
+      "slotVersion": "0.1.0",
+      "versionHash": "23251d539966274bb5316cfb3d11efd7b584e57fab64d6bba50a5ed56b8d577b",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "reorder.graceDays",
+        "value": 2
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-program.shareWindowDays",
+      "slotVersion": "0.1.0",
+      "versionHash": "acbc39bedfd3c9604067fcaa8728c8235d3e7f691033ddfcf531e6a64aaf9054",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "program.shareWindowDays",
+        "value": 30
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-program.shareTarget",
+      "slotVersion": "0.1.0",
+      "versionHash": "360fb63491c5e6ccf5a723eba74c8879844db4520d062b56fe6735558a8e50e6",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "program.shareTarget",
+        "value": 0.8
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-verify.menu.windowDays",
+      "slotVersion": "0.1.0",
+      "versionHash": "1cfa2e17550716822089a0fe5e8b114ef0533ecc608cbe94d32c44b070ff3174",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.menu.windowDays",
+        "value": 30
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-verify.menu.minShare",
+      "slotVersion": "0.1.0",
+      "versionHash": "563cc7c2520366e6b2250ba4d6ce7b42513c102876413690c28cf5334baed732",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.menu.minShare",
+        "value": 0.8
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-verify.price.tolerance",
+      "slotVersion": "0.1.0",
+      "versionHash": "6a8d71603b74071cd2fb68e0a55413051905c56492019fbb99bc9ba6443c766c",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.price.tolerance",
+        "value": 0.1
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-verify.segment.minSample",
+      "slotVersion": "0.1.0",
+      "versionHash": "36f3ea42520fffba6b66b73ff001f8a39b0739bf9a19edd06a5be055847b613f",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.segment.minSample",
+        "value": 10
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-verify.segment.minReplyRate",
+      "slotVersion": "0.1.0",
+      "versionHash": "a7fca46f617fec1e5dd6305704d45815293ccd15acf6484bbe14fc9f288dc8f9",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.segment.minReplyRate",
+        "value": 0.1
+      }
     }
   ]
 }

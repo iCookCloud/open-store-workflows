@@ -30,6 +30,7 @@
     "tsx": "^4.20.0",
     "@osw/core": "workspace:*",
     "@osw/store-concept": "workspace:*",
-    "@osw/mcp": "workspace:*"
+    "@osw/mcp": "workspace:*",
+    "@osw/replenishment": "workspace:*"
   }
 }

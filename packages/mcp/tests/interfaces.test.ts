@@ -15,6 +15,7 @@ import {
   z,
 } from '@osw/core';
 import { discoverWorkflows, executeStep, runCli } from '@osw/core/node';
+import { workflow as replenishmentWorkflow } from '@osw/replenishment';
 import { describe, expect, it, vi } from 'vitest';
 import { createOswServer, stripPrivateOutput } from '../src/index.js';
 
@@ -89,6 +90,29 @@ async function connect(options: Parameters<typeof createOswServer>[0] = {}) {
 }
 
 describe('CLI and MCP use the same read-only runner', () => {
+  it('discovers replenishment tools and returns the same blocking needs as the CLI runner', async () => {
+    const source = new MemorySource([], replenishmentWorkflow.slots);
+    const { client } = await connect({ workflows: [replenishmentWorkflow], source });
+    try {
+      const tools = (await client.listTools()).tools;
+      for (const step of replenishmentWorkflow.steps)
+        expect(tools.map((tool) => tool.name)).toContain(step.id.replace('/', '_'));
+      const step = replenishmentWorkflow.steps.find(
+        (step) => step.id === 'replenishment/classifyStores',
+      )!;
+      const input = { rulesetId: 'example-missing-rules' };
+      const cli = await executeStep(step, input, { source, now, actor: 'osw:mcp@0.1.0' });
+      const response = await client.callTool({
+        name: 'replenishment_classifyStores',
+        arguments: input,
+      });
+      expect(response.structuredContent).toEqual(cli.result);
+      expect(response.isError).not.toBe(true);
+      expect(cli.exitCode).toBe(2);
+    } finally {
+      await client.close();
+    }
+  });
   it('returns the same input need for missing required fields without hiding internal errors', async () => {
     const directory = await tempDirectory();
     await writeFile(join(directory, 'missing.json'), '{}');

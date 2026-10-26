@@ -25,6 +25,7 @@ const allowedDomains = new Set([
   'www.typescriptlang.org',
   'modelcontextprotocol.io',
   'ts.sdk.modelcontextprotocol.io',
+  'api.resend.com',
 ]);
 
 export function parseDenylist(text) {

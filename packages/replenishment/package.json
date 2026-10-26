@@ -1,0 +1,22 @@
+{
+  "name": "@osw/replenishment",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "files": ["dist", "rules"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./runner": { "types": "./dist/runner/index.d.ts", "import": "./dist/runner/index.js" },
+    "./provider-resend": {
+      "types": "./dist/provider-resend/index.d.ts",
+      "import": "./dist/provider-resend/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run tests"
+  },
+  "dependencies": { "@osw/core": "workspace:*" },
+  "osw": { "workflow": true }
+}

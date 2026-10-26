@@ -1,0 +1,322 @@
+{
+  "kind": "SupplyProgram",
+  "artifactVersion": "0.1.0",
+  "id": "supply-59dcf49dce1eb040a2b345e8ffa893e6",
+  "hash": "59dcf49dce1eb040a2b345e8ffa893e6277891eef4ccda315fd14838bf7b61d6",
+  "producedBy": {
+    "step": "replenishment/run",
+    "pkg": "@osw/replenishment",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-supply-store-1",
+  "inputs": [
+    {
+      "kind": "OpeningRecord",
+      "id": "example-supply-opening",
+      "hash": "b24d3f8bade9a8f3a6b62c1e2a66a07829bb937ce96c5ff0295b154ad985b460"
+    },
+    {
+      "kind": "Bom",
+      "id": "example-supply-bom",
+      "hash": "72fce2ae3df04804a629d59b508a7b0aad4e4ed42a120951d0128e8346d8e061"
+    }
+  ],
+  "sources": [
+    {
+      "slot": "offer",
+      "id": "example-supply-repeat",
+      "versionHash": "f4c40825bc95e67c5d6a7b61ea9358e859f224c5ea1566a27a735977fe0299e0"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.bounce",
+      "versionHash": "d5167be0239cf7abb465e7d690991b0baf9af9765ec9f860ae4c20a324ad9bc3"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.complaint",
+      "versionHash": "d3f8b477e13fc67725a3f5979451b23c816c5de352e1917eecb5445db474046a"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.failed",
+      "versionHash": "00928c5cd190e46df962fa933e1f52e0266c76be5650aa7681f90ca95ce0ec6c"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.minAttempts",
+      "versionHash": "96b298b8138457a0703720681b83b859ceb2713585aea50fc849d5895fa101d4"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.minSample",
+      "versionHash": "008bbaa3d7a9c2b3ef44eb1c0ddf37fad2e107dac68c8a4d7cbf57b86f02678a"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.breaker.unsub",
+      "versionHash": "1e8054f72a8e3ebe627ca222922c1e317e434be4caec1509c710625dd892455f"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.capDays",
+      "versionHash": "292f259e99992b3344c034b9b022264b855226bbe0379229153afd5254b0621b"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.dayMax",
+      "versionHash": "08e49cdba263a3215c80193c3e056f309b6ad881a7a5aa8417420051ed4c2b9a"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.holdHours",
+      "versionHash": "4f63cd0ca91f168243aba81a1dfed055a1bd0db81fd38c77a59a591013e8cfc8"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.matrix.maxDims",
+      "versionHash": "183e8864ac1a8ddf57573d11cfb3c4f30eaa5b59524cfdeadef93b6562d2dee0"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.matrix.minCell",
+      "versionHash": "50d4bb6c436e3075f4ac6a91077859e620f537be3f3e114138cf0e00ffb0594c"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.runMax",
+      "versionHash": "e9af1ae8944bd46049eea9eff47441f16326bee7c70b13228a10a903569d8198"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.trial",
+      "versionHash": "78c881af0de21fc5b16419b3a6f920334bd9ca5b0df98450f82c09b09ced23ca"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.days",
+      "versionHash": "6d3bb7f61b9d2beb29be38b42ca3bb6b4e563a79c94715e90bb0016c068a2dba"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.fromHour",
+      "versionHash": "92afd9ea06abe34496120edfd9f535258ca436ae29a9415bbcab954b916ea98d"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.toHour",
+      "versionHash": "b1586c5cdb2eba4b94a0afb9a88729d0c7632f22915de0a94e41fa7730d41a3f"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-nl.window.tz",
+      "versionHash": "0a8f36b7f652cd952de4c56f55d8104db7bbe9b194c5930edc75809a9480815c"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-program.shareTarget",
+      "versionHash": "360fb63491c5e6ccf5a723eba74c8879844db4520d062b56fe6735558a8e50e6"
+    },
+    {
+      "slot": "params",
+      "id": "example-supply-param-program.shareWindowDays",
+      "versionHash": "acbc39bedfd3c9604067fcaa8728c8235d3e7f691033ddfcf531e6a64aaf9054"
+    },
+    {
+      "slot": "party",
+      "id": "example-supply-partner",
+      "versionHash": "e480fc3f0f2476ac905aabc9db3c6dd1325ae753d35776babe0c0a20290a8398"
+    },
+    {
+      "slot": "product",
+      "id": "example-supply-noodle",
+      "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+    },
+    {
+      "slot": "segment-ruleset",
+      "id": "example-supply-rules",
+      "versionHash": "c30cc4c4bbf01cc371fbd4c1e5f8b6c53db99e0cad8a8351bc03c9928125da93"
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-footer",
+      "versionHash": "09374cf67830f06682a9f57a0f3b78cafb32b4b7997b28e285f4c381608a4972"
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-lead",
+      "versionHash": "30f260c8e2605b5589887b0c88e57d1d16049e38b1629b79c3eba65ebea0b256"
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-service",
+      "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824"
+    }
+  ],
+  "createdAt": "2026-02-02T12:00:00Z",
+  "example": true,
+  "body": {
+    "ruleset": {
+      "slot": "segment-ruleset",
+      "id": "example-supply-rules",
+      "versionHash": "c30cc4c4bbf01cc371fbd4c1e5f8b6c53db99e0cad8a8351bc03c9928125da93"
+    },
+    "segmentation": {
+      "total": 5,
+      "segments": [
+        {
+          "key": "XE-A|replenishment-noodle",
+          "region": "XE-A",
+          "track": "replenishment-noodle",
+          "supplyCats": [
+            "ingredients"
+          ],
+          "count": 2,
+          "filter": {
+            "all": [
+              {
+                "field": "status",
+                "op": "eq",
+                "value": "operating"
+              },
+              {
+                "field": "track",
+                "op": "eq",
+                "value": "replenishment-noodle"
+              },
+              {
+                "field": "jurisdiction",
+                "op": "prefix",
+                "value": "XE-A"
+              }
+            ]
+          }
+        }
+      ],
+      "unclassified": {
+        "count": 3,
+        "byMissing": {
+          "region": 3
+        },
+        "sample": [
+          "example-store-1",
+          "example-store-2",
+          "example-store-3"
+        ]
+      }
+    },
+    "matches": [
+      {
+        "supplierId": "example-supply-partner",
+        "offerIds": [
+          "example-supply-repeat"
+        ],
+        "segments": [
+          {
+            "key": "XE-A|replenishment-noodle",
+            "count": 2,
+            "sharedCats": [
+              "ingredients"
+            ]
+          }
+        ],
+        "blocked": {
+          "region": 0,
+          "cats": 0,
+          "track": 0
+        }
+      }
+    ],
+    "campaigns": [
+      {
+        "campaignId": "example-supply-campaign",
+        "supplierId": "example-supply-partner",
+        "topicKey": "example-recurring-ingredients",
+        "topicRule": {
+          "tracks": [
+            "replenishment-noodle"
+          ],
+          "regions": [
+            "xe-a"
+          ]
+        },
+        "dims": [
+          "scene"
+        ],
+        "variants": [
+          {
+            "variantKey": "ingredients",
+            "cell": {
+              "scene": "ingredients"
+            },
+            "rule": {
+              "tracks": [
+                "replenishment-noodle"
+              ],
+              "regions": [
+                "xe-a"
+              ]
+            },
+            "lead": {
+              "slot": "template",
+              "id": "example-supply-lead",
+              "versionHash": "30f260c8e2605b5589887b0c88e57d1d16049e38b1629b79c3eba65ebea0b256"
+            },
+            "service": {
+              "slot": "template",
+              "id": "example-supply-service",
+              "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824"
+            },
+            "productIds": [
+              "example-supply-noodle"
+            ],
+            "subject": "Example recurring ingredients",
+            "preheader": "An invented supply program",
+            "expected": 2
+          }
+        ],
+        "sharedBlocks": [
+          {
+            "slot": "template",
+            "id": "example-supply-footer",
+            "versionHash": "09374cf67830f06682a9f57a0f3b78cafb32b4b7997b28e285f4c381608a4972"
+          }
+        ],
+        "contentHash": "9302da0072ea68fac7dd93fecfd970eb7cd45df8fd24425a130b4f34b947d3ca",
+        "state": "approved",
+        "stats": {
+          "sent": 0,
+          "failed": 0,
+          "queued": 0,
+          "bounced": 0,
+          "complained": 0,
+          "unsub": 0,
+          "replies": 0,
+          "orders": 0
+        }
+      }
+    ],
+    "reorders": {
+      "byState": {
+        "delivered": 3
+      },
+      "attributed": 0
+    },
+    "replenishShare": [
+      {
+        "segmentKey": "XE-A|replenishment-noodle",
+        "basis": "none",
+        "stores": 1,
+        "byLines": null,
+        "target": 0.8
+      },
+      {
+        "segmentKey": "XE-A|replenishment-noodle",
+        "basis": "bom",
+        "stores": 1,
+        "byLines": 1,
+        "target": 0.8
+      }
+    ]
+  }
+}

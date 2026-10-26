@@ -1,0 +1,92 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "template",
+      "id": "example-supply-lead",
+      "slotVersion": "0.1.0",
+      "versionHash": "30f260c8e2605b5589887b0c88e57d1d16049e38b1629b79c3eba65ebea0b256",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "newsletter-block",
+        "lang": "en",
+        "title": {
+          "en": "Example Supply Introduction"
+        },
+        "format": "markdown",
+        "body": "Hello {{STORE}}, explore recurring ingredients for your menu."
+      }
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-service",
+      "slotVersion": "0.1.0",
+      "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "newsletter-block",
+        "lang": "en",
+        "title": {
+          "en": "Example Supply Service"
+        },
+        "format": "markdown",
+        "body": "Choose quantities in your store page: {{STORE_URL}}"
+      }
+    },
+    {
+      "slot": "template",
+      "id": "example-supply-footer",
+      "slotVersion": "0.1.0",
+      "versionHash": "09374cf67830f06682a9f57a0f3b78cafb32b4b7997b28e285f4c381608a4972",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "kind": "newsletter-block",
+        "lang": "en",
+        "title": {
+          "en": "Example Supply Footer"
+        },
+        "format": "markdown",
+        "body": "Unsubscribe: {{UNSUB}}"
+      }
+    }
+  ]
+}

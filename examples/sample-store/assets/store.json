@@ -222,6 +222,74 @@
           }
         ]
       }
+    },
+    {
+      "slot": "store",
+      "id": "example-supply-store-1",
+      "slotVersion": "0.1.0",
+      "versionHash": "8ad15d1a7422b2bdc00530462037d382e1cfa5b0b9090658849659fa9153c7b7",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Noodle Bar"
+        },
+        "status": "operating",
+        "origin": "opened",
+        "track": "replenishment-noodle",
+        "jurisdiction": "XE-A-AA",
+        "timezone": "UTC",
+        "openedAt": "2026-01-01",
+        "supplyCategories": [
+          "outdated-example-category"
+        ]
+      }
+    },
+    {
+      "slot": "store",
+      "id": "example-supply-store-2",
+      "slotVersion": "0.1.0",
+      "versionHash": "6a33f39e5237a7af7a367f957ad9b7a0fbf230b2ac82b56c0238d25461cf0d21",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Intake Noodle Bar"
+        },
+        "status": "operating",
+        "origin": "intake",
+        "track": "replenishment-noodle",
+        "jurisdiction": "XE-A-BB",
+        "timezone": "UTC",
+        "openedAt": "2026-01-01",
+        "supplyCategories": [
+          "ingredients"
+        ]
+      }
     }
   ]
 }

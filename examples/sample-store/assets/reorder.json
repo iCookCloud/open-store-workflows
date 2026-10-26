@@ -1,0 +1,278 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "reorder",
+      "id": "example-supply-order-10",
+      "slotVersion": "0.1.0",
+      "versionHash": "0c0d62f31636ee3288ea72dba3d9f7f441ae96141903b2d2c96446f4794f8f89",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "storeId": "example-supply-store-1",
+        "supplierId": "example-supply-partner",
+        "lines": [
+          {
+            "id": "example-noodle-line",
+            "lineKind": "food",
+            "qty": 10,
+            "unit": "kg",
+            "key": "example-supply-noodle",
+            "weakKey": false,
+            "name": "Example Noodles",
+            "spec": "Example 1 kg bag",
+            "productRef": {
+              "slot": "product",
+              "id": "example-supply-noodle",
+              "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-supply-repeat",
+              "versionHash": "f4c40825bc95e67c5d6a7b61ea9358e859f224c5ea1566a27a735977fe0299e0"
+            },
+            "initialOfferRef": {
+              "slot": "offer",
+              "id": "example-supply-initial",
+              "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+            },
+            "unitPrice": {
+              "amount": 20,
+              "currency": "USD"
+            },
+            "priceSource": "repeat-offer",
+            "coverDays": 10
+          }
+        ],
+        "skipped": [],
+        "state": "delivered",
+        "history": [
+          {
+            "state": "draft",
+            "at": "2026-01-10T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "submitted",
+            "at": "2026-01-10T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "confirmed",
+            "at": "2026-01-10T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "delivered",
+            "at": "2026-01-10T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          }
+        ],
+        "receipt": [
+          {
+            "key": "example-supply-noodle",
+            "qty": 10
+          }
+        ]
+      }
+    },
+    {
+      "slot": "reorder",
+      "id": "example-supply-order-20",
+      "slotVersion": "0.1.0",
+      "versionHash": "d49a9aeb60cb103f5b2db478410a0bb6d344944b3c48582e47554a363b165d14",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "storeId": "example-supply-store-1",
+        "supplierId": "example-supply-partner",
+        "lines": [
+          {
+            "id": "example-noodle-line",
+            "lineKind": "food",
+            "qty": 10,
+            "unit": "kg",
+            "key": "example-supply-noodle",
+            "weakKey": false,
+            "name": "Example Noodles",
+            "spec": "Example 1 kg bag",
+            "productRef": {
+              "slot": "product",
+              "id": "example-supply-noodle",
+              "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-supply-repeat",
+              "versionHash": "f4c40825bc95e67c5d6a7b61ea9358e859f224c5ea1566a27a735977fe0299e0"
+            },
+            "initialOfferRef": {
+              "slot": "offer",
+              "id": "example-supply-initial",
+              "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+            },
+            "unitPrice": {
+              "amount": 20,
+              "currency": "USD"
+            },
+            "priceSource": "repeat-offer",
+            "coverDays": 10
+          }
+        ],
+        "skipped": [],
+        "state": "delivered",
+        "history": [
+          {
+            "state": "draft",
+            "at": "2026-01-20T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "submitted",
+            "at": "2026-01-20T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "confirmed",
+            "at": "2026-01-20T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "delivered",
+            "at": "2026-01-20T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          }
+        ],
+        "receipt": [
+          {
+            "key": "example-supply-noodle",
+            "qty": 10
+          }
+        ]
+      }
+    },
+    {
+      "slot": "reorder",
+      "id": "example-supply-order-30",
+      "slotVersion": "0.1.0",
+      "versionHash": "95c8bc0ba9bc0acc9bb12cc101fbe7bd733f4c588414bffdb1929001aece0700",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "storeId": "example-supply-store-1",
+        "supplierId": "example-supply-partner",
+        "lines": [
+          {
+            "id": "example-noodle-line",
+            "lineKind": "food",
+            "qty": 10,
+            "unit": "kg",
+            "key": "example-supply-noodle",
+            "weakKey": false,
+            "name": "Example Noodles",
+            "spec": "Example 1 kg bag",
+            "productRef": {
+              "slot": "product",
+              "id": "example-supply-noodle",
+              "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-supply-repeat",
+              "versionHash": "f4c40825bc95e67c5d6a7b61ea9358e859f224c5ea1566a27a735977fe0299e0"
+            },
+            "initialOfferRef": {
+              "slot": "offer",
+              "id": "example-supply-initial",
+              "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+            },
+            "unitPrice": {
+              "amount": 20,
+              "currency": "USD"
+            },
+            "priceSource": "repeat-offer",
+            "coverDays": 10
+          }
+        ],
+        "skipped": [],
+        "state": "delivered",
+        "history": [
+          {
+            "state": "draft",
+            "at": "2026-01-30T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "submitted",
+            "at": "2026-01-30T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "confirmed",
+            "at": "2026-01-30T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          },
+          {
+            "state": "delivered",
+            "at": "2026-01-30T12:00:00Z",
+            "by": "example:operator",
+            "subjectHash": "7d2946c7205baf4897f614b15e7ad83b12ce6ba207440d94ed89f0374e00c54d"
+          }
+        ],
+        "receipt": [
+          {
+            "key": "example-supply-noodle",
+            "qty": 10
+          }
+        ]
+      }
+    }
+  ]
+}

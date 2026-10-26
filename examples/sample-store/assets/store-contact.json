@@ -1,0 +1,63 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "store-contact",
+      "id": "example-supply-contact-1",
+      "slotVersion": "0.1.0",
+      "versionHash": "a4dcf2282a6ac08e9360092d5fc174544bbbba81157dbb895103f4ce8205ed5d",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "storeId": "example-supply-store-1",
+        "channel": "email",
+        "address": "supply-1@example.com",
+        "verdict": "verified",
+        "source": "synthetic-example",
+        "verifiedAt": "2026-01-01T12:00:00Z",
+        "createdAt": "2026-01-01T12:00:00Z"
+      }
+    },
+    {
+      "slot": "store-contact",
+      "id": "example-supply-contact-2",
+      "slotVersion": "0.1.0",
+      "versionHash": "900de8107c7da4f40520416c2f303f4aa37f12411ac99d0ad307afac1cde4483",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "storeId": "example-supply-store-2",
+        "channel": "email",
+        "address": "supply-2@example.com",
+        "verdict": "verified",
+        "source": "synthetic-example",
+        "verifiedAt": "2026-01-01T12:00:00Z",
+        "createdAt": "2026-01-01T12:00:00Z"
+      }
+    }
+  ]
+}
