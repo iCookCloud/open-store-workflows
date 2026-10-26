@@ -1,4 +1,4 @@
-import { BUDGET_KEYS, Money, StoreSpecBody, roundMoney, z } from '@osw/core';
+import { BUDGET_KEYS, BudgetKey, Money, MonthlyKey, StoreSpecBody, roundMoney, z } from '@osw/core';
 import type { ConceptBrief } from './brief.js';
 import { decimalSum } from './decimal.js';
 import { type CalcParam, CalcTemplate } from './slots/calc-template.js';
@@ -58,11 +58,26 @@ export function compute(input: ComputeInput): EngineOutput {
     if (money.currency !== template.currency)
       throw new Error('All money must match template.currency before compute');
   }
-  if (!template.hasDefaults) {
-    for (const param of template.params) {
-      if (!(param.key in overrides))
-        throw new Error(`No default exists for ${param.key}; provide an override`);
-    }
+  if (!template.hasDefaults)
+    throw new Error('A trusted template is required before computing financial outputs');
+  const parameters: CalcParam[] = [...template.params];
+  const existing = new Set(parameters.map((param) => param.key));
+  for (const key of Object.keys(overrides).sort()) {
+    const investmentKey = BudgetKey.safeParse(key);
+    const monthlyKey = MonthlyKey.safeParse(key);
+    if (!investmentKey.success && !monthlyKey.success)
+      throw new Error(`Unknown override key: ${key}`);
+    const parsedKey = investmentKey.success ? investmentKey.data : monthlyKey.data!;
+    if (existing.has(parsedKey)) continue;
+    // 模板外的用户金额也是有效预算，固定追加后参与小计与保本计算。
+    parameters.push({
+      key: parsedKey,
+      kind: investmentKey.success ? 'investment' : 'monthly',
+      algorithm: 'fixed',
+      baseValue: overrides[parsedKey]!.amount,
+      baseAreaM2: null,
+      provenance: { kind: 'unset', storeIds: [] },
+    });
   }
   const money = (amount: number) => roundMoney({ amount, currency: template.currency });
   const spend = money(assumptions.spend?.amount ?? template.spend);
@@ -86,7 +101,7 @@ export function compute(input: ComputeInput): EngineOutput {
       overrides[param.key]?.amount ??
         paramValue(param, input.areaM2, monthlyRevenue.amount, subtotal),
     );
-  const investmentParams = template.params.filter((param) => param.kind === 'investment');
+  const investmentParams = parameters.filter((param) => param.kind === 'investment');
   const subtotal = investmentParams
     .filter((param) => param.algorithm !== 'subtotal_percent')
     .reduce((sum, param) => sum + amountFor(param).amount, 0);
@@ -99,7 +114,7 @@ export function compute(input: ComputeInput): EngineOutput {
       overridden: overridden(param),
     }))
     .filter((line) => line.amount.amount > 0);
-  const monthlyParams = template.params.filter((param) => param.kind === 'monthly');
+  const monthlyParams = parameters.filter((param) => param.kind === 'monthly');
   const monthly = monthlyParams.map((param) => ({
     key: param.key as z.infer<typeof StoreSpecBody>['economics']['monthly'][number]['key'],
     amount: amountFor(param),

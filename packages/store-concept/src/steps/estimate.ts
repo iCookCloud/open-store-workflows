@@ -23,15 +23,32 @@ export const estimate: StepDef<typeof MenuSelection, typeof EstimatedConcept> = 
     const verifications: Verification[] = [];
     if (!template.data.hasDefaults) {
       for (const param of template.data.params)
-        if (brief.overrides?.[param.key] === undefined)
+        if (param.kind === 'investment' && brief.overrides?.[param.key] === undefined)
           needs.push({
             kind: 'input',
             path: `overrides.${param.key}`,
             reason: 'Template has no usable defaults; supply this amount explicitly',
             blocking: true,
           });
+      needs.push({
+        kind: 'asset',
+        slot: 'calc-template',
+        filter: { field: 'storeType', op: 'eq', value: template.data.storeType },
+        reason:
+          'Use a trusted template: expense overrides cannot validate placeholder revenue or monthly-cost assumptions',
+        blocking: true,
+      });
+      return blocked(needs, [
+        {
+          asset: assetRef(template),
+          purpose: 'store-concept/estimate',
+          verdict: 'pending',
+          reason: 'Template has no trusted defaults; financial outputs are withheld',
+          at: initialCtx.now,
+          by: initialCtx.actor,
+        },
+      ]);
     }
-    if (needs.some((need) => need.blocking)) return blocked(needs);
     const scope = scopeFor(brief, template.data.track);
     const ctx = await withFxParams(initialCtx, [template.data.currency], brief.currency, scope);
     const convert = (amount: number) => {

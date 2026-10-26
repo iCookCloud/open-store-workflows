@@ -12,7 +12,6 @@ import {
   type StepCtx,
   type StepResult,
   type Verification,
-  createParamReader,
   getMany,
   type z,
 } from '@osw/core';
@@ -131,64 +130,7 @@ export function numericParam(
   }
   return found.value;
 }
-export async function withFxParams(
-  ctx: StepCtx,
-  currencies: readonly string[],
-  target: string,
-  scope: { jurisdiction: string; track?: string },
-): Promise<StepCtx> {
-  const keys = [
-    ...new Set(
-      currencies
-        .filter((currency) => currency !== target)
-        .map((currency) => `fx.${currency}.${target}`),
-    ),
-  ];
-  // 已预取的值与歧义判定保留；只为缺失的动态汇率做一次定向批查。
-  const missing = keys.filter((key) => ctx.params.get(key, scope) === undefined);
-  if (!missing.length) return ctx;
-  const records = [];
-  for (let i = 0; i < missing.length; i += 200)
-    records.push(
-      ...(await queryAll(ctx.assets, ParamsSlot, {
-        field: 'key',
-        op: 'in',
-        value: missing.slice(i, i + 200),
-      })),
-    );
-  const extra = createParamReader(records, ctx.now, scope);
-  const params: ParamReader & {
-    need?: (
-      key: string,
-      at?: { jurisdiction?: string; track?: string; qualifier?: string },
-    ) => Need | undefined;
-  } = {
-    get(key, at) {
-      const prior = ctx.params.need?.(key, at);
-      if (prior?.kind === 'param' && prior.reason === 'ambiguous') return undefined;
-      return ctx.params.get(key, at) ?? extra.get(key, at);
-    },
-    need(key, at) {
-      const original = ctx.params as ParamReader & {
-        need?: (
-          key: string,
-          at?: { jurisdiction?: string; track?: string; qualifier?: string },
-        ) => Need | undefined;
-      };
-      const prior = original.need?.(key, at);
-      if (prior?.kind === 'param' && prior.reason === 'ambiguous') return prior;
-      return (extra as typeof original).need?.(key, at) ?? prior;
-    },
-    refs(key, at) {
-      const prior = ctx.params.need?.(key, at);
-      if (prior?.kind === 'param' && prior.reason === 'ambiguous') return [];
-      return ctx.params.get(key, at) !== undefined
-        ? (ctx.params.refs?.(key, at) ?? [])
-        : (extra.refs?.(key, at) ?? []);
-    },
-  };
-  return { ...ctx, params };
-}
+export { withFxParams } from '@osw/core';
 export function uniqueRefs(refs: readonly z.infer<typeof AssetRef>[]) {
   const seen = new Set<string>();
   return refs.filter((ref) => {

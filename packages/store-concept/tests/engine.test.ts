@@ -108,9 +108,48 @@ describe('deterministic economics golden cases', () => {
     expect(output.totals.investment.amount).toBe(20);
     expect(output.paybackMonths).toBeNull();
   });
-  it('templates without defaults require every amount and cannot invent zero budget', () => {
+  it('review F3: even complete expense overrides cannot turn an untrusted revenue template into payback', () => {
+    const t = { ...template(), hasDefaults: false };
+    const overrides = Object.fromEntries(
+      t.params.map((line) => [
+        line.key,
+        { amount: line.key === 'working_capital' ? 0 : 100, currency: 'USD' },
+      ]),
+    );
+    expect(() => compute({ template: t, areaM2: 100, overrides })).toThrow('trusted');
+  });
+  it('review F4: template-external legal investment and monthly overrides become fixed rows and enter the subtotal base', () => {
+    const output = compute({
+      template: template(),
+      areaM2: 100,
+      overrides: {
+        consulting: { amount: 5000, currency: 'USD' },
+        admin: { amount: 200, currency: 'USD' },
+      },
+    });
+    expect(output.investment).toContainEqual({
+      key: 'consulting',
+      owner: 'store-concept',
+      algorithm: 'fixed',
+      overridden: true,
+      amount: { amount: 5000, currency: 'USD' },
+    });
+    expect(output.monthly).toContainEqual({
+      key: 'admin',
+      algorithm: 'fixed',
+      overridden: true,
+      amount: { amount: 200, currency: 'USD' },
+    });
+    expect(output.investment.find((line) => line.key === 'working_capital')!.amount.amount).toBe(
+      800,
+    );
+    expect(output.totals.investment.amount).toBe(8800);
+    expect(output.totals.monthlyCost.amount).toBe(5000);
+    expect(output.paybackMonths).toBe(8800 / 3000);
+  });
+  it('templates without defaults cannot invent budgets from placeholder revenue assumptions', () => {
     expect(() => compute({ template: { ...template(), hasDefaults: false }, areaM2: 100 })).toThrow(
-      'provide an override',
+      'trusted',
     );
   });
 });

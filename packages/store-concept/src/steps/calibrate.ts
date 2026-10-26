@@ -1,6 +1,9 @@
 import {
+  type AssetRecordOf,
+  BudgetKey,
   type Need,
   type StepDef,
+  type Store,
   StoreSlot,
   type Verification,
   convertMoney,
@@ -19,6 +22,92 @@ import {
   withFxParams,
 } from '../helpers.js';
 import { Calibration, EstimatedConcept } from '../models.js';
+
+interface InvestmentDefinition {
+  key: BudgetKey;
+  algorithm: EstimatedConcept['economics']['investment'][number]['algorithm'];
+  overridden: boolean;
+  amount: number;
+  sourceStoreIds: readonly string[];
+}
+
+function investmentDefinitions(estimate: EstimatedConcept): InvestmentDefinition[] {
+  const { brief, template } = estimate.selection.concept;
+  const parameters = new Map(
+    template.data.params
+      .filter((param) => param.kind === 'investment')
+      .map((param) => [param.key as BudgetKey, param]),
+  );
+  const outputs = new Map(estimate.economics.investment.map((line) => [line.key, line]));
+  const keys = new Set<BudgetKey>([...parameters.keys(), ...outputs.keys()]);
+  for (const key of Object.keys(brief.overrides ?? {})) {
+    const parsed = BudgetKey.safeParse(key);
+    if (parsed.success) keys.add(parsed.data);
+  }
+  // 输出只锁定正金额，源店分母仍须保留被用户覆盖为零的原投资科目。
+  return [...keys].map((key) => ({
+    key,
+    algorithm: outputs.get(key)?.algorithm ?? parameters.get(key)?.algorithm ?? 'fixed',
+    overridden: brief.overrides?.[key] !== undefined,
+    amount: outputs.get(key)?.amount.amount ?? 0,
+    sourceStoreIds: parameters.get(key)?.provenance.storeIds ?? [],
+  }));
+}
+
+function planStore(
+  store: AssetRecordOf<Store>,
+  definitions: readonly InvestmentDefinition[],
+  outputKeys: ReadonlySet<BudgetKey>,
+) {
+  const selected = new Map<BudgetKey, NonNullable<Store['actuals']>>();
+  for (const line of definitions) {
+    const actuals = (store.data.actuals ?? []).filter((actual) => actual.key === line.key);
+    const paid = actuals.filter((actual) => actual.basis === 'paid');
+    const chosen = paid.length ? paid : actuals.filter((actual) => actual.basis === 'committed');
+    if (chosen.length) selected.set(line.key, chosen);
+  }
+  const independent = new Set(
+    definitions
+      .filter(
+        (line) =>
+          !line.overridden &&
+          !line.sourceStoreIds.includes(store.id) &&
+          selected.has(line.key) &&
+          (line.algorithm !== 'area_scale' || Boolean(store.data.areaM2 && store.data.areaM2 > 0)),
+      )
+      .map((line) => line.key),
+  );
+  const needed = new Set(
+    definitions
+      .filter(
+        (line) =>
+          outputKeys.has(line.key) &&
+          independent.has(line.key) &&
+          line.algorithm !== 'subtotal_percent',
+      )
+      .map((line) => line.key),
+  );
+  const subtotals = definitions.filter(
+    (line) =>
+      outputKeys.has(line.key) &&
+      independent.has(line.key) &&
+      line.algorithm === 'subtotal_percent',
+  );
+  const readySubtotals = new Set<BudgetKey>();
+  for (const subtotal of subtotals) {
+    const base = definitions.filter((line) => line.key !== subtotal.key);
+    if (
+      !base.every(
+        (line) => selected.has(line.key) && (line.overridden || independent.has(line.key)),
+      )
+    )
+      continue;
+    readySubtotals.add(subtotal.key);
+    needed.add(subtotal.key);
+    for (const line of base) needed.add(line.key);
+  }
+  return { store, selected, independent, needed, subtotals, readySubtotals };
+}
 
 export const calibrate: StepDef<typeof EstimatedConcept, typeof Calibration> = {
   id: 'store-concept/calibrate',
@@ -72,11 +161,19 @@ export const calibrate: StepDef<typeof EstimatedConcept, typeof Calibration> = {
     ).filter(
       (store) =>
         store.data.track === template.data.track &&
-        isWithin(brief.jurisdiction, store.data.jurisdiction),
+        (isWithin(brief.jurisdiction, store.data.jurisdiction) ||
+          isWithin(store.data.jurisdiction, brief.jurisdiction)),
     );
+    const definitions = investmentDefinitions(estimate);
+    const outputKeys = new Set(estimate.economics.investment.map((line) => line.key));
+    const plans = stores.map((store) => planStore(store, definitions, outputKeys));
     const ctx = await withFxParams(
       initialCtx,
-      stores.flatMap((store) => (store.data.actuals ?? []).map((actual) => actual.amount.currency)),
+      plans.flatMap((plan) =>
+        [...plan.needed].flatMap((key) =>
+          plan.selected.get(key)!.map((actual) => actual.amount.currency),
+        ),
+      ),
       brief.currency,
       scope,
     );
@@ -87,22 +184,16 @@ export const calibrate: StepDef<typeof EstimatedConcept, typeof Calibration> = {
     let example = estimate.example;
     const usedFxKeys = new Set<string>();
     const money = (amount: number) => roundMoney({ amount, currency: brief.currency });
-    for (const store of stores) {
+    for (const plan of plans) {
+      const { store } = plan;
       if (!store.data.actuals?.length) continue;
       const normalized = new Map<string, number>();
+      const sourceAmounts = new Map<string, number>();
       let used = false;
-      for (const line of estimate.economics.investment) {
-        const param = template.data.params.find((param) => param.key === line.key)!;
-        if (line.overridden || param.provenance.storeIds.includes(store.id)) continue;
-        if (param.algorithm === 'area_scale' && (!store.data.areaM2 || store.data.areaM2 <= 0))
-          continue;
-        // 同科目多个账目是不同支付凭据，优先 paid 口径，避免把承诺额与实付重复相加。
-        const actuals = store.data.actuals.filter((actual) => actual.key === line.key);
-        const paid = actuals.filter((actual) => actual.basis === 'paid');
-        const selected = paid.length
-          ? paid
-          : actuals.filter((actual) => actual.basis === 'committed');
-        if (!selected.length) continue;
+      const lines = estimate.economics.investment;
+      // 先按独立验证及真实小计依赖筛选，再加载汇率与换币。
+      for (const key of plan.needed) {
+        const selected = plan.selected.get(key)!;
         let amount = 0;
         let convertedAll = true;
         for (const actual of selected) {
@@ -116,11 +207,60 @@ export const calibrate: StepDef<typeof EstimatedConcept, typeof Calibration> = {
           if (actual.amount.currency !== brief.currency)
             usedFxKeys.add(`fx.${actual.amount.currency}.${brief.currency}`);
         }
-        if (!convertedAll) continue;
-        amount = money(
-          amount * (param.algorithm === 'area_scale' ? targetArea / store.data.areaM2! : 1),
-        ).amount;
-        normalized.set(line.key, amount);
+        if (convertedAll) sourceAmounts.set(key, money(amount).amount);
+      }
+      for (const line of definitions) {
+        if (line.overridden) {
+          normalized.set(line.key, line.amount);
+          continue;
+        }
+        if (
+          !plan.independent.has(line.key) ||
+          !sourceAmounts.has(line.key) ||
+          line.algorithm === 'subtotal_percent'
+        )
+          continue;
+        normalized.set(
+          line.key,
+          money(
+            sourceAmounts.get(line.key)! *
+              (line.algorithm === 'area_scale' ? targetArea / store.data.areaM2! : 1),
+          ).amount,
+        );
+      }
+      for (const line of plan.subtotals) {
+        const baseLines = definitions.filter((base) => base.key !== line.key);
+        const complete =
+          plan.readySubtotals.has(line.key) &&
+          sourceAmounts.has(line.key) &&
+          baseLines.every((base) => sourceAmounts.has(base.key) && normalized.has(base.key));
+        const sourceSubtotal = baseLines.reduce(
+          (sum, base) => sum + (sourceAmounts.get(base.key) ?? 0),
+          0,
+        );
+        if (!complete || sourceSubtotal <= 0) {
+          verifications.push({
+            asset: assetRef(template),
+            purpose: 'store-concept/calibrate',
+            dimension: `investment.${line.key}`,
+            verdict: 'pending',
+            reason: 'Source-store subtotal is missing or cannot support independent normalization',
+            evidence: [`sha256:${store.versionHash}`],
+            at: ctx.now,
+            by: ctx.actor,
+          });
+          used = true;
+          continue;
+        }
+        const targetSubtotal = baseLines.reduce((sum, base) => sum + normalized.get(base.key)!, 0);
+        normalized.set(
+          line.key,
+          money((sourceAmounts.get(line.key)! / sourceSubtotal) * targetSubtotal).amount,
+        );
+      }
+      for (const line of lines) {
+        if (line.overridden || !normalized.has(line.key)) continue;
+        const amount = normalized.get(line.key)!;
         const previous = amounts.get(line.key) ?? [];
         previous.push(amount);
         amounts.set(line.key, previous);
