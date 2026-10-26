@@ -1,0 +1,35 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "role",
+      "id": "example-cook",
+      "data": {
+        "key": "example-cook",
+        "standard": "example-food",
+        "onboardWave": "example-first",
+        "stationKey": "example-hot",
+        "relief": false,
+        "names": {
+          "en": "Example Cook"
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "cd141a2754c0b2acb0531e7bd283f7c8c1558f856f8d8a78f6ebc3f2c4802d3b",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

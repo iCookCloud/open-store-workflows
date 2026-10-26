@@ -1,0 +1,191 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "compliance-answer",
+      "id": "example-cooker-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "2ea3106ad813f59914a37618ce38a6bfc385aab3eb1aec56884bc8e8f9268ce5",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-certificate",
+        "subject": {
+          "kind": "product",
+          "id": "example-cooker"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/evidence/example-cooker"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-table-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "f3fb827e48e7f965cecc9d73eecf99655a60487c140399db6da525fb690967ea",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-certificate",
+        "subject": {
+          "kind": "product",
+          "id": "example-table"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/evidence/example-table"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-food-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "5d0cd8b0a7d10edf149b57efb0ab15111ff422c7a0a264bc8d3c066299709613",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-certificate",
+        "subject": {
+          "kind": "product",
+          "id": "example-food"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/evidence/example-food"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-urgent-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "3a826de79827920f29e1db5a291634305d25d22aa548588b7c94b30f44998233",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-certificate",
+        "subject": {
+          "kind": "product",
+          "id": "example-urgent"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/evidence/example-urgent"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-local-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "39e7f8bb072388a927cb22575bb22cc200f2c15ef1421423bf876fc9223fc9b1",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-certificate",
+        "subject": {
+          "kind": "product",
+          "id": "example-local"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/evidence/example-local"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-denied-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "7960f4b44a5edb066812f8d4ed147ed73abcd49c57dc5dadcedfe772ed1695e3",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-certificate",
+        "subject": {
+          "kind": "product",
+          "id": "example-denied"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/evidence/example-denied"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    }
+  ]
+}

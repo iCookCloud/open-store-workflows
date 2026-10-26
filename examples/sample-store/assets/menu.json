@@ -5,7 +5,7 @@
       "slot": "menu",
       "id": "example-menu-1",
       "slotVersion": "0.1.0",
-      "versionHash": "58c606f6f5f13cb0b46f0af2301f20df3b18d526c93e0f2ecab368acb8aae941",
+      "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53",
       "coverage": {
         "tier": "track",
         "tracks": [
@@ -29,6 +29,15 @@
           "example-noodle"
         ],
         "origin": "delivered",
+        "items": [
+          {
+            "id": "example-dish",
+            "name": {
+              "en": "Example Noodles"
+            },
+            "station": "example-hot"
+          }
+        ],
         "pageCount": 2,
         "derives": {
           "ingredients": [

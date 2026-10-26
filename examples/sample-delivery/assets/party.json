@@ -1,0 +1,163 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "party",
+      "id": "example-supplier",
+      "slotVersion": "0.1.0",
+      "versionHash": "678f026a88d2c2dfb9de78ddf8c99136f49083bc4a2f6b31912a102c200b1177",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Supplier"
+        },
+        "roles": [
+          "supplier"
+        ],
+        "status": "active",
+        "base": {
+          "jurisdiction": "XF"
+        }
+      }
+    },
+    {
+      "slot": "party",
+      "id": "example-local-seller",
+      "slotVersion": "0.1.0",
+      "versionHash": "2dfcd882977e416723ba1fc3680e7dd2a68a2e511c4d8bcbe3d0329c40c3de0d",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Local Seller"
+        },
+        "roles": [
+          "supplier"
+        ],
+        "status": "active",
+        "base": {
+          "jurisdiction": "XE"
+        }
+      }
+    },
+    {
+      "slot": "party",
+      "id": "example-forwarder",
+      "slotVersion": "0.1.0",
+      "versionHash": "ff1bb72ba5effed30fdc3a640c1b1455a5fba7a37fc13be07acd784935308119",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Forwarder"
+        },
+        "roles": [
+          "forwarder"
+        ],
+        "status": "active",
+        "profiles": {
+          "forwarder": {
+            "rank": 10,
+            "goodsClasses": [
+              "food",
+              "nonfood"
+            ],
+            "lanes": [
+              {
+                "from": "XF",
+                "to": "XE",
+                "modes": [
+                  "sea_fcl",
+                  "sea_lcl",
+                  "air"
+                ]
+              }
+            ],
+            "handling": [
+              "cold_chain",
+              "frozen",
+              "liftgate",
+              "small_vehicle"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slot": "party",
+      "id": "example-standby",
+      "slotVersion": "0.1.0",
+      "versionHash": "a0f23c2593cecccd8b6899b025c8b352e3b357e2caa0ac9bf1e9da9ef8cd1e0a",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Standby"
+        },
+        "roles": [
+          "forwarder"
+        ],
+        "status": "standby",
+        "profiles": {
+          "forwarder": {
+            "rank": 0,
+            "goodsClasses": [
+              "food",
+              "nonfood"
+            ],
+            "lanes": [
+              {
+                "from": "XF",
+                "to": "XE",
+                "modes": [
+                  "sea_fcl",
+                  "sea_lcl",
+                  "air"
+                ]
+              }
+            ],
+            "handling": [
+              "cold_chain",
+              "frozen",
+              "liftgate",
+              "small_vehicle"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

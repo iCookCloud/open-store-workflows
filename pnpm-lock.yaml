@@ -20,9 +20,15 @@ importers:
       '@osw/fitout-bom':
         specifier: workspace:*
         version: link:packages/fitout-bom
+      '@osw/landed-delivery':
+        specifier: workspace:*
+        version: link:packages/landed-delivery
       '@osw/mcp':
         specifier: workspace:*
         version: link:packages/mcp
+      '@osw/opening':
+        specifier: workspace:*
+        version: link:packages/opening
       '@osw/replenishment':
         specifier: workspace:*
         version: link:packages/replenishment
@@ -60,11 +66,23 @@ importers:
         specifier: workspace:*
         version: link:../core
 
+  packages/landed-delivery:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
   packages/mcp:
     dependencies:
       '@modelcontextprotocol/sdk':
         specifier: ^1.25.0
         version: 1.32.2(zod@4.6.7)
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/opening:
+    dependencies:
       '@osw/core':
         specifier: workspace:*
         version: link:../core
