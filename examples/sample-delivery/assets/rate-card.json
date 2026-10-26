@@ -1,0 +1,65 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "rate-card",
+      "id": "example-rate-food",
+      "slotVersion": "0.1.0",
+      "versionHash": "1fcc3f45fdde13c3ad8b84d16e9d709f60d7cf2ff25841e1cced1899be323025",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-forwarder",
+        "from": "XF",
+        "to": "XE",
+        "mode": "sea_fcl",
+        "goodsClass": "food",
+        "basis": "shipment",
+        "rate": {
+          "amount": 100,
+          "currency": "USD"
+        },
+        "validFrom": "2026-01-01",
+        "validTo": "2026-12-31"
+      }
+    },
+    {
+      "slot": "rate-card",
+      "id": "example-rate-nonfood",
+      "slotVersion": "0.1.0",
+      "versionHash": "d91dfaea69d43bd3eebc32a0aa70361781fddfc28d29ae1f84d5ec65ef21d83f",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-forwarder",
+        "from": "XF",
+        "to": "XE",
+        "mode": "sea_fcl",
+        "goodsClass": "nonfood",
+        "basis": "shipment",
+        "rate": {
+          "amount": 100,
+          "currency": "USD"
+        },
+        "validFrom": "2026-01-01",
+        "validTo": "2026-12-31"
+      }
+    }
+  ]
+}

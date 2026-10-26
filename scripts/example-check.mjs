@@ -4,6 +4,7 @@ import { mkdtemp, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkDeliveryExample } from './delivery-example-check.mjs';
 import { EXAMPLE_ACTOR, EXAMPLE_NOW, exampleDirectory, generateExamples } from './gen-examples.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -94,3 +95,4 @@ assert(
 console.log(
   `Example passed: reproducible fixtures, blocking approval, approved CLI and failed verification (${scratch})`,
 );
+await checkDeliveryExample();

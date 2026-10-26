@@ -1,0 +1,1161 @@
+{
+  "kind": "DeliveryPlan",
+  "artifactVersion": "0.1.0",
+  "id": "example-delivery",
+  "hash": "11fdc78d24a2b6387acd25b0d0f0da947b81b2a1df4e95dd060498fc3b0282d7",
+  "producedBy": {
+    "step": "landed-delivery/summarize",
+    "pkg": "@osw/landed-delivery",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-delivery-store",
+  "inputs": [
+    {
+      "kind": "Bom",
+      "id": "example-bom",
+      "hash": "d296f842dc7ff184e66fce60c698400c651cbc2f255612656b5ceaeed964c59d"
+    }
+  ],
+  "sources": [
+    {
+      "slot": "compliance-answer",
+      "id": "example-cooker-answer",
+      "versionHash": "2ea3106ad813f59914a37618ce38a6bfc385aab3eb1aec56884bc8e8f9268ce5"
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-denied-answer",
+      "versionHash": "7960f4b44a5edb066812f8d4ed147ed73abcd49c57dc5dadcedfe772ed1695e3"
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-food-answer",
+      "versionHash": "5d0cd8b0a7d10edf149b57efb0ab15111ff422c7a0a264bc8d3c066299709613"
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-local-answer",
+      "versionHash": "39e7f8bb072388a927cb22575bb22cc200f2c15ef1421423bf876fc9223fc9b1"
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-table-answer",
+      "versionHash": "f3fb827e48e7f965cecc9d73eecf99655a60487c140399db6da525fb690967ea"
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-urgent-answer",
+      "versionHash": "3a826de79827920f29e1db5a291634305d25d22aa548588b7c94b30f44998233"
+    },
+    {
+      "slot": "compliance-category",
+      "id": "example-category",
+      "versionHash": "ceaa72676fa6b0a8453be0bccda39dd643296b73c0bd8cd106780bbdd4f907ef"
+    },
+    {
+      "slot": "compliance-item",
+      "id": "example-batch-document",
+      "versionHash": "99f55c9f670116c65296f90c899cc09f941d50101012c217a28052f0569a3a3e"
+    },
+    {
+      "slot": "compliance-item",
+      "id": "example-certificate",
+      "versionHash": "83402064c698f77bc098931d45f8be90e8cdbf78e33a680e97f2f66e7b7ca1aa"
+    },
+    {
+      "slot": "offer",
+      "id": "example-cooker-offer",
+      "versionHash": "1e2b14f2b0baf8ab83d4c19be46292ebbbdf095f1178aac0dde63419a2ed5c6b"
+    },
+    {
+      "slot": "offer",
+      "id": "example-denied-offer",
+      "versionHash": "ec6afaa8d52bf778e5295e4c58bc55a158725ceed5ea352e9b4b56779c81c48c"
+    },
+    {
+      "slot": "offer",
+      "id": "example-food-offer",
+      "versionHash": "8b4c8e0cbfbc7a925a536c04678cede64d091a42c1c6b74eb178735046f75f3d"
+    },
+    {
+      "slot": "offer",
+      "id": "example-local-offer",
+      "versionHash": "899b08395079bb68df5399ad2ae614d3ad1564c0a483ea6fed7dc2592dee8083"
+    },
+    {
+      "slot": "offer",
+      "id": "example-table-offer",
+      "versionHash": "13bf24dd763007f7d8e8c904b75a3c423577451472ea043442f7c7a15675ef7b"
+    },
+    {
+      "slot": "offer",
+      "id": "example-urgent-offer",
+      "versionHash": "dd7312e228a57fc05dbb4f8f6ff29169cc56f03455320ba4103cbab8821a0948"
+    },
+    {
+      "slot": "params",
+      "id": "example-customs.declarationCurrency",
+      "versionHash": "a658891e5c5f39e69208ac52882e2ae952e941f871d5271d96a2223a6551352f"
+    },
+    {
+      "slot": "params",
+      "id": "example-delivery.tolerance.volumePct",
+      "versionHash": "766f2e867a31a8a98e02fa2e42a20d1d4c84f7b5cc07e1b76202dc464a4718b6"
+    },
+    {
+      "slot": "params",
+      "id": "example-delivery.tolerance.weightPct",
+      "versionHash": "85ef61257d5c65b9c2277df20555b1c12cb7a9f04bc2a2625c706c61f54bb21a"
+    },
+    {
+      "slot": "params",
+      "id": "example-freight.tolerance.rateCardPct",
+      "versionHash": "fbf38446d92a8681bc97e5de72557aff5bec7284ff4b01d390d8c22dd2692213"
+    },
+    {
+      "slot": "params",
+      "id": "example-freight.tolerance.transitDays",
+      "versionHash": "a45620c6a07c022b96e8d8bce807865169608ae1faab41b58e66810dc02c73e4"
+    },
+    {
+      "slot": "party",
+      "id": "example-forwarder",
+      "versionHash": "ff1bb72ba5effed30fdc3a640c1b1455a5fba7a37fc13be07acd784935308119"
+    },
+    {
+      "slot": "party",
+      "id": "example-local-seller",
+      "versionHash": "2dfcd882977e416723ba1fc3680e7dd2a68a2e511c4d8bcbe3d0329c40c3de0d"
+    },
+    {
+      "slot": "party",
+      "id": "example-standby",
+      "versionHash": "a0f23c2593cecccd8b6899b025c8b352e3b357e2caa0ac9bf1e9da9ef8cd1e0a"
+    },
+    {
+      "slot": "party",
+      "id": "example-supplier",
+      "versionHash": "678f026a88d2c2dfb9de78ddf8c99136f49083bc4a2f6b31912a102c200b1177"
+    },
+    {
+      "slot": "product",
+      "id": "example-cooker",
+      "versionHash": "660675c2379936cdda5d41c7e63b89d85223f0752f1a8237dcd2dbbb7fbed0d7"
+    },
+    {
+      "slot": "product",
+      "id": "example-denied",
+      "versionHash": "34fa67d7220d5aaa4d73ec8e3558eb10f358948a05d10ee3f2157f9e9ac6a0ba"
+    },
+    {
+      "slot": "product",
+      "id": "example-food",
+      "versionHash": "a690aeeb549a64b695f20f420c8064d4fb8c9ce02a1fa792514845379910762e"
+    },
+    {
+      "slot": "product",
+      "id": "example-local",
+      "versionHash": "540acdd4a8431b37aef56eb909b671114e24c7e75260b36d9ec0265e517d3b0c"
+    },
+    {
+      "slot": "product",
+      "id": "example-table",
+      "versionHash": "2e61215d0547e9ee6eda3739b230801c558f3cae99e79fa8164d681d2e4f27c1"
+    },
+    {
+      "slot": "product",
+      "id": "example-urgent",
+      "versionHash": "36d5edee1d5ad922c1fa20508a708589f2fd68950a9b961de97ffe9e30d7f193"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-cooker-classification",
+      "versionHash": "e67aa0bf2df717e7101a70b91fd19c980e393181832f93c8c86891cc0e6504df"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-denied-classification",
+      "versionHash": "e879df3516e056b67fc620bf5fb65431da8dbbb6a4f891cde72be387985f2398"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-food-classification",
+      "versionHash": "8073520f521b2459beffd809b0f707d2d0adbce805c0666b2dff34c7de53b44e"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-local-classification",
+      "versionHash": "30037777be3d4c8b0adde6ce8f527d98a4907e096f83ee768004cb9599a6bae4"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-table-classification",
+      "versionHash": "3ec6d9cb2baa8b1fa30220754926e66ccba0362f1bdb994471754fe2772c1fc0"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-urgent-classification",
+      "versionHash": "fe8526e07ee3d92e0a8bc7c7dac60bb2320e1d78484db9a4e130cb4d3a79f055"
+    },
+    {
+      "slot": "rate-card",
+      "id": "example-rate-food",
+      "versionHash": "1fcc3f45fdde13c3ad8b84d16e9d709f60d7cf2ff25841e1cced1899be323025"
+    },
+    {
+      "slot": "rate-card",
+      "id": "example-rate-nonfood",
+      "versionHash": "d91dfaea69d43bd3eebc32a0aa70361781fddfc28d29ae1f84d5ec65ef21d83f"
+    },
+    {
+      "slot": "store",
+      "id": "example-delivery-store",
+      "versionHash": "1dd086e5c71b36dadd7f15e34354d63ce7442d9a5c134a249814f3334a59a477"
+    }
+  ],
+  "createdAt": "2026-01-20T12:00:00Z",
+  "example": true,
+  "body": {
+    "market": "XE",
+    "compliance": [
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-cooker",
+          "versionHash": "660675c2379936cdda5d41c7e63b89d85223f0752f1a8237dcd2dbbb7fbed0d7"
+        },
+        "market": "XE",
+        "categoryId": "example-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-batch-document",
+            "level": "batch",
+            "required": "mandatory",
+            "state": "unanswered",
+            "evidence": []
+          },
+          {
+            "itemRootId": "example-certificate",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/evidence/example-cooker"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "96dfe33e12858ee6c1a099d4e28a929cf86aa8ac7b85213605420bc355a28ca8",
+        "conclusion": "enter"
+      },
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-table",
+          "versionHash": "2e61215d0547e9ee6eda3739b230801c558f3cae99e79fa8164d681d2e4f27c1"
+        },
+        "market": "XE",
+        "categoryId": "example-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-batch-document",
+            "level": "batch",
+            "required": "mandatory",
+            "state": "unanswered",
+            "evidence": []
+          },
+          {
+            "itemRootId": "example-certificate",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/evidence/example-table"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "6d9644414a7922d9fa77b1d4f3225b6b0f6afcf674daa9922594b30224ab8983",
+        "conclusion": "enter"
+      },
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-food",
+          "versionHash": "a690aeeb549a64b695f20f420c8064d4fb8c9ce02a1fa792514845379910762e"
+        },
+        "market": "XE",
+        "categoryId": "example-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-batch-document",
+            "level": "batch",
+            "required": "mandatory",
+            "state": "unanswered",
+            "evidence": []
+          },
+          {
+            "itemRootId": "example-certificate",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/evidence/example-food"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "e1d981942b1998891e579b4e15a997cda6f55eb38fe201d8b8612860d63facb7",
+        "conclusion": "enter"
+      },
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-urgent",
+          "versionHash": "36d5edee1d5ad922c1fa20508a708589f2fd68950a9b961de97ffe9e30d7f193"
+        },
+        "market": "XE",
+        "categoryId": "example-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-batch-document",
+            "level": "batch",
+            "required": "mandatory",
+            "state": "unanswered",
+            "evidence": []
+          },
+          {
+            "itemRootId": "example-certificate",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/evidence/example-urgent"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "8959d4b5be2486b71f441636006772ea915a92b37f1022855a9c7a96d612dbd3",
+        "conclusion": "enter"
+      },
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-local",
+          "versionHash": "540acdd4a8431b37aef56eb909b671114e24c7e75260b36d9ec0265e517d3b0c"
+        },
+        "market": "XE",
+        "categoryId": "example-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-batch-document",
+            "level": "batch",
+            "required": "mandatory",
+            "state": "unanswered",
+            "evidence": []
+          },
+          {
+            "itemRootId": "example-certificate",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/evidence/example-local"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "64e498c453e2275aa35e60fa1fdd51d1674484af43c0178778c67bc381497c51",
+        "conclusion": "enter"
+      },
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-denied",
+          "versionHash": "34fa67d7220d5aaa4d73ec8e3558eb10f358948a05d10ee3f2157f9e9ac6a0ba"
+        },
+        "market": "XE",
+        "categoryId": "example-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-batch-document",
+            "level": "batch",
+            "required": "mandatory",
+            "state": "unanswered",
+            "evidence": []
+          },
+          {
+            "itemRootId": "example-certificate",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/evidence/example-denied"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "4df77de8631dab8893b2deb4e1fe5ac1d185f57b07952e79fd568fd597b8cd78",
+        "conclusion": "deny"
+      }
+    ],
+    "held": [
+      {
+        "bomLineId": "example-denied",
+        "detail": "ok: deny",
+        "reason": "compliance_deny"
+      }
+    ],
+    "shipments": [
+      {
+        "id": "shipment-9a0821dbcc60b322-1",
+        "origin": "XF",
+        "goodsClass": "nonfood",
+        "mode": "sea_fcl",
+        "crossBorder": true,
+        "status": "received",
+        "node": "delivered",
+        "consignee": {
+          "jurisdiction": "XE",
+          "company": "Example Company",
+          "address": "Example Street",
+          "name": "Example Receiver",
+          "phone": "EXAMPLE",
+          "email": "receiver@example.com"
+        },
+        "portFrom": null,
+        "portTo": "Example Port",
+        "lastMile": [
+          "liftgate",
+          "small_vehicle"
+        ],
+        "carrier": {
+          "kind": "forwarder",
+          "partyRef": {
+            "slot": "party",
+            "id": "example-forwarder",
+            "versionHash": "ff1bb72ba5effed30fdc3a640c1b1455a5fba7a37fc13be07acd784935308119"
+          }
+        },
+        "lines": [
+          {
+            "id": "example-cooker",
+            "bomLineId": "example-cooker",
+            "lineKind": "equipment",
+            "productRef": {
+              "slot": "product",
+              "id": "example-cooker",
+              "versionHash": "660675c2379936cdda5d41c7e63b89d85223f0752f1a8237dcd2dbbb7fbed0d7"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-cooker-offer",
+              "versionHash": "1e2b14f2b0baf8ab83d4c19be46292ebbbdf095f1178aac0dde63419a2ed5c6b"
+            },
+            "name": "双头煮面炉",
+            "spec": "2 pcs/carton",
+            "qty": 2,
+            "goodsClass": "nonfood",
+            "goodsClassSrc": "asset",
+            "hsCode": {
+              "value": "000000",
+              "src": "asset"
+            },
+            "materialText": {
+              "value": "Example synthetic material",
+              "src": "asset"
+            },
+            "netWeightKg": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartonUnits": {
+              "value": 2,
+              "src": "asset"
+            },
+            "cartons": {
+              "value": 1,
+              "src": "derived"
+            },
+            "totalNetWeightKg": {
+              "value": 20,
+              "src": "derived"
+            },
+            "totalGrossWeightKg": {
+              "value": 30,
+              "src": "derived"
+            },
+            "totalVolumeM3": {
+              "value": 1,
+              "src": "derived"
+            },
+            "declaredValue": {
+              "amount": 200,
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "example-table",
+            "bomLineId": "example-table",
+            "lineKind": "furniture",
+            "productRef": {
+              "slot": "product",
+              "id": "example-table",
+              "versionHash": "2e61215d0547e9ee6eda3739b230801c558f3cae99e79fa8164d681d2e4f27c1"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-table-offer",
+              "versionHash": "13bf24dd763007f7d8e8c904b75a3c423577451472ea043442f7c7a15675ef7b"
+            },
+            "name": "茶几",
+            "spec": "2 pcs/carton",
+            "qty": 2,
+            "goodsClass": "nonfood",
+            "goodsClassSrc": "asset",
+            "hsCode": {
+              "value": "000000",
+              "src": "asset"
+            },
+            "materialText": {
+              "value": "Example synthetic material",
+              "src": "asset"
+            },
+            "netWeightKg": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartonUnits": {
+              "value": 2,
+              "src": "asset"
+            },
+            "cartons": {
+              "value": 1,
+              "src": "derived"
+            },
+            "totalNetWeightKg": {
+              "value": 20,
+              "src": "derived"
+            },
+            "totalGrossWeightKg": {
+              "value": 30,
+              "src": "derived"
+            },
+            "totalVolumeM3": {
+              "value": 1,
+              "src": "derived"
+            },
+            "declaredValue": {
+              "amount": 200,
+              "currency": "USD"
+            }
+          }
+        ],
+        "quotes": [
+          {
+            "id": "shipment-9a0821dbcc60b322-1-quote",
+            "partyRef": {
+              "slot": "party",
+              "id": "example-forwarder",
+              "versionHash": "ff1bb72ba5effed30fdc3a640c1b1455a5fba7a37fc13be07acd784935308119"
+            },
+            "form": "lump_sum",
+            "items": [
+              {
+                "category": "other",
+                "amount": {
+                  "amount": 200,
+                  "currency": "USD"
+                }
+              }
+            ],
+            "terms": "Synthetic example only",
+            "transitDays": 10,
+            "validUntil": "2026-12-31",
+            "receivedAt": "2026-01-02T00:00:00Z"
+          }
+        ],
+        "chosenQuoteId": "shipment-9a0821dbcc60b322-1-quote",
+        "freight": {
+          "amount": 200,
+          "currency": "USD"
+        },
+        "documents": [
+          {
+            "itemRootId": "example-batch-document",
+            "productRefs": [
+              {
+                "slot": "product",
+                "id": "example-cooker",
+                "versionHash": "660675c2379936cdda5d41c7e63b89d85223f0752f1a8237dcd2dbbb7fbed0d7"
+              },
+              {
+                "slot": "product",
+                "id": "example-table",
+                "versionHash": "2e61215d0547e9ee6eda3739b230801c558f3cae99e79fa8164d681d2e4f27c1"
+              }
+            ],
+            "state": "unanswered",
+            "evidence": []
+          }
+        ],
+        "tracking": {
+          "eta": "2026-01-15",
+          "departedAt": "2026-01-05",
+          "deliveredAt": "2026-01-18"
+        },
+        "holds": [],
+        "arrival": {
+          "receivedAt": "2026-01-19",
+          "by": "example:receiver",
+          "evidence": [
+            "https://example.com/receipt"
+          ],
+          "lines": [
+            {
+              "lineId": "example-cooker",
+              "receivedQty": 2,
+              "damagedQty": 0,
+              "cartons": 1,
+              "measuredGrossWeightKg": 60,
+              "measuredVolumeM3": 2,
+              "note": "Invented discrepancy to exercise verification"
+            },
+            {
+              "lineId": "example-table",
+              "receivedQty": 2,
+              "damagedQty": 0,
+              "cartons": 1,
+              "measuredGrossWeightKg": 60,
+              "measuredVolumeM3": 2,
+              "note": "Invented discrepancy to exercise verification"
+            }
+          ],
+          "observedLoadingAccess": null
+        },
+        "amendments": []
+      },
+      {
+        "id": "shipment-c6fed32b4cc67145-1",
+        "origin": "XF",
+        "goodsClass": "food",
+        "mode": "sea_fcl",
+        "crossBorder": true,
+        "status": "received",
+        "node": "delivered",
+        "consignee": {
+          "jurisdiction": "XE",
+          "company": "Example Company",
+          "address": "Example Street",
+          "name": "Example Receiver",
+          "phone": "EXAMPLE",
+          "email": "receiver@example.com"
+        },
+        "portFrom": null,
+        "portTo": "Example Port",
+        "lastMile": [
+          "liftgate",
+          "small_vehicle"
+        ],
+        "carrier": {
+          "kind": "forwarder",
+          "partyRef": {
+            "slot": "party",
+            "id": "example-forwarder",
+            "versionHash": "ff1bb72ba5effed30fdc3a640c1b1455a5fba7a37fc13be07acd784935308119"
+          }
+        },
+        "lines": [
+          {
+            "id": "example-food",
+            "bomLineId": "example-food",
+            "lineKind": "food",
+            "productRef": {
+              "slot": "product",
+              "id": "example-food",
+              "versionHash": "a690aeeb549a64b695f20f420c8064d4fb8c9ce02a1fa792514845379910762e"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-food-offer",
+              "versionHash": "8b4c8e0cbfbc7a925a536c04678cede64d091a42c1c6b74eb178735046f75f3d"
+            },
+            "name": "Example noodles",
+            "spec": "2 pcs/carton",
+            "qty": 2,
+            "goodsClass": "food",
+            "goodsClassSrc": "asset",
+            "hsCode": {
+              "value": "000000",
+              "src": "asset"
+            },
+            "materialText": {
+              "value": "Example synthetic material",
+              "src": "asset"
+            },
+            "netWeightKg": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartonUnits": {
+              "value": 2,
+              "src": "asset"
+            },
+            "cartons": {
+              "value": 1,
+              "src": "derived"
+            },
+            "totalNetWeightKg": {
+              "value": 20,
+              "src": "derived"
+            },
+            "totalGrossWeightKg": {
+              "value": 30,
+              "src": "derived"
+            },
+            "totalVolumeM3": {
+              "value": 1,
+              "src": "derived"
+            },
+            "declaredValue": {
+              "amount": 200,
+              "currency": "USD"
+            }
+          }
+        ],
+        "quotes": [
+          {
+            "id": "shipment-c6fed32b4cc67145-1-quote",
+            "partyRef": {
+              "slot": "party",
+              "id": "example-forwarder",
+              "versionHash": "ff1bb72ba5effed30fdc3a640c1b1455a5fba7a37fc13be07acd784935308119"
+            },
+            "form": "lump_sum",
+            "items": [
+              {
+                "category": "other",
+                "amount": {
+                  "amount": 200,
+                  "currency": "USD"
+                }
+              }
+            ],
+            "terms": "Synthetic example only",
+            "transitDays": 10,
+            "validUntil": "2026-12-31",
+            "receivedAt": "2026-01-02T00:00:00Z"
+          }
+        ],
+        "chosenQuoteId": "shipment-c6fed32b4cc67145-1-quote",
+        "freight": {
+          "amount": 200,
+          "currency": "USD"
+        },
+        "documents": [
+          {
+            "itemRootId": "example-batch-document",
+            "productRefs": [
+              {
+                "slot": "product",
+                "id": "example-food",
+                "versionHash": "a690aeeb549a64b695f20f420c8064d4fb8c9ce02a1fa792514845379910762e"
+              }
+            ],
+            "state": "unanswered",
+            "evidence": []
+          }
+        ],
+        "tracking": {
+          "eta": "2026-01-15",
+          "departedAt": "2026-01-05",
+          "deliveredAt": "2026-01-18"
+        },
+        "holds": [],
+        "arrival": {
+          "receivedAt": "2026-01-19",
+          "by": "example:receiver",
+          "evidence": [
+            "https://example.com/receipt"
+          ],
+          "lines": [
+            {
+              "lineId": "example-food",
+              "receivedQty": 2,
+              "damagedQty": 0,
+              "cartons": 1,
+              "measuredGrossWeightKg": 60,
+              "measuredVolumeM3": 2,
+              "note": "Invented discrepancy to exercise verification"
+            }
+          ],
+          "observedLoadingAccess": null
+        },
+        "amendments": []
+      },
+      {
+        "id": "shipment-d8819705c85d8bea-1",
+        "origin": "XF",
+        "goodsClass": "nonfood",
+        "mode": "air",
+        "crossBorder": true,
+        "status": "received",
+        "node": "delivered",
+        "consignee": {
+          "jurisdiction": "XE",
+          "company": "Example Company",
+          "address": "Example Street",
+          "name": "Example Receiver",
+          "phone": "EXAMPLE",
+          "email": "receiver@example.com"
+        },
+        "portFrom": null,
+        "portTo": "Example Port",
+        "lastMile": [
+          "liftgate"
+        ],
+        "carrier": {
+          "kind": "own",
+          "name": "Example Own Carrier",
+          "contact": "carrier@example.com"
+        },
+        "lines": [
+          {
+            "id": "example-urgent",
+            "bomLineId": "example-urgent",
+            "lineKind": "equipment",
+            "productRef": {
+              "slot": "product",
+              "id": "example-urgent",
+              "versionHash": "36d5edee1d5ad922c1fa20508a708589f2fd68950a9b961de97ffe9e30d7f193"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-urgent-offer",
+              "versionHash": "dd7312e228a57fc05dbb4f8f6ff29169cc56f03455320ba4103cbab8821a0948"
+            },
+            "name": "Example urgent equipment",
+            "spec": "2 pcs/carton",
+            "qty": 2,
+            "goodsClass": "nonfood",
+            "goodsClassSrc": "asset",
+            "hsCode": {
+              "value": "000000",
+              "src": "asset"
+            },
+            "materialText": {
+              "value": "Example synthetic material",
+              "src": "asset"
+            },
+            "netWeightKg": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartonUnits": {
+              "value": 2,
+              "src": "asset"
+            },
+            "cartons": {
+              "value": 1,
+              "src": "derived"
+            },
+            "totalNetWeightKg": {
+              "value": 20,
+              "src": "derived"
+            },
+            "totalGrossWeightKg": {
+              "value": 30,
+              "src": "derived"
+            },
+            "totalVolumeM3": {
+              "value": 1,
+              "src": "derived"
+            },
+            "declaredValue": {
+              "amount": 200,
+              "currency": "USD"
+            }
+          }
+        ],
+        "quotes": [],
+        "chosenQuoteId": null,
+        "freight": null,
+        "documents": [
+          {
+            "itemRootId": "example-batch-document",
+            "productRefs": [
+              {
+                "slot": "product",
+                "id": "example-urgent",
+                "versionHash": "36d5edee1d5ad922c1fa20508a708589f2fd68950a9b961de97ffe9e30d7f193"
+              }
+            ],
+            "state": "unanswered",
+            "evidence": []
+          }
+        ],
+        "tracking": {
+          "eta": "2026-01-15",
+          "departedAt": "2026-01-05",
+          "deliveredAt": "2026-01-18"
+        },
+        "holds": [],
+        "arrival": {
+          "receivedAt": "2026-01-19",
+          "by": "example:receiver",
+          "evidence": [
+            "https://example.com/receipt"
+          ],
+          "lines": [
+            {
+              "lineId": "example-urgent",
+              "receivedQty": 2,
+              "damagedQty": 0,
+              "cartons": 1,
+              "measuredGrossWeightKg": 60,
+              "measuredVolumeM3": 2,
+              "note": "Invented discrepancy to exercise verification"
+            }
+          ],
+          "observedLoadingAccess": null
+        },
+        "amendments": []
+      },
+      {
+        "id": "shipment-30bfd425ac15ffcf-1",
+        "origin": "XE",
+        "goodsClass": "nonfood",
+        "mode": "ground",
+        "crossBorder": false,
+        "status": "received",
+        "node": "delivered",
+        "consignee": {
+          "jurisdiction": "XE",
+          "company": "Example Company",
+          "address": "Example Street",
+          "name": "Example Receiver",
+          "phone": "EXAMPLE",
+          "email": "receiver@example.com"
+        },
+        "portFrom": null,
+        "portTo": "Example Port",
+        "lastMile": [
+          "liftgate"
+        ],
+        "carrier": {
+          "kind": "seller",
+          "partyRef": {
+            "slot": "party",
+            "id": "example-local-seller",
+            "versionHash": "2dfcd882977e416723ba1fc3680e7dd2a68a2e511c4d8bcbe3d0329c40c3de0d"
+          }
+        },
+        "lines": [
+          {
+            "id": "example-local",
+            "bomLineId": "example-local",
+            "lineKind": "supplies",
+            "productRef": {
+              "slot": "product",
+              "id": "example-local",
+              "versionHash": "540acdd4a8431b37aef56eb909b671114e24c7e75260b36d9ec0265e517d3b0c"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-local-offer",
+              "versionHash": "899b08395079bb68df5399ad2ae614d3ad1564c0a483ea6fed7dc2592dee8083"
+            },
+            "name": "Example local supplies",
+            "spec": "2 pcs/carton",
+            "qty": 2,
+            "goodsClass": "nonfood",
+            "goodsClassSrc": "asset",
+            "hsCode": {
+              "value": "000000",
+              "src": "asset"
+            },
+            "materialText": {
+              "value": "Example synthetic material",
+              "src": "asset"
+            },
+            "netWeightKg": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartonUnits": {
+              "value": 2,
+              "src": "asset"
+            },
+            "cartons": {
+              "value": 1,
+              "src": "derived"
+            },
+            "totalNetWeightKg": {
+              "value": 20,
+              "src": "derived"
+            },
+            "totalGrossWeightKg": {
+              "value": 30,
+              "src": "derived"
+            },
+            "totalVolumeM3": {
+              "value": 1,
+              "src": "derived"
+            },
+            "declaredValue": {
+              "amount": 200,
+              "currency": "USD"
+            }
+          }
+        ],
+        "quotes": [],
+        "chosenQuoteId": null,
+        "freight": null,
+        "documents": [
+          {
+            "itemRootId": "example-batch-document",
+            "productRefs": [
+              {
+                "slot": "product",
+                "id": "example-local",
+                "versionHash": "540acdd4a8431b37aef56eb909b671114e24c7e75260b36d9ec0265e517d3b0c"
+              }
+            ],
+            "state": "unanswered",
+            "evidence": []
+          }
+        ],
+        "tracking": {
+          "eta": "2026-01-15",
+          "departedAt": "2026-01-05",
+          "deliveredAt": "2026-01-18"
+        },
+        "holds": [],
+        "arrival": {
+          "receivedAt": "2026-01-19",
+          "by": "example:receiver",
+          "evidence": [
+            "https://example.com/receipt"
+          ],
+          "lines": [
+            {
+              "lineId": "example-local",
+              "receivedQty": 2,
+              "damagedQty": 0,
+              "cartons": 1,
+              "measuredGrossWeightKg": 60,
+              "measuredVolumeM3": 2,
+              "note": "Invented discrepancy to exercise verification"
+            }
+          ],
+          "observedLoadingAccess": null
+        },
+        "amendments": []
+      }
+    ],
+    "arrivals": [
+      {
+        "bomLineId": "example-cooker",
+        "shipmentId": "shipment-9a0821dbcc60b322-1",
+        "qty": 2,
+        "basis": "received",
+        "eta": "2026-01-15",
+        "arrivedAt": "2026-01-19",
+        "receivedQty": 2,
+        "damagedQty": 0
+      },
+      {
+        "bomLineId": "example-table",
+        "shipmentId": "shipment-9a0821dbcc60b322-1",
+        "qty": 2,
+        "basis": "received",
+        "eta": "2026-01-15",
+        "arrivedAt": "2026-01-19",
+        "receivedQty": 2,
+        "damagedQty": 0
+      },
+      {
+        "bomLineId": "example-food",
+        "shipmentId": "shipment-c6fed32b4cc67145-1",
+        "qty": 2,
+        "basis": "received",
+        "eta": "2026-01-15",
+        "arrivedAt": "2026-01-19",
+        "receivedQty": 2,
+        "damagedQty": 0
+      },
+      {
+        "bomLineId": "example-urgent",
+        "shipmentId": "shipment-d8819705c85d8bea-1",
+        "qty": 2,
+        "basis": "received",
+        "eta": "2026-01-15",
+        "arrivedAt": "2026-01-19",
+        "receivedQty": 2,
+        "damagedQty": 0
+      },
+      {
+        "bomLineId": "example-local",
+        "shipmentId": "shipment-30bfd425ac15ffcf-1",
+        "qty": 2,
+        "basis": "received",
+        "eta": "2026-01-15",
+        "arrivedAt": "2026-01-19",
+        "receivedQty": 2,
+        "damagedQty": 0
+      }
+    ],
+    "fitoutGoodsLastAt": {
+      "date": "2026-01-19",
+      "basis": "received",
+      "shipmentIds": [
+        "shipment-9a0821dbcc60b322-1",
+        "shipment-d8819705c85d8bea-1"
+      ]
+    },
+    "openingStock": {
+      "status": "planned",
+      "firstAt": {
+        "date": null,
+        "basis": "none",
+        "shipmentIds": []
+      },
+      "lastAt": {
+        "date": null,
+        "basis": "none",
+        "shipmentIds": []
+      }
+    },
+    "allReceived": false
+  }
+}

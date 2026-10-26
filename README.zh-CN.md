@@ -4,7 +4,7 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-本批实现 **共享 core 与第 1 项「定店型」**：从开店意图出发，匹配测算模板与菜单，计算投资、营收、保本、回本和场地要求，经审批后生成 `StoreSpec`。其余六项流程的业务实现与现有站点对接另行开展。
+目前实现 **共享 core、第 1 项「定店型」与第 4 项「到店」**，分别生成 `StoreSpec` 和 `DeliveryPlan`。其余五项流程的业务实现与现有站点对接另行开展。
 
 ## 使用
 
@@ -38,13 +38,39 @@ MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动
 
 ## 设计约束
 
-- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；`@osw/store-concept` 只依赖它。
+- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；两个 workflow 包均只依赖它。
 - Memory、File、HTTP 三种资产源使用同一份接口。FileSource 支持 JSON、NDJSON 和 CSV。
 - 缺业务参数或同级候选不唯一时明确返回 `needs`，不猜默认价格和汇率。
 - 金额按币种最小单位逐行舍入，用户覆盖值已经是目标币种，不重复换算。
 - 验证排除模板来源门店的同源自证，也不把用户覆盖值记成模板错误。
 - 步骤只读资产。人工批示、版本变化和只补空规则在实际运行时校验。
 - 核心模块和 workflow 可打包到非 Node 环境，文件与命令行适配集中在 `@osw/core/node`。
+
+## 第 4 项：到店
+
+```sh
+pnpm osw landed-delivery run \
+  --assets examples/sample-delivery/assets \
+  --in examples/sample-delivery/inputs/landed-delivery.json \
+  --approvals examples/sample-delivery/approvals/landed-delivery.json \
+  --now 2026-01-20T12:00:00Z \
+  --actor example:delivery-reviewer \
+  --out-dir .osw/delivery
+```
+
+流程依次执行合规准入、分箱、匹配承运方、补格、定稿、报价、运输更新、签收和汇总，共九个步骤，CLI 与 MCP 共用。首次补格在定稿前完成，保证确认批示覆盖最终格值。输入包含完整 `bom` 信封、`jurisdiction`、可选 `site` / `existing`，以及按箱单 ID 索引的 `carriers`、`edits`、`quotes`、`updates`、`arrivals`。BOM 必须指向资产源中准备开业或营业中的门店。独立调用后续步骤时传入上一步的 `DeliveryState`；`summarize` 返回完整产出物。
+
+- 合规类目继承最多六层；缺分类、断链、循环、跨市场、清单错市场与冲突改写均暂挂。审批只接受 `reviewer` 或带当前律师资产引用的 `lawyer`；必备主体/SKU 证据未解决时不能批准 `enter`。批次材料单独进入箱单。
+- 审批哈希排除 `subjectHash` 自身与 `conclusion`，同时绑定证据版本、供应商/进口主体、法域和预计到港有效期；答复变化须重批。六个私有槽位按 core 规范命名为 `compliance-category`、`compliance-item`、`product-classification`、`compliance-answer`、`rate-card`、`packing-history`。
+- 按发货国、货类、运输方式分单；卖方配送再按卖方分开。本地走陆运、跨境急件走空运。货代的出发地、目的地和方式必须在同一条 lane 匹配；冷链、尾板车和小车要求进入能力筛选。供应商和运价均由资产提供。
+- 件数接受 `pcs` / `set` / `pack`，按 `carton` 计数必须有箱规；重量、体积不能直接换件数。申报币种、汇率和容差没有业务默认值，跨币种汇率为 `1` 仍视为未核验。
+- 装卸通道实测值 `dock`、`loading_dock` 或「有装卸平台」表示有平台；未知时返回待办并请求尾板车服务。缺箱单字段提示补充但不阻断定稿；毛重小于净重等矛盾会阻断。
+- host 负责认证 `edits[].role`。货代/自带物流只能补允许的空格；品名、规格、货值由操作员修改。定稿后修改须说明原因并留 `amendments`。分享给承运方时用 `viewFor`，隐藏其他报价和内部备注。MCP 面向已授权操作员，不承担分享链接鉴权。
+- 货代、定稿、选报价由 `operator` 批准，`client` 接受报价只留痕。无报价时返回带询价待办的计划；已有报价须明确选择，过期报价不可选。运价基数支持 `shipment` / `m3` / `kg` / `carton`；三个 `*Pct` 容差是小数比例，时效容差是天数。
+- 承运方报送达不等于门店实收；缺任一必需批次日期时，汇总日期仍为未知。混合预计与实收日期时，汇总采用较弱的证据类型。暂挂、短收、破损都使 `allReceived=false`。恢复既有计划时只传新增运输事件，签收记录不能静默覆盖。
+- 回填只认人工/签收实测；同字段多人值冲突记 `pending`，已有值不一致记 `fails`，不覆盖源数据。产品槽位升级到 `0.2.0`，允许逐项提供箱规，已核装箱数和毛重可先于尺寸入库。core 每次回填都检查源版本及 schema；同批先前回填导致版本改变时，后续意图必须重新读取并核实。host 应先保存计划，再执行补空意图。
+
+示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `node scripts/gen-delivery-example.mjs` 更新该示例；`pnpm examples` 同时检查两个 workflow。
 
 ## 验收与示例
 

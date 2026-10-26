@@ -1,0 +1,65 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "compliance-item",
+      "id": "example-certificate",
+      "slotVersion": "0.1.0",
+      "versionHash": "83402064c698f77bc098931d45f8be90e8cdbf78e33a680e97f2f66e7b7ca1aa",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "categoryId": "example-category",
+        "market": "XE",
+        "name": "Invented sample checklist item",
+        "level": "sku",
+        "entityRole": null,
+        "required": "mandatory",
+        "issuer": "Example authority",
+        "officialUrl": "https://example.com/checklist",
+        "evidenceHint": "Synthetic evidence only",
+        "certTag": null,
+        "overrideOf": null,
+        "retired": false
+      }
+    },
+    {
+      "slot": "compliance-item",
+      "id": "example-batch-document",
+      "slotVersion": "0.1.0",
+      "versionHash": "99f55c9f670116c65296f90c899cc09f941d50101012c217a28052f0569a3a3e",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "categoryId": "example-category",
+        "market": "XE",
+        "name": "Invented batch document",
+        "level": "batch",
+        "entityRole": null,
+        "required": "mandatory",
+        "issuer": "Example authority",
+        "officialUrl": "https://example.com/checklist",
+        "evidenceHint": "Synthetic evidence only",
+        "certTag": null,
+        "overrideOf": null,
+        "retired": false
+      }
+    }
+  ]
+}

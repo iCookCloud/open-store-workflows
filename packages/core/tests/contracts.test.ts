@@ -5,15 +5,18 @@ import {
   MemorySource,
   Offer,
   OfferSlot,
+  ProductSlot,
   Requirement,
   SHARED_SLOTS,
   addDays,
+  assetRef,
   convertMoney,
   convertUnit,
   createParamReader,
   defineSlot,
   diffDays,
   divMoney,
+  fieldsetHash,
   isWithin,
   jurisdictionPrefixes,
   meets,
@@ -43,6 +46,44 @@ async function record(slot: string, id: string, data: unknown): Promise<AnyAsset
   };
 }
 describe('canonical hash', () => {
+  it('accepts partial carton observations while keeping source-version guards on subsequent fills', async () => {
+    const data = {
+      name: { en: 'Example Product' },
+      kind: 'catalog',
+      category: 'example',
+      goodsClass: 'nonfood',
+      status: 'active',
+    };
+    const product = await record('product', 'example-carton', data);
+    product.fieldsetHashes = Object.fromEntries(
+      await Promise.all(
+        Object.entries(ProductSlot.fieldsets!).map(async ([key, fields]) => [
+          key,
+          await fieldsetHash(data, fields),
+        ]),
+      ),
+    );
+    const source = new MemorySource([product], [ProductSlot]);
+    const first = {
+      asset: assetRef(product),
+      field: 'carton.units',
+      value: 2,
+      by: 'example:receiver',
+      at: time,
+    };
+    expect(await source.applyFills([first])).toEqual([{ status: 'recorded' }]);
+    expect((await source.get(ProductSlot, product.id))?.data.carton).toEqual({ units: 2 });
+    expect(
+      await source.applyFills([{ ...first, field: 'carton.grossWeightKg', value: 30 }]),
+    ).toEqual([{ status: 'source_changed' }]);
+    const updated = (await source.get(ProductSlot, product.id))!;
+    expect(
+      await source.applyFills([
+        { ...first, asset: assetRef(updated), field: 'carton.grossWeightKg', value: 30 },
+      ]),
+    ).toEqual([{ status: 'recorded' }]);
+    expect(ProductSlot.schema.safeParse({ ...data, carton: { units: 0 } }).success).toBe(false);
+  });
   it('matches both protocol golden vectors', async () => {
     expect(
       await versionHash({

@@ -17,6 +17,9 @@ importers:
       '@osw/core':
         specifier: workspace:*
         version: link:packages/core
+      '@osw/landed-delivery':
+        specifier: workspace:*
+        version: link:packages/landed-delivery
       '@osw/mcp':
         specifier: workspace:*
         version: link:packages/mcp
@@ -44,6 +47,12 @@ importers:
       zod:
         specifier: ^4.1.0
         version: 4.6.7
+
+  packages/landed-delivery:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/mcp:
     dependencies:
