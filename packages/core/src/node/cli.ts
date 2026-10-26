@@ -11,11 +11,18 @@ import {
   slotJsonSchema,
 } from '../index.js';
 import { collectSlots, discoverWorkflows } from './discover.js';
-import { type Execution, executeStep, executeWorkflow, openSource } from './runner.js';
+import { loadProviders } from './providers.js';
+import {
+  type Execution,
+  type RunOptions,
+  executeStep,
+  executeWorkflow,
+  openSource,
+} from './runner.js';
 
 const HELP = `osw <workflow> <step|run> --assets <directory|url> --in <file>
     [--out <file> | --out-dir <directory>] [--approvals <file>]
-    [--now <ISO timestamp>] [--actor <name>] [--record]
+    [--now <ISO timestamp>] [--actor <name>] [--providers <local-module>] [--record]
 osw slots [--json-schema [directory]]
 osw validate <slot> <file>
 
@@ -25,6 +32,8 @@ Assets may also be configured with OSW_ASSETS; HTTP credentials use OSW_TOKEN.
 
 export interface CliOptions {
   workflows?: readonly WorkflowModule[];
+  providers?: RunOptions['providers'];
+  stores?: RunOptions['stores'];
   source?: AssetSource;
   cwd?: string;
   stdout?: (text: string) => void;
@@ -34,7 +43,16 @@ export interface CliOptions {
 function parseArgs(args: readonly string[]) {
   const positionals: string[] = [];
   const flags = new Map<string, string | true>();
-  const values = new Set(['assets', 'in', 'out', 'out-dir', 'approvals', 'now', 'actor']);
+  const values = new Set([
+    'assets',
+    'in',
+    'out',
+    'out-dir',
+    'approvals',
+    'now',
+    'actor',
+    'providers',
+  ]);
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (!arg.startsWith('--')) {
@@ -162,7 +180,15 @@ export async function runCli(args: readonly string[], options: CliOptions = {}):
         throw new Error('Approvals file must contain an array or {items:[]}');
       approvals = items.map((approval) => Approval.parse(approval));
     }
+    const providerFile = flags.get('providers');
+    const now =
+      typeof flags.get('now') === 'string' ? String(flags.get('now')) : new Date().toISOString();
+    const adapters =
+      typeof providerFile === 'string'
+        ? await loadProviders(path(providerFile), now)
+        : { providers: options.providers, stores: options.stores };
     const runOptions = {
+      ...adapters,
       source,
       approvals,
       ...(typeof flags.get('now') === 'string' ? { now: String(flags.get('now')) } : {}),

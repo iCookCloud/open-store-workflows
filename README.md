@@ -6,7 +6,9 @@ Reusable, data-driven workflows for planning and operating a store. Business rul
 
 [Source](https://github.com/iCookCloud/open-store-workflows) · [CI](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-This implementation includes the shared core, **store-concept** and **landed-delivery** workflows. They produce versioned `StoreSpec` and `DeliveryPlan` artifacts. The other five workflow implementations and production-system integration are separate work.
+Implemented workflows include **store-concept** (`StoreSpec`), **site-search** (`SiteDecision`), **fitout-bom** (`Bom`), and **landed-delivery** (`DeliveryPlan`). They share the core, CLI and MCP interfaces. The remaining three workflows and production-system integration are separate work.
+
+See the [site-search guide](packages/site-search/README.md) for the synthetic end-to-end example and explicit local `--providers` modules. `pnpm examples:site-search` checks missing-signature-approval exit 2 and completed exit 0.
 
 ## Packages
 
@@ -14,6 +16,8 @@ This implementation includes the shared core, **store-concept** and **landed-del
 | --- | --- |
 | `@osw/core` | Schemas, hashing, units, money, conditions, parameter resolution, asset sources and artifact contracts |
 | `@osw/store-concept` | Concept selection, menus, investment and breakeven calculations, calibration, site requirements and release approval |
+| `@osw/site-search` | Unit-aware listing filters, independent surveys, lease drift, approvals and signing evidence |
+| `@osw/fitout-bom` | Case/image review, quantities, model costs, supplier offers, verification and BOM release approval |
 | `@osw/landed-delivery` | Compliance review, packing, carrier capabilities, freight quotations, shipment tracking and measured receipts |
 | `@osw/mcp` | A stdio MCP server exposing the same steps and schemas as the CLI |
 
@@ -96,7 +100,7 @@ The host authenticates edit roles before invoking `applyPartyEdits`. Carrier edi
 
 Rates use `shipment`, `m3`, `kg` or `carton` bases. `delivery.tolerance.weightPct`, `delivery.tolerance.volumePct` and `freight.tolerance.rateCardPct` are fractional ratios; `freight.tolerance.transitDays` is an absolute day allowance. Tolerances become required when the corresponding measurement exists. Missing packing cells request follow-up without blocking confirmation; contradictions block. Missing quotes return a usable plan with a request action, while supplied quotes require an explicit current choice. Delivery is distinct from signed receipt. A milestone with any unknown required date stays unknown, and mixed evidence uses the weakest basis. Held goods, shortages or damage keep `allReceived` false.
 
-Only manual or signed observations produce fill intentions. Conflicting observations produce `pending`; existing differing values produce `fails` without overwriting. The product slot is version `0.2.0`: carton fields may be supplied individually, so verified units or weight can be filled before dimensions are known. Core writeback checks source versions and schema on each fill; later fills based on a now-changed version require a fresh read and review. Hosts persist plan results before applying fill intentions. The sample spans two shipping countries, food/nonfood, air freight, own logistics, seller delivery and one denied product, and deliberately produces rate, weight and transit failures. Regenerate it with `node scripts/gen-delivery-example.mjs`; `pnpm examples` checks both workflows against committed golden artifacts.
+Only manual or signed observations produce fill intentions. Conflicting observations produce `pending`; existing differing values produce `fails` without overwriting. The product slot is version `0.2.0`: carton fields may be supplied individually, so verified units or weight can be filled before dimensions are known. Core writeback checks source versions and schema on each fill; later fills based on a now-changed version require a fresh read and review. Hosts persist plan results before applying fill intentions. The sample spans two shipping countries, food/nonfood, air freight, own logistics, seller delivery and one denied product, and deliberately produces rate, weight and transit failures. Regenerate it with `node scripts/gen-delivery-example.mjs`; `pnpm examples` checks all four workflows against committed golden artifacts.
 
 ## Verification and synthetic data
 
@@ -126,3 +130,7 @@ The pre-push hook scans the blobs reachable from outgoing commits; the full-hist
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+## Fitout workflow
+
+`@osw/fitout-bom` implements case/image review, site and menu quantities, material costing, supplier selection, offer verification, BOM freezing and optional customer quotes. See [the fitout package guide](packages/fitout-bom/README.md). The fully synthetic `examples/fitout-store` fixture is checked by `pnpm examples`.

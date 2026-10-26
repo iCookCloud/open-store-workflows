@@ -1,0 +1,26 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "providerPlaceId": "example-place-0",
+      "geo": {
+        "lat": 0,
+        "lng": 0
+      }
+    },
+    {
+      "providerPlaceId": "example-place-1",
+      "geo": {
+        "lat": 0.001,
+        "lng": 0
+      }
+    },
+    {
+      "providerPlaceId": "example-place-2",
+      "geo": {
+        "lat": 0.002,
+        "lng": 0
+      }
+    }
+  ]
+}

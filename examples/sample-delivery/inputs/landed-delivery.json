@@ -5,7 +5,7 @@
     "kind": "Bom",
     "artifactVersion": "0.1.0",
     "id": "example-bom",
-    "hash": "d296f842dc7ff184e66fce60c698400c651cbc2f255612656b5ceaeed964c59d",
+    "hash": "74b200960dad381acc6465586bc44f90f8940d14efaeb86eb26667a4d7bfa54f",
     "producedBy": {
       "step": "fitout-bom/assembleBom",
       "pkg": "@osw/fitout-bom",
@@ -121,7 +121,20 @@
           "modelCostPerUnit": null,
           "parts": [],
           "modelWarnings": [],
-          "sourcing": null,
+          "sourcing": {
+            "partyId": "example-supplier",
+            "offerPrice": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "tierMinQty": 1,
+            "includes": [],
+            "quotedAt": "2026-01-01",
+            "leadTimeDays": {
+              "min": 1,
+              "max": 10
+            }
+          },
           "costBasis": "offer",
           "unitPrice": {
             "amount": 100,
@@ -172,7 +185,20 @@
           "modelCostPerUnit": null,
           "parts": [],
           "modelWarnings": [],
-          "sourcing": null,
+          "sourcing": {
+            "partyId": "example-supplier",
+            "offerPrice": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "tierMinQty": 1,
+            "includes": [],
+            "quotedAt": "2026-01-01",
+            "leadTimeDays": {
+              "min": 1,
+              "max": 10
+            }
+          },
           "costBasis": "offer",
           "unitPrice": {
             "amount": 100,
@@ -223,7 +249,20 @@
           "modelCostPerUnit": null,
           "parts": [],
           "modelWarnings": [],
-          "sourcing": null,
+          "sourcing": {
+            "partyId": "example-supplier",
+            "offerPrice": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "tierMinQty": 1,
+            "includes": [],
+            "quotedAt": "2026-01-01",
+            "leadTimeDays": {
+              "min": 1,
+              "max": 10
+            }
+          },
           "costBasis": "offer",
           "unitPrice": {
             "amount": 100,
@@ -274,7 +313,20 @@
           "modelCostPerUnit": null,
           "parts": [],
           "modelWarnings": [],
-          "sourcing": null,
+          "sourcing": {
+            "partyId": "example-supplier",
+            "offerPrice": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "tierMinQty": 1,
+            "includes": [],
+            "quotedAt": "2026-01-01",
+            "leadTimeDays": {
+              "min": 1,
+              "max": 10
+            }
+          },
           "costBasis": "offer",
           "unitPrice": {
             "amount": 100,
@@ -325,7 +377,20 @@
           "modelCostPerUnit": null,
           "parts": [],
           "modelWarnings": [],
-          "sourcing": null,
+          "sourcing": {
+            "partyId": "example-local-seller",
+            "offerPrice": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "tierMinQty": 1,
+            "includes": [],
+            "quotedAt": "2026-01-01",
+            "leadTimeDays": {
+              "min": 1,
+              "max": 10
+            }
+          },
           "costBasis": "offer",
           "unitPrice": {
             "amount": 100,
@@ -376,7 +441,20 @@
           "modelCostPerUnit": null,
           "parts": [],
           "modelWarnings": [],
-          "sourcing": null,
+          "sourcing": {
+            "partyId": "example-supplier",
+            "offerPrice": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "tierMinQty": 1,
+            "includes": [],
+            "quotedAt": "2026-01-01",
+            "leadTimeDays": {
+              "min": 1,
+              "max": 10
+            }
+          },
           "costBasis": "offer",
           "unitPrice": {
             "amount": 100,

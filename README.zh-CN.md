@@ -4,7 +4,9 @@
 
 [GitHub 源码](https://github.com/iCookCloud/open-store-workflows) · [自动检查](https://github.com/iCookCloud/open-store-workflows/actions/workflows/ci.yml)
 
-目前实现 **共享 core、第 1 项「定店型」与第 4 项「到店」**，分别生成 `StoreSpec` 和 `DeliveryPlan`。其余五项流程的业务实现与现有站点对接另行开展。
+已实现 **共享 core、第 1 项「定店型」、第 2 项「找房」、第 3 项「装修物料单」与第 4 项「到店」**，分别生成 `StoreSpec`、`SiteDecision`、`Bom` 和 `DeliveryPlan`。四条流程共用 CLI／MCP；其余三项及生产站点接入另行开展。
+
+第二项包含筛选、周边扫描、实测、意向书、律师审阅与签署证据核验，详见[找房运行说明](packages/site-search/README.md)。运行 `pnpm examples:site-search` 可验证缺签约批示退出 2、审批完整退出 0。CLI 和 MCP 可用 `--providers <本地模块>` 显式加载外部服务及额度存储。
 
 ## 使用
 
@@ -38,7 +40,7 @@ MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动
 
 ## 设计约束
 
-- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；两个 workflow 包均只依赖它。
+- `@osw/core` 统一数据格式、哈希、单位、金额、参数解析和资产接口；四个 workflow 包均只依赖它。
 - Memory、File、HTTP 三种资产源使用同一份接口。FileSource 支持 JSON、NDJSON 和 CSV。
 - 缺业务参数或同级候选不唯一时明确返回 `needs`，不猜默认价格和汇率。
 - 金额按币种最小单位逐行舍入，用户覆盖值已经是目标币种，不重复换算。
@@ -70,7 +72,7 @@ pnpm osw landed-delivery run \
 - 承运方报送达不等于门店实收；缺任一必需批次日期时，汇总日期仍为未知。混合预计与实收日期时，汇总采用较弱的证据类型。暂挂、短收、破损都使 `allReceived=false`。恢复既有计划时只传新增运输事件，签收记录不能静默覆盖。
 - 回填只认人工/签收实测；同字段多人值冲突记 `pending`，已有值不一致记 `fails`，不覆盖源数据。产品槽位升级到 `0.2.0`，允许逐项提供箱规，已核装箱数和毛重可先于尺寸入库。core 每次回填都检查源版本及 schema；同批先前回填导致版本改变时，后续意图必须重新读取并核实。host 应先保存计划，再执行补空意图。
 
-示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `node scripts/gen-delivery-example.mjs` 更新该示例；`pnpm examples` 同时检查两个 workflow。
+示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `node scripts/gen-delivery-example.mjs` 更新该示例；`pnpm examples` 检查四个 workflow。
 
 ## 验收与示例
 
@@ -97,3 +99,7 @@ git config core.hooksPath .githooks
 未配置黑名单时扫描失败。`pre-push` 检查待推提交；GitHub Actions 为推送和 PR 运行构建、测试与示例。主分支隐私检查使用 `OSW_PRIVATE_DENYLIST_CONTENT` 仓库 secret 扫描完整历史，私有词表不会提供给 PR 作业。可选的 Woodpecker 使用 `osw_private_denylist` secret。发布包还可以用 `--tarball` 检查。GitHub 源码公开与 npm 发布、生产接入分别管理。
 
 许可证：[Apache-2.0](LICENSE)。
+
+## 第三条：装修物料单
+
+`@osw/fitout-bom` 已实现案例／识图人审、铺位与菜单用量、用料计价、供应商选择、报价验证、物料单定稿及对外报价。操作方法见 [装修包说明](packages/fitout-bom/README.md)。`examples/fitout-store` 是从零合成的第三条独立示例，纳入 `pnpm examples` 验收。生产资产中心接入尚需在私有项目实施。

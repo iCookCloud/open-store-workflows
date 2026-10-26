@@ -287,3 +287,20 @@ describe('schema contracts', () => {
     expect(isWithin('XE-AAX', 'XE-AA')).toBe(false);
   });
 });
+
+describe('lawyer profile contract', () => {
+  it('preserves owned, partner and absent service options and rejects invalid stance', async () => {
+    const { LawyerProfile } = await import('../src/index.js');
+    const profile = {
+      matters: ['lease'],
+      stance: 'tenant',
+      caseTypes: [],
+      chinaLanding: 'partner',
+      engagement: ['matter'],
+    };
+    for (const chinaLanding of ['own', 'partner', 'none'])
+      expect(LawyerProfile.parse({ ...profile, chinaLanding }).chinaLanding).toBe(chinaLanding);
+    expect(LawyerProfile.safeParse({ ...profile, chinaLanding: false }).success).toBe(false);
+    expect(LawyerProfile.safeParse({ ...profile, stance: 'unknown' }).success).toBe(false);
+  });
+});

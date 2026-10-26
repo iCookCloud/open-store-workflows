@@ -1,0 +1,39 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "trade-area",
+      "id": "example-population",
+      "data": {
+        "jurisdiction": "XE",
+        "center": {
+          "lat": 0,
+          "lng": 0
+        },
+        "radiusKm": 10,
+        "residents": {
+          "value": 20000,
+          "basis": "observed",
+          "by": "example-surveyor",
+          "at": "2026-01-09T12:00:00Z",
+          "expiresAt": "2026-12-31",
+          "refs": [
+            "https://example.com/survey"
+          ]
+        },
+        "method": "exact",
+        "period": "2026"
+      },
+      "versionHash": "91aea7b247fb2805760e6f2df73ce9e31e72da53852879cc3dcdf26e235b09f5",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    }
+  ]
+}

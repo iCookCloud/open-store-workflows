@@ -1,5 +1,6 @@
 import { Hash, ParamKey, SlotName, StepId, z } from './base.js';
 import type { AssetRef, WorkflowKey } from './base.js';
+import type { OswProviders } from './index.js';
 import type { SlotDef } from './slot.js';
 import type { AssetReader } from './source.js';
 import type { Approval, Fill, Verification } from './verification.js';
@@ -60,8 +61,6 @@ export interface ParamReader {
   ): { value: number | string | boolean; unit?: string } | undefined;
   need?(key: string, at?: ParamScope): Need | undefined;
 }
-// biome-ignore lint/suspicious/noEmptyInterface: 各工作流通过声明合并扩展 provider 接口
-export interface OswProviders {}
 export interface QuotaStore {
   consume(scope: string, key: string, limit: number, windowSec: number): Promise<boolean>;
 }

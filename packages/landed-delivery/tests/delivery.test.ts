@@ -1,7 +1,8 @@
+import { readFile } from 'node:fs/promises';
 import { Need, Verification, slotJsonSchema, versionHash, z } from '@osw/core';
 import { executeWorkflow } from '@osw/core/node';
 import { describe, expect, it, vi } from 'vitest';
-import { DeliveryPlan, type DeliveryState, type Shipment } from '../src/models.js';
+import { DeliveryInput, DeliveryPlan, type DeliveryState, type Shipment } from '../src/models.js';
 import { workflow } from '../src/run.js';
 import { slots } from '../src/slots.js';
 import { collectQuotes } from '../src/steps/collect-quotes.js';
@@ -192,6 +193,18 @@ describe('quotes, transport and receipt', () => {
 });
 
 describe('downstream artifacts and runner contracts', () => {
+  it('accepts the actual frozen BOM produced by the fitout example', async () => {
+    const bom = JSON.parse(
+      await readFile(
+        new URL('../../../examples/fitout-store/expected/bom.json', import.meta.url),
+        'utf8',
+      ),
+    );
+    const input = DeliveryInput.parse({ id: 'example-fitout-delivery', jurisdiction: 'XE', bom });
+    expect(input.bom.hash).toBe(await versionHash(input.bom.body));
+    expect(input.bom.body.lines[0].sourcing?.partyId).toBe('example-supplier');
+    expect(input.bom.body.lines[0].offerRef?.slot).toBe('offer');
+  });
   it('does not claim a dated milestone while one required shipment lacks a date', async () => {
     const fixture = await approvedDelivery();
     const state = structuredClone(

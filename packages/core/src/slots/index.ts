@@ -150,12 +150,12 @@ export const ContractorProfile = z.object({
 });
 export const LawyerProfile = z.object({
   matters: Strings,
-  stance: z.string(),
+  stance: z.enum(['tenant', 'landlord', 'employer', 'employee', 'mixed']),
   caseTypes: Strings,
   teamSize: z.number().int().positive().optional(),
   since: z.number().int().optional(),
-  chinaLanding: z.boolean(),
-  engagement: Strings,
+  chinaLanding: z.enum(['own', 'partner', 'none']),
+  engagement: z.array(z.enum(['retainer', 'matter', 'batch', 'contingency', 'negotiable'])),
 });
 export const CreatorProfile = z.object({
   platform: z.string(),

@@ -1,79 +1,88 @@
-import {
-  Address,
-  AssetId,
-  AssetRef,
-  FillSrc,
-  GeoPoint,
-  Hash,
-  IsoDate,
-  IsoDateTime,
-  Jurisdiction,
-  LineItem,
-  Measure,
-  Money,
-  ParamKey,
-  TrackKey,
-  Unit,
-  z,
-} from '../base.js';
+import { AssetId, AssetRef, Currency, IsoDate, LineItem, Money, Unit, z } from '../base.js';
 import { BudgetKey } from '../budget.js';
-import { ConditionKey, ConditionReading, Requirement } from '../conditions.js';
-import { FilterSchema } from '../filter.js';
-import { ArtifactRef } from './envelope.js';
 
-const Basis = z.object({
+export const Basis = z.object({
   status: z.enum(['measured', 'estimated', 'derived', 'manual']),
   note: z.string(),
 });
-const Frame = z.object({ x: z.number(), y: z.number(), w: z.number(), h: z.number() });
+export const Frame = z.object({
+  x: z.number().finite(),
+  y: z.number().finite(),
+  w: z.number().positive(),
+  h: z.number().positive(),
+});
+export const DimensionsMm = z.object({
+  l: z.number().positive(),
+  w: z.number().nonnegative(),
+  h: z.number().nonnegative(),
+});
 export const PriceBasis = z.enum(['model', 'quote', 'catalog', 'invoice', 'estimate']);
 export const QtyRule = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('manual') }),
   z.object({
     kind: z.enum(['length', 'area']),
     demand: z.number().nonnegative(),
-    lossPct: z.number().min(0),
+    lossPct: z.number().nonnegative(),
   }),
   z.object({
     kind: z.enum(['modules', 'tiles']),
     demand: z.number().nonnegative(),
-    lossPct: z.number().min(0),
+    lossPct: z.number().nonnegative(),
     packSize: z.number().int().positive(),
   }),
   z.object({
     kind: z.literal('linked'),
-    links: z.array(z.string()).min(1),
+    links: z.array(z.string().min(1)).min(1),
     factor: z.number().nonnegative(),
   }),
   z.object({
     kind: z.literal('site'),
     metric: z.enum(['seats', 'area', 'frontage', 'clearHeight']),
     factor: z.number().nonnegative(),
-    lossPct: z.number().min(0),
+    lossPct: z.number().nonnegative(),
   }),
   z.object({
     kind: z.literal('menu'),
-    recipeId: z.string(),
+    recipeId: z.string().min(1),
     ingredientIndex: z.number().int().nonnegative(),
   }),
 ]);
-export const Component = z.object({
-  key: z.string(),
-  name: z.string(),
-  kind: z.enum(['material', 'hardware', 'process', 'labor']),
-  basis: z.enum(['fixed', 'length', 'area', 'front', 'side', 'volume', 'skin', 'cylinder']),
-  qtyPerUnit: z.number().nonnegative(),
-  unit: Unit,
-  rateRef: AssetRef.optional(),
-  rate: Money.optional(),
-  rateNote: z.string().optional(),
-  override: z.object({ rate: Money, reason: z.string().min(1) }).optional(),
-});
+export const Component = z
+  .object({
+    key: z.string().min(1),
+    name: z.string().min(1),
+    kind: z.enum(['material', 'hardware', 'process', 'labor']),
+    basis: z.enum(['fixed', 'length', 'area', 'front', 'side', 'volume', 'skin', 'cylinder']),
+    qtyPerUnit: z.number().nonnegative(),
+    unit: Unit,
+    rateRef: AssetRef.optional(),
+    rate: Money.optional(),
+    rateNote: z.string().optional(),
+    override: z.object({ rate: Money, reason: z.string().min(1) }).optional(),
+  })
+  .superRefine((v, c) => {
+    if (v.rateRef && v.rate)
+      c.addIssue({ code: 'custom', message: 'rateRef and rate are mutually exclusive' });
+    if (v.rate && !v.rateNote?.trim())
+      c.addIssue({
+        code: 'custom',
+        path: ['rateNote'],
+        message: 'Inline rates require their source',
+      });
+    if (v.rateRef && v.rateRef.slot !== 'material-rate')
+      c.addIssue({
+        code: 'custom',
+        path: ['rateRef'],
+        message: 'Expected material-rate reference',
+      });
+    if ((v.rate?.amount ?? 0) < 0 || (v.override?.rate.amount ?? 0) < 0)
+      c.addIssue({ code: 'custom', message: 'Rates must be nonnegative' });
+  });
 export const Part = z.object({
   key: z.string(),
   name: z.string(),
   kind: z.string(),
-  qty: z.number(),
+  qty: z.number().nonnegative(),
   unit: Unit,
   rate: Money,
   total: Money,
@@ -84,7 +93,7 @@ export const BomLine = LineItem.extend({
   name: z.string().min(1),
   zone: z.string(),
   spec: z.string(),
-  dimensionsMm: z.object({ l: z.number(), w: z.number(), h: z.number() }).optional(),
+  dimensionsMm: DimensionsMm.optional(),
   qtyRule: QtyRule,
   qtyBasis: Basis,
   dimsBasis: Basis,
@@ -103,12 +112,14 @@ export const BomLine = LineItem.extend({
     .object({
       partyId: AssetId,
       offerPrice: Money,
-      tierMinQty: z.number(),
+      tierMinQty: z.number().nonnegative(),
       incoterm: z.string().optional(),
       includes: z.array(z.enum(['pack', 'freight', 'install', 'tax'])),
       quotedAt: IsoDate,
       validUntil: IsoDate.optional(),
-      leadTimeDays: z.object({ min: z.number().int(), max: z.number().int() }).optional(),
+      leadTimeDays: z
+        .object({ min: z.number().int().nonnegative(), max: z.number().int().nonnegative() })
+        .optional(),
     })
     .nullable(),
   costBasis: z.enum(['model', 'offer']),
@@ -118,13 +129,63 @@ export const BomLine = LineItem.extend({
   urgent: z.boolean().optional(),
   orderedAt: IsoDate.optional(),
   coverDays: z.number().positive().optional(),
+}).superRefine((v, c) => {
+  if ((v.pricingMode === 'custom') !== v.components.length > 0)
+    c.addIssue({
+      code: 'custom',
+      path: ['components'],
+      message: 'Custom lines require components; whole lines cannot have components',
+    });
+  if (new Set(v.components.map((x) => x.key)).size !== v.components.length)
+    c.addIssue({ code: 'custom', path: ['components'], message: 'Component keys must be unique' });
+  if (v.costBasis === 'offer' && (!v.offerRef || !v.sourcing))
+    c.addIssue({
+      code: 'custom',
+      path: ['sourcing'],
+      message: 'Offer cost requires selected offer snapshot',
+    });
+  if (Boolean(v.offerRef) !== Boolean(v.sourcing))
+    c.addIssue({ code: 'custom', message: 'offerRef and sourcing must occur together' });
+  if (v.productRef && v.productRef.slot !== 'product')
+    c.addIssue({ code: 'custom', path: ['productRef'], message: 'Expected product reference' });
+  if (v.offerRef && v.offerRef.slot !== 'offer')
+    c.addIssue({ code: 'custom', path: ['offerRef'], message: 'Expected offer reference' });
+  if (v.qty > 1e8) c.addIssue({ code: 'custom', path: ['qty'], message: 'Quantity exceeds limit' });
 });
-const Sum = z.object({ model: Money, chosen: Money, sourcedShare: z.number().min(0).max(1) });
-export const BomBody = z.object({
-  currency: z.string().regex(/^[A-Z]{3}$/),
-  lines: z.array(BomLine).max(2000),
-  totals: z.object({ model: Money, chosen: Money, byBudgetKey: z.partialRecord(BudgetKey, Sum) }),
+export type BomLine = z.infer<typeof BomLine>;
+export type Component = z.infer<typeof Component>;
+export type QtyRule = z.infer<typeof QtyRule>;
+export const BomSum = z.object({
+  model: Money,
+  chosen: Money,
+  sourcedShare: z.number().min(0).max(1),
 });
+export const BomBody = z
+  .object({
+    currency: Currency,
+    lines: z.array(BomLine).max(2000),
+    totals: z.object({
+      model: Money,
+      chosen: Money,
+      byBudgetKey: z.partialRecord(BudgetKey, BomSum),
+    }),
+  })
+  .superRefine((v, c) => {
+    if (new Set(v.lines.map((l) => l.id)).size !== v.lines.length)
+      c.addIssue({ code: 'custom', path: ['lines'], message: 'Line IDs must be unique' });
+    for (const [i, line] of v.lines.entries())
+      if (
+        line.unitPrice.currency !== v.currency ||
+        (line.modelCostPerUnit && line.modelCostPerUnit.currency !== v.currency)
+      )
+        c.addIssue({
+          code: 'custom',
+          path: ['lines', i],
+          message: 'Line currency differs from BOM',
+        });
+  });
+export type BomBody = z.infer<typeof BomBody>;
+
 export const MenuPlan = z.object({
   menuRef: AssetRef,
   coverDays: z.number().positive(),

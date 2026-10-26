@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtemp, readFile, readdir } from 'node:fs/promises';
+import { cp, mkdtemp, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -95,4 +95,59 @@ assert(
 console.log(
   `Example passed: reproducible fixtures, blocking approval, approved CLI and failed verification (${scratch})`,
 );
+
+const fitoutExample = resolve(root, 'examples/fitout-store');
+const fitoutAssets = resolve(scratch, 'fitout-assets');
+await cp(resolve(fitoutExample, 'assets'), fitoutAssets, { recursive: true });
+const fitoutArgs = [
+  cli,
+  'fitout-bom',
+  'run',
+  '--assets',
+  fitoutAssets,
+  '--in',
+  resolve(fitoutExample, 'inputs/fitout-bom.json'),
+  '--now',
+  '2026-01-01T12:00:00Z',
+  '--actor',
+  'osw:fitout-bom/test@0.1.0',
+];
+const fitoutBlocked = spawnSync(
+  process.execPath,
+  [...fitoutArgs, '--out-dir', resolve(scratch, 'fitout-blocked')],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(fitoutBlocked.status, 2, fitoutBlocked.stderr);
+const fitoutCompleted = spawnSync(
+  process.execPath,
+  [
+    ...fitoutArgs,
+    '--approvals',
+    resolve(fitoutExample, 'approvals/fitout-bom.json'),
+    '--out-dir',
+    resolve(scratch, 'fitout-approved'),
+    '--record',
+  ],
+  { cwd: root, encoding: 'utf8' },
+);
+assert.equal(fitoutCompleted.status, 0, fitoutCompleted.stderr);
+const fitoutArtifact = JSON.parse(
+  await readFile(resolve(scratch, 'fitout-approved/artifact.json'), 'utf8'),
+);
+assert.deepEqual(
+  fitoutArtifact,
+  JSON.parse(await readFile(resolve(fitoutExample, 'expected/bom.json'), 'utf8')),
+);
+assert.deepEqual(fitoutArtifact.body.totals.chosen, usd(200));
+assert.deepEqual(fitoutArtifact.body.totals.model, usd(200));
+const fitoutChecks = (await readFile(resolve(fitoutAssets, '_verifications.ndjson'), 'utf8'))
+  .trim()
+  .split('\n')
+  .map((line) => JSON.parse(line))
+  .filter((v) => v.asset.slot === 'offer');
+assert.deepEqual(fitoutChecks.map((v) => v.verdict).sort(), ['fails', 'holds', 'pending']);
+console.log(
+  'Fitout example passed: blocked approval, reproducible Bom, and three recorded offer verdicts',
+);
+
 await checkDeliveryExample();
