@@ -30,6 +30,7 @@ import {
   z,
 } from '../src/index.js';
 import type { AnyAssetRecord } from '../src/index.js';
+import { prepareContext } from '../src/node/runner.js';
 const time = '2026-01-01T00:00:00Z';
 async function record(slot: string, id: string, data: unknown): Promise<AnyAssetRecord> {
   return {
@@ -42,6 +43,54 @@ async function record(slot: string, id: string, data: unknown): Promise<AnyAsset
     data,
   };
 }
+describe('review: runner parameter hydration', () => {
+  it('loads qualified prices and dynamic FX while keeping parameter namespaces separate', async () => {
+    const records = await Promise.all([
+      record('params', 'base', { key: 'labor.rate', value: 1 }),
+      record('params', 'specific', { key: 'labor.rate.special', value: 4 }),
+      record('params', 'other', { key: 'labor.rateExtra.special', value: 99 }),
+      record('params', 'fx', { key: 'fx.EUR.USD', value: 2 }),
+      ...Array.from({ length: 205 }, (_, i) =>
+        record('params', `page-${i}`, { key: `labor.rate.item${i}`, value: i }),
+      ),
+    ]);
+    const ctx = await prepareContext(
+      [
+        {
+          id: 'store-concept/price',
+          input: z.object({}),
+          output: z.unknown(),
+          reads: ['params'],
+          params: [{ key: 'labor.rate', required: true, description: 'Labor price' }],
+          run: async () => ({ output: {}, needs: [], verifications: [] }),
+        },
+      ],
+      {},
+      { source: new MemorySource(records), now: time },
+    );
+    expect(ctx.params.get('labor.rate', { qualifier: 'special' })?.value).toBe(4);
+    expect(ctx.params.get('labor.rate', { qualifier: 'item204' })?.value).toBe(204);
+    expect(ctx.params.get('labor.rateExtra', { qualifier: 'special' })).toBeUndefined();
+    expect(ctx.params.get('fx.EUR.USD')?.value).toBe(2);
+    expect(ctx.params.refs?.('labor.rate', { qualifier: 'special' })?.[0].id).toBe('specific');
+  });
+});
+describe('review: condition unit safety', () => {
+  it('does not compare dimensional thresholds without a declared unit', () => {
+    const result = meets(
+      { key: 'area', op: 'gte', value: 100, hard: true },
+      { key: 'area', measure: { value: 1000, unit: 'ft2' } },
+    );
+    expect(result.value).toBeNull();
+    expect(result.needs).toContainEqual(expect.objectContaining({ kind: 'input', blocking: true }));
+    expect(
+      meets(
+        { key: 'area', op: 'gte', value: 100, unit: 'm2', hard: true },
+        { key: 'area', measure: { value: 1000, unit: 'ft2' } },
+      ).value,
+    ).toBe(false);
+  });
+});
 describe('canonical hash', () => {
   it('matches both protocol golden vectors', async () => {
     expect(

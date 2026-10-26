@@ -9,11 +9,142 @@ import {
   type AssetSource,
   MemorySource,
   OswSourceError,
+  ProductSlot,
   defineSlot,
+  fieldsetHash,
   versionHash,
   z,
 } from '../src/index.js';
 import { FileSource, recordsFromCsv } from '../src/node/file-source.js';
+describe('review: source contract defects', () => {
+  it('applies distinct fills from one observed version as one batch, then rejects stale callers', async () => {
+    const records = await conformanceRecords();
+    const source = new MemorySource(records, [ConformanceSlot]);
+    const base = {
+      asset: { slot: 'conformance', id: '4', versionHash: records[3].versionHash },
+      by: 'example:tester',
+      at: '2026-01-01T00:00:00Z',
+    };
+    expect(
+      await source.applyFills([
+        { ...base, field: 'note', value: 'verified' },
+        { ...base, field: 'score', value: 25 },
+        { ...base, field: 'note', value: 'overwrite' },
+      ]),
+    ).toEqual([{ status: 'recorded' }, { status: 'recorded' }, { status: 'not_empty' }]);
+    expect((await source.get(ConformanceSlot, '4'))?.data).toMatchObject({
+      note: 'verified',
+      score: 25,
+    });
+    expect(await source.applyFills([{ ...base, field: 'jurisdiction', value: 'XE' }])).toEqual([
+      { status: 'source_changed' },
+    ]);
+  });
+  it('reopens a multi-field journal batch and accepts an already materialized value', async () => {
+    const directory = await mkdtemp(join(tmpdir(), 'osw-batch-replay-'));
+    const records = await conformanceRecords();
+    const file = join(directory, 'conformance.json');
+    await writeFile(file, JSON.stringify(records));
+    const source = await FileSource.open(directory, [ConformanceSlot]);
+    const common = {
+      asset: { slot: 'conformance', id: '4', versionHash: records[3].versionHash },
+      by: 'example:tester',
+      at: '2026-01-01T00:00:00Z',
+    };
+    expect(
+      await source.applyFills([
+        { ...common, field: 'note', value: 'verified' },
+        { ...common, field: 'score', value: 25 },
+      ]),
+    ).toEqual([{ status: 'recorded' }, { status: 'recorded' }]);
+    const reopened = await FileSource.open(directory, [ConformanceSlot]);
+    expect((await reopened.get(ConformanceSlot, '4'))?.data).toMatchObject({
+      note: 'verified',
+      score: 25,
+    });
+    records[3] = (await reopened.get(ConformanceSlot, '4'))!;
+    await writeFile(file, JSON.stringify(records));
+    expect(
+      (await (await FileSource.open(directory, [ConformanceSlot])).get(ConformanceSlot, '4'))?.data
+        .note,
+    ).toBe('verified');
+  });
+  it('reports journal replay conflicts instead of silently dropping prior fills', async () => {
+    const directory = await mkdtemp(join(tmpdir(), 'osw-replay-review-'));
+    const records = await conformanceRecords();
+    const file = join(directory, 'conformance.json');
+    await writeFile(file, JSON.stringify(records));
+    const source = await FileSource.open(directory, [ConformanceSlot]);
+    await source.applyFills([
+      {
+        asset: { slot: 'conformance', id: '1', versionHash: records[0].versionHash },
+        field: 'note',
+        value: 'verified',
+        by: 'example:tester',
+        at: '2026-01-01T00:00:00Z',
+      },
+    ]);
+    records[0].data.label = 'Changed externally';
+    records[0].versionHash = await versionHash(records[0].data);
+    await writeFile(file, JSON.stringify(records));
+    await expect(FileSource.open(directory, [ConformanceSlot])).rejects.toMatchObject({
+      code: 'journal_conflict',
+    });
+    expect(JSON.parse(await readFile(file, 'utf8'))[0].data.label).toBe('Changed externally');
+  });
+  it('searches all product translations and paginates deterministic name sorting', async () => {
+    const records = await Promise.all(
+      [{ en: 'Zed Chair', zh: '示例椅' }, { en: 'Amy Chair' }, { zh: '示例桌' }].map(
+        async (name, index) => {
+          const data = {
+            name,
+            kind: 'catalog',
+            category: 'example',
+            goodsClass: 'nonfood',
+            status: 'active',
+          };
+          return {
+            slot: 'product',
+            id: `example-${index}`,
+            slotVersion: ProductSlot.slotVersion,
+            coverage: { tier: 'general', tracks: [], workflows: [], jurisdictions: [] },
+            updatedAt: '2026-01-01T00:00:00Z',
+            data,
+            versionHash: await versionHash(data),
+            fieldsetHashes: Object.fromEntries(
+              await Promise.all(
+                Object.entries(ProductSlot.fieldsets!).map(async ([key, fields]) => [
+                  key,
+                  await fieldsetHash(data, fields),
+                ]),
+              ),
+            ),
+          };
+        },
+      ),
+    );
+    const source = new MemorySource(records as AnyAssetRecord[], [ProductSlot]);
+    expect(
+      (await source.query(ProductSlot, { field: 'name', op: 'contains', value: 'chair' })).items,
+    ).toHaveLength(2);
+    expect(
+      (
+        await source.query(ProductSlot, { field: 'name', op: 'contains', value: '示例桌' })
+      ).items.map((r) => r.id),
+    ).toEqual(['example-2']);
+    const first = await source.query(ProductSlot, null, {
+      limit: 1,
+      sort: [{ field: 'name', dir: 'asc' }],
+    });
+    expect(first.items[0].id).toBe('example-1');
+    const second = await source.query(ProductSlot, null, {
+      limit: 1,
+      sort: [{ field: 'name', dir: 'asc' }],
+      cursor: first.nextCursor,
+    });
+    expect(second.items[0].id).toBe('example-0');
+  });
+});
 function referenceFetch(source: AssetSource): typeof fetch {
   return (async (input, init) => {
     const url = new URL(String(input));
@@ -338,8 +469,10 @@ describe('source review regressions', () => {
     records[0].data = { ...records[0].data, label: 'Externally revised', note: 'external value' };
     records[0].versionHash = await versionHash(records[0].data);
     await writeFile(path, JSON.stringify({ items: records }));
-    const updated = await FileSource.open(dir, [ConformanceSlot]);
-    expect((await updated.get(ConformanceSlot, '1'))?.data).toMatchObject({
+    await expect(FileSource.open(dir, [ConformanceSlot])).rejects.toMatchObject({
+      code: 'journal_conflict',
+    });
+    expect(JSON.parse(await readFile(path, 'utf8')).items[0].data).toMatchObject({
       label: 'Externally revised',
       note: 'external value',
     });

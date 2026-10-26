@@ -322,9 +322,11 @@ export class MemorySource implements AssetSource {
   private async commitFills(fs: readonly Fill[]): Promise<RecordResult[]> {
     if (fs.length > 200) throw new OswSourceError('too_many', 'At most 200 fills', { status: 413 });
     const parsed = fs.map((raw) => Fill.parse(raw));
+    // 同一批意图共享读取时版本；批内每次仍检查当前目标格为空，跨批调用仍严格校验新版本。
+    const initialStatuses = parsed.map((fill) => this.referenceStatus(fill.asset));
     const results: RecordResult[] = [];
-    for (const f of parsed) {
-      const status = this.referenceStatus(f.asset);
+    for (const [index, f] of parsed.entries()) {
+      const status = initialStatuses[index];
       if (status) {
         results.push(status);
         continue;

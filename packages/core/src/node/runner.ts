@@ -1,13 +1,10 @@
 import { HttpSource } from '../http/index.js';
 import {
   Approval,
-  type AssetRecordOf,
   type AssetSource,
   Fill,
   IsoDateTime,
   Need,
-  type Page,
-  type Param,
   type ParamScope,
   type RecordResult,
   SHARED_SLOTS,
@@ -17,7 +14,7 @@ import {
   Verification,
   type WorkflowModule,
   createParamReader,
-  paramsSlot,
+  loadParameterRecords,
 } from '../index.js';
 import { collectSlots } from './discover.js';
 import { FileSource } from './file-source.js';
@@ -73,23 +70,8 @@ export async function prepareContext(
 ): Promise<StepCtx> {
   const now = IsoDateTime.parse(options.now ?? new Date().toISOString());
   const keys = [...new Set(steps.flatMap((step) => step.params.map((param) => param.key)))];
-  const records: AssetRecordOf<Param>[] = [];
-  for (let offset = 0; offset < keys.length; offset += 200) {
-    const batch = keys.slice(offset, offset + 200);
-    let cursor: string | null = null;
-    do {
-      const page: Page<Param> = await options.source.query(
-        paramsSlot,
-        { field: 'key', op: 'in', value: batch },
-        { limit: 200, cursor },
-      );
-      records.push(...page.items);
-      if (page.nextCursor !== null && page.nextCursor === cursor) {
-        throw new Error('Asset source returned a non-advancing parameter cursor');
-      }
-      cursor = page.nextCursor;
-    } while (cursor !== null);
-  }
+  const records = await loadParameterRecords(options.source, [...keys, 'fx'], true);
+
   return {
     assets: options.source,
     params: createParamReader(records, now, inputScope(input)),

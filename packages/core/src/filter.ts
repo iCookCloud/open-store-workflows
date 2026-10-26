@@ -12,6 +12,7 @@ export const FilterOp = z.enum([
   'exists',
   'within',
   'prefix',
+  'keyPrefix',
 ]);
 export type FilterOp = z.infer<typeof FilterOp>;
 export type Scalar = string | number | boolean;
@@ -19,7 +20,7 @@ export type Filter =
   | { field: string; op: 'eq'; value: Scalar }
   | { field: string; op: 'in' | 'hasAny' | 'hasAll'; value: Scalar[] }
   | { field: string; op: 'gte' | 'lte'; value: number | string }
-  | { field: string; op: 'contains' | 'prefix'; value: string }
+  | { field: string; op: 'contains' | 'prefix' | 'keyPrefix'; value: string }
   | { field: string; op: 'exists'; value: boolean }
   | { field: string; op: 'within'; value: { lat: number; lng: number; radiusKm: number } }
   | { all: Filter[] }
@@ -55,6 +56,13 @@ export const FilterSchema: z.ZodType<Filter> = z.lazy(() =>
       .object({ field: z.string().min(1), op: z.literal('contains'), value: z.string().min(3) })
       .strict(),
     z.object({ field: z.string().min(1), op: z.literal('prefix'), value: Jurisdiction }).strict(),
+    z
+      .object({
+        field: z.string().min(1),
+        op: z.literal('keyPrefix'),
+        value: z.string().regex(/^[a-z][a-zA-Z0-9]*(\.[A-Za-z0-9]+)*$/),
+      })
+      .strict(),
     z.object({ field: z.string().min(1), op: z.literal('exists'), value: z.boolean() }).strict(),
     z
       .object({
@@ -101,6 +109,15 @@ export function pathValues(object: unknown, path: string): unknown[] {
   return values;
 }
 export function recordValues(record: AnyAssetRecord, path: string): unknown[] {
+  // 名称搜索覆盖每种译文；名称排序固定优先英文，其次按语言键排序，游标只保存字符串。
+  if (record.slot === 'product' && path === 'name') {
+    const name = record.data?.name;
+    if (!name || typeof name !== 'object' || Array.isArray(name)) return [];
+    const languages = Object.keys(name).sort();
+    return [...(languages.includes('en') ? ['en'] : []), ...languages.filter((key) => key !== 'en')]
+      .map((language) => name[language])
+      .filter((value) => typeof value === 'string');
+  }
   return pathValues(ENVELOPE.has(path.split('.')[0]) ? record : record.data, path);
 }
 export function filterFields(filter: Filter | null): string[] {
@@ -186,6 +203,8 @@ function leaf(v: unknown, f: Extract<Filter, { field: string }>): boolean {
       return Array.isArray(v) && f.value.every((x) => v.includes(x));
     case 'prefix':
       return typeof v === 'string' && isWithin(v, f.value);
+    case 'keyPrefix':
+      return typeof v === 'string' && (v === f.value || v.startsWith(`${f.value}.`));
     case 'within':
       return (
         typeof v === 'object' &&
