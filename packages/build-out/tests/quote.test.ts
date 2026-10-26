@@ -18,10 +18,16 @@ import {
 import { approveStep, fixture, refreshSource, rehash, stages } from './fixtures.js';
 
 describe('takeoff and installation rates', () => {
-  it('deduplicates identical BOM imports, excludes landlord work, and requires a current operator approval', async () => {
+  it('rejects duplicate BOM line IDs at the shared Bom contract', async () => {
     const f = await fixture();
     f.input.bom.body.lines.push(structuredClone(f.input.bom.body.lines[0]));
     await rehash(f.input);
+    const r = await takeoff.run(f.input, f.ctx);
+    expect(r.output).toBeNull();
+    expect(r.needs).toContainEqual(expect.objectContaining({ kind: 'input', blocking: true }));
+  });
+  it('excludes landlord work and requires a current operator approval', async () => {
+    const f = await fixture();
     const result = await takeoff.run(f.input, f.ctx);
     expect(result.output?.lines.map((l) => l.id)).toEqual(['example-counter', 'example-appliance']);
     f.input.quantities['example-counter'] = 11;
@@ -34,15 +40,14 @@ describe('takeoff and installation rates', () => {
       true,
     );
   });
-  it('rejects conflicting duplicate lines, unmapped landlord work and wrong-store artifacts', async () => {
+  it('rejects unmapped landlord work and wrong-store artifacts', async () => {
     const f = await fixture();
-    f.input.bom.body.lines.push({ ...f.input.bom.body.lines[0], qty: 90 });
     f.input.landlordScope = [];
     f.input.site.storeId = 'example-other-store';
     await rehash(f.input);
     const r = await takeoff.run(f.input, f.ctx);
     expect(r.output).toBeNull();
-    expect(r.needs.filter((n) => n.kind === 'input').length).toBeGreaterThanOrEqual(3);
+    expect(r.needs.filter((n) => n.kind === 'input').length).toBeGreaterThanOrEqual(2);
   });
   it('rejects changed artifact bodies and old delivery BOM references', async () => {
     const f = await fixture();

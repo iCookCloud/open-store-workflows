@@ -6,6 +6,11 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const fold = (text) => text.normalize('NFKC').toLowerCase().replace(/\s+/gu, '');
 const allowedDomains = new Set([
+  // 公共服务的固定 API/政策域名，不允许任意子域。
+  'places.googleapis.com',
+  'nominatim.openstreetmap.org',
+  'developers.google.com',
+  'operations.osmfoundation.org',
   'example.com',
   'example.org',
   'example.net',
@@ -13,6 +18,7 @@ const allowedDomains = new Set([
   'www.apache.org',
   'spdx.org',
   'github.com',
+  'api.resend.com',
   'www.w3.org',
   'json-schema.org',
   'zod.dev',

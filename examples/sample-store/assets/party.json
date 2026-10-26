@@ -3,6 +3,94 @@
   "items": [
     {
       "slot": "party",
+      "id": "example-creator",
+      "data": {
+        "name": {
+          "en": "Example Creator"
+        },
+        "roles": [
+          "creator"
+        ],
+        "status": "active",
+        "jurisdictions": [
+          "XE"
+        ],
+        "languages": [
+          "en"
+        ],
+        "profiles": {
+          "creator": {
+            "platform": "example-platform",
+            "tier": "micro",
+            "audience": 100,
+            "formats": [
+              "short"
+            ],
+            "engagementPct": 10,
+            "lastPostOn": "2025-12-31",
+            "verifiedOn": "2025-12-31"
+          }
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "9d01fd063cc44b05e75fb0f69b0b26eeebb60ed04cc0666310a37fc79eedc992",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "party",
+      "id": "example-supply-partner",
+      "slotVersion": "0.1.0",
+      "versionHash": "e480fc3f0f2476ac905aabc9db3c6dd1325ae753d35776babe0c0a20290a8398",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Supply Partner"
+        },
+        "roles": [
+          "supplier"
+        ],
+        "status": "active",
+        "jurisdictions": [
+          "XE"
+        ],
+        "profiles": {
+          "supplier": {
+            "supplyCats": [
+              "ingredients"
+            ],
+            "acceptsSmallOrders": true
+          }
+        }
+      }
+    },
+    {
+      "slot": "party",
       "id": "example-builder-a",
       "slotVersion": "0.1.0",
       "versionHash": "c90415956aa19bae718f21c104cf162dcfdffd673f3efe4626f2fef41c45280f",

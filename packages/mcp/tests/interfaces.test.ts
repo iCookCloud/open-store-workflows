@@ -7,7 +7,9 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import {
+  type AnyAssetRecord,
   MemorySource,
+  SHARED_SLOTS,
   type StepDef,
   type WorkflowModule,
   paramsSlot,
@@ -15,7 +17,11 @@ import {
   z,
 } from '@osw/core';
 import { discoverWorkflows, executeStep, runCli } from '@osw/core/node';
+import { workflow as deliveryWorkflow } from '@osw/landed-delivery';
+import { CertSlot, ExamSlot, workflow as openingWorkflow } from '@osw/opening';
+import { workflow as replenishmentWorkflow } from '@osw/replenishment';
 import { describe, expect, it, vi } from 'vitest';
+import { deliveryFixture } from '../../../scripts/gen-delivery-example.mjs';
 import { createOswServer, stripPrivateOutput } from '../src/index.js';
 
 const now = '2030-01-01T00:00:00Z';
@@ -89,6 +95,75 @@ async function connect(options: Parameters<typeof createOswServer>[0] = {}) {
 }
 
 describe('CLI and MCP use the same read-only runner', () => {
+  it('discovers replenishment tools and returns the same blocking needs as the CLI runner', async () => {
+    const source = new MemorySource([], replenishmentWorkflow.slots);
+    const { client } = await connect({ workflows: [replenishmentWorkflow], source });
+    try {
+      const tools = (await client.listTools()).tools;
+      for (const step of replenishmentWorkflow.steps)
+        expect(tools.map((tool) => tool.name)).toContain(step.id.replace('/', '_'));
+      const step = replenishmentWorkflow.steps.find(
+        (step) => step.id === 'replenishment/classifyStores',
+      )!;
+      const input = { rulesetId: 'example-missing-rules' };
+      const cli = await executeStep(step, input, { source, now, actor: 'osw:mcp@0.1.0' });
+      const response = await client.callTool({
+        name: 'replenishment_classifyStores',
+        arguments: input,
+      });
+      expect(response.structuredContent).toEqual(cli.result);
+      expect(response.isError).not.toBe(true);
+      expect(cli.exitCode).toBe(2);
+    } finally {
+      await client.close();
+    }
+  });
+  it('discovers all landed-delivery steps and returns identical compliance needs through CLI and MCP', async () => {
+    const fixture = await deliveryFixture();
+    const directory = await tempDirectory();
+    await writeFile(join(directory, 'delivery.json'), JSON.stringify(fixture.input));
+    const output: string[] = [];
+    const record = vi.spyOn(fixture.source, 'recordVerification');
+    expect(
+      await runCli(
+        [
+          'landed-delivery',
+          'screenCompliance',
+          '--in',
+          'delivery.json',
+          '--now',
+          fixture.ctx.now,
+          '--actor',
+          fixture.ctx.actor,
+        ],
+        {
+          cwd: directory,
+          workflows: [deliveryWorkflow],
+          source: fixture.source,
+          stdout: (text) => output.push(text),
+        },
+      ),
+    ).toBe(2);
+    const { client } = await connect({
+      workflows: [deliveryWorkflow],
+      source: fixture.source,
+      now: fixture.ctx.now,
+      actor: fixture.ctx.actor,
+    });
+    try {
+      const names = (await client.listTools()).tools.map((tool) => tool.name);
+      for (const step of deliveryWorkflow.steps) expect(names).toContain(step.id.replace('/', '_'));
+      const result = await client.callTool({
+        name: 'landed-delivery_screenCompliance',
+        arguments: fixture.input,
+      });
+      expect(result.isError).not.toBe(true);
+      expect(result.structuredContent).toEqual(JSON.parse(output.join('')));
+      expect(record).not.toHaveBeenCalled();
+    } finally {
+      await client.close();
+    }
+  });
   it('returns the same input need for missing required fields without hiding internal errors', async () => {
     const directory = await tempDirectory();
     await writeFile(join(directory, 'missing.json'), '{}');
@@ -495,6 +570,211 @@ describe('private JSON pointers', () => {
     const stripped = stripPrivateOutput(result, ['/a~1b/~0answer', '/list/0/secret']);
     expect(stripped.output).toEqual({ 'a/b': {}, list: [{ visible: 1 }] });
     expect(result.output.list[0].secret).toBe('private');
+  });
+});
+
+describe('opening assessment privacy across CLI and MCP', () => {
+  it('protects answer keys through student paper, grading and the generic asset query while keeping public question fields', async () => {
+    const examData = {
+      key: 'example-assessment',
+      certKey: 'example-certification',
+      lang: 'en',
+      version: '1',
+      passScore: 60,
+      questions: [
+        {
+          no: 1,
+          points: 100,
+          manual: false,
+          prompt: 'Example public question',
+          answer: 'Example private answer',
+          rationale: 'Example private rationale',
+          guide: 'Example private guide',
+        },
+      ],
+    };
+    const certData = {
+      key: 'example-certification',
+      standard: 'example-standard',
+      title: { en: 'Example certification' },
+      group: 'example-group',
+      positions: [],
+      critical: true,
+      locked: true,
+      requires: ['written'],
+      defaultChecks: [],
+    };
+    const makeRecord = async (
+      slot: string,
+      id: string,
+      data: unknown,
+    ): Promise<AnyAssetRecord> => ({
+      slot,
+      id,
+      slotVersion: '0.1.0',
+      versionHash: await versionHash(data),
+      updatedAt: now,
+      coverage: { tier: 'general', tracks: [], jurisdictions: [], workflows: [] },
+      example: true,
+      data,
+    });
+    const exam = await makeRecord('exam', 'example-assessment', examData);
+    const cert = await makeRecord('cert', 'example-certification', certData);
+    const params = await Promise.all(
+      Object.entries({
+        'training.minPassScore': 60,
+        'training.verify.minAttempts': 2,
+        'training.verify.firstPassRateLow': 0.2,
+        'training.verify.firstPassRateHigh': 0.8,
+      }).map(([key, value]) => makeRecord('params', key, { key, value })),
+    );
+    const source = new MemorySource(
+      [exam, cert, ...params],
+      [...SHARED_SLOTS, ...openingWorkflow.slots],
+    );
+    const record = vi.spyOn(source, 'recordVerification');
+    const { client } = await connect({ workflows: [openingWorkflow], source });
+    const examRef = { slot: 'exam', id: exam.id, versionHash: exam.versionHash };
+    const certRef = { slot: 'cert', id: cert.id, versionHash: cert.versionHash };
+    const submissions = [
+      { step: 'toStudentPaper', input: { examRef } },
+      {
+        step: 'applyExam',
+        input: {
+          track: 'example-track',
+          jurisdiction: 'XE',
+          timezone: 'UTC',
+          seatId: 'example-seat',
+          certKey: certData.key,
+          examRef,
+          history: [],
+          planItem: { ...certData, ref: certRef, enabled: true, checks: [] },
+          submission: {
+            id: 'example-attempt',
+            kind: 'written',
+            by: 'example:examiner',
+            answers: { '1': 'Example private answer' },
+          },
+        },
+      },
+    ];
+    try {
+      const names = (await client.listTools()).tools.map((tool) => tool.name);
+      expect(names).toContain('opening_toStudentPaper');
+      expect(names).toContain('opening_applyExam');
+      const directory = await tempDirectory();
+      for (const { step, input } of submissions) {
+        await writeFile(join(directory, 'opening.json'), JSON.stringify(input));
+        const output: string[] = [];
+        expect(
+          await runCli(['opening', step, '--in', 'opening.json', '--now', now], {
+            cwd: directory,
+            workflows: [openingWorkflow],
+            source,
+            stdout: (text) => output.push(text),
+          }),
+        ).toBe(0);
+        const cliResult = JSON.parse(output.join(''));
+        const response = await client.callTool({ name: `opening_${step}`, arguments: input });
+        expect(response.isError).not.toBe(true);
+        expect(response.structuredContent).toEqual(cliResult);
+        for (const secret of [
+          'Example private answer',
+          'Example private rationale',
+          'Example private guide',
+        ])
+          expect(JSON.stringify(response)).not.toContain(secret);
+        if (step === 'toStudentPaper')
+          expect(cliResult.output.questions).toEqual([
+            { no: 1, points: 100, manual: false, prompt: 'Example public question' },
+          ]);
+        else {
+          expect(cliResult.output.attempt.score).toBe(100);
+          expect(cliResult.output.cell.state).toBe('passed');
+          expect(cliResult.output.attempt.details).toEqual([{ no: 1, earned: 100, possible: 100 }]);
+        }
+      }
+      const query = await client.callTool({
+        name: 'osw_query',
+        arguments: { slot: ExamSlot.name, limit: 1 },
+      });
+      expect(query.isError).not.toBe(true);
+      const items = query.structuredContent?.items as AnyAssetRecord[];
+      expect(items).toHaveLength(1);
+      expect(items[0].data.questions).toEqual([
+        { no: 1, points: 100, manual: false, prompt: 'Example public question' },
+      ]);
+      for (const key of ['answer', 'rationale', 'guide'])
+        expect(items[0].data.questions[0]).not.toHaveProperty(key);
+      expect(JSON.stringify(query)).not.toContain('Example private');
+      expect((await source.get(ExamSlot, exam.id))!.data.questions[0].answer).toBe(
+        'Example private answer',
+      );
+      expect((await source.get(CertSlot, cert.id))!.data.key).toBe(certData.key);
+      expect(record).not.toHaveBeenCalled();
+    } finally {
+      await client.close();
+    }
+  });
+});
+
+// 真实第二项的 Provider 与额度存储必须穿过 MCP runner，不能只验证工具名。
+describe('site-search integration', () => {
+  it('lists ten tools and executes a provider-backed surroundings scan', async () => {
+    const { workflow: siteWorkflow } = await import('@osw/site-search');
+    const { FileSource, loadProviders } = await import('@osw/core/node');
+    const directory = join(process.cwd(), 'examples/sample-store/site-search');
+    const sampleNow = '2026-01-10T12:00:00Z';
+    const adapters = await loadProviders(join(directory, 'providers.mjs'), sampleNow);
+    const source = new FileSource(join(directory, 'assets'), [
+      ...SHARED_SLOTS,
+      ...siteWorkflow.slots,
+    ]);
+    const listings = JSON.parse(
+      await readFile(join(directory, 'assets/listing.json'), 'utf8'),
+    ).items;
+    const { client, server } = await connect({
+      workflows: [siteWorkflow],
+      source,
+      now: sampleNow,
+      ...adapters,
+    });
+    try {
+      expect(
+        (await client.listTools()).tools.filter((t) => t.name.startsWith('site-search_')),
+      ).toHaveLength(10);
+      const output = await client.callTool({
+        name: 'site-search_scanSurroundings',
+        arguments: {
+          decisionId: 'example-mcp',
+          candidates: [listings[0]],
+          track: 'example-noodle',
+        },
+      });
+      expect(output.isError).not.toBe(true);
+      const result = output.structuredContent as {
+        output: { candidates: unknown[] } | null;
+        needs: unknown[];
+      };
+      expect(result.output, JSON.stringify(result.needs)).not.toBeNull();
+      expect(result.output?.candidates).toHaveLength(1);
+    } finally {
+      await client.close();
+      await server.close();
+    }
+  });
+  it('loads only explicit valid provider modules and rejects malformed stores', async () => {
+    const { loadProviders } = await import('@osw/core/node');
+    const directory = await tempDirectory();
+    const invalid = join(directory, 'invalid.mjs');
+    await writeFile(
+      invalid,
+      'export const createProviders = () => ({stores:{quota:{},cache:{}}});',
+    );
+    await expect(loadProviders(invalid, now)).rejects.toThrow('stores');
+    const missing = join(directory, 'missing.mjs');
+    await writeFile(missing, 'export const providers = {};');
+    await expect(loadProviders(missing, now)).rejects.toThrow('createProviders');
   });
 });
 

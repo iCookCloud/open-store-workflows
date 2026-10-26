@@ -1,0 +1,8 @@
+{
+  "$example": "synthetic",
+  "segmentRegions": ["XE-A", "XE-A-AA", "XE-B"],
+  "regionTiers": { "central": ["XE-A"], "outer": ["XE-B"] },
+  "supplyCats": ["ingredients", "supplies"],
+  "trackSupply": { "noodle-bar": ["ingredients", "supplies"], "service-only": [] },
+  "categoryAliases": { "noodle bar": "noodle-bar", "noodle barr": "noodle-bar" }
+}

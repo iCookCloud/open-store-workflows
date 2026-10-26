@@ -1,0 +1,43 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "exam",
+      "id": "example-exam",
+      "data": {
+        "key": "example-exam",
+        "certKey": "example-safety",
+        "lang": "en",
+        "version": "0.1.0",
+        "passScore": 60,
+        "questions": [
+          {
+            "no": 1,
+            "points": 100,
+            "manual": false,
+            "prompt": "Type the invented word EXAMPLE.",
+            "answer": "EXAMPLE",
+            "rationale": "Synthetic answer key",
+            "guide": "Synthetic grading guide"
+          }
+        ]
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "9dca118480bab3d9662e1332cfe52306d846cdedbd5e306ca7dd67062580b1be",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

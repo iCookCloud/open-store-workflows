@@ -1,0 +1,42 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "content-playbook",
+      "id": "example-playbook",
+      "data": {
+        "weeks": [
+          {
+            "weekOffset": 0,
+            "count": 2,
+            "mix": {
+              "intro": 1
+            }
+          }
+        ],
+        "scripts": {
+          "intro": [
+            "Example kitchen",
+            "Example dish"
+          ]
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "c6621bdae84bdd27429e77d1ffe82eb8219cf69435a1433373263cdaf9036ec0",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

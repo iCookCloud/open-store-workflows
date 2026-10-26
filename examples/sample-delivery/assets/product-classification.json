@@ -1,0 +1,143 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "product-classification",
+      "id": "example-cooker-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "e67aa0bf2df717e7101a70b91fd19c980e393181832f93c8c86891cc0e6504df",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-cooker",
+        "market": "XE",
+        "categoryId": "example-category",
+        "by": "example:classifier",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-table-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "3ec6d9cb2baa8b1fa30220754926e66ccba0362f1bdb994471754fe2772c1fc0",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-table",
+        "market": "XE",
+        "categoryId": "example-category",
+        "by": "example:classifier",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-food-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "8073520f521b2459beffd809b0f707d2d0adbce805c0666b2dff34c7de53b44e",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-food",
+        "market": "XE",
+        "categoryId": "example-category",
+        "by": "example:classifier",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-urgent-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "fe8526e07ee3d92e0a8bc7c7dac60bb2320e1d78484db9a4e130cb4d3a79f055",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-urgent",
+        "market": "XE",
+        "categoryId": "example-category",
+        "by": "example:classifier",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-local-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "30037777be3d4c8b0adde6ce8f527d98a4907e096f83ee768004cb9599a6bae4",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-local",
+        "market": "XE",
+        "categoryId": "example-category",
+        "by": "example:classifier",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-denied-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "e879df3516e056b67fc620bf5fb65431da8dbbb6a4f891cde72be387985f2398",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-denied",
+        "market": "XE",
+        "categoryId": "example-category",
+        "by": "example:classifier",
+        "at": "2026-01-01T00:00:00Z"
+      }
+    }
+  ]
+}

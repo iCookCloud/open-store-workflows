@@ -1,0 +1,68 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "place-observation",
+      "id": "example-observation-0",
+      "data": {
+        "provider": "example",
+        "providerPlaceId": "example-place-0",
+        "kind": "direct",
+        "observedAt": "2026-01-10T12:00:00Z",
+        "curatedBy": "example-researcher"
+      },
+      "versionHash": "7eca0e24945e68afcad8add2dfc767b949f724220aa7a29e44e564b2e933cb6f",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "place-observation",
+      "id": "example-observation-1",
+      "data": {
+        "provider": "example",
+        "providerPlaceId": "example-place-1",
+        "kind": "adjacent",
+        "observedAt": "2026-01-10T12:00:00Z",
+        "curatedBy": "example-researcher"
+      },
+      "versionHash": "c797faf12cc8b3640dd4911affb75ce48d6117777b686fe63fe2c5d5ba9db7a1",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    },
+    {
+      "slot": "place-observation",
+      "id": "example-observation-2",
+      "data": {
+        "provider": "example",
+        "providerPlaceId": "example-place-2",
+        "kind": "substitute",
+        "observedAt": "2026-01-10T12:00:00Z",
+        "curatedBy": "example-researcher"
+      },
+      "versionHash": "c45323af6115aaff64299986453ca519eb24dbfb7df3974440939ab069d2e4a4",
+      "slotVersion": "0.1.0",
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "workflows": [],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-01-10T12:00:00Z",
+      "example": true
+    }
+  ]
+}

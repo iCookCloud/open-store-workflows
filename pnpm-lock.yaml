@@ -20,9 +20,24 @@ importers:
       '@osw/core':
         specifier: workspace:*
         version: link:packages/core
+      '@osw/fitout-bom':
+        specifier: workspace:*
+        version: link:packages/fitout-bom
+      '@osw/landed-delivery':
+        specifier: workspace:*
+        version: link:packages/landed-delivery
       '@osw/mcp':
         specifier: workspace:*
         version: link:packages/mcp
+      '@osw/opening':
+        specifier: workspace:*
+        version: link:packages/opening
+      '@osw/replenishment':
+        specifier: workspace:*
+        version: link:packages/replenishment
+      '@osw/site-search':
+        specifier: workspace:*
+        version: link:packages/site-search
       '@osw/store-concept':
         specifier: workspace:*
         version: link:packages/store-concept
@@ -54,11 +69,41 @@ importers:
         specifier: ^4.1.0
         version: 4.6.7
 
+  packages/fitout-bom:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/landed-delivery:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
   packages/mcp:
     dependencies:
       '@modelcontextprotocol/sdk':
         specifier: ^1.25.0
         version: 1.32.2(zod@4.6.7)
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/opening:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/replenishment:
+    dependencies:
+      '@osw/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/site-search:
+    dependencies:
       '@osw/core':
         specifier: workspace:*
         version: link:../core

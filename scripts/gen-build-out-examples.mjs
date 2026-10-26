@@ -189,7 +189,18 @@ export async function buildOutExample() {
     evidence: [],
     derivedFrom: { kind: 'case', ref: bomCase.id },
     pricingMode: 'custom',
-    components: [],
+    components: [
+      {
+        key: 'example-part',
+        name: 'Example material',
+        kind: 'material',
+        basis: 'fixed',
+        qtyPerUnit: 1,
+        unit: 'pcs',
+        rate: usd(price),
+        rateNote: 'Invented',
+      },
+    ],
     modelCostPerUnit: usd(price),
     parts: [
       {

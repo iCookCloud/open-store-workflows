@@ -54,6 +54,8 @@ export const Product = z.object({
       wMm: z.number().positive(),
       hMm: z.number().positive(),
     })
+    // 箱规逐项实测与补空；未知尺寸不能阻止已核实的装箱数、毛重入库。
+    .partial()
     .optional(),
   hsCode: z
     .string()
@@ -84,6 +86,7 @@ export const Product = z.object({
 export type Product = z.infer<typeof Product>;
 export const ProductSlot = defineSlot({
   name: 'product',
+  slotVersion: '0.2.0',
   schema: Product,
   fieldsets: {
     identity: [
@@ -147,12 +150,12 @@ export const ContractorProfile = z.object({
 });
 export const LawyerProfile = z.object({
   matters: Strings,
-  stance: z.string(),
+  stance: z.enum(['tenant', 'landlord', 'employer', 'employee', 'mixed']),
   caseTypes: Strings,
   teamSize: z.number().int().positive().optional(),
   since: z.number().int().optional(),
-  chinaLanding: z.boolean(),
-  engagement: Strings,
+  chinaLanding: z.enum(['own', 'partner', 'none']),
+  engagement: z.array(z.enum(['retainer', 'matter', 'batch', 'contingency', 'negotiable'])),
 });
 export const CreatorProfile = z.object({
   platform: z.string(),
