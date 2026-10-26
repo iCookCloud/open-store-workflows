@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm boundaries
+      - run: pnpm runtime
+      - run: pnpm examples
+
+  private-scan:
+    name: Private data scan
+    needs: verify
+    # 私有词表只交给主分支和手动运行，不向外部 PR 代码提供。
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Scan source and full history
+        env:
+          OSW_PRIVATE_DENYLIST_CONTENT: ${{ secrets.OSW_PRIVATE_DENYLIST_CONTENT }}
+        run: |
+          test -n "$OSW_PRIVATE_DENYLIST_CONTENT"
+          export OSW_PRIVATE_DENYLIST="$RUNNER_TEMP/osw-private-denylist.txt"
+          umask 077
+          printf '%s\n' "$OSW_PRIVATE_DENYLIST_CONTENT" > "$OSW_PRIVATE_DENYLIST"
+          node scripts/scan-private.mjs
+          node scripts/scan-private.mjs --history
