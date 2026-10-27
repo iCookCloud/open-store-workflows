@@ -12,6 +12,7 @@ import {
   ProductSlot,
   defineSlot,
   fieldsetHash,
+  parseRecord,
   versionHash,
   z,
 } from '../src/index.js';
@@ -285,6 +286,29 @@ describe('memory source failure paths', () => {
   });
 });
 describe('file source formats and durable writes', () => {
+  it('decodes the CSV example literal as a boolean before record validation', async () => {
+    const record = (await conformanceRecords())[0];
+    const csv = [
+      'slot,id,slotVersion,versionHash,coverage.tier,updatedAt,example,data.label',
+      `conformance,1,0.1.0,${record.versionHash},general,${record.updatedAt},true,Example label`,
+    ].join('\n');
+    const parsed = parseRecord(ConformanceSlot, recordsFromCsv(csv, ConformanceSlot)[0]);
+    expect(parsed.example).toBe(true);
+    expect(parsed.data.label).toBe('Example label');
+    const invalid = recordsFromCsv(csv.replace(',true,', ',false,'), ConformanceSlot)[0];
+    expect(() => parseRecord(ConformanceSlot, invalid)).toThrow();
+    const literals = defineSlot({
+      name: 'literal-types',
+      schema: z.object({
+        text: z.literal('true'),
+        enabled: z.literal(false),
+        number: z.literal(0),
+      }),
+    });
+    expect(
+      recordsFromCsv('data.text,data.enabled,data.number\ntrue,false,0', literals)[0].data,
+    ).toEqual({ text: 'true', enabled: false, number: 0 });
+  });
   it('reads NDJSON and CSV and replays write journals', async () => {
     const records = await conformanceRecords();
     const dir = await mkdtemp(join(tmpdir(), 'osw-formats-'));
@@ -321,6 +345,61 @@ describe('file source formats and durable writes', () => {
   });
 });
 describe('HTTP source trust boundary', () => {
+  it.each([429, 503])('retries an HTML %i response before decoding JSON', async (status) => {
+    const delays: number[] = [];
+    let requests = 0;
+    const source = new HttpSource('https://example.com/osw/v1', {
+      fetch: (async () => {
+        requests++;
+        return requests === 1
+          ? new Response('<html>Temporarily unavailable</html>', {
+              status,
+              headers: { 'Content-Type': 'text/html', 'Retry-After': '1' },
+            })
+          : Response.json({ items: [], nextCursor: null });
+      }) as typeof fetch,
+      sleep: async (ms) => {
+        delays.push(ms);
+      },
+    });
+    await expect(source.query(ConformanceSlot, null)).resolves.toEqual({
+      items: [],
+      nextCursor: null,
+    });
+    expect(requests).toBe(2);
+    expect(delays).toEqual([1000]);
+  });
+  it('caps retries for HTML errors and does not retry malformed successful responses', async () => {
+    let attempts = 0;
+    const delays: number[] = [];
+    const source = new HttpSource('https://example.com', {
+      fetch: (async () => {
+        attempts++;
+        return new Response('<html>Rate limit</html>', { status: 429 });
+      }) as typeof fetch,
+      sleep: async (ms) => {
+        delays.push(ms);
+      },
+    });
+    await expect(source.query(ConformanceSlot, null)).rejects.toMatchObject({
+      code: 'rate_limited',
+      status: 429,
+    });
+    expect(attempts).toBe(4);
+    expect(delays).toEqual([1000, 2000, 4000]);
+    let successfulCalls = 0;
+    const invalid = new HttpSource('https://example.com', {
+      fetch: (async () => {
+        successfulCalls++;
+        return new Response('<html>Not an asset</html>');
+      }) as typeof fetch,
+    });
+    await expect(invalid.query(ConformanceSlot, null)).rejects.toMatchObject({
+      code: 'source_unavailable',
+      status: 200,
+    });
+    expect(successfulCalls).toBe(1);
+  });
   it('uses bounded retries, forwards auth, and returns ordered statuses', async () => {
     let requests = 0;
     const delays: number[] = [];

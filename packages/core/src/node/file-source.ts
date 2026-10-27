@@ -64,12 +64,12 @@ function schemaAt(
 function cellValue(value: string, schema: z.core.$ZodType | undefined): unknown {
   if (value === '') return undefined;
   const target = schema ? unwrap(schema) : undefined;
-  if (
-    target instanceof z.ZodString ||
-    target instanceof z.ZodEnum ||
-    target instanceof z.ZodLiteral
-  )
+  if (target instanceof z.ZodString || target instanceof z.ZodEnum) return value;
+  if (target instanceof z.ZodLiteral) {
+    // 按 schema 的字面类型还原，不能把 example:true 变成字符串，也不能把 'true' 文本变成布尔值。
+    for (const literal of target.values) if (String(literal) === value) return literal;
     return value;
+  }
   if (value.startsWith('[') || value.startsWith('{') || value === 'null') return JSON.parse(value);
   if (target instanceof z.ZodArray)
     return value.split(';').map((v) => cellValue(v, target.element));
