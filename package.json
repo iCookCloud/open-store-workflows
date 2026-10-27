@@ -16,7 +16,7 @@
     "boundaries": "node scripts/check-boundaries.mjs",
     "runtime": "node scripts/check-runtime.mjs",
     "scan": "node scripts/scan-private.mjs",
-    "examples": "node scripts/example-check.mjs && pnpm examples:site-search",
+    "examples": "node scripts/example-check.mjs && pnpm examples:site-search && pnpm -F @osw/landed-delivery examples",
     "check": "pnpm build && pnpm lint && pnpm typecheck && pnpm test && pnpm boundaries && pnpm runtime && pnpm examples && pnpm scan",
     "osw": "node packages/core/dist/node/cli.js",
     "examples:site-search": "tsx packages/site-search/tests/example-check.ts"

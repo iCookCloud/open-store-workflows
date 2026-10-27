@@ -1,0 +1,77 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "party",
+      "id": "example-overseas-supplier",
+      "slotVersion": "0.1.0",
+      "versionHash": "4eedc1e8db57ddf9dd792b818b218967616a483fb966cc36c1abe0bd014daea9",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Overseas Supplier"
+        },
+        "roles": [
+          "supplier"
+        ],
+        "status": "active",
+        "base": {
+          "jurisdiction": "XF"
+        }
+      }
+    },
+    {
+      "slot": "party",
+      "id": "example-warehouse-carrier",
+      "slotVersion": "0.1.0",
+      "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Warehouse Carrier"
+        },
+        "roles": [
+          "forwarder"
+        ],
+        "status": "active",
+        "profiles": {
+          "forwarder": {
+            "rank": 10,
+            "goodsClasses": [
+              "food",
+              "nonfood"
+            ],
+            "lanes": [
+              {
+                "from": "XF",
+                "to": "XE",
+                "modes": [
+                  "sea_lcl"
+                ]
+              }
+            ],
+            "handling": []
+          }
+        }
+      }
+    }
+  ]
+}

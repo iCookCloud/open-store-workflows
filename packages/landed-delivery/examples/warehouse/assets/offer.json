@@ -1,0 +1,95 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "offer",
+      "id": "example-rice-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "091cf4e879dbee1a054555109d57a15747f39be37de99e8b8940d6cebe7cf76c",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-overseas-supplier",
+        "productId": "example-rice",
+        "basis": "quote",
+        "use": "repeat",
+        "currency": "EUR",
+        "unit": "carton",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 100
+          },
+          {
+            "minQty": 2,
+            "unitPrice": 80
+          }
+        ],
+        "moq": 1,
+        "quotedAt": "2026-02-01",
+        "validUntil": "2026-12-31",
+        "shipFrom": "XF",
+        "delivery": "buyer_arranges",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 5
+        }
+      },
+      "fieldsetHashes": {
+        "price": "1690f89d6f9d7954cacb0881b36414f27c262901a5239676cdaec14dc03e9df4",
+        "terms": "31a2568a18344006c8578201e9a1edda1a22cd8c13c5612786d8ba6e71b41ba8"
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-supply-offer",
+      "slotVersion": "0.1.0",
+      "versionHash": "3c1977833cae2841f178680b1f726ebd3d20c94cd65f326047ea5d0dff1de11e",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-overseas-supplier",
+        "productId": "example-supply",
+        "basis": "quote",
+        "use": "repeat",
+        "currency": "USD",
+        "unit": "pcs",
+        "tiers": [
+          {
+            "minQty": 10,
+            "unitPrice": 10
+          }
+        ],
+        "moq": 10,
+        "quotedAt": "2026-02-01",
+        "validUntil": "2026-12-31",
+        "shipFrom": "XF",
+        "delivery": "buyer_arranges",
+        "leadTimeDays": {
+          "min": 1,
+          "max": 5
+        }
+      },
+      "fieldsetHashes": {
+        "price": "f6df35f96b89125a7d81c024b1650d9cbf4b52d1fca24617e40c14c76ca50b7e",
+        "terms": "92d3f7c643e02eaf717f94f7383d96b4cf99dd5220ebad33e782ce02da83cba7"
+      }
+    }
+  ]
+}

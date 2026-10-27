@@ -24,6 +24,7 @@ import {
 } from '../helpers.js';
 import type { ComplianceEntry } from '../models.js';
 import { complianceAnswerSlot, productClassificationSlot } from '../slots.js';
+import { deliveryLines, deliveryStoreId, resolveOrderLines } from '../source.js';
 
 export const screenCompliance = deliveryStep(
   'screenCompliance',
@@ -40,21 +41,24 @@ export const screenCompliance = deliveryStep(
     const { input, plan } = state;
     const needs: Need[] = [];
     const verifications: Verification[] = [];
+    needs.push(...(await resolveOrderLines(state, ctx)));
+    if (needs.some((need) => need.blocking)) return stepResult(state, needs);
+    const lines = deliveryLines(state);
     if (new Set(plan.shipments.map((shipment) => shipment.id)).size !== plan.shipments.length)
       needs.push(inputNeed('existing.shipments', 'Shipment IDs must be unique'));
     for (const artifact of [input.bom, input.site, input.existing])
       if (artifact) await validateArtifact(artifact, needs);
-    if (new Set(input.bom.body.lines.map((line) => line.id)).size !== input.bom.body.lines.length)
+    if (new Set(lines.map((line) => line.id)).size !== lines.length)
       needs.push(inputNeed('bom.body.lines', 'BOM line IDs must be unique'));
     if (
       input.site &&
-      (input.site.storeId !== input.bom.storeId ||
+      (input.site.storeId !== deliveryStoreId(input) ||
         input.site.body.jurisdiction !== input.jurisdiction)
     )
       needs.push(inputNeed('site', 'Site and BOM must refer to the same store and jurisdiction'));
     if (
       input.existing &&
-      (input.existing.storeId !== input.bom.storeId ||
+      (input.existing.storeId !== deliveryStoreId(input) ||
         input.existing.body.market !== plan.market ||
         input.existing.id !== input.id)
     )
@@ -62,14 +66,14 @@ export const screenCompliance = deliveryStep(
     const offers = await getMany(
       ctx.assets,
       OfferSlot,
-      input.bom.body.lines.flatMap((line) => (line.offerRef ? [line.offerRef.id] : [])),
+      lines.flatMap((line) => (line.offerRef ? [line.offerRef.id] : [])),
     );
     const products = await getMany(
       ctx.assets,
       ProductSlot,
-      input.bom.body.lines.flatMap((line) => (line.productRef ? [line.productRef.id] : [])),
+      lines.flatMap((line) => (line.productRef ? [line.productRef.id] : [])),
     );
-    const eligible = input.bom.body.lines.filter((line) => {
+    const eligible = lines.filter((line) => {
       if (!line.offerRef) {
         plan.held.push({
           bomLineId: line.id,

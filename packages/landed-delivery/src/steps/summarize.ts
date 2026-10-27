@@ -1,6 +1,7 @@
 import { type StepCtx, type StepDef, stepResult, versionHash } from '@osw/core';
 import { inputNeed, uniqueRefs } from '../helpers.js';
 import { DeliveryPlan, DeliveryState, type Shipment, emptyMilestone } from '../models.js';
+import { deliveryLines, deliveryStoreId } from '../source.js';
 
 export function bestDate(shipment: Shipment) {
   if (shipment.arrival) return { date: shipment.arrival.receivedAt, basis: 'received' as const };
@@ -39,6 +40,7 @@ export const summarize: StepDef<typeof DeliveryState, typeof DeliveryPlan> = {
         verifications: [],
       };
     const { input, plan, sources, example } = parsed.data;
+    const lines = deliveryLines(parsed.data);
     plan.arrivals = plan.shipments.flatMap((shipment) =>
       shipment.lines.map((line) => {
         const received = shipment.arrival?.lines.find((received) => received.lineId === line.id);
@@ -77,9 +79,7 @@ export const summarize: StepDef<typeof DeliveryState, typeof DeliveryPlan> = {
     plan.openingStock = { status, firstAt: milestone(stock, true), lastAt: milestone(stock) };
     if (
       plan.held.some((held) =>
-        input.bom.body.lines.some(
-          (line) => line.id === held.bomLineId && fitoutKinds.includes(line.lineKind),
-        ),
+        lines.some((line) => line.id === held.bomLineId && fitoutKinds.includes(line.lineKind)),
       )
     )
       plan.fitoutGoodsLastAt = {
@@ -88,7 +88,7 @@ export const summarize: StepDef<typeof DeliveryState, typeof DeliveryPlan> = {
       };
     if (
       plan.held.some((held) =>
-        input.bom.body.lines.some(
+        lines.some(
           (line) => line.id === held.bomLineId && ['food', 'supplies'].includes(line.lineKind),
         ),
       )
@@ -112,7 +112,7 @@ export const summarize: StepDef<typeof DeliveryState, typeof DeliveryPlan> = {
           }),
       );
     const inputs = [
-      input.bom,
+      ...(input.bom ? [input.bom] : []),
       ...(input.site ? [input.site] : []),
       ...(input.existing ? [input.existing] : []),
     ].map((artifact) => ({ kind: artifact.kind, id: artifact.id, hash: artifact.hash }));
@@ -127,11 +127,11 @@ export const summarize: StepDef<typeof DeliveryState, typeof DeliveryPlan> = {
           pkg: '@osw/landed-delivery',
           pkgVersion: '0.1.0',
         },
-        storeId: input.bom.storeId,
+        storeId: deliveryStoreId(input),
         inputs,
         sources: uniqueRefs([
           ...sources,
-          ...input.bom.sources,
+          ...(input.bom?.sources ?? []),
           ...(input.site?.sources ?? []),
           ...(input.existing?.sources ?? []),
         ]),
