@@ -1,9 +1,10 @@
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { ArtifactEnvelope, OpeningRecordBody, SHARED_SLOTS, versionHash } from '@osw/core';
 import { FileSource, executeWorkflow } from '@osw/core/node';
 import { describe, expect, it } from 'vitest';
 import { workflow } from '../src/index.js';
-const directory = new URL('../../../examples/sample-store/', import.meta.url).pathname;
+const directory = fileURLToPath(new URL('../examples/', import.meta.url));
 const now = '2026-01-01T00:00:00Z';
 async function fixture() {
   const input = JSON.parse(await readFile(`${directory}/inputs/opening.json`, 'utf8'));

@@ -1,0 +1,261 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "params",
+      "id": "example-build-labor-hourlyRate",
+      "slotVersion": "0.1.0",
+      "versionHash": "cb13e59a7da230d56bc7171e6ad4b14874271151dfe0899627a255c2fff527cc",
+      "fieldsetHashes": {
+        "price": "cb13e59a7da230d56bc7171e6ad4b14874271151dfe0899627a255c2fff527cc",
+        "terms": "cb13e59a7da230d56bc7171e6ad4b14874271151dfe0899627a255c2fff527cc"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "labor.hourlyRate",
+        "value": 20,
+        "unit": "USD/h",
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        }
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-minBids",
+      "slotVersion": "0.1.0",
+      "versionHash": "2a4319c476606e87b0d41e6d9223195c1eadaa10b823eb66e7d5c2dd3dc99ec6",
+      "fieldsetHashes": {
+        "price": "2a4319c476606e87b0d41e6d9223195c1eadaa10b823eb66e7d5c2dd3dc99ec6",
+        "terms": "2a4319c476606e87b0d41e6d9223195c1eadaa10b823eb66e7d5c2dd3dc99ec6"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "build.minBids",
+        "value": 3,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        }
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-crewSize",
+      "slotVersion": "0.1.0",
+      "versionHash": "dff60a9f442bbbdc51b2fdf0a883ae5c114b77563e726040068029089e34aa27",
+      "fieldsetHashes": {
+        "price": "dff60a9f442bbbdc51b2fdf0a883ae5c114b77563e726040068029089e34aa27",
+        "terms": "dff60a9f442bbbdc51b2fdf0a883ae5c114b77563e726040068029089e34aa27"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "build.crewSize",
+        "value": 2,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        }
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-hoursPerDay",
+      "slotVersion": "0.1.0",
+      "versionHash": "e9950b4b3913669cfa4fee3e21455c0261b0683b5df6cee0526aca993945ccab",
+      "fieldsetHashes": {
+        "price": "e9950b4b3913669cfa4fee3e21455c0261b0683b5df6cee0526aca993945ccab",
+        "terms": "e9950b4b3913669cfa4fee3e21455c0261b0683b5df6cee0526aca993945ccab"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "build.hoursPerDay",
+        "value": 10,
+        "unit": "h",
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        }
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-build-build-workdays",
+      "slotVersion": "0.1.0",
+      "versionHash": "e5c19ab0793ccec26014b8a03c7c70653b8ab6b4c563ce1554952bbb26e033e4",
+      "fieldsetHashes": {
+        "price": "e5c19ab0793ccec26014b8a03c7c70653b8ab6b4c563ce1554952bbb26e033e4",
+        "terms": "e5c19ab0793ccec26014b8a03c7c70653b8ab6b4c563ce1554952bbb26e033e4"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "build.workdays",
+        "value": "1,2,3,4,5",
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        }
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-build-verify-installHours-tolerancePct",
+      "slotVersion": "0.1.0",
+      "versionHash": "45f2365dc0ce81f615a5839925b97e1d7cb99077bc502e870cea7be7e80e75ff",
+      "fieldsetHashes": {
+        "price": "45f2365dc0ce81f615a5839925b97e1d7cb99077bc502e870cea7be7e80e75ff",
+        "terms": "45f2365dc0ce81f615a5839925b97e1d7cb99077bc502e870cea7be7e80e75ff"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.installHours.tolerancePct",
+        "value": 10,
+        "unit": "%",
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        }
+      }
+    },
+    {
+      "slot": "params",
+      "id": "example-build-verify-siteMeasure-tolerancePct",
+      "slotVersion": "0.1.0",
+      "versionHash": "42a3da48031c0723e794d6c0c1eedb9c04dd9ac8a9ed7c5c5ceadcc890610f62",
+      "fieldsetHashes": {
+        "price": "42a3da48031c0723e794d6c0c1eedb9c04dd9ac8a9ed7c5c5ceadcc890610f62",
+        "terms": "42a3da48031c0723e794d6c0c1eedb9c04dd9ac8a9ed7c5c5ceadcc890610f62"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.siteMeasure.tolerancePct",
+        "value": 10,
+        "unit": "%",
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        }
+      }
+    }
+  ]
+}

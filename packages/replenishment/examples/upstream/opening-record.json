@@ -1,0 +1,107 @@
+{
+  "kind": "OpeningRecord",
+  "artifactVersion": "0.1.0",
+  "id": "example-supply-opening",
+  "hash": "bdd5ef9019e53ab27337f6f78c919f543cc75cecd337a845172512d017983847",
+  "producedBy": {
+    "step": "opening/assembleRecord",
+    "pkg": "@osw/opening",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-supply-store-1",
+  "inputs": [],
+  "sources": [
+    {
+      "slot": "menu",
+      "id": "example-supply-menu",
+      "versionHash": "bb593ed0f7036bd46e1ea0c936c04ff2d9abde819d50c9547101126821bc88c8"
+    }
+  ],
+  "createdAt": "2026-01-01T12:00:00Z",
+  "example": true,
+  "body": {
+    "menuRef": {
+      "slot": "menu",
+      "id": "example-supply-menu",
+      "versionHash": "bb593ed0f7036bd46e1ea0c936c04ff2d9abde819d50c9547101126821bc88c8"
+    },
+    "bomRef": {
+      "kind": "Bom",
+      "id": "example-supply-bom",
+      "hash": "160133e4c977fb2389ac48345149eebca5c3ed3f36bcc06e0d3b0e93f2b7897e"
+    },
+    "decidedAt": "2026-01-01T12:00:00Z",
+    "track": "replenishment-noodle",
+    "jurisdiction": "XE-A-AA",
+    "timezone": "UTC",
+    "openingDate": "2026-01-01",
+    "status": "completed",
+    "staffing": [],
+    "certMatrix": {
+      "plan": {
+        "slot": "template",
+        "id": "example-supply-service",
+        "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824"
+      },
+      "seats": [],
+      "cells": [],
+      "summary": {
+        "planTotal": 0,
+        "staffed": 0,
+        "gaps": [],
+        "certRequired": 0,
+        "certPassed": 0,
+        "criticalRequired": 0,
+        "criticalPassed": 0,
+        "criticalPending": 0,
+        "expiring": 0,
+        "hollow": false,
+        "ready": true
+      }
+    },
+    "checklist": {
+      "template": {
+        "slot": "template",
+        "id": "example-supply-service",
+        "versionHash": "c9a0a07d939c208775bcb687d7855aa47bb71b8898f795b725740570de333824"
+      },
+      "firstDay": 0,
+      "lastDay": 0,
+      "items": []
+    },
+    "issues": [],
+    "release": {
+      "current": {
+        "state": "ready",
+        "blockers": []
+      },
+      "signed": {
+        "snapshot": [],
+        "snapshotHash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "decision": "go",
+        "at": "2026-01-01T12:00:00Z",
+        "by": "example:operator"
+      }
+    },
+    "marketing": {
+      "template": {
+        "slot": "template",
+        "id": "example-supply-lead",
+        "versionHash": "30f260c8e2605b5589887b0c88e57d1d16049e38b1629b79c3eba65ebea0b256"
+      },
+      "items": [],
+      "ledger": [],
+      "assetGap": {
+        "required": 0,
+        "ready": 0,
+        "missing": 0,
+        "blockedChannels": []
+      }
+    },
+    "reviews": [],
+    "handoff": {
+      "storeStatus": "operating",
+      "openedAt": "2026-01-01"
+    }
+  }
+}

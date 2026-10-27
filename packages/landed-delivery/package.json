@@ -13,9 +13,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run tests",
-    "examples": "node scripts/check-warehouse-example.mjs",
-    "examples:generate": "node scripts/generate-warehouse-example.mjs"
+    "test": "pnpm build && vitest run --config vitest.config.ts",
+    "examples": "pnpm build && node scripts/check-delivery-example.mjs && node scripts/check-warehouse-example.mjs",
+    "examples:generate": "pnpm build && node scripts/generate-delivery-example.mjs && node scripts/generate-warehouse-example.mjs"
   },
   "dependencies": {
     "@osw/core": "workspace:*"
@@ -31,5 +31,11 @@
   "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/landed-delivery",
   "bugs": {
     "url": "https://github.com/iCookCloud/open-store-workflows/issues"
+  },
+  "devDependencies": {
+    "@osw/mcp": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.25.0",
+    "vitest": "^3.2.0",
+    "tsx": "^4.20.0"
   }
 }

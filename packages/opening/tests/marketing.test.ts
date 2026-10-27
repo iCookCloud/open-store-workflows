@@ -141,10 +141,7 @@ async function fixture(extra: AnyAssetRecord[] = [], options = { creators: false
     providers: {},
   };
   const storeSpec = JSON.parse(
-    await readFile(
-      new URL('../../../examples/sample-store/expected/store-spec.json', import.meta.url),
-      'utf8',
-    ),
+    await readFile(new URL('../examples/upstream/store-spec.json', import.meta.url), 'utf8'),
   );
   return {
     records,

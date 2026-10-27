@@ -1,0 +1,88 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "offer",
+      "id": "example-supply-initial",
+      "slotVersion": "0.1.0",
+      "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0",
+      "fieldsetHashes": {
+        "price": "fda0e29ec1482a6365e1263879bbf95f5c608a2c4d9f080d243a47f104d66ffa",
+        "terms": "e0edbb120606af57210f3e8cd6cd5c4dbf6f031bb8512a57ac3088c69428403d"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supply-partner",
+        "productId": "example-supply-noodle",
+        "basis": "invoice",
+        "use": "project",
+        "currency": "USD",
+        "unit": "kg",
+        "tiers": [
+          {
+            "minQty": 0,
+            "unitPrice": 30
+          }
+        ],
+        "quotedAt": "2026-01-01"
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-supply-repeat",
+      "slotVersion": "0.1.0",
+      "versionHash": "f4c40825bc95e67c5d6a7b61ea9358e859f224c5ea1566a27a735977fe0299e0",
+      "fieldsetHashes": {
+        "price": "9062d4c9e4685c1fa3bf12d8c61dfb375e8ec42e6e221837d77bcff4ae0da0d8",
+        "terms": "ceb98aecc1452feb78eb18c37a052d97316fecda787619ef65ff70048bd95a86"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-supply-partner",
+        "productId": "example-supply-noodle",
+        "basis": "catalog",
+        "use": "repeat",
+        "currency": "USD",
+        "unit": "kg",
+        "tiers": [
+          {
+            "minQty": 0,
+            "unitPrice": 30
+          },
+          {
+            "minQty": 10,
+            "unitPrice": 20
+          }
+        ],
+        "moq": 10,
+        "quotedAt": "2026-01-01"
+      }
+    }
+  ]
+}

@@ -1,0 +1,511 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "params",
+      "id": "concept-budgetband",
+      "slotVersion": "0.1.0",
+      "versionHash": "e45350e514385e0ef8f6069ac04aa8cc242ee4e6446145eecad50b856e9c0194",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.budgetBand",
+        "value": 0.2,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-areatolerance",
+      "slotVersion": "0.1.0",
+      "versionHash": "1f7e8d6ff3b32994a282b6177488912074f018111ce4aca29c99dc8a8c9840e0",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.areaTolerance",
+        "value": 0.2,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-calibrationminsample",
+      "slotVersion": "0.1.0",
+      "versionHash": "ae93833d39f096a34baa2c3f0bfe84cdb2febc20cd27a9517ed83d285beab908",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.calibrationMinSample",
+        "value": 2,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-minmarginrate",
+      "slotVersion": "0.1.0",
+      "versionHash": "533346f3a3426abe84f1ca1809af5756de7ca72d1b03d13241aba9aa0082da25",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.minMarginRate",
+        "value": 0.1,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "verify-calctemplatetolerance",
+      "slotVersion": "0.1.0",
+      "versionHash": "63154eddeb5d088fa9ceb8d08387c383eefe13e6376107dd8e7f00ed9296a4a8",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.calcTemplateTolerance",
+        "value": 0.1,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "training.minPassScore",
+      "data": {
+        "key": "training.minPassScore",
+        "value": 60
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "8fb61ff04cb1e44adb1a724f98fbda0ec1e5b7f0df9f03d51c81068f0eefd199",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "training.verify.minAttempts",
+      "data": {
+        "key": "training.verify.minAttempts",
+        "value": 2
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "dae6c1018d3717d6d7f65c2a1140d308b5b0d30ef44094f2a290b78226475e73",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "training.verify.firstPassRateLow",
+      "data": {
+        "key": "training.verify.firstPassRateLow",
+        "value": 0.2
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "0351bb55263cd8c7bc147e19f89f488806c129ec5955e5488bb7935209379f7f",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "training.verify.firstPassRateHigh",
+      "data": {
+        "key": "training.verify.firstPassRateHigh",
+        "value": 0.8
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "5162d948df205baf6076772cc92fb50aa05a25a45cdc6bfe4cf959ede079cffe",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.activeWithinDays",
+      "data": {
+        "key": "marketing.creator.activeWithinDays",
+        "value": 30
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "2133668fa9a6a859be3535a709d0b0a0116f7053d5ef9e1d222c60119e9eef62",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.maxPostGapDays",
+      "data": {
+        "key": "marketing.creator.maxPostGapDays",
+        "value": 10
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "8b6ea0d9000da6783718fe8165a03260f040d3b99a7ca0dc986436aefa4871e0",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.staleDays",
+      "data": {
+        "key": "marketing.creator.staleDays",
+        "value": 30
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "89ddeb74e4489e9d6c3299e5e011013b487b90ed2d57d2e9b135715c100b65d4",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.minEngagement.micro",
+      "data": {
+        "key": "marketing.creator.minEngagement.micro",
+        "value": 2
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "2e8e48737e6ebc578a6faac8eb7a013092fb1e19bcbb0477123ba4d5adcf7433",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.mixMin.local",
+      "data": {
+        "key": "marketing.creator.mixMin.local",
+        "value": 1
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "4182d3d3f616ce181fddd28b296f153765b844bcb2178110548b1438b970fceb",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.creator.mixMax.local",
+      "data": {
+        "key": "marketing.creator.mixMax.local",
+        "value": 1
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "caea6fff804e4936b658628f1217948355d59fa5198f11b87906cfb0e8728c89",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.budget.revenueRate",
+      "data": {
+        "key": "marketing.budget.revenueRate",
+        "value": 0.1
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "afe14ff0b1ee13c6ab54b6ab742d1c0fdba22dbae7373dc9b85d218ff44903d1",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.budget.reserveRate",
+      "data": {
+        "key": "marketing.budget.reserveRate",
+        "value": 0.2
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "f4c0a257251a7d91a0059c91c626b2eff8263f3fb63941612a08e238f926ac73",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.budget.split.social",
+      "data": {
+        "key": "marketing.budget.split.social",
+        "value": 1
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "417c2bcb9bd3592ec18b5407cdeedb7ea0bf89afe8d0492b6dd803b46e637d65",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "params",
+      "id": "marketing.ads.stageWeight.before",
+      "data": {
+        "key": "marketing.ads.stageWeight.before",
+        "value": 1
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "7e065f069d765cc54068f2c1afab7067dffb3d5f30325c923acbf6aad4793287",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

@@ -40,7 +40,7 @@ pnpm build
 
 ```sh
 pnpm osw slots --json-schema .osw/schemas
-OSW_ASSETS=examples/sample-store/assets node packages/mcp/dist/stdio.js
+OSW_ASSETS=packages/store-concept/examples/assets node packages/mcp/dist/stdio.js
 ```
 
 MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动时添加 `--allow-record` 才提供写回工具。
@@ -51,9 +51,9 @@ MCP 使用相同步骤和数据格式，查询每页最多 50 条；只有启动
 
 ```sh
 pnpm osw store-concept run \
-  --assets examples/sample-store/assets \
-  --in examples/sample-store/inputs/store-concept.json \
-  --approvals examples/sample-store/approvals/store-concept.json \
+  --assets packages/store-concept/examples/assets \
+  --in packages/store-concept/examples/inputs/store-concept.json \
+  --approvals packages/store-concept/examples/approvals/store-concept.json \
   --now 2026-01-01T00:00:00Z \
   --actor example:reviewer \
   --out-dir .osw/approved
@@ -67,15 +67,15 @@ pnpm osw store-concept run \
 
 ## 03 · 装修物料单
 
-`@osw/fitout-bom` 已实现案例／识图人审、铺位与菜单用量、用料计价、供应商选择、报价验证、物料单定稿及对外报价。操作方法见 [装修包说明](packages/fitout-bom/README.md)。`examples/fitout-store` 是从零合成的第三条独立示例，纳入 `pnpm examples` 验收。生产资产中心接入尚需在私有项目实施。
+`@osw/fitout-bom` 已实现案例／识图人审、铺位与菜单用量、用料计价、供应商选择、报价验证、物料单定稿及对外报价。操作方法见 [装修包说明](packages/fitout-bom/README.md)。`packages/fitout-bom/examples` 是从零合成的第三条独立示例，纳入 `pnpm examples` 验收。生产资产中心接入尚需在私有项目实施。
 
 ## 04 · 到店
 
 ```sh
 pnpm osw landed-delivery run \
-  --assets examples/sample-delivery/assets \
-  --in examples/sample-delivery/inputs/landed-delivery.json \
-  --approvals examples/sample-delivery/approvals/landed-delivery.json \
+  --assets packages/landed-delivery/examples/bom/assets \
+  --in packages/landed-delivery/examples/bom/inputs/landed-delivery.json \
+  --approvals packages/landed-delivery/examples/bom/approvals/landed-delivery.json \
   --now 2026-01-20T12:00:00Z \
   --actor example:delivery-reviewer \
   --out-dir .osw/delivery
@@ -93,15 +93,15 @@ pnpm osw landed-delivery run \
 - 承运方报送达不等于门店实收；缺任一必需批次日期时，汇总日期仍为未知。混合预计与实收日期时，汇总采用较弱的证据类型。暂挂、短收、破损都使 `allReceived=false`。恢复既有计划时只传新增运输事件，签收记录不能静默覆盖。
 - 回填只认人工/签收实测；同字段多人值冲突记 `pending`，已有值不一致记 `fails`，不覆盖源数据。产品槽位升级到 `0.2.0`，允许逐项提供箱规，已核装箱数和毛重可先于尺寸入库。core 按批次起始版本检查各条意图，同批可补多个空字段；跨批旧版本仍需重新读取。每格仍受 schema 与只补空约束，日志重放冲突会显式报错。host 应先保存计划，再执行补空意图。
 
-示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `node scripts/gen-delivery-example.mjs` 更新该示例；`pnpm examples` 检查七个 workflow。
+示例全部从虚构常数构造，包含两个发货国、食品与非食品、急件空运、自带物流、本地卖方配送和一件拒绝准入的产品，并故意制造运价、重量和时效偏差。合规条目也是虚构示例。运行 `pnpm --filter @osw/landed-delivery examples:generate` 更新该示例；`pnpm examples` 检查七个 workflow。
 
 ## 05 · 施工
 
 ```sh
 pnpm osw build-out run \
-  --assets examples/sample-store/assets \
-  --in examples/sample-store/inputs/build-out.json \
-  --approvals examples/sample-store/approvals/build-out.json \
+  --assets packages/build-out/examples/assets \
+  --in packages/build-out/examples/inputs/build-out.json \
+  --approvals packages/build-out/examples/approvals/build-out.json \
   --now 2026-01-30T00:00:00Z \
   --actor example:reviewer \
   --out-dir .osw/build-out
@@ -121,9 +121,9 @@ pnpm osw build-out run \
 
 ```sh
 pnpm osw opening run \
-  --assets examples/sample-store/assets \
-  --in examples/sample-store/inputs/opening.json \
-  --approvals examples/sample-store/approvals/opening.json \
+  --assets packages/opening/examples/assets \
+  --in packages/opening/examples/inputs/opening.json \
+  --approvals packages/opening/examples/approvals/opening.json \
   --now 2026-01-01T00:00:00Z \
   --actor example:reviewer \
   --out-dir .osw/opening
@@ -145,9 +145,9 @@ pnpm osw opening run \
 
 ```sh
 pnpm osw replenishment run \
-  --assets examples/sample-store/assets \
-  --in examples/sample-store/inputs/replenishment.json \
-  --approvals examples/sample-store/approvals/replenishment.json \
+  --assets packages/replenishment/examples/assets \
+  --in packages/replenishment/examples/inputs/replenishment.json \
+  --approvals packages/replenishment/examples/approvals/replenishment.json \
   --now 2026-02-02T12:00:00Z \
   --actor example:operator \
   --out-dir .osw/supply-program
@@ -177,6 +177,16 @@ pnpm osw replenishment run \
 
 ## 验收与示例
 
+每条 workflow 自带 `packages/<workflow>/examples/`、包内生成／检查脚本和专属 MCP 测试。进入任意 workflow 包目录后可执行：
+
+```sh
+pnpm test
+pnpm examples
+pnpm examples:generate
+```
+
+根目录 `pnpm examples` 按 01–07 依次调用各包检查，`pnpm examples:generate` 依次运行独立生成器。跨 workflow 只使用消费包 `examples/upstream/` 中冻结的 core 产出物 JSON；采用新版上游产物时显式更新输入快照，不导入另一条 workflow 的脚本。通用文件／CLI 验收工具位于 `@osw/core/node`，通用 MCP 连接工具位于 `@osw/mcp/testing`。
+
 ```sh
 pnpm lint
 pnpm typecheck
@@ -186,7 +196,7 @@ pnpm runtime
 pnpm examples
 ```
 
-示例店 **Example Noodle Bar** 使用虚构法域 `XE`、从零构造的数值和固定随机种子。`pnpm examples` 会在独立临时目录重新生成数据，比对仓库中的预期结果，并验证无审批阻断、批准后完成和至少一条真实判为 `fails` 的偏差记录。需要更新示例时运行 `node scripts/gen-examples.mjs`，并审查差异。
+示例店 **Example Noodle Bar** 使用虚构法域 `XE`、从零构造的数值和固定随机种子。`pnpm examples` 会在独立临时目录重新生成数据，比对仓库中的预期结果，并验证无审批阻断、批准后完成和至少一条真实判为 `fails` 的偏差记录。需要更新示例时运行 `pnpm examples:generate`，并审查差异。
 
 私有数据扫描必须提供仓库外的非空黑名单文件：每行一个字面词，或使用 `re:` 开头的正则。匹配会进行 Unicode 规范化、大小写归一与去空白，同时检查凭据、绝对路径、电话、邮箱和域名。
 

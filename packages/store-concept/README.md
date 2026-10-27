@@ -19,7 +19,7 @@ pnpm -F @osw/store-concept test
 5. `deriveSiteRequirements` combines requirements, equipment triggers, area and rent constraints.
 6. `assembleSpec` validates the body and requires a matching release approval.
 
-For the runnable synthetic CLI example, see the root [README](../../README.md) and [sample assets](../../examples/sample-store). The same steps are exposed through MCP.
+Run `pnpm examples` from this package directory for the synthetic CLI example. Its [assets and golden artifact](examples/) are owned by this package. The same steps are exposed through MCP.
 
 ## Financial input rules
 
@@ -31,3 +31,9 @@ For the runnable synthetic CLI example, see the root [README](../../README.md) a
 - Parameter, template, menu and actual-store references retain their source hashes. Final approval binds to the resulting specification body.
 
 业务说明：这是“定店型”包。无可信默认值、缺必要资产／汇率或未获放行时，通过结构化 `needs` 明确停下；不使用占位营收生成回本数字。完整中文运行方式见 [中文 README](../../README.zh-CN.md)。
+
+## Package-owned example
+
+From this package directory, run `pnpm examples:generate` to intentionally regenerate `examples/`, and `pnpm examples` to regenerate into a temporary directory and compare it with the committed fixtures. `pnpm test` runs only this package's tests, including its real stdio CLI/MCP parity check.
+
+The generator imports only this workflow and core. It does not call other workflow generators. Its released `examples/expected/store-spec.json` is the JSON handoff that another project may explicitly snapshot as input. The example checks approval blocking/release, golden output, independently calculated financial totals, and recorded failing verifications.

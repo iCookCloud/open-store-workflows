@@ -1,5 +1,5 @@
 import { MemorySource, SHARED_SLOTS, createParamReader, versionHash } from '@osw/core';
-import { approvedDelivery, deliveryFixture } from '../../../scripts/gen-delivery-example.mjs';
+import { approvedDelivery, deliveryFixture } from '../scripts/generate-delivery-example.mjs';
 import { slots } from '../src/slots.js';
 export { approvedDelivery, deliveryFixture };
 export async function rebuild(fixture: Awaited<ReturnType<typeof deliveryFixture>>) {

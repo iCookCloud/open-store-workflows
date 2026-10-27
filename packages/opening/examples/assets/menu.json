@@ -1,0 +1,112 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "menu",
+      "id": "example-menu-1",
+      "slotVersion": "0.1.0",
+      "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "title": {
+          "en": "Example Noodle Menu"
+        },
+        "cuisine": "example-noodle",
+        "tracks": [
+          "example-noodle"
+        ],
+        "origin": "delivered",
+        "items": [
+          {
+            "id": "example-dish",
+            "name": {
+              "en": "Example Noodles"
+            },
+            "station": "example-hot"
+          }
+        ],
+        "pageCount": 2,
+        "derives": {
+          "ingredients": [
+            {
+              "key": "example-noodle"
+            }
+          ],
+          "equipment": [
+            {
+              "key": "example-induction"
+            }
+          ],
+          "sop": [
+            {
+              "key": "example-boil"
+            }
+          ],
+          "coldchain": false
+        }
+      }
+    },
+    {
+      "slot": "menu",
+      "id": "example-menu-2",
+      "slotVersion": "0.1.0",
+      "versionHash": "5469ac89eb7101be9fea5a15b4f46e67e2d5a14453b58c676b00c68f378350e6",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "title": {
+          "en": "Example Alternative Menu"
+        },
+        "cuisine": "example-noodle",
+        "tracks": [
+          "example-noodle"
+        ],
+        "origin": "reference",
+        "pageCount": 1,
+        "derives": {
+          "ingredients": [
+            {
+              "key": "example-noodle"
+            }
+          ],
+          "equipment": [
+            {
+              "key": "example-induction"
+            }
+          ],
+          "sop": [
+            {
+              "key": "example-boil"
+            }
+          ],
+          "coldchain": false
+        }
+      }
+    }
+  ]
+}

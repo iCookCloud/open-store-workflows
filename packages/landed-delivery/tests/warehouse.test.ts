@@ -52,7 +52,7 @@ describe('warehouse order input', () => {
     expect(parsed.bom).toBeUndefined();
     const bom = JSON.parse(
       await readFile(
-        new URL('../../../examples/sample-delivery/inputs/landed-delivery.json', import.meta.url),
+        new URL('../examples/bom/inputs/landed-delivery.json', import.meta.url),
         'utf8',
       ),
     ).bom;

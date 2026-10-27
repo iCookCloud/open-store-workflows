@@ -1,0 +1,263 @@
+{
+  "kind": "Bom",
+  "artifactVersion": "0.1.0",
+  "id": "example-bom",
+  "hash": "7710a5035d0f21199d9007cad421e809bdb8ad8195656895def9112e160e1c2e",
+  "producedBy": {
+    "step": "fitout-bom/run",
+    "pkg": "@osw/example",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-noodle-store",
+  "inputs": [],
+  "sources": [
+    {
+      "slot": "bom-case",
+      "id": "example-bom-case",
+      "versionHash": "dc1fd60936e8b12abb463f30a0680b2ad1a7b90d77c7b2c3de67d26822ccca8a"
+    }
+  ],
+  "createdAt": "2026-01-30T00:00:00Z",
+  "example": true,
+  "body": {
+    "currency": "USD",
+    "lines": [
+      {
+        "id": "example-counter",
+        "lineKind": "furniture",
+        "qty": 10,
+        "unit": "pcs",
+        "category": "example-casework",
+        "name": "Example counter",
+        "zone": "example-room",
+        "spec": "Invented specification",
+        "qtyRule": {
+          "kind": "manual"
+        },
+        "qtyBasis": {
+          "status": "manual",
+          "note": "Synthetic"
+        },
+        "dimsBasis": {
+          "status": "manual",
+          "note": "Synthetic"
+        },
+        "budgetKey": "furnishing",
+        "evidence": [],
+        "derivedFrom": {
+          "kind": "case",
+          "ref": "example-bom-case"
+        },
+        "pricingMode": "custom",
+        "components": [
+          {
+            "key": "example-part",
+            "name": "Example material",
+            "kind": "material",
+            "basis": "fixed",
+            "qtyPerUnit": 1,
+            "unit": "pcs",
+            "rate": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "rateNote": "Invented"
+          }
+        ],
+        "modelCostPerUnit": {
+          "amount": 100,
+          "currency": "USD"
+        },
+        "parts": [
+          {
+            "key": "example-part",
+            "name": "Example material",
+            "kind": "material",
+            "qty": 1,
+            "unit": "pcs",
+            "rate": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "total": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "note": "Invented"
+          }
+        ],
+        "modelWarnings": [],
+        "sourcing": null,
+        "costBasis": "model",
+        "unitPrice": {
+          "amount": 100,
+          "currency": "USD",
+          "basis": "model"
+        },
+        "installKind": "fixed",
+        "volumePerUnit": 0.1
+      },
+      {
+        "id": "example-appliance",
+        "lineKind": "equipment",
+        "qty": 2,
+        "unit": "pcs",
+        "category": "example-appliance",
+        "name": "Example appliance",
+        "zone": "example-room",
+        "spec": "Invented specification",
+        "qtyRule": {
+          "kind": "manual"
+        },
+        "qtyBasis": {
+          "status": "manual",
+          "note": "Synthetic"
+        },
+        "dimsBasis": {
+          "status": "manual",
+          "note": "Synthetic"
+        },
+        "budgetKey": "furnishing",
+        "evidence": [],
+        "derivedFrom": {
+          "kind": "case",
+          "ref": "example-bom-case"
+        },
+        "pricingMode": "custom",
+        "components": [
+          {
+            "key": "example-part",
+            "name": "Example material",
+            "kind": "material",
+            "basis": "fixed",
+            "qtyPerUnit": 1,
+            "unit": "pcs",
+            "rate": {
+              "amount": 200,
+              "currency": "USD"
+            },
+            "rateNote": "Invented"
+          }
+        ],
+        "modelCostPerUnit": {
+          "amount": 200,
+          "currency": "USD"
+        },
+        "parts": [
+          {
+            "key": "example-part",
+            "name": "Example material",
+            "kind": "material",
+            "qty": 1,
+            "unit": "pcs",
+            "rate": {
+              "amount": 200,
+              "currency": "USD"
+            },
+            "total": {
+              "amount": 200,
+              "currency": "USD"
+            },
+            "note": "Invented"
+          }
+        ],
+        "modelWarnings": [],
+        "sourcing": null,
+        "costBasis": "model",
+        "unitPrice": {
+          "amount": 200,
+          "currency": "USD",
+          "basis": "model"
+        },
+        "installKind": "fixed",
+        "volumePerUnit": 0.5
+      },
+      {
+        "id": "example-landlord-panel",
+        "lineKind": "fitout",
+        "qty": 1,
+        "unit": "pcs",
+        "category": "example-casework",
+        "name": "Example landlord panel",
+        "zone": "example-room",
+        "spec": "Invented specification",
+        "qtyRule": {
+          "kind": "manual"
+        },
+        "qtyBasis": {
+          "status": "manual",
+          "note": "Synthetic"
+        },
+        "dimsBasis": {
+          "status": "manual",
+          "note": "Synthetic"
+        },
+        "budgetKey": "furnishing",
+        "evidence": [],
+        "derivedFrom": {
+          "kind": "case",
+          "ref": "example-bom-case"
+        },
+        "pricingMode": "custom",
+        "components": [
+          {
+            "key": "example-part",
+            "name": "Example material",
+            "kind": "material",
+            "basis": "fixed",
+            "qtyPerUnit": 1,
+            "unit": "pcs",
+            "rate": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "rateNote": "Invented"
+          }
+        ],
+        "modelCostPerUnit": {
+          "amount": 100,
+          "currency": "USD"
+        },
+        "parts": [
+          {
+            "key": "example-part",
+            "name": "Example material",
+            "kind": "material",
+            "qty": 1,
+            "unit": "pcs",
+            "rate": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "total": {
+              "amount": 100,
+              "currency": "USD"
+            },
+            "note": "Invented"
+          }
+        ],
+        "modelWarnings": [],
+        "sourcing": null,
+        "costBasis": "model",
+        "unitPrice": {
+          "amount": 100,
+          "currency": "USD",
+          "basis": "model"
+        },
+        "installKind": "fixed",
+        "volumePerUnit": 0.1
+      }
+    ],
+    "totals": {
+      "model": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "chosen": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "byBudgetKey": {}
+    }
+  }
+}

@@ -195,10 +195,7 @@ describe('quotes, transport and receipt', () => {
 describe('downstream artifacts and runner contracts', () => {
   it('accepts the actual frozen BOM produced by the fitout example', async () => {
     const bom = JSON.parse(
-      await readFile(
-        new URL('../../../examples/fitout-store/expected/bom.json', import.meta.url),
-        'utf8',
-      ),
+      await readFile(new URL('../examples/upstream/bom.json', import.meta.url), 'utf8'),
     );
     const input = DeliveryInput.parse({ id: 'example-fitout-delivery', jurisdiction: 'XE', bom });
     expect(input.bom.hash).toBe(await versionHash(input.bom.body));

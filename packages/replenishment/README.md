@@ -2,21 +2,21 @@
 
 Workflow 07 of Open Store Workflows. This package depends on `@osw/core`; it is developed in the shared repository and is independently packageable. npm publication requires separate approval.
 
-From the repository root:
+From this package directory after installing and building the workspace:
 
 ```sh
-pnpm install --frozen-lockfile
-pnpm build
-pnpm -F @osw/replenishment test
+pnpm test
+pnpm examples
+pnpm examples:generate
 ```
 
 The synthetic store has been operating for a month. Its opening handoff and first-stock BOM seed the recurring list; historical reorders provide cadence and ingredient evidence. The external intake store has no BOM denominator and reports `basis: none`, `byLines: null`.
 
 ```sh
-pnpm osw replenishment run \
-  --assets examples/sample-store/assets \
-  --in examples/sample-store/inputs/replenishment.json \
-  --approvals examples/sample-store/approvals/replenishment.json \
+pnpm exec osw replenishment run \
+  --assets examples/assets \
+  --in examples/inputs/replenishment.json \
+  --approvals examples/approvals/replenishment.json \
   --now 2026-02-02T12:00:00Z \
   --actor example:operator \
   --out-dir .osw/supply-program
@@ -33,5 +33,11 @@ For the reorder path, use `inputs/replenishment-reorder.json` and `approvals/rep
 - `persistDraftReorders` and `runReorderTransition` perform explicit approved ledger writes. Repeat offers take precedence, quantities are converted before MOQ/tier checks, missing FX returns a need, and fallback last-paid prices require approval. Confirmation requires the supplier or operator; price changes before confirmation need a fresh store approval. Confirmed lines are immutable, and receipt quantities produce verifications.
 
 All business thresholds come from `params`, including send windows, quotas, breakers, matrix sizes, reorder cadence and verification tolerances. Missing inputs never become guessed prices or rates. No production mail, database integration, package publication or deployment is performed by the examples.
+
+## Package-owned examples
+
+The `examples/` tree, `scripts/generate-examples.mjs`, and `scripts/check-examples.mjs` belong to this package. Generation does not import another workflow or write a shared repository fixture. Frozen upstream contracts live in `examples/upstream/`; replace those JSON envelopes intentionally when testing a different handoff. The checker regenerates into a temporary directory, compares the complete tree, then runs the real CLI with and without approval.
+
+`examples/seeds/unclassified-stores.json` preserves three deliberately unclassified synthetic stores alongside the two supply stores, so segmentation and private-data assertions remain exercised. The expected send ledger uses the memory provider only.
 
 License: Apache-2.0.

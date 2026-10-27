@@ -1,0 +1,97 @@
+{
+  "kind": "Bom",
+  "artifactVersion": "0.1.0",
+  "id": "example-supply-bom",
+  "hash": "160133e4c977fb2389ac48345149eebca5c3ed3f36bcc06e0d3b0e93f2b7897e",
+  "producedBy": {
+    "step": "fitout-bom/assembleBom",
+    "pkg": "@osw/fitout-bom",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-supply-store-1",
+  "inputs": [],
+  "sources": [
+    {
+      "slot": "offer",
+      "id": "example-supply-initial",
+      "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+    }
+  ],
+  "createdAt": "2026-01-01T12:00:00Z",
+  "example": true,
+  "body": {
+    "currency": "USD",
+    "lines": [
+      {
+        "id": "example-noodle-line",
+        "lineKind": "food",
+        "productRef": {
+          "slot": "product",
+          "id": "example-supply-noodle",
+          "versionHash": "2b443145742ad5056dd89a196181b0a70a66c26c56131e8536607787819636f3"
+        },
+        "offerRef": {
+          "slot": "offer",
+          "id": "example-supply-initial",
+          "versionHash": "b198e2c1232cbfc4efc0decc19ce646b89bbf1d638dd0dc5777f0a5c768175a0"
+        },
+        "qty": 10,
+        "unit": "kg",
+        "category": "ingredients",
+        "name": "Example Noodles",
+        "zone": "example-kitchen",
+        "spec": "Example 1 kg bag",
+        "qtyRule": {
+          "kind": "manual"
+        },
+        "qtyBasis": {
+          "status": "manual",
+          "note": "Synthetic opening stock"
+        },
+        "dimsBasis": {
+          "status": "manual",
+          "note": "Not dimensioned"
+        },
+        "budgetKey": "opening_inventory",
+        "evidence": [],
+        "derivedFrom": {
+          "kind": "manual",
+          "ref": "example"
+        },
+        "pricingMode": "whole",
+        "components": [],
+        "modelCostPerUnit": null,
+        "parts": [],
+        "modelWarnings": [],
+        "sourcing": {
+          "partyId": "example-supply-partner",
+          "offerPrice": {
+            "amount": 30,
+            "currency": "USD"
+          },
+          "tierMinQty": 0,
+          "includes": [],
+          "quotedAt": "2026-01-01"
+        },
+        "costBasis": "offer",
+        "unitPrice": {
+          "amount": 30,
+          "currency": "USD",
+          "basis": "invoice"
+        },
+        "coverDays": 10
+      }
+    ],
+    "totals": {
+      "model": {
+        "amount": 0,
+        "currency": "USD"
+      },
+      "chosen": {
+        "amount": 300,
+        "currency": "USD"
+      },
+      "byBudgetKey": {}
+    }
+  }
+}

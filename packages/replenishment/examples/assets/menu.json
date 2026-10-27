@@ -1,0 +1,43 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "menu",
+      "id": "example-supply-menu",
+      "slotVersion": "0.1.0",
+      "versionHash": "bb593ed0f7036bd46e1ea0c936c04ff2d9abde819d50c9547101126821bc88c8",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "workflows": [
+          "replenishment"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-02-02T12:00:00Z",
+      "example": true,
+      "data": {
+        "title": {
+          "en": "Example Operating Menu"
+        },
+        "cuisine": "replenishment-noodle",
+        "tracks": [
+          "replenishment-noodle"
+        ],
+        "items": [
+          {
+            "id": "example-bowl",
+            "name": {
+              "en": "Example Bowl"
+            },
+            "recipeId": "example-supply-recipe"
+          }
+        ]
+      }
+    }
+  ]
+}

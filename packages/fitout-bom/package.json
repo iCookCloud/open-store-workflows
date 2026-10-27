@@ -19,7 +19,10 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm build && vitest run --config vitest.config.ts",
+    "examples": "pnpm build && tsx scripts/check-examples.ts",
+    "examples:generate": "pnpm build && tsx scripts/generate-examples.ts"
   },
   "dependencies": {
     "@osw/core": "workspace:*"
@@ -32,5 +35,11 @@
   "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/fitout-bom",
   "bugs": {
     "url": "https://github.com/iCookCloud/open-store-workflows/issues"
+  },
+  "devDependencies": {
+    "@osw/mcp": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.25.0",
+    "vitest": "^3.2.0",
+    "tsx": "^4.20.0"
   }
 }

@@ -1,0 +1,214 @@
+{
+  "kind": "DeliveryPlan",
+  "artifactVersion": "0.1.0",
+  "id": "example-deliveryplan",
+  "hash": "32bc4bcbdaa838860b247df41ac87843148a4df83ac6ac9503b1fba6c556666e",
+  "producedBy": {
+    "step": "landed-delivery/run",
+    "pkg": "@osw/example",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-noodle-store",
+  "inputs": [
+    {
+      "kind": "Bom",
+      "id": "example-bom",
+      "hash": "7710a5035d0f21199d9007cad421e809bdb8ad8195656895def9112e160e1c2e"
+    }
+  ],
+  "sources": [
+    {
+      "slot": "party",
+      "id": "example-delivery-party",
+      "versionHash": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98"
+    }
+  ],
+  "createdAt": "2026-01-30T00:00:00Z",
+  "example": true,
+  "body": {
+    "market": "XE",
+    "compliance": [],
+    "held": [],
+    "shipments": [
+      {
+        "id": "example-shipment",
+        "origin": "XE",
+        "goodsClass": "nonfood",
+        "mode": "ground",
+        "crossBorder": false,
+        "status": "received",
+        "node": "delivered",
+        "consignee": {},
+        "portFrom": null,
+        "portTo": null,
+        "lastMile": [],
+        "carrier": {
+          "kind": "forwarder",
+          "partyRef": {
+            "slot": "party",
+            "id": "example-delivery-party",
+            "versionHash": "6ae98ee275b0b04a733789d736508bfb935b193ef222e913d30adf218b35cc98"
+          }
+        },
+        "lines": [
+          {
+            "id": "packing-example-counter",
+            "bomLineId": "example-counter",
+            "lineKind": "furniture",
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-goods-example-counter",
+              "versionHash": "0000000000000000000000000000000000000000000000000000000000000000"
+            },
+            "name": "Example counter",
+            "spec": "Invented specification",
+            "qty": 20,
+            "goodsClass": "nonfood",
+            "goodsClassSrc": "manual",
+            "hsCode": {
+              "value": null,
+              "src": null
+            },
+            "materialText": {
+              "value": null,
+              "src": null
+            },
+            "netWeightKg": {
+              "value": null,
+              "src": null
+            },
+            "cartonUnits": {
+              "value": null,
+              "src": null
+            },
+            "cartons": {
+              "value": null,
+              "src": null
+            },
+            "totalNetWeightKg": {
+              "value": null,
+              "src": null
+            },
+            "totalGrossWeightKg": {
+              "value": null,
+              "src": null
+            },
+            "totalVolumeM3": {
+              "value": null,
+              "src": null
+            },
+            "declaredValue": {
+              "amount": 0,
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "packing-example-appliance",
+            "bomLineId": "example-appliance",
+            "lineKind": "equipment",
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-goods-example-appliance",
+              "versionHash": "0000000000000000000000000000000000000000000000000000000000000000"
+            },
+            "name": "Example appliance",
+            "spec": "Invented specification",
+            "qty": 2,
+            "goodsClass": "nonfood",
+            "goodsClassSrc": "manual",
+            "hsCode": {
+              "value": null,
+              "src": null
+            },
+            "materialText": {
+              "value": null,
+              "src": null
+            },
+            "netWeightKg": {
+              "value": null,
+              "src": null
+            },
+            "cartonUnits": {
+              "value": null,
+              "src": null
+            },
+            "cartons": {
+              "value": null,
+              "src": null
+            },
+            "totalNetWeightKg": {
+              "value": null,
+              "src": null
+            },
+            "totalGrossWeightKg": {
+              "value": null,
+              "src": null
+            },
+            "totalVolumeM3": {
+              "value": null,
+              "src": null
+            },
+            "declaredValue": {
+              "amount": 0,
+              "currency": "USD"
+            }
+          }
+        ],
+        "quotes": [],
+        "chosenQuoteId": null,
+        "freight": {
+          "amount": 80,
+          "currency": "USD"
+        },
+        "documents": [],
+        "tracking": {},
+        "holds": [],
+        "arrival": null,
+        "amendments": []
+      }
+    ],
+    "arrivals": [
+      {
+        "bomLineId": "example-counter",
+        "shipmentId": "example-shipment",
+        "qty": 20,
+        "basis": "received",
+        "eta": "2026-01-05",
+        "arrivedAt": "2026-01-05",
+        "receivedQty": 20,
+        "damagedQty": 0
+      },
+      {
+        "bomLineId": "example-appliance",
+        "shipmentId": "example-shipment",
+        "qty": 2,
+        "basis": "received",
+        "eta": "2026-01-07",
+        "arrivedAt": "2026-01-07",
+        "receivedQty": 2,
+        "damagedQty": 0
+      }
+    ],
+    "fitoutGoodsLastAt": {
+      "date": "2026-01-07",
+      "basis": "received",
+      "shipmentIds": [
+        "example-shipment"
+      ]
+    },
+    "openingStock": {
+      "status": "none",
+      "firstAt": {
+        "date": null,
+        "basis": "none",
+        "shipmentIds": []
+      },
+      "lastAt": {
+        "date": null,
+        "basis": "none",
+        "shipmentIds": []
+      }
+    },
+    "allReceived": true
+  }
+}

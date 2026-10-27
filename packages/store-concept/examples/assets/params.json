@@ -1,0 +1,175 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "params",
+      "id": "concept-budgetband",
+      "slotVersion": "0.1.0",
+      "versionHash": "e45350e514385e0ef8f6069ac04aa8cc242ee4e6446145eecad50b856e9c0194",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.budgetBand",
+        "value": 0.2,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-areatolerance",
+      "slotVersion": "0.1.0",
+      "versionHash": "1f7e8d6ff3b32994a282b6177488912074f018111ce4aca29c99dc8a8c9840e0",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.areaTolerance",
+        "value": 0.2,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-calibrationminsample",
+      "slotVersion": "0.1.0",
+      "versionHash": "ae93833d39f096a34baa2c3f0bfe84cdb2febc20cd27a9517ed83d285beab908",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.calibrationMinSample",
+        "value": 2,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-minmarginrate",
+      "slotVersion": "0.1.0",
+      "versionHash": "533346f3a3426abe84f1ca1809af5756de7ca72d1b03d13241aba9aa0082da25",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.minMarginRate",
+        "value": 0.1,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "verify-calctemplatetolerance",
+      "slotVersion": "0.1.0",
+      "versionHash": "63154eddeb5d088fa9ceb8d08387c383eefe13e6376107dd8e7f00ed9296a4a8",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.calcTemplateTolerance",
+        "value": 0.1,
+        "appliesTo": {
+          "jurisdictions": [
+            "XE"
+          ],
+          "tracks": [
+            "example-noodle"
+          ]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    }
+  ]
+}
