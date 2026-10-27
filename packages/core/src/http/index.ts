@@ -48,20 +48,11 @@ export class HttpSource implements AssetSource {
           error instanceof Error ? error.message : 'Network error',
         );
       }
-      let data: unknown;
-      try {
-        data = await response.json();
-      } catch {
-        throw new OswSourceError('source_unavailable', 'Invalid JSON response', {
-          status: response.status,
-        });
-      }
-      if (response.ok) return data;
-      const err = (data as { error?: { code?: string; message?: string; detail?: unknown } })
-        ?.error;
       const retryHeader = response.headers.get('Retry-After');
       const retry = retryHeader?.trim() ? Number(retryHeader) : Number.NaN;
       if ([429, 503].includes(response.status) && attempt < max) {
+        // 网关错误页不一定是 JSON；先按状态退避，并释放不再使用的响应流。
+        await response.body?.cancel().catch(() => undefined);
         const ms =
           Number.isFinite(retry) && retry >= 0
             ? Math.min(retry * 1000, 60000)
@@ -71,8 +62,22 @@ export class HttpSource implements AssetSource {
         );
         continue;
       }
+      let data: unknown;
+      try {
+        data = await response.json();
+      } catch {
+        if (response.ok) {
+          throw new OswSourceError('source_unavailable', 'Invalid JSON response', {
+            status: response.status,
+          });
+        }
+        // 错误页无法解析时仍保留 HTTP 状态及重试提示，不把 HTML 当作资产数据。
+      }
+      if (response.ok) return data;
+      const err = (data as { error?: { code?: string; message?: string; detail?: unknown } })
+        ?.error;
       throw new OswSourceError(
-        err?.code ?? 'source_unavailable',
+        err?.code ?? (response.status === 429 ? 'rate_limited' : 'source_unavailable'),
         err?.message ?? `HTTP ${response.status}`,
         {
           status: response.status,
