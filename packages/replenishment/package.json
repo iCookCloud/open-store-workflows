@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "license": "Apache-2.0",
-  "files": ["dist", "rules"],
+  "files": ["dist", "rules", "README.md", "examples", "scripts"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -21,7 +21,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run tests"
+    "test": "vitest run --config vitest.config.ts",
+    "examples": "node scripts/check-examples.mjs",
+    "examples:generate": "node scripts/generate-examples.mjs"
   },
   "dependencies": {
     "@osw/core": "workspace:*"
@@ -37,5 +39,11 @@
   "homepage": "https://github.com/iCookCloud/open-store-workflows/tree/main/packages/replenishment",
   "bugs": {
     "url": "https://github.com/iCookCloud/open-store-workflows/issues"
+  },
+  "devDependencies": {
+    "@osw/mcp": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.25.0",
+    "vitest": "^3.2.0",
+    "tsx": "^4.20.0"
   }
 }

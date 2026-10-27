@@ -1,0 +1,149 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "calc-template",
+      "id": "example-noodle-template",
+      "slotVersion": "0.1.0",
+      "versionHash": "f49565e37d1ec319b5276331c1e16566b29be814119e74671c6fb0fd372d098a",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "storeType": "example-noodle",
+        "track": "example-noodle",
+        "cuisines": [
+          "example-noodle"
+        ],
+        "nonFood": false,
+        "revenueModel": "covers",
+        "currency": "USD",
+        "baseAreaM2": 100,
+        "seatRatio": 0.5,
+        "turnover": 2,
+        "spend": 20,
+        "taxRate": 0.1,
+        "opDays": 20,
+        "hasDefaults": true,
+        "params": [
+          {
+            "key": "equipment",
+            "kind": "investment",
+            "algorithm": "area_scale",
+            "baseValue": 10000,
+            "baseAreaM2": 100,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [
+                "example-store-1"
+              ],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "furnishing",
+            "kind": "investment",
+            "algorithm": "fixed",
+            "baseValue": 4000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "construction",
+            "kind": "investment",
+            "algorithm": "area_scale",
+            "baseValue": 20000,
+            "baseAreaM2": 100,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "working_capital",
+            "kind": "investment",
+            "algorithm": "subtotal_percent",
+            "baseValue": 0.1,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "rent",
+            "kind": "monthly",
+            "algorithm": "fixed",
+            "baseValue": 2000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "labor",
+            "kind": "monthly",
+            "algorithm": "fixed",
+            "baseValue": 4000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "utilities",
+            "kind": "monthly",
+            "algorithm": "fixed",
+            "baseValue": 1000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "food_cost",
+            "kind": "monthly",
+            "algorithm": "revenue_percent",
+            "baseValue": 0.3,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          }
+        ],
+        "staffing": [
+          {
+            "positionKey": "example-cook",
+            "headcount": 2,
+            "algorithm": "area_scale"
+          }
+        ]
+      }
+    }
+  ]
+}

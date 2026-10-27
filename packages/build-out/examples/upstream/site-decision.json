@@ -1,0 +1,108 @@
+{
+  "kind": "SiteDecision",
+  "artifactVersion": "0.1.0",
+  "id": "example-sitedecision",
+  "hash": "b40ef873010cb0cba8834d221b392507f4e2ac30bbf17975be32c4439b8473d7",
+  "producedBy": {
+    "step": "site-search/run",
+    "pkg": "@osw/example",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": "example-noodle-store",
+  "inputs": [],
+  "sources": [
+    {
+      "slot": "listing",
+      "id": "example-listing",
+      "versionHash": "1139ff7fc6bfde530309e1d5eb53653857e3c6b54b72591e8ab047045f772b98"
+    }
+  ],
+  "createdAt": "2026-01-30T00:00:00Z",
+  "example": true,
+  "body": {
+    "stage": "chosen",
+    "listing": {
+      "slot": "listing",
+      "id": "example-listing",
+      "versionHash": "1139ff7fc6bfde530309e1d5eb53653857e3c6b54b72591e8ab047045f772b98"
+    },
+    "address": {
+      "line1": "Example Unit",
+      "locality": "Example Town",
+      "jurisdiction": "XE"
+    },
+    "geo": {
+      "lat": 0,
+      "lng": 0
+    },
+    "jurisdiction": "XE",
+    "unit": "Example Unit",
+    "floorLevel": 0,
+    "conditions": [
+      {
+        "key": "area",
+        "measure": {
+          "value": 100,
+          "unit": "m2",
+          "basis": "observed"
+        },
+        "required": {
+          "key": "area",
+          "op": "gte",
+          "value": 80,
+          "unit": "m2",
+          "hard": true
+        },
+        "verdict": "holds"
+      }
+    ],
+    "unmeasured": [],
+    "openingTarget": "2026-02-01",
+    "lease": {
+      "termMonths": 12,
+      "renewals": [],
+      "possessionDate": "2026-01-05",
+      "rentCommencementDate": "2026-02-01",
+      "rent": {
+        "base": {
+          "amount": 1000,
+          "currency": "USD"
+        },
+        "period": "month",
+        "basis": "total",
+        "escalation": {
+          "kind": "none",
+          "value": null,
+          "everyMonths": 12
+        },
+        "freeRentMonths": 0,
+        "additional": []
+      },
+      "deposit": null,
+      "tiAllowance": null,
+      "guarantee": {
+        "kind": "none",
+        "cap": null
+      },
+      "permittedUse": "Example food store",
+      "exclusiveUse": false,
+      "assignment": "consent",
+      "deliveryCondition": "as_is",
+      "landlordWork": [
+        "Example landlord panel"
+      ],
+      "documents": []
+    },
+    "shortlist": [
+      {
+        "listing": {
+          "slot": "listing",
+          "id": "example-listing",
+          "versionHash": "1139ff7fc6bfde530309e1d5eb53653857e3c6b54b72591e8ab047045f772b98"
+        },
+        "status": "chosen",
+        "reason": "Synthetic choice"
+      }
+    ]
+  }
+}

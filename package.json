@@ -16,10 +16,11 @@
     "boundaries": "node scripts/check-boundaries.mjs",
     "runtime": "node scripts/check-runtime.mjs",
     "scan": "node scripts/scan-private.mjs",
-    "examples": "node scripts/example-check.mjs && pnpm examples:site-search && pnpm -F @osw/landed-delivery examples",
+    "examples": "pnpm --filter @osw/store-concept examples && pnpm --filter @osw/site-search examples && pnpm --filter @osw/fitout-bom examples && pnpm --filter @osw/landed-delivery examples && pnpm --filter @osw/build-out examples && pnpm --filter @osw/opening examples && pnpm --filter @osw/replenishment examples",
     "check": "pnpm build && pnpm lint && pnpm typecheck && pnpm test && pnpm boundaries && pnpm runtime && pnpm examples && pnpm scan",
     "osw": "node packages/core/dist/node/cli.js",
-    "examples:site-search": "tsx packages/site-search/tests/example-check.ts"
+    "examples:site-search": "pnpm --filter @osw/site-search examples",
+    "examples:generate": "pnpm --filter @osw/store-concept examples:generate && pnpm --filter @osw/site-search examples:generate && pnpm --filter @osw/fitout-bom examples:generate && pnpm --filter @osw/landed-delivery examples:generate && pnpm --filter @osw/build-out examples:generate && pnpm --filter @osw/opening examples:generate && pnpm --filter @osw/replenishment examples:generate"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

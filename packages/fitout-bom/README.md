@@ -4,15 +4,15 @@
 
 ## 运行合成示例
 
-在仓库根目录执行：
+在本包目录执行（依赖安装与构建完成后）：
 
 ```bash
 pnpm install
 pnpm build
-pnpm osw fitout-bom run \
-  --assets examples/fitout-store/assets \
-  --in examples/fitout-store/inputs/fitout-bom.json \
-  --approvals examples/fitout-store/approvals/fitout-bom.json \
+pnpm exec osw fitout-bom run \
+  --assets examples/assets \
+  --in examples/inputs/fitout-bom.json \
+  --approvals examples/approvals/fitout-bom.json \
   --now 2026-01-01T12:00:00Z \
   --out-dir .osw/fitout
 ```
@@ -64,11 +64,21 @@ import { openaiCompatibleItemizer } from '@osw/fitout-bom/providers/openai-compa
 ## 验证与边界
 
 ```bash
-pnpm exec vitest run packages/fitout-bom/tests
-pnpm exec tsx scripts/gen-fitout-example.ts
+pnpm test
+pnpm examples:generate
 pnpm examples
 ```
 
 不发送询价、不写产品档案、不生成效果图、不代替现场实测。缺货返回 `rfq`，定制品缺档返回 `createProduct`。配方产量须为份数（`pcs`/`set`）；不能把 `carton.units` 件数直接当 kg/L 的包装规格。
 
 生产资产中心的槽位投影、采购结果写回和站点页面替换需在私有项目中另行接入。本包未修改生产数据，也未发布 npm 包。
+
+## Package-local verification
+
+```sh
+pnpm test
+pnpm examples
+pnpm examples:generate
+```
+
+The tests and deterministic example tools run from this package directory. Upstream workflow data is exchanged as core artifact JSON snapshots, without importing another workflow’s example scripts.

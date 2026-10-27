@@ -1,0 +1,32 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "term",
+      "id": "example-induction",
+      "slotVersion": "0.1.0",
+      "versionHash": "99a020e1023a9c0454ccb26679df1f260006b19058d99663a292abad8f3e44c3",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "example-induction",
+        "kind": "equipment",
+        "labels": {
+          "en": "example-induction"
+        }
+      }
+    }
+  ]
+}

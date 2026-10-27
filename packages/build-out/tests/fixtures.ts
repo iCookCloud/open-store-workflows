@@ -3,7 +3,7 @@ import {
   approveBuildExample,
   buildContext,
   buildOutExample,
-} from '../../../scripts/gen-build-out-examples.mjs';
+} from '../scripts/generate-examples.mjs';
 import {
   type Bids,
   BuildOutInput,

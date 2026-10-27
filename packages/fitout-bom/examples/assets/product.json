@@ -1,0 +1,33 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "product",
+      "id": "example-product",
+      "slotVersion": "0.2.0",
+      "versionHash": "9355df7947a1018712be4f256d74f576a3bed6a5a7a0dd00c9f2c9524cb03ea0",
+      "fieldsetHashes": {
+        "identity": "9355df7947a1018712be4f256d74f576a3bed6a5a7a0dd00c9f2c9524cb03ea0",
+        "logistics": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      "coverage": {
+        "tier": "general",
+        "tracks": [],
+        "jurisdictions": [],
+        "workflows": []
+      },
+      "updatedAt": "2026-01-01T12:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Table"
+        },
+        "kind": "catalog",
+        "category": "furniture.table",
+        "goodsClass": "nonfood",
+        "status": "active"
+      }
+    }
+  ]
+}

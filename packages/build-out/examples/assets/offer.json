@@ -1,0 +1,93 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "offer",
+      "id": "example-builder-a-bid",
+      "slotVersion": "0.1.0",
+      "versionHash": "a8708d4ca59618470371b692e95e29fcdd2fdbdbc11934ce66f3817f6da736d1",
+      "fieldsetHashes": {
+        "price": "a8708d4ca59618470371b692e95e29fcdd2fdbdbc11934ce66f3817f6da736d1",
+        "terms": "a8708d4ca59618470371b692e95e29fcdd2fdbdbc11934ce66f3817f6da736d1"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-builder-a",
+        "serviceScope": "Example installation",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "lot",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 2000
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "serviceLineRefs": [
+          "example-counter",
+          "example-appliance"
+        ],
+        "hoursPerUnit": 30
+      }
+    },
+    {
+      "slot": "offer",
+      "id": "example-builder-b-bid",
+      "slotVersion": "0.1.0",
+      "versionHash": "6a39258f933dfa997def0ab824c45b05c5dd1b3f405d4e5b253aac6a95add5bc",
+      "fieldsetHashes": {
+        "price": "6a39258f933dfa997def0ab824c45b05c5dd1b3f405d4e5b253aac6a95add5bc",
+        "terms": "6a39258f933dfa997def0ab824c45b05c5dd1b3f405d4e5b253aac6a95add5bc"
+      },
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "build-out"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-30T00:00:00Z",
+      "example": true,
+      "data": {
+        "partyId": "example-builder-b",
+        "serviceScope": "Example installation",
+        "basis": "quote",
+        "use": "project",
+        "currency": "USD",
+        "unit": "lot",
+        "tiers": [
+          {
+            "minQty": 1,
+            "unitPrice": 2200
+          }
+        ],
+        "quotedAt": "2026-01-01",
+        "serviceLineRefs": [
+          "example-counter",
+          "example-appliance"
+        ],
+        "hoursPerUnit": 30
+      }
+    }
+  ]
+}

@@ -2,19 +2,19 @@
 
 Workflow 04 of Open Store Workflows. This package depends on `@osw/core`; it is developed in the shared repository and is independently packageable. npm publication requires separate approval.
 
-From the repository root:
+After installing dependencies and building the workspace, run from this package directory:
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm build
-pnpm -F @osw/landed-delivery test
+pnpm test
 ```
 
 ```sh
-pnpm osw landed-delivery run \
-  --assets examples/sample-delivery/assets \
-  --in examples/sample-delivery/inputs/landed-delivery.json \
-  --approvals examples/sample-delivery/approvals/landed-delivery.json \
+pnpm exec osw landed-delivery run \
+  --assets examples/bom/assets \
+  --in examples/bom/inputs/landed-delivery.json \
+  --approvals examples/bom/approvals/landed-delivery.json \
   --now 2026-01-20T12:00:00Z \
   --actor example:delivery-reviewer \
   --out-dir .osw/delivery
@@ -30,7 +30,7 @@ The host authenticates edit roles before invoking `applyPartyEdits`. Carrier edi
 
 Rates use `shipment`, `m3`, `kg` or `carton` bases. `delivery.tolerance.weightPct`, `delivery.tolerance.volumePct` and `freight.tolerance.rateCardPct` are fractional ratios; `freight.tolerance.transitDays` is an absolute day allowance. Tolerances become required when the corresponding measurement exists. Missing packing cells request follow-up without blocking confirmation; contradictions block. Missing quotes return a usable plan with a request action, while supplied quotes require an explicit current choice. Delivery is distinct from signed receipt. A milestone with any unknown required date stays unknown, and mixed evidence uses the weakest basis. Held goods, shortages or damage keep `allReceived` false.
 
-Only manual or signed observations produce fill intentions. Conflicting observations produce `pending`; existing differing values produce `fails` without overwriting. The product slot is version `0.2.0`: carton fields may be supplied individually, so verified units or weight can be filled before dimensions are known. Core writeback checks every fill against its batch-start source version and current target emptiness; multiple fields can be filled in one batch, while a later batch needs a current version. File journal conflicts are surfaced explicitly. Hosts persist plan results before applying fill intentions. The sample spans two shipping countries, food/nonfood, air freight, own logistics, seller delivery and one denied product, and deliberately produces rate, weight and transit failures. Regenerate it with `node scripts/gen-delivery-example.mjs`; `pnpm examples` checks all seven workflows against committed golden artifacts.
+Only manual or signed observations produce fill intentions. Conflicting observations produce `pending`; existing differing values produce `fails` without overwriting. The product slot is version `0.2.0`: carton fields may be supplied individually, so verified units or weight can be filled before dimensions are known. Core writeback checks every fill against its batch-start source version and current target emptiness; multiple fields can be filled in one batch, while a later batch needs a current version. File journal conflicts are surfaced explicitly. Hosts persist plan results before applying fill intentions. The sample spans two shipping countries, food/nonfood, air freight, own logistics, seller delivery and one denied product, and deliberately produces rate, weight and transit failures. Regenerate it with `node scripts/generate-delivery-example.mjs`; `pnpm examples` checks both this package’s BOM-delivery and warehouse-reorder examples against committed golden artifacts.
 
 ## Reorder shipments to a warehouse
 
@@ -61,7 +61,7 @@ pnpm examples:generate
 The repository's `pnpm examples` and `pnpm check` also run this check. To run the same input through the CLI from the repository root:
 
 ```sh
-pnpm osw landed-delivery run \
+pnpm exec osw landed-delivery run \
   --assets packages/landed-delivery/examples/warehouse/assets \
   --in packages/landed-delivery/examples/warehouse/input.json \
   --approvals packages/landed-delivery/examples/warehouse/approvals.json \
@@ -71,3 +71,13 @@ pnpm osw landed-delivery run \
 ```
 
 License: Apache-2.0.
+
+## Package-local verification
+
+```sh
+pnpm test
+pnpm examples
+pnpm examples:generate
+```
+
+The tests and deterministic example tools run from this package directory. Upstream workflow data is exchanged as core artifact JSON snapshots, without importing another workflow’s example scripts.

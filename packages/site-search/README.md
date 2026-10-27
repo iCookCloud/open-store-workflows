@@ -6,14 +6,14 @@ Only `@osw/core` is a runtime dependency. Each exported step is deterministic fo
 
 ## Run the synthetic example
 
-From the repository root, after `pnpm install` and `pnpm build`:
+From this package directory, after installing dependencies and building the workspace:
 
 ```sh
-pnpm osw site-search run \
-  --assets examples/sample-store/site-search/assets \
-  --in examples/sample-store/site-search/input.json \
-  --approvals examples/sample-store/site-search/approvals.json \
-  --providers examples/sample-store/site-search/providers.mjs \
+pnpm exec osw site-search run \
+  --assets examples/assets \
+  --in examples/input.json \
+  --approvals examples/approvals.json \
+  --providers examples/providers.mjs \
   --now 2026-01-10T12:00:00Z \
   --actor example-test \
   --out-dir .osw/site-search
@@ -21,7 +21,7 @@ pnpm osw site-search run \
 
 Use `pending-approvals.json` to stop at `signLease` with exit code 2. With all example approvals and signing receipts, exit code 0 produces a schema-valid signed artifact. These are explicitly synthetic test materials, including the PDF-like byte fixtures; they are not signed legal documents.
 
-`pnpm examples:site-search` verifies both CLI exits and the golden artifact hash. Regenerate the invented fixtures with `pnpm exec tsx packages/site-search/tests/example-check.ts --write`, then review the diff. No private data is read by the generator.
+`pnpm examples` verifies both CLI exits and the golden artifact hash. Regenerate the invented fixtures with `pnpm examples:generate`, then review the diff. No private data is read by the generator.
 
 ## Inputs and results
 
@@ -53,3 +53,13 @@ Import adapters and types from `@osw/site-search/providers`. A CLI/MCP adapter m
 - `MemoryQuotaStore(clock)` and `MemoryCacheStore(clock)` support a single local process. Production hosts must inject shared atomic quota storage and an appropriate cache.
 
 External API tests use synthetic responses. Live paid API calls, production asset-center integration, and public npm publication are not part of these checks.
+
+## Package-local verification
+
+```sh
+pnpm test
+pnpm examples
+pnpm examples:generate
+```
+
+The tests and deterministic example tools run from this package directory. Upstream workflow data is exchanged as core artifact JSON snapshots, without importing another workflow’s example scripts.

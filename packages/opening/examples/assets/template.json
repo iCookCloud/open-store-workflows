@@ -1,0 +1,199 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "template",
+      "id": "example-cert-plan",
+      "data": {
+        "kind": "cert-plan",
+        "lang": "en",
+        "title": {
+          "en": "example-cert-plan"
+        },
+        "format": "json",
+        "content": {
+          "standard": "example-food",
+          "groups": [
+            "example-required"
+          ],
+          "excludeKeys": [],
+          "checks": {
+            "example-safety": [
+              "example-clean"
+            ]
+          }
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "3f783309e2fc28bbb9533c18760bd42b91e1f7b357dde6f7d6ab6b97f02871ba",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-opening-checklist",
+      "data": {
+        "kind": "opening-checklist",
+        "lang": "en",
+        "title": {
+          "en": "example-opening-checklist"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-permit",
+              "title": "Example permit evidence",
+              "phase": "before",
+              "dayOffset": -1,
+              "gate": true,
+              "waivable": false,
+              "jurisdiction": "XE"
+            },
+            {
+              "key": "example-review",
+              "title": "Example first-month review",
+              "phase": "after",
+              "dayOffset": 30,
+              "gate": false,
+              "waivable": false,
+              "reviewCheckpoint": "month"
+            }
+          ],
+          "complaintAreas": [
+            "example-food"
+          ]
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "fa63e9afc07da82d46f8679e38a7d5af47258d6055a89f546ce48565258499db",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-marketing-plan",
+      "data": {
+        "kind": "marketing-plan",
+        "lang": "en",
+        "title": {
+          "en": "example-marketing-plan"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-launch",
+              "channel": "social",
+              "title": "Example launch announcement",
+              "dayOffset": -1,
+              "deliverable": "Example post",
+              "core": true,
+              "category": "launch",
+              "stage": "before"
+            }
+          ],
+          "creatorSelection": {
+            "tiers": [
+              "micro"
+            ],
+            "formats": [
+              "short"
+            ],
+            "audienceLanguages": [
+              "en"
+            ],
+            "mixRoles": [
+              "local"
+            ]
+          },
+          "disclosureRules": [
+            {
+              "jurisdiction": "XE",
+              "required": true
+            }
+          ]
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "0a810ea39827e44a977401ab82b9d32b1f1828026194154581dd0e2e2015dcdf",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    },
+    {
+      "slot": "template",
+      "id": "example-asset-plan",
+      "data": {
+        "kind": "asset-plan",
+        "lang": "en",
+        "title": {
+          "en": "example-asset-plan"
+        },
+        "format": "json",
+        "content": {
+          "items": [
+            {
+              "key": "example-photo",
+              "required": 2,
+              "channels": [
+                "social"
+              ]
+            }
+          ]
+        }
+      },
+      "slotVersion": "0.1.0",
+      "versionHash": "42ecef2b42bd6a9bfe326acdd7cc4e09ddf8680a3de242c66842b3b31d7a8cfe",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "opening"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "example": true
+    }
+  ]
+}

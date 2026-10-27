@@ -1,0 +1,615 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "calc-template",
+      "id": "example-noodle-template",
+      "slotVersion": "0.1.0",
+      "versionHash": "f49565e37d1ec319b5276331c1e16566b29be814119e74671c6fb0fd372d098a",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "storeType": "example-noodle",
+        "track": "example-noodle",
+        "cuisines": ["example-noodle"],
+        "nonFood": false,
+        "revenueModel": "covers",
+        "currency": "USD",
+        "baseAreaM2": 100,
+        "seatRatio": 0.5,
+        "turnover": 2,
+        "spend": 20,
+        "taxRate": 0.1,
+        "opDays": 20,
+        "hasDefaults": true,
+        "params": [
+          {
+            "key": "equipment",
+            "kind": "investment",
+            "algorithm": "area_scale",
+            "baseValue": 10000,
+            "baseAreaM2": 100,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": ["example-store-1"],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "furnishing",
+            "kind": "investment",
+            "algorithm": "fixed",
+            "baseValue": 4000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "construction",
+            "kind": "investment",
+            "algorithm": "area_scale",
+            "baseValue": 20000,
+            "baseAreaM2": 100,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "working_capital",
+            "kind": "investment",
+            "algorithm": "subtotal_percent",
+            "baseValue": 0.1,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "rent",
+            "kind": "monthly",
+            "algorithm": "fixed",
+            "baseValue": 2000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "labor",
+            "kind": "monthly",
+            "algorithm": "fixed",
+            "baseValue": 4000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "utilities",
+            "kind": "monthly",
+            "algorithm": "fixed",
+            "baseValue": 1000,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          },
+          {
+            "key": "food_cost",
+            "kind": "monthly",
+            "algorithm": "revenue_percent",
+            "baseValue": 0.3,
+            "baseAreaM2": null,
+            "provenance": {
+              "kind": "actual",
+              "storeIds": [],
+              "note": "Invented synthetic fixture"
+            }
+          }
+        ],
+        "staffing": [
+          {
+            "positionKey": "example-cook",
+            "headcount": 2,
+            "algorithm": "area_scale"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "menu",
+      "id": "example-menu-1",
+      "slotVersion": "0.1.0",
+      "versionHash": "9ebd769d078919832a6bc70a207ffb4c91727d428b85e658b026fb50b32d3f53",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "title": {
+          "en": "Example Noodle Menu"
+        },
+        "cuisine": "example-noodle",
+        "tracks": ["example-noodle"],
+        "origin": "delivered",
+        "items": [
+          {
+            "id": "example-dish",
+            "name": {
+              "en": "Example Noodles"
+            },
+            "station": "example-hot"
+          }
+        ],
+        "pageCount": 2,
+        "derives": {
+          "ingredients": [
+            {
+              "key": "example-noodle"
+            }
+          ],
+          "equipment": [
+            {
+              "key": "example-induction"
+            }
+          ],
+          "sop": [
+            {
+              "key": "example-boil"
+            }
+          ],
+          "coldchain": false
+        }
+      }
+    },
+    {
+      "slot": "menu",
+      "id": "example-menu-2",
+      "slotVersion": "0.1.0",
+      "versionHash": "5469ac89eb7101be9fea5a15b4f46e67e2d5a14453b58c676b00c68f378350e6",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "title": {
+          "en": "Example Alternative Menu"
+        },
+        "cuisine": "example-noodle",
+        "tracks": ["example-noodle"],
+        "origin": "reference",
+        "pageCount": 1,
+        "derives": {
+          "ingredients": [
+            {
+              "key": "example-noodle"
+            }
+          ],
+          "equipment": [
+            {
+              "key": "example-induction"
+            }
+          ],
+          "sop": [
+            {
+              "key": "example-boil"
+            }
+          ],
+          "coldchain": false
+        }
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-budgetband",
+      "slotVersion": "0.1.0",
+      "versionHash": "e45350e514385e0ef8f6069ac04aa8cc242ee4e6446145eecad50b856e9c0194",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.budgetBand",
+        "value": 0.2,
+        "appliesTo": {
+          "jurisdictions": ["XE"],
+          "tracks": ["example-noodle"]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-areatolerance",
+      "slotVersion": "0.1.0",
+      "versionHash": "1f7e8d6ff3b32994a282b6177488912074f018111ce4aca29c99dc8a8c9840e0",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.areaTolerance",
+        "value": 0.2,
+        "appliesTo": {
+          "jurisdictions": ["XE"],
+          "tracks": ["example-noodle"]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-calibrationminsample",
+      "slotVersion": "0.1.0",
+      "versionHash": "ae93833d39f096a34baa2c3f0bfe84cdb2febc20cd27a9517ed83d285beab908",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.calibrationMinSample",
+        "value": 2,
+        "appliesTo": {
+          "jurisdictions": ["XE"],
+          "tracks": ["example-noodle"]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "concept-minmarginrate",
+      "slotVersion": "0.1.0",
+      "versionHash": "533346f3a3426abe84f1ca1809af5756de7ca72d1b03d13241aba9aa0082da25",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "concept.minMarginRate",
+        "value": 0.1,
+        "appliesTo": {
+          "jurisdictions": ["XE"],
+          "tracks": ["example-noodle"]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "params",
+      "id": "verify-calctemplatetolerance",
+      "slotVersion": "0.1.0",
+      "versionHash": "63154eddeb5d088fa9ceb8d08387c383eefe13e6376107dd8e7f00ed9296a4a8",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "verify.calcTemplateTolerance",
+        "value": 0.1,
+        "appliesTo": {
+          "jurisdictions": ["XE"],
+          "tracks": ["example-noodle"]
+        },
+        "validFrom": "2025-01-01",
+        "validTo": "2030-12-31"
+      }
+    },
+    {
+      "slot": "site-profile",
+      "id": "example-noodle-site-profile",
+      "slotVersion": "0.1.0",
+      "versionHash": "39ec649fc3510eb8b3dac21b33518be01ceafa2e47004d4276a8ec7d5369369f",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "storeType": "example-noodle",
+        "requirements": [
+          {
+            "key": "powerCapacity",
+            "op": "gte",
+            "value": 30,
+            "unit": "kW",
+            "hard": true,
+            "reason": "Synthetic equipment allowance"
+          }
+        ],
+        "equipmentTriggers": [
+          {
+            "termKeys": ["example-induction"],
+            "requirement": {
+              "key": "serviceVoltage",
+              "op": "gte",
+              "value": 220,
+              "unit": "V",
+              "hard": true,
+              "reason": "Synthetic induction requirement"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "slot": "store",
+      "id": "example-store-1",
+      "slotVersion": "0.1.0",
+      "versionHash": "c1e1b5fa33dfaa84c279c5cae3163501cf62549d4930039314861b295781dba4",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Operating Store 1"
+        },
+        "status": "operating",
+        "track": "example-noodle",
+        "storeType": "example-noodle",
+        "cuisine": "example-noodle",
+        "jurisdiction": "XE",
+        "timezone": "UTC",
+        "areaM2": 100,
+        "geo": {
+          "lat": 0,
+          "lng": 0.001
+        },
+        "actuals": [
+          {
+            "key": "equipment",
+            "amount": {
+              "amount": 8000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "furnishing",
+            "amount": {
+              "amount": 3000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "construction",
+            "amount": {
+              "amount": 18000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "working_capital",
+            "amount": {
+              "amount": 3000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "store",
+      "id": "example-store-2",
+      "slotVersion": "0.1.0",
+      "versionHash": "31864d697032e580b2cf097ee91f741016380fe624819897fc1c5f02dd24b3ad",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Operating Store 2"
+        },
+        "status": "operating",
+        "track": "example-noodle",
+        "storeType": "example-noodle",
+        "cuisine": "example-noodle",
+        "jurisdiction": "XE",
+        "timezone": "UTC",
+        "areaM2": 100,
+        "geo": {
+          "lat": 0,
+          "lng": 0.006
+        },
+        "actuals": [
+          {
+            "key": "equipment",
+            "amount": {
+              "amount": 12000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "furnishing",
+            "amount": {
+              "amount": 5000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "construction",
+            "amount": {
+              "amount": 24000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "working_capital",
+            "amount": {
+              "amount": 4000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "store",
+      "id": "example-store-3",
+      "slotVersion": "0.1.0",
+      "versionHash": "9f7705ca6c16c5e5ae3b50d1b3d1fc1135929a9278faf959690415b231ee2e84",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example Operating Store 3"
+        },
+        "status": "operating",
+        "track": "example-noodle",
+        "storeType": "example-noodle",
+        "cuisine": "example-noodle",
+        "jurisdiction": "XE",
+        "timezone": "UTC",
+        "areaM2": 100,
+        "geo": {
+          "lat": 0,
+          "lng": 0.007
+        },
+        "actuals": [
+          {
+            "key": "equipment",
+            "amount": {
+              "amount": 14000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "furnishing",
+            "amount": {
+              "amount": 6000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "construction",
+            "amount": {
+              "amount": 28000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          },
+          {
+            "key": "working_capital",
+            "amount": {
+              "amount": 5000,
+              "currency": "USD"
+            },
+            "basis": "paid",
+            "at": "2026-01-01T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "term",
+      "id": "example-induction",
+      "slotVersion": "0.1.0",
+      "versionHash": "99a020e1023a9c0454ccb26679df1f260006b19058d99663a292abad8f3e44c3",
+      "coverage": {
+        "tier": "track",
+        "tracks": ["example-noodle"],
+        "workflows": ["store-concept"],
+        "jurisdictions": ["XE"]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "key": "example-induction",
+        "kind": "equipment",
+        "labels": {
+          "en": "example-induction"
+        }
+      }
+    }
+  ]
+}

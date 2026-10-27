@@ -5,11 +5,39 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error 根目录维护脚本是供 Node 执行的 JavaScript。
-import { inspectSource } from '../scripts/check-boundaries.mjs';
+import { inspectSource, inspectWorkflowTools } from '../scripts/check-boundaries.mjs';
 // @ts-expect-error 根目录维护脚本是供 Node 执行的 JavaScript。
 import { parseDenylist, scanText } from '../scripts/scan-private.mjs';
 
 describe('repository gates', () => {
+  it('keeps example generators and workflow tests within their package boundary', () => {
+    const path = resolve('packages/example/scripts/generate.mjs');
+    const directory = resolve('packages/example');
+    expect(
+      inspectWorkflowTools(
+        "import { workflow } from '@osw/another';",
+        path,
+        directory,
+        '@osw/example',
+      ),
+    ).toHaveLength(1);
+    expect(
+      inspectWorkflowTools(
+        "await import('../../../scripts/gen-examples.mjs');",
+        path,
+        directory,
+        '@osw/example',
+      ),
+    ).toHaveLength(1);
+    expect(
+      inspectWorkflowTools(
+        "import { workflow } from '@osw/example'; import { runCli } from '@osw/core/node'; import '../tests/fixtures.js';",
+        path,
+        directory,
+        '@osw/example',
+      ),
+    ).toEqual([]);
+  });
   it('fails closed without a denylist and refuses an actual outgoing commit with a denied blob', () => {
     const root = fileURLToPath(new URL('../', import.meta.url));
     const scanner = resolve(root, 'scripts/scan-private.mjs');

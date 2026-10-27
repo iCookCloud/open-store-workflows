@@ -1,0 +1,53 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "site-profile",
+      "id": "example-noodle-site-profile",
+      "slotVersion": "0.1.0",
+      "versionHash": "39ec649fc3510eb8b3dac21b33518be01ceafa2e47004d4276a8ec7d5369369f",
+      "coverage": {
+        "tier": "track",
+        "tracks": [
+          "example-noodle"
+        ],
+        "workflows": [
+          "store-concept"
+        ],
+        "jurisdictions": [
+          "XE"
+        ]
+      },
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "storeType": "example-noodle",
+        "requirements": [
+          {
+            "key": "powerCapacity",
+            "op": "gte",
+            "value": 30,
+            "unit": "kW",
+            "hard": true,
+            "reason": "Synthetic equipment allowance"
+          }
+        ],
+        "equipmentTriggers": [
+          {
+            "termKeys": [
+              "example-induction"
+            ],
+            "requirement": {
+              "key": "serviceVoltage",
+              "op": "gte",
+              "value": 220,
+              "unit": "V",
+              "hard": true,
+              "reason": "Synthetic induction requirement"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

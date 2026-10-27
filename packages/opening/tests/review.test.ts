@@ -7,10 +7,7 @@ import { context, now, record } from './lifecycle-fixtures.js';
 const usd = (amount: number) => ({ amount, currency: 'USD' });
 async function fixture() {
   const storeSpec = JSON.parse(
-    await readFile(
-      new URL('../../../examples/sample-store/expected/store-spec.json', import.meta.url),
-      'utf8',
-    ),
+    await readFile(new URL('../examples/upstream/store-spec.json', import.meta.url), 'utf8'),
   );
   const courseData = {
     key: 'example-course',

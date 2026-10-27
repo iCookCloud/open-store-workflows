@@ -1,7 +1,7 @@
 import { type Approval, type Need, type StepCtx, versionHash } from '@osw/core';
 import { executeWorkflow, validateStepResult } from '@osw/core/node';
 import { describe, expect, it, vi } from 'vitest';
-import { replenishmentExample } from '../../../scripts/gen-replenishment-examples.mjs';
+import { replenishmentExample } from '../scripts/generate-examples.mjs';
 import { approvalNeed } from '../src/helpers.js';
 import { RunInput, SupplyProgram, run, steps, workflow } from '../src/run.js';
 import { verifyUpstream } from '../src/verify.js';

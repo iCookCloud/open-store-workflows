@@ -12,7 +12,7 @@ export async function sourceFiles(directory) {
   const nested = await Promise.all(
     entries.map((entry) => {
       const path = resolve(directory, entry.name);
-      return entry.isDirectory() ? sourceFiles(path) : /\.[cm]?tsx?$/.test(path) ? [path] : [];
+      return entry.isDirectory() ? sourceFiles(path) : /\.[cm]?[jt]sx?$/.test(path) ? [path] : [];
     }),
   );
   return nested.flat();
@@ -78,6 +78,46 @@ export function inspectSource(text, path, workflow = false) {
   return errors;
 }
 
+export function inspectWorkflowTools(text, path, directory, packageName) {
+  const errors = [];
+  const file = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
+  const packageRoot = resolve(directory);
+  const allowed = new Set([packageName, '@osw/core', '@osw/mcp']);
+  const check = (specifier) => {
+    if (specifier.startsWith('@osw/') && !allowed.has(specifier.split('/').slice(0, 2).join('/'))) {
+      errors.push(
+        `${path}: workflow tools must exchange artifacts as JSON, not import ${specifier}`,
+      );
+    }
+    if (specifier.startsWith('.')) {
+      const target = resolve(path, '..', specifier);
+      const location = relative(packageRoot, target);
+      if (location === '..' || location.startsWith('../')) {
+        errors.push(`${path}: workflow tool import escapes its package: ${specifier}`);
+      }
+    }
+  };
+  const visit = (node) => {
+    if (
+      (ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) &&
+      node.moduleSpecifier &&
+      ts.isStringLiteral(node.moduleSpecifier)
+    )
+      check(node.moduleSpecifier.text);
+    if (
+      ts.isCallExpression(node) &&
+      (node.expression.kind === ts.SyntaxKind.ImportKeyword ||
+        node.expression.getText(file) === 'require')
+    ) {
+      const argument = node.arguments[0];
+      if (argument && ts.isStringLiteral(argument)) check(argument.text);
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(file);
+  return errors;
+}
+
 async function main() {
   const errors = [];
   for (const entry of await readdir(resolve(root, 'packages'), { withFileTypes: true })) {
@@ -97,6 +137,20 @@ async function main() {
     }
     for (const path of await sourceFiles(resolve(directory, 'src')))
       errors.push(...inspectSource(await readFile(path, 'utf8'), path, workflow));
+    if (workflow) {
+      for (const folder of ['scripts', 'tests']) {
+        let paths = [];
+        try {
+          paths = await sourceFiles(resolve(directory, folder));
+        } catch (error) {
+          if (error.code !== 'ENOENT') throw error;
+        }
+        for (const path of paths)
+          errors.push(
+            ...inspectWorkflowTools(await readFile(path, 'utf8'), path, directory, pkg.name),
+          );
+      }
+    }
   }
   if (errors.length) throw new Error(errors.map((line) => line.replaceAll(root, '')).join('\n'));
   console.log('Package boundaries and deterministic runtime rules passed');
