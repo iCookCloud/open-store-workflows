@@ -1,5 +1,5 @@
-import type { AssetRecordOf, BomLine, FillSrc, Money, Product, z } from '@osw/core';
-import type { PackingLine, Shipment } from '../models.js';
+import type { AssetRecordOf, FillSrc, Money, Product, z } from '@osw/core';
+import type { DeliverySourceLine, PackingLine, Shipment } from '../models.js';
 import type { PackingHistory } from '../slots.js';
 import { classifyGoods } from './goods-class.js';
 import { parseCartonUnits } from './units.js';
@@ -8,7 +8,7 @@ function cell<T>(value: T | undefined, src: z.infer<typeof FillSrc>) {
   return { value: value ?? null, src: value === undefined ? null : src };
 }
 export function packingLine(
-  line: z.infer<typeof BomLine>,
+  line: DeliverySourceLine,
   product: Product,
   qty: number,
   value: Money,

@@ -32,4 +32,42 @@ Rates use `shipment`, `m3`, `kg` or `carton` bases. `delivery.tolerance.weightPc
 
 Only manual or signed observations produce fill intentions. Conflicting observations produce `pending`; existing differing values produce `fails` without overwriting. The product slot is version `0.2.0`: carton fields may be supplied individually, so verified units or weight can be filled before dimensions are known. Core writeback checks every fill against its batch-start source version and current target emptiness; multiple fields can be filled in one batch, while a later batch needs a current version. File journal conflicts are surfaced explicitly. Hosts persist plan results before applying fill intentions. The sample spans two shipping countries, food/nonfood, air freight, own logistics, seller delivery and one denied product, and deliberately produces rate, weight and transit failures. Regenerate it with `node scripts/gen-delivery-example.mjs`; `pnpm examples` checks all seven workflows against committed golden artifacts.
 
+## Reorder shipments to a warehouse
+
+Supply `reorder` instead of `bom` to ship an overseas replenishment order to a warehouse. Exactly one source is required. Existing BOM inputs, approvals and golden examples retain their behavior. The new entry uses core's `LineItem` and `AssetRef` contracts and does not import another workflow package.
+
+| Field | Meaning |
+| --- | --- |
+| `reorder.id` | Stable upstream order identifier |
+| `reorder.lines` | Nonempty core `LineItem` list, with unique IDs, positive quantities and a required current `offerRef` on each line |
+| `reorder.mode` | Explicit international transport mode: `sea_fcl`, `sea_lcl`, `air` or `ground`; a domestic shipment always uses `ground` |
+| `reorder.orderedAt` | Optional order date used for offer validity and lead-time checks; omitted validity date uses the injected clock |
+| `reorder.loadingAccess` | Optional core `Measure` for the warehouse loading dock; unknown access keeps the conservative last-mile requirements |
+| `reorder.sourceRef` | Optional core `AssetRef` to the originating `reorder` asset, retained in output provenance; its ID must equal `reorder.id` |
+| `consignee` | Required warehouse `jurisdiction`, `company`, `address`, `name` and `phone`; optional `email` |
+
+The top-level `id` identifies the delivery plan and `jurisdiction` must match the warehouse. A store asset and `SiteDecision` are not part of this path. Product identity is resolved from the selected offer; an optional line `productRef` must identify the same current product. Prices are read from the referenced offer's quantity tier, with matching units, minimum quantities and validity checked. Extra fields from an upstream order, such as its cached name or price, do not override those assets. Hidden or missing prices return a blocking need. Carton conversion and declaration FX then use the same rules as BOM delivery.
+
+The result remains the shared `DeliveryPlan` contract. Its `storeId` is `null`, warehouse details live on each shipment's `consignee`, and no `Bom` input reference is manufactured. The legacy `bomLineId` fields contain the original order line IDs. Shipment IDs include the order identity, so resuming an existing plan with a different order, destination or packed quantity requires explicit reconciliation. Optional `reorder.sourceRef`, product, offer and parameter references remain in `sources`. Admission, carrier selection, packing confirmation, quotation choice and signed receipt retain their existing gates.
+
+The complete synthetic input, assets, approvals and expected receipt are in [`examples/warehouse`](examples/warehouse). All of this example's generation and checking code lives in this package. After building the workspace, run from the package directory:
+
+```sh
+pnpm examples
+# Intentionally regenerate and review the committed warehouse fixture:
+pnpm examples:generate
+```
+
+The repository's `pnpm examples` and `pnpm check` also run this check. To run the same input through the CLI from the repository root:
+
+```sh
+pnpm osw landed-delivery run \
+  --assets packages/landed-delivery/examples/warehouse/assets \
+  --in packages/landed-delivery/examples/warehouse/input.json \
+  --approvals packages/landed-delivery/examples/warehouse/approvals.json \
+  --now 2026-02-20T12:00:00Z \
+  --actor example:warehouse-reviewer \
+  --out-dir .osw/warehouse
+```
+
 License: Apache-2.0.

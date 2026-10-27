@@ -1,0 +1,495 @@
+{
+  "kind": "DeliveryPlan",
+  "artifactVersion": "0.1.0",
+  "id": "example-warehouse-delivery",
+  "hash": "152b3d456211e07bb3d05c838b9c07cb4d62c223143b70fdfc8932243d2be9c1",
+  "producedBy": {
+    "step": "landed-delivery/summarize",
+    "pkg": "@osw/landed-delivery",
+    "pkgVersion": "0.1.0"
+  },
+  "storeId": null,
+  "inputs": [],
+  "sources": [
+    {
+      "slot": "compliance-answer",
+      "id": "example-rice-answer",
+      "versionHash": "32ff7bce150270275190be190a3d978cff1b8ef4920c87ccdbce79bd666bfa5d"
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-supply-answer",
+      "versionHash": "940f2c84b24a63c61cd96e0d4d4f874fddbde3ca9782fe587e6ac073ccfc7a04"
+    },
+    {
+      "slot": "compliance-category",
+      "id": "example-warehouse-category",
+      "versionHash": "36fdba64f6287335c70654a4d26f209e2fd326169d1183ae90ed30c68c918ffd"
+    },
+    {
+      "slot": "compliance-item",
+      "id": "example-warehouse-item",
+      "versionHash": "4e78b4bc480fd4519ebdd04b820b9515a475054f7edef96be7ededd30ee79e4e"
+    },
+    {
+      "slot": "offer",
+      "id": "example-rice-offer",
+      "versionHash": "091cf4e879dbee1a054555109d57a15747f39be37de99e8b8940d6cebe7cf76c"
+    },
+    {
+      "slot": "offer",
+      "id": "example-supply-offer",
+      "versionHash": "3c1977833cae2841f178680b1f726ebd3d20c94cd65f326047ea5d0dff1de11e"
+    },
+    {
+      "slot": "params",
+      "id": "example-customs.declarationCurrency",
+      "versionHash": "a658891e5c5f39e69208ac52882e2ae952e941f871d5271d96a2223a6551352f"
+    },
+    {
+      "slot": "params",
+      "id": "example-delivery.tolerance.volumePct",
+      "versionHash": "766f2e867a31a8a98e02fa2e42a20d1d4c84f7b5cc07e1b76202dc464a4718b6"
+    },
+    {
+      "slot": "params",
+      "id": "example-delivery.tolerance.weightPct",
+      "versionHash": "85ef61257d5c65b9c2277df20555b1c12cb7a9f04bc2a2625c706c61f54bb21a"
+    },
+    {
+      "slot": "params",
+      "id": "example-freight.tolerance.transitDays",
+      "versionHash": "a45620c6a07c022b96e8d8bce807865169608ae1faab41b58e66810dc02c73e4"
+    },
+    {
+      "slot": "params",
+      "id": "example-fx.EUR.USD",
+      "versionHash": "1ea5d38211632fa039074b3d392a24e6e77c4c72552fd5614f036e4252e02c6f"
+    },
+    {
+      "slot": "party",
+      "id": "example-overseas-supplier",
+      "versionHash": "4eedc1e8db57ddf9dd792b818b218967616a483fb966cc36c1abe0bd014daea9"
+    },
+    {
+      "slot": "party",
+      "id": "example-warehouse-carrier",
+      "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7"
+    },
+    {
+      "slot": "product",
+      "id": "example-rice",
+      "versionHash": "08fa045e6ef604552faa458400b7959ce135aaccc7656639f96bb116a74b0449"
+    },
+    {
+      "slot": "product",
+      "id": "example-supply",
+      "versionHash": "a19d84180c344232d83a864465dbc028d4a1942f02c7064ec58baab3ac43ac2e"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-rice-classification",
+      "versionHash": "07c87c4052c51ebaaeb8899080c07610e0f7fd1481b939208415fc54de895482"
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-supply-classification",
+      "versionHash": "30109493cb82d1d27a576f13715564c2b00c29f43250f624d2401e645ae7501a"
+    }
+  ],
+  "createdAt": "2026-02-20T12:00:00Z",
+  "example": true,
+  "body": {
+    "market": "XE",
+    "compliance": [
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-rice",
+          "versionHash": "08fa045e6ef604552faa458400b7959ce135aaccc7656639f96bb116a74b0449"
+        },
+        "market": "XE",
+        "categoryId": "example-warehouse-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-warehouse-item",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/warehouse-evidence/example-rice"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "d40ac1839f003e1487272ab0eaad62ea7429bc7dd021a7fb80f943ccf258be93",
+        "conclusion": "enter"
+      },
+      {
+        "productRef": {
+          "slot": "product",
+          "id": "example-supply",
+          "versionHash": "a19d84180c344232d83a864465dbc028d4a1942f02c7064ec58baab3ac43ac2e"
+        },
+        "market": "XE",
+        "categoryId": "example-warehouse-category",
+        "tree": "ok",
+        "items": [
+          {
+            "itemRootId": "example-warehouse-item",
+            "level": "sku",
+            "required": "mandatory",
+            "state": "cited",
+            "evidence": [
+              "https://example.com/warehouse-evidence/example-supply"
+            ]
+          }
+        ],
+        "open": {
+          "mandatory": 0,
+          "advisory": 0
+        },
+        "orphans": [],
+        "subjectHash": "8c7999fc46b1dfcbe8018cd3000223c2add1e537d30530814734356a0e62cc59",
+        "conclusion": "enter"
+      }
+    ],
+    "held": [],
+    "shipments": [
+      {
+        "id": "shipment-51f46c100912ea34-1",
+        "origin": "XF",
+        "goodsClass": "food",
+        "mode": "sea_lcl",
+        "crossBorder": true,
+        "status": "received",
+        "node": "delivered",
+        "consignee": {
+          "jurisdiction": "XE",
+          "company": "Example Warehouse",
+          "address": "Example Warehouse Road, Example City",
+          "name": "Example Receiving Team",
+          "phone": "EXAMPLE",
+          "email": "warehouse@example.com"
+        },
+        "portFrom": null,
+        "portTo": "Example Destination Port",
+        "lastMile": [],
+        "carrier": {
+          "kind": "forwarder",
+          "partyRef": {
+            "slot": "party",
+            "id": "example-warehouse-carrier",
+            "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7"
+          }
+        },
+        "lines": [
+          {
+            "id": "example-rice-line",
+            "bomLineId": "example-rice-line",
+            "lineKind": "food",
+            "productRef": {
+              "slot": "product",
+              "id": "example-rice",
+              "versionHash": "08fa045e6ef604552faa458400b7959ce135aaccc7656639f96bb116a74b0449"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-rice-offer",
+              "versionHash": "091cf4e879dbee1a054555109d57a15747f39be37de99e8b8940d6cebe7cf76c"
+            },
+            "name": "Example food",
+            "spec": "10 pcs/carton",
+            "qty": 20,
+            "goodsClass": "food",
+            "goodsClassSrc": "asset",
+            "hsCode": {
+              "value": "000000",
+              "src": "asset"
+            },
+            "materialText": {
+              "value": "Example material",
+              "src": "asset"
+            },
+            "netWeightKg": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartonUnits": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartons": {
+              "value": 2,
+              "src": "derived"
+            },
+            "totalNetWeightKg": {
+              "value": 200,
+              "src": "derived"
+            },
+            "totalGrossWeightKg": {
+              "value": 220,
+              "src": "derived"
+            },
+            "totalVolumeM3": {
+              "value": 2,
+              "src": "derived"
+            },
+            "declaredValue": {
+              "amount": 320,
+              "currency": "USD"
+            }
+          }
+        ],
+        "quotes": [
+          {
+            "id": "shipment-51f46c100912ea34-1-quote",
+            "partyRef": {
+              "slot": "party",
+              "id": "example-warehouse-carrier",
+              "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7"
+            },
+            "form": "lump_sum",
+            "items": [
+              {
+                "category": "other",
+                "amount": {
+                  "amount": 100,
+                  "currency": "USD"
+                }
+              }
+            ],
+            "terms": "Synthetic warehouse quotation",
+            "transitDays": 10,
+            "validUntil": "2026-12-31",
+            "receivedAt": "2026-02-02T00:00:00Z"
+          }
+        ],
+        "chosenQuoteId": "shipment-51f46c100912ea34-1-quote",
+        "freight": {
+          "amount": 100,
+          "currency": "USD"
+        },
+        "documents": [],
+        "tracking": {
+          "departedAt": "2026-02-05",
+          "deliveredAt": "2026-02-18"
+        },
+        "holds": [],
+        "arrival": {
+          "receivedAt": "2026-02-19",
+          "by": "example:warehouse-receiver",
+          "evidence": [
+            "https://example.com/warehouse-receipt"
+          ],
+          "lines": [
+            {
+              "lineId": "example-rice-line",
+              "receivedQty": 20,
+              "damagedQty": 0,
+              "cartons": 2,
+              "measuredGrossWeightKg": 220,
+              "measuredVolumeM3": 2,
+              "note": "Synthetic complete warehouse receipt"
+            }
+          ],
+          "observedLoadingAccess": "dock"
+        },
+        "amendments": []
+      },
+      {
+        "id": "shipment-f5af95cc01476695-1",
+        "origin": "XF",
+        "goodsClass": "nonfood",
+        "mode": "sea_lcl",
+        "crossBorder": true,
+        "status": "received",
+        "node": "delivered",
+        "consignee": {
+          "jurisdiction": "XE",
+          "company": "Example Warehouse",
+          "address": "Example Warehouse Road, Example City",
+          "name": "Example Receiving Team",
+          "phone": "EXAMPLE",
+          "email": "warehouse@example.com"
+        },
+        "portFrom": null,
+        "portTo": "Example Destination Port",
+        "lastMile": [],
+        "carrier": {
+          "kind": "forwarder",
+          "partyRef": {
+            "slot": "party",
+            "id": "example-warehouse-carrier",
+            "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7"
+          }
+        },
+        "lines": [
+          {
+            "id": "example-supply-line",
+            "bomLineId": "example-supply-line",
+            "lineKind": "supplies",
+            "productRef": {
+              "slot": "product",
+              "id": "example-supply",
+              "versionHash": "a19d84180c344232d83a864465dbc028d4a1942f02c7064ec58baab3ac43ac2e"
+            },
+            "offerRef": {
+              "slot": "offer",
+              "id": "example-supply-offer",
+              "versionHash": "3c1977833cae2841f178680b1f726ebd3d20c94cd65f326047ea5d0dff1de11e"
+            },
+            "name": "Example supplies",
+            "spec": "6 pcs/carton",
+            "qty": 12,
+            "goodsClass": "nonfood",
+            "goodsClassSrc": "asset",
+            "hsCode": {
+              "value": "000000",
+              "src": "asset"
+            },
+            "materialText": {
+              "value": "Example material",
+              "src": "asset"
+            },
+            "netWeightKg": {
+              "value": 10,
+              "src": "asset"
+            },
+            "cartonUnits": {
+              "value": 6,
+              "src": "asset"
+            },
+            "cartons": {
+              "value": 2,
+              "src": "derived"
+            },
+            "totalNetWeightKg": {
+              "value": 120,
+              "src": "derived"
+            },
+            "totalGrossWeightKg": {
+              "value": 140,
+              "src": "derived"
+            },
+            "totalVolumeM3": {
+              "value": 2,
+              "src": "derived"
+            },
+            "declaredValue": {
+              "amount": 120,
+              "currency": "USD"
+            }
+          }
+        ],
+        "quotes": [
+          {
+            "id": "shipment-f5af95cc01476695-1-quote",
+            "partyRef": {
+              "slot": "party",
+              "id": "example-warehouse-carrier",
+              "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7"
+            },
+            "form": "lump_sum",
+            "items": [
+              {
+                "category": "other",
+                "amount": {
+                  "amount": 100,
+                  "currency": "USD"
+                }
+              }
+            ],
+            "terms": "Synthetic warehouse quotation",
+            "transitDays": 10,
+            "validUntil": "2026-12-31",
+            "receivedAt": "2026-02-02T00:00:00Z"
+          }
+        ],
+        "chosenQuoteId": "shipment-f5af95cc01476695-1-quote",
+        "freight": {
+          "amount": 100,
+          "currency": "USD"
+        },
+        "documents": [],
+        "tracking": {
+          "departedAt": "2026-02-05",
+          "deliveredAt": "2026-02-18"
+        },
+        "holds": [],
+        "arrival": {
+          "receivedAt": "2026-02-19",
+          "by": "example:warehouse-receiver",
+          "evidence": [
+            "https://example.com/warehouse-receipt"
+          ],
+          "lines": [
+            {
+              "lineId": "example-supply-line",
+              "receivedQty": 12,
+              "damagedQty": 0,
+              "cartons": 2,
+              "measuredGrossWeightKg": 140,
+              "measuredVolumeM3": 2,
+              "note": "Synthetic complete warehouse receipt"
+            }
+          ],
+          "observedLoadingAccess": "dock"
+        },
+        "amendments": []
+      }
+    ],
+    "arrivals": [
+      {
+        "bomLineId": "example-rice-line",
+        "shipmentId": "shipment-51f46c100912ea34-1",
+        "qty": 20,
+        "basis": "received",
+        "eta": null,
+        "arrivedAt": "2026-02-19",
+        "receivedQty": 20,
+        "damagedQty": 0
+      },
+      {
+        "bomLineId": "example-supply-line",
+        "shipmentId": "shipment-f5af95cc01476695-1",
+        "qty": 12,
+        "basis": "received",
+        "eta": null,
+        "arrivedAt": "2026-02-19",
+        "receivedQty": 12,
+        "damagedQty": 0
+      }
+    ],
+    "fitoutGoodsLastAt": {
+      "date": null,
+      "basis": "none",
+      "shipmentIds": []
+    },
+    "openingStock": {
+      "status": "received",
+      "firstAt": {
+        "date": "2026-02-19",
+        "basis": "received",
+        "shipmentIds": [
+          "shipment-51f46c100912ea34-1",
+          "shipment-f5af95cc01476695-1"
+        ]
+      },
+      "lastAt": {
+        "date": "2026-02-19",
+        "basis": "received",
+        "shipmentIds": [
+          "shipment-51f46c100912ea34-1",
+          "shipment-f5af95cc01476695-1"
+        ]
+      }
+    },
+    "allReceived": true
+  }
+}

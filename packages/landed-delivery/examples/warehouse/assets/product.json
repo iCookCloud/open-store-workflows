@@ -1,0 +1,89 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "product",
+      "id": "example-rice",
+      "slotVersion": "0.2.0",
+      "versionHash": "08fa045e6ef604552faa458400b7959ce135aaccc7656639f96bb116a74b0449",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example food"
+        },
+        "kind": "catalog",
+        "category": "food",
+        "goodsClass": "food",
+        "status": "active",
+        "spec": "10 pcs/carton",
+        "netWeightKg": 10,
+        "carton": {
+          "units": 10,
+          "grossWeightKg": 110,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example material",
+        "storage": "ambient"
+      },
+      "fieldsetHashes": {
+        "identity": "383a91ead74d55285d1e8033d7dc55dc2f850226bd729f04848ebca0ddb699c0",
+        "logistics": "8aac352d5f239939b52be630e4f49ced943a987d3b57c13f329fd171fcbd6ed3",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    },
+    {
+      "slot": "product",
+      "id": "example-supply",
+      "slotVersion": "0.2.0",
+      "versionHash": "a19d84180c344232d83a864465dbc028d4a1942f02c7064ec58baab3ac43ac2e",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "name": {
+          "en": "Example supplies"
+        },
+        "kind": "catalog",
+        "category": "supplies",
+        "goodsClass": "nonfood",
+        "status": "active",
+        "spec": "6 pcs/carton",
+        "netWeightKg": 10,
+        "carton": {
+          "units": 6,
+          "grossWeightKg": 70,
+          "lMm": 1000,
+          "wMm": 1000,
+          "hMm": 1000
+        },
+        "hsCode": "000000",
+        "customsMaterial": "Example material",
+        "storage": "ambient"
+      },
+      "fieldsetHashes": {
+        "identity": "9c185be2601b5e829626e3028e5ecfe09751a894d794d4fd190e927d52b3281d",
+        "logistics": "e13119ad4f9773c4783fe8099764d10bde8bbb0ece0ab30883584c4b057efc41",
+        "images": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    }
+  ]
+}

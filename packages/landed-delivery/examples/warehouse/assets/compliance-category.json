@@ -1,0 +1,27 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "compliance-category",
+      "id": "example-warehouse-category",
+      "slotVersion": "0.1.0",
+      "versionHash": "36fdba64f6287335c70654a4d26f209e2fd326169d1183ae90ed30c68c918ffd",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "parentId": null,
+        "market": "XE",
+        "name": "Invented warehouse import category",
+        "goneAt": null
+      }
+    }
+  ]
+}

@@ -23,6 +23,7 @@ import { fillEmptyCells, packingLine } from '../packing/fill.js';
 import { classifyGoods } from '../packing/goods-class.js';
 import { declarationValue, parseCartonUnits, pieceQuantity } from '../packing/units.js';
 import { packingHistorySlot } from '../slots.js';
+import { deliveryLines, resolveOrderLines, shipmentGroup } from '../source.js';
 
 export const planShipments = deliveryStep(
   'planShipments',
@@ -30,10 +31,16 @@ export const planShipments = deliveryStep(
   async (state, ctx) => {
     const { input, plan } = state;
     const needs: Need[] = [];
+    needs.push(...(await resolveOrderLines(state, ctx)));
+    if (needs.some((need) => need.blocking)) return stepResult(state, needs);
+    const lines = deliveryLines(state);
     const store = (
-      await getMany(ctx.assets, StoreSlot, input.bom.storeId ? [input.bom.storeId] : [])
+      await getMany(ctx.assets, StoreSlot, input.bom?.storeId ? [input.bom.storeId] : [])
     )[0];
-    if (!store || store.data.jurisdiction !== input.jurisdiction || store.data.status === 'closed')
+    if (
+      input.bom &&
+      (!store || store.data.jurisdiction !== input.jurisdiction || store.data.status === 'closed')
+    )
       return stepResult(state, [
         assetNeed(
           'store',
@@ -43,12 +50,12 @@ export const planShipments = deliveryStep(
     const products = await getMany(
       ctx.assets,
       ProductSlot,
-      input.bom.body.lines.flatMap((line) => (line.productRef ? [line.productRef.id] : [])),
+      lines.flatMap((line) => (line.productRef ? [line.productRef.id] : [])),
     );
     const offers = await getMany(
       ctx.assets,
       OfferSlot,
-      input.bom.body.lines.flatMap((line) => (line.offerRef ? [line.offerRef.id] : [])),
+      lines.flatMap((line) => (line.offerRef ? [line.offerRef.id] : [])),
     );
     const parties = await getMany(
       ctx.assets,
@@ -79,14 +86,14 @@ export const planShipments = deliveryStep(
       ]);
     const fxCtx = await loadFx(
       ctx,
-      input.bom.body.lines
+      lines
         .filter((line) => line.unitPrice.currency !== currency.value)
         .map((line) => `fx.${line.unitPrice.currency}.${currency.value}`),
       input.jurisdiction,
     );
-    const loading = input.site?.body.conditions.find(
-      (condition) => condition.key === 'loadingAccess',
-    );
+    const loading =
+      input.site?.body.conditions.find((condition) => condition.key === 'loadingAccess') ??
+      (input.reorder?.loadingAccess ? { measure: input.reorder.loadingAccess } : undefined);
     const observed =
       loading?.measure.basis === 'observed' &&
       !input.site?.body.unmeasured.some((requirement) => requirement.key === 'loadingAccess') &&
@@ -96,7 +103,7 @@ export const planShipments = deliveryStep(
     if (!observed)
       needs.push(
         inputNeed(
-          'SiteDecision.conditions[loadingAccess]',
+          input.reorder ? 'reorder.loadingAccess' : 'SiteDecision.conditions[loadingAccess]',
           'Loading access has not been measured; request liftgate service',
           false,
         ),
@@ -106,7 +113,7 @@ export const planShipments = deliveryStep(
     );
     for (const shipment of plan.shipments)
       for (const line of shipment.lines) {
-        if (!input.bom.body.lines.some((bomLine) => bomLine.id === line.bomLineId))
+        if (!lines.some((bomLine) => bomLine.id === line.bomLineId))
           needs.push(
             inputNeed(
               'existing.shipments',
@@ -121,7 +128,7 @@ export const planShipments = deliveryStep(
             ),
           );
       }
-    for (const line of input.bom.body.lines) {
+    for (const line of lines) {
       if (plan.held.some((held) => held.bomLineId === line.id)) continue;
       const product = products.find((record) => record.id === line.productRef?.id);
       const offer = offers.find((record) => record.id === line.offerRef?.id);
@@ -141,7 +148,7 @@ export const planShipments = deliveryStep(
       ) {
         needs.push(
           inputNeed(
-            `bom.lines.${line.id}`,
+            `${input.reorder ? 'reorder' : 'bom'}.lines.${line.id}`,
             'Current product, offer and admission decision must agree',
           ),
         );
@@ -158,9 +165,7 @@ export const planShipments = deliveryStep(
         ? 'ground'
         : line.urgent
           ? 'air'
-          : store.data.status === 'preparing'
-            ? 'sea_fcl'
-            : 'sea_lcl';
+          : (input.reorder?.mode ?? (store!.data.status === 'preparing' ? 'sea_fcl' : 'sea_lcl'));
       const goods = classifyGoods(product.data, line.category, line.name);
       if (goods.src === 'derived')
         needs.push(
@@ -181,7 +186,13 @@ export const planShipments = deliveryStep(
           reason: 'unit_unconvertible',
           detail: 'Unit cannot be converted to pieces without carton information',
         });
-        needs.push(inputNeed(`bom.lines.${line.id}.unit`, 'Unsupported piece conversion', false));
+        needs.push(
+          inputNeed(
+            `${input.reorder ? 'reorder' : 'bom'}.lines.${line.id}.unit`,
+            'Unsupported piece conversion',
+            false,
+          ),
+        );
         continue;
       }
       const declared = declarationValue(
@@ -223,6 +234,21 @@ export const planShipments = deliveryStep(
           shipment.lines.some((existing) => existing.bomLineId === line.id),
         );
         if (
+          input.reorder &&
+          owners
+            .flatMap((shipment) => shipment.lines)
+            .filter((existing) => existing.bomLineId === line.id)
+            .reduce((sum, existing) => sum + existing.qty, 0) !== qty
+        ) {
+          needs.push(
+            inputNeed(
+              'existing.shipments',
+              'Order quantity changed; reconcile existing packing explicitly',
+            ),
+          );
+          continue;
+        }
+        if (
           owners.some(
             (shipment) =>
               !groupMatches(shipment) ||
@@ -259,17 +285,17 @@ export const planShipments = deliveryStep(
         (candidate) => candidate.status === 'draft' && groupMatches(candidate),
       );
       if (!shipment) {
-        const key = {
+        const key = shipmentGroup(input, {
           origin,
           goodsClass: goods.goodsClass,
           mode,
           seller: seller ? offer.data.partyId : null,
-        };
+        });
         const prefix = `shipment-${(await versionHash(key)).slice(0, 16)}`;
         let sequence = 1;
         while (plan.shipments.some((candidate) => candidate.id === `${prefix}-${sequence}`))
           sequence++;
-        const address = input.site?.body.address ?? store.data.address;
+        const address = input.site?.body.address ?? store?.data.address;
         shipment = {
           id: `${prefix}-${sequence}`,
           origin,

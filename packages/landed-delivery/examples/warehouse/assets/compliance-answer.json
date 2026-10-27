@@ -1,0 +1,67 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "compliance-answer",
+      "id": "example-rice-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "32ff7bce150270275190be190a3d978cff1b8ef4920c87ccdbce79bd666bfa5d",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-warehouse-item",
+        "subject": {
+          "kind": "product",
+          "id": "example-rice"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/warehouse-evidence/example-rice"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-02-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "compliance-answer",
+      "id": "example-supply-answer",
+      "slotVersion": "0.1.0",
+      "versionHash": "940f2c84b24a63c61cd96e0d4d4f874fddbde3ca9782fe587e6ac073ccfc7a04",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "market": "XE",
+        "itemRootId": "example-warehouse-item",
+        "subject": {
+          "kind": "product",
+          "id": "example-supply"
+        },
+        "state": "cited",
+        "evidence": [
+          "https://example.com/warehouse-evidence/example-supply"
+        ],
+        "validUntil": "2026-12-31",
+        "by": "example:reviewer",
+        "at": "2026-02-01T00:00:00Z"
+      }
+    }
+  ]
+}

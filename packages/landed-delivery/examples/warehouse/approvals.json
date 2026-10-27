@@ -1,0 +1,74 @@
+[
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-rice@XE",
+    "subjectHash": "d40ac1839f003e1487272ab0eaad62ea7429bc7dd021a7fb80f943ccf258be93",
+    "decision": "enter",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/screenCompliance",
+    "subject": "product:example-supply@XE",
+    "subjectHash": "8c7999fc46b1dfcbe8018cd3000223c2add1e537d30530814734356a0e62cc59",
+    "decision": "enter",
+    "role": "reviewer",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/assignCarrier",
+    "subject": "shipment:shipment-51f46c100912ea34-1",
+    "subjectHash": "a59847b01c8b5803c803766780ac87cbefb91996ab62938015073d9beebe7a48",
+    "decision": "forwarder:example-warehouse-carrier",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/assignCarrier",
+    "subject": "shipment:shipment-f5af95cc01476695-1",
+    "subjectHash": "98e3ad4b84eb78c6b04d61b01fc2327d30715c8a8409c1c118fbfc6e1f9a3cac",
+    "decision": "forwarder:example-warehouse-carrier",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/confirmPacking",
+    "subject": "shipment:shipment-51f46c100912ea34-1",
+    "subjectHash": "9714e9c9bbf8e3d8afa13289a67385953fbc5da5e58383fed2ef77f66031e742",
+    "decision": "confirm",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/confirmPacking",
+    "subject": "shipment:shipment-f5af95cc01476695-1",
+    "subjectHash": "8af0566bcce13f1146a8165532d286da336de5d4951f401e97ca20079c7c43f5",
+    "decision": "confirm",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/collectQuotes",
+    "subject": "quote:shipment-51f46c100912ea34-1-quote",
+    "subjectHash": "b7a3ec059a8d2192599f52d13bc6eab14a4f30333518b06fdcf9dec5bd728a83",
+    "decision": "choose",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  },
+  {
+    "step": "landed-delivery/collectQuotes",
+    "subject": "quote:shipment-f5af95cc01476695-1-quote",
+    "subjectHash": "6c46f5bdfa451eb7ac34a02f674405bffc35b4b355b2b0e9e7a50c259b47c183",
+    "decision": "choose",
+    "role": "operator",
+    "by": "example:approver",
+    "at": "2026-02-20T12:00:00Z"
+  }
+]

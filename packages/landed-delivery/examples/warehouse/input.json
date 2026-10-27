@@ -1,0 +1,166 @@
+{
+  "id": "example-warehouse-delivery",
+  "jurisdiction": "XE",
+  "reorder": {
+    "id": "example-warehouse-order",
+    "lines": [
+      {
+        "id": "example-rice-line",
+        "lineKind": "food",
+        "offerRef": {
+          "slot": "offer",
+          "id": "example-rice-offer",
+          "versionHash": "091cf4e879dbee1a054555109d57a15747f39be37de99e8b8940d6cebe7cf76c"
+        },
+        "qty": 2,
+        "unit": "carton"
+      },
+      {
+        "id": "example-supply-line",
+        "lineKind": "supplies",
+        "offerRef": {
+          "slot": "offer",
+          "id": "example-supply-offer",
+          "versionHash": "3c1977833cae2841f178680b1f726ebd3d20c94cd65f326047ea5d0dff1de11e"
+        },
+        "qty": 12,
+        "unit": "pcs"
+      }
+    ],
+    "mode": "sea_lcl",
+    "orderedAt": "2026-02-01",
+    "loadingAccess": {
+      "value": "dock",
+      "basis": "observed",
+      "at": "2026-02-01T00:00:00Z",
+      "by": "example:receiver"
+    },
+    "example": true
+  },
+  "consignee": {
+    "jurisdiction": "XE",
+    "company": "Example Warehouse",
+    "address": "Example Warehouse Road, Example City",
+    "name": "Example Receiving Team",
+    "phone": "EXAMPLE",
+    "email": "warehouse@example.com"
+  },
+  "expectedArrival": "2026-02-20",
+  "portTo": "Example Destination Port",
+  "carriers": {},
+  "edits": {},
+  "quotes": {
+    "shipment-51f46c100912ea34-1": [
+      {
+        "id": "shipment-51f46c100912ea34-1-quote",
+        "partyRef": {
+          "slot": "party",
+          "id": "example-warehouse-carrier",
+          "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7"
+        },
+        "form": "lump_sum",
+        "items": [
+          {
+            "category": "other",
+            "amount": {
+              "amount": 100,
+              "currency": "USD"
+            }
+          }
+        ],
+        "terms": "Synthetic warehouse quotation",
+        "transitDays": 10,
+        "validUntil": "2026-12-31",
+        "receivedAt": "2026-02-02T00:00:00Z"
+      }
+    ],
+    "shipment-f5af95cc01476695-1": [
+      {
+        "id": "shipment-f5af95cc01476695-1-quote",
+        "partyRef": {
+          "slot": "party",
+          "id": "example-warehouse-carrier",
+          "versionHash": "02127173f646f16e85e649de11220fc1c8f3efdad8031e7aef6a9b6d1fc367a7"
+        },
+        "form": "lump_sum",
+        "items": [
+          {
+            "category": "other",
+            "amount": {
+              "amount": 100,
+              "currency": "USD"
+            }
+          }
+        ],
+        "terms": "Synthetic warehouse quotation",
+        "transitDays": 10,
+        "validUntil": "2026-12-31",
+        "receivedAt": "2026-02-02T00:00:00Z"
+      }
+    ]
+  },
+  "updates": {
+    "shipment-51f46c100912ea34-1": [
+      {
+        "node": "depart",
+        "at": "2026-02-05T00:00:00Z"
+      },
+      {
+        "node": "delivered",
+        "at": "2026-02-18T00:00:00Z",
+        "cleared": true
+      }
+    ],
+    "shipment-f5af95cc01476695-1": [
+      {
+        "node": "depart",
+        "at": "2026-02-05T00:00:00Z"
+      },
+      {
+        "node": "delivered",
+        "at": "2026-02-18T00:00:00Z",
+        "cleared": true
+      }
+    ]
+  },
+  "arrivals": {
+    "shipment-51f46c100912ea34-1": {
+      "receivedAt": "2026-02-19",
+      "by": "example:warehouse-receiver",
+      "evidence": [
+        "https://example.com/warehouse-receipt"
+      ],
+      "observedLoadingAccess": "dock",
+      "lines": [
+        {
+          "lineId": "example-rice-line",
+          "receivedQty": 20,
+          "damagedQty": 0,
+          "cartons": 2,
+          "measuredGrossWeightKg": 220,
+          "measuredVolumeM3": 2,
+          "note": "Synthetic complete warehouse receipt"
+        }
+      ]
+    },
+    "shipment-f5af95cc01476695-1": {
+      "receivedAt": "2026-02-19",
+      "by": "example:warehouse-receiver",
+      "evidence": [
+        "https://example.com/warehouse-receipt"
+      ],
+      "observedLoadingAccess": "dock",
+      "lines": [
+        {
+          "lineId": "example-supply-line",
+          "receivedQty": 12,
+          "damagedQty": 0,
+          "cartons": 2,
+          "measuredGrossWeightKg": 140,
+          "measuredVolumeM3": 2,
+          "note": "Synthetic complete warehouse receipt"
+        }
+      ]
+    }
+  }
+}

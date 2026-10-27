@@ -1,0 +1,35 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "compliance-item",
+      "id": "example-warehouse-item",
+      "slotVersion": "0.1.0",
+      "versionHash": "4e78b4bc480fd4519ebdd04b820b9515a475054f7edef96be7ededd30ee79e4e",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "categoryId": "example-warehouse-category",
+        "market": "XE",
+        "name": "Invented SKU evidence",
+        "level": "sku",
+        "entityRole": null,
+        "required": "mandatory",
+        "issuer": "Example issuer",
+        "officialUrl": "https://example.com/warehouse-check",
+        "evidenceHint": "Synthetic evidence only",
+        "certTag": null,
+        "overrideOf": null,
+        "retired": false
+      }
+    }
+  ]
+}

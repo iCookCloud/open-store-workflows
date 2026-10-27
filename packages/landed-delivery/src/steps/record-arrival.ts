@@ -9,6 +9,7 @@ import {
   versionHash,
 } from '@osw/core';
 import { deliveryStep, inputNeed, numericParam, stepResult, verification } from '../helpers.js';
+import { deliveryLines } from '../source.js';
 import { type FillCandidate, writeback } from '../verify/writeback.js';
 
 export const recordArrival = deliveryStep(
@@ -112,9 +113,7 @@ export const recordArrival = deliveryStep(
                 arrival.evidence,
               ),
             );
-          const bomLine = state.input.bom.body.lines.find(
-            (bomLine) => bomLine.id === line.bomLineId,
-          )!;
+          const bomLine = deliveryLines(state).find((bomLine) => bomLine.id === line.bomLineId)!;
           if (bomLine.orderedAt && shipment.tracking.departedAt && offer.data.leadTimeDays) {
             const actual = diffDays(shipment.tracking.departedAt, bomLine.orderedAt);
             const expected = offer.data.leadTimeDays.max;

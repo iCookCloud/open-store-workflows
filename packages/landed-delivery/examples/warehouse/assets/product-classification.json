@@ -1,0 +1,51 @@
+{
+  "$example": "synthetic",
+  "items": [
+    {
+      "slot": "product-classification",
+      "id": "example-rice-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "07c87c4052c51ebaaeb8899080c07610e0f7fd1481b939208415fc54de895482",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-rice",
+        "market": "XE",
+        "categoryId": "example-warehouse-category",
+        "by": "example:classifier",
+        "at": "2026-02-01T00:00:00Z"
+      }
+    },
+    {
+      "slot": "product-classification",
+      "id": "example-supply-classification",
+      "slotVersion": "0.1.0",
+      "versionHash": "30109493cb82d1d27a576f13715564c2b00c29f43250f624d2401e645ae7501a",
+      "coverage": {
+        "tier": "supply",
+        "tracks": [],
+        "workflows": [
+          "landed-delivery"
+        ],
+        "jurisdictions": []
+      },
+      "updatedAt": "2026-02-01T00:00:00Z",
+      "example": true,
+      "data": {
+        "productId": "example-supply",
+        "market": "XE",
+        "categoryId": "example-warehouse-category",
+        "by": "example:classifier",
+        "at": "2026-02-01T00:00:00Z"
+      }
+    }
+  ]
+}
